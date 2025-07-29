@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import json
+import os
 
 # Create your views here.
 
@@ -34,3 +36,11 @@ def color_matrix_explore(request):
 def product_detail(request, product_id):
     """제품 상세 페이지 뷰"""
     return render(request, 'detail.html', {'product_id': product_id})
+
+def product_list(request):
+    json_path = os.path.join('static', 'data', 'products.json')
+    
+    with open(json_path, 'r', encoding='utf-8') as f:
+        products = json.load(f)
+    
+    return render(request, 'product_list.html', {'products': products})
