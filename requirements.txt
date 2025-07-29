@@ -1,1 +1,2 @@
 django
+boto3==1.6.19
