@@ -10,4 +10,6 @@ urlpatterns = [
     path('mood_result/', views.mood_result, name='mood_result'), #무드 테스트 결과 페이지
     path('color_matrix_explore/', views.color_matrix_explore, name='color_matrix_explore'), #색상 매트릭스
     path('product/<int:product_id>/', views.product_detail, name='product_detail'), #제품 상세 페이지
+    path('products/', views.product_list, name='product_list'),
+    path('products_list/', views.product_list, name='products_list'),
 ]

@@ -1,0 +1,20 @@
+<!-- my_app/templates/product_list.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+</head>
+<body>
+    <h1>크롤링한 상품 목록</h1>
+    <ul>
+        {% for product in products %}
+            <li style="margin-bottom: 20px;">
+                <img src="{{ product.image }}" width="120" alt="{{ product.name }}">
+                <p><strong>{{ product.name }}</strong></p>
+                <p>{{ product.price }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
