@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'moodico',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -127,5 +128,23 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'  # NCP에 저장될 예정 -> 사용되지 않음
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용되지 않음
+
+
+
+###############
+# NCP Object Storage setting(S3)
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+
+AWS_STORAGE_BUCKET_NAME = ''# 추후 버킷 명 기입
+AWS_S3_ENDPOINT_URL = 'https://kr.object.ncloudstorage.com'
+AWS_S3_REGION_NAME = 'kr-standard'
+
+AWS_ACCESS_KEY_ID = os.environ.get('NCP_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('NCP_SECRET_ACCESS_KEY', '')
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
