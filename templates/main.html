@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <h3>Moodico</h3>
+    <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
+
+    <div class="exploration-models">
+        <a href="{% url 'my_item_recommendation' %}" class="model-card item-based">
+            <div class="icon-circle">🔍</div>
+            <div class="model-card-content">
+                <h3>내 아이템 기반 추천</h3>
+                <p>가진 제품으로 완벽한 조합 찾기</p>
+            </div>
+            <span class="arrow-icon">→</span>
+        </a>
+
+        <a href="{% url 'mood_test' %}" class="model-card mood-test">
+            <div class="icon-circle">✏️</div>
+            <div class="model-card-content">
+                <h3>무드 테스트</h3>
+                <p>10가지 추구미 중 나만의 스타일 발견</p>
+            </div>
+            <span class="arrow-icon">→</span>
+        </a>
+
+        <a href="{% url 'color_matrix_explore' %}" class="model-card color-matrix">
+            <div class="icon-circle">📈</div>
+            <div class="model-card-content">
+                <h3>색상 매트릭스 탐색</h3>
+                <p>시각적 색상 맵에서 완벽한 조합 발견</p>
+            </div>
+            <span class="arrow-icon">→</span>
+        </a>
+    </div>
+</div>
+{% endblock %}

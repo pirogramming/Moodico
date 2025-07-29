@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+<div class="mood-result-container">
+    <div class="mood-summary-section">
+        <p class="section-label">당신의 추구미</p>
+        <h2>{{ mood_name }}</h2>
+        <p>{{ mood_description }}</p>
+        <div class="color-palette">
+            {% for color in colors %}
+            <div class="color-box" style="background-color: {{ color }};"></div>
+            {% endfor %}
+        </div>
+        <div class="tag-list">
+            {% for tag in tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        <div class="mood-category-selector">
+            <button>립 💋</button>
+            <button>블러셔 🌸</button>
+            <button>아이쉐도우 👁️</button>
+            <button>조합 ✨</button>
+        </div>
+    </div>
+
+    <div class="recommendation-section">
+        <div class="recommended-product-grid">
+            {% for product in recommended_products %}
+            <a href="{% url 'product_detail' product_id=forloop.counter %}" class="recommended-product-card">
+                <span class="product-type-label">{{ product.type }}</span>
+                <img src="{{ product.image }}" alt="{{ product.product_name }}">
+                <div class="brand-name">{{ product.brand }}</div>
+                <div class="product-name">{{ product.product_name }}</div>
+                <div class="price">{{ product.price }}</div>
+                <div class="product-rating">
+                    <span class="star-icon">⭐️</span> {{ product.rating }} ({{ product.review_count }} 리뷰)
+                </div>
+                <button class="purchase-button">구매하기</button>
+            </a>
+            {% empty %}
+            <p>추천 제품이 없습니다.</p>
+            {% endfor %}
+        </div>
+
+        <div class="feedback-section">
+            <p>마음에 드는 조합을 찾으셨나요?</p>
+            <p>다른 스타일도 궁금하다면 테스트를 다시 해보세요!</p>
+            <div class="feedback-buttons">
+                <button class="retake-test" onclick="location.href='{% url 'mood_test' %}'">다시 테스트하기</button>
+                <button class="retake-test" onclick="location.href='{% url 'color_matrix_explore' %}'">색상 매트릭스 보기</button>
+                <button class="explore-other" onclick="alert('다른 제품 더 찾아보기 기능 (백엔드 연동 필요)')">다른 제품 더 찾아보기</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

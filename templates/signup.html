@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="signup-box">
+        <h2>회원가입</h2>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <div class="signup-input-group">
+                <label for="signup-username">아이디</label>
+                <input type="text" id="signup-username" name="username" placeholder="사용할 아이디를 입력하세요" required>
+            </div>
+            <div class="signup-input-group">
+                <label for="signup-password">비밀번호</label>
+                <input type="password" id="signup-password" name="password" placeholder="비밀번호를 입력하세요" required>
+            </div>
+            <div class="signup-input-group">
+                <label for="signup-confirm-password">비밀번호 확인</label>
+                <input type="password" id="signup-confirm-password" name="confirm_password" placeholder="비밀번호를 다시 입력하세요" required>
+            </div>
+            <button type="submit" class="signup-button">회원가입</button>
+        </form>
+        <div class="login-link">
+            이미 계정이 있으신가요? <a href="{% url 'login' %}">로그인</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
