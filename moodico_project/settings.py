@@ -141,7 +141,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_STORAGE_BUCKET_NAME = ''# 추후 버킷 명 기입
 AWS_S3_ENDPOINT_URL = 'https://kr.object.ncloudstorage.com'
-AWS_S3_REGION_NAME = 'kr-standard'
+AWS_S3_REGION_NAME = 'kr-standard' # 추후 정확한 region명 확인 후 기입 필요 
 
 AWS_ACCESS_KEY_ID = os.environ.get('NCP_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('NCP_SECRET_ACCESS_KEY', '')
