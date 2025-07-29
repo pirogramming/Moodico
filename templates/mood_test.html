@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+<div class="mood-test-container">
+    <div class="test-header">
+        <h2>무드 테스트</h2>
+        <p>5가지 질문으로 10가지 추구미 중 당신만의 스타일을 찾아보세요</p>
+        <div class="progress-bar-container">
+            <div class="progress-bar" style="width: 20%;"></div> </div>
+        <p class="progress-text">1/5</p>
+    </div>
+
+    <div class="question-section">
+        <h3>평소 선호하는 메이크업 스타일은?</h3>
+        <form id="moodTestForm" action="{% url 'mood_result' %}" method="post">
+            {% csrf_token %}
+            <div class="options-group">
+                <label class="option-card">
+                    <input type="radio" name="q1" value="natural_daily_look">
+                    <div class="option-content">
+                        <span class="radio-custom"></span>
+                        <span class="option-text">자연스럽고 깔끔한 데일리 룩</span>
+                    </div>
+                </label>
+                <label class="option-card">
+                    <input type="radio" name="q1" value="bold_unique_point_look">
+                    <div class="option-content">
+                        <span class="radio-custom"></span>
+                        <span class="option-text">화려하고 개성있는 포인트 룩</span>
+                    </div>
+                </label>
+                <label class="option-card">
+                    <input type="radio" name="q1" value="soft_feminine_romantic_look">
+                    <div class="option-content">
+                        <span class="radio-custom"></span>
+                        <span class="option-text">부드럽고 여성스러운 로맨틱 룩</span>
+                    </div>
+                </label>
+                <label class="option-card">
+                    <input type="radio" name="q1" value="sophisticated_chic_urban_look">
+                    <div class="option-content">
+                        <span class="radio-custom"></span>
+                        <span class="option-text">세련되고 도시적인 시크 룩</span>
+                    </div>
+                </label>
+            </div>
+            <div class="submit-button-container">
+                <button type="submit" class="submit-button">다음 질문</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll('.option-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const radio = this.querySelector('input[type="radio"]');
+            radio.checked = true;
+            document.querySelectorAll('.option-card').forEach(otherCard => {
+                otherCard.querySelector('.option-content').style.backgroundColor = '';
+                otherCard.querySelector('.option-content').style.color = '';
+                otherCard.querySelector('.option-content').style.borderColor = '';
+                otherCard.querySelector('.option-text').style.color = '';
+                const customRadio = otherCard.querySelector('.radio-custom');
+                if (customRadio) {
+                    customRadio.style.borderColor = '#ccc';
+                    customRadio.style.backgroundColor = '';
+                    customRadio.innerHTML = '';
+                }
+            });     
+        });
+    });
+
+    document.getElementById('moodTestForm').addEventListener('submit', function(event) {
+        const selectedOption = this.querySelector('input[name="q1"]:checked');
+        if (!selectedOption) {
+            event.preventDefault(); //제출 방지
+            alert('옵션을 선택해주세요.');
+        }
+        //실제로는 다음 질문으로 넘어가거나, 마지막 질문일 경우 결과 페이지로 이동하도록 로직 구현
+    });
+</script>
+{% endblock %}
+{% endblock %}
