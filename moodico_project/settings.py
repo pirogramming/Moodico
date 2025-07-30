@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-f+2cp%8dmctmuc-8#8@t)7zkd!=#smii5e+tv&eb-0g$970fkd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'moodico.context_processors.kakao_user',
             ],
         },
     },
@@ -123,6 +124,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# 배포 시 사용
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -148,3 +152,16 @@ AWS_SECRET_ACCESS_KEY = os.environ.get('NCP_SECRET_ACCESS_KEY', '')
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
+
+
+# 카카오 로그인 설정
+KAKAO_REDIRECT_URI = "http://localhost:8000/kakao/callback/"
+KAKAO_AUTH_HOST = "https://kauth.kakao.com"
+KAKAO_API_HOST = "https://kapi.kakao.com"
+from decouple import config
+KAKAO_CLIENT_ID = config("KAKAO_CLIENT_ID")
+KAKAO_CLIENT_SECRET = config("KAKAO_CLIENT_SECRET")
+
+# 로그인 로그아웃 후 리다이렉트 URL 설정
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/login/"
