@@ -1,59 +1,25 @@
+import uuid
 # 몇몇 id를 charField보다 autoFeilf, uuidfield쓰면 좋을거 같은데 이미지 서버도 사용할 수 있을거 같아서 uuidfield 사용이 적합해보임
 
 
 import uuid
 from django.db import models
-
-# class Brand(models.Model):
-#     id = models.CharField(primary_key=True, max_length=225, verbose_name="브랜드 식별자")
-#     name = models.CharField(max_length=225, verbose_name="브랜드 명")
-
-#     def __str__(self):
-#         return self.name
-
-
-# class Product(models.Model):
-#     id = models.CharField(primary_key=True, max_length=225, verbose_name="제품 식별자")
-#     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드", related_name="products")
-#     name = models.CharField(max_length=255, verbose_name="제품 이름")
-#     category = models.CharField(max_length=255, verbose_name="제품 카테고리")  # ex. 립, 블러셔, 섀도우
-#     url = models.TextField(null=True, blank=True, verbose_name="제품 링크")
-#     price = models.IntegerField(null=True, blank=True, verbose_name="제품 가격")
-#     external_code = models.CharField(max_length=255, null=True, blank=True, verbose_name="사이트별 제품코드")
-
-#     def __str__(self):
-#         return self.name
-
-
-# class ProductShade(models.Model):
-#     id = models.CharField(primary_key=True, max_length=225, verbose_name="제품 셰이드 식별자")
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="제품", related_name="shades")
-#     tone_tag_id = models.CharField(max_length=225, null=True, blank=True, verbose_name="톤 태그 ID")
-
-#     hex = models.CharField(max_length=225, null=True, blank=True, verbose_name="색상 HEX")
-#     lab_l = models.FloatField(null=True, blank=True, verbose_name="명도(L)")  # 0~100
-#     lab_a = models.FloatField(null=True, blank=True, verbose_name="채도(G/R)")  # 초록(−) ~ 빨강(+)
-#     lab_b = models.FloatField(null=True, blank=True, verbose_name="채도(B/Y)")  # 파랑(−) ~ 노랑(+)
-
-#     shade_name = models.CharField(max_length=255, verbose_name="셰이드 이름")
-
-#     def __str__(self):
-#         return f"{self.product.name} - {self.shade_name}"
-
+from django.contrib.auth.models import User
 
 
 # ------------------------------
 # 사용자 관련
 # ------------------------------
 
-class User(models.Model):
-    user = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="유저 식별자")
-    username = models.CharField(max_length=225, verbose_name="유저 이름")
-    email = models.EmailField(max_length=225, verbose_name="이메일")
-    date_join = models.DateTimeField(verbose_name="가입날짜")
+# Django의 기본 User 모델을 사용할 거여서 지워됬습니다
+# class User(models.Model):
+#     user = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="유저 식별자")
+#     username = models.CharField(max_length=225, verbose_name="유저 이름")
+#     email = models.EmailField(max_length=225, verbose_name="이메일")
+#     date_join = models.DateTimeField(verbose_name="가입날짜")
 
-    def __str__(self):
-        return self.username
+#     def __str__(self):
+#         return self.username
 
 
 class ToneTag(models.Model):
@@ -80,7 +46,7 @@ class ToneTag(models.Model):
 class UserProfile(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="유저 프로필 식별자")
     
-    user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='profiles', verbose_name="유저")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profiles', verbose_name="유저")
     default_tone_tag = models.ForeignKey('ToneTag', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="기본 톤 태그")
     
     created_at = models.DateTimeField(auto_now_add=True,verbose_name="프로필 생성 날짜")
@@ -161,15 +127,21 @@ class PaletteColor(models.Model):
 class Brand(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="브랜드 식별자")
     name = models.CharField(max_length=100,unique=True, verbose_name="브랜드 명")
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="브랜드 식별자")
+    name = models.CharField(max_length=100,unique=True, verbose_name="브랜드 명")
 
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 식별자")
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드")
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 식별자")
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드")
     name = models.CharField(max_length=255, verbose_name="제품 이름")
+    category = models.CharField(max_length=255, verbose_name="제품 카테고리")
+    url = models.URLField(null=True, blank=True, verbose_name="제품 링크") #urlfeild 사용
+    price = models.PositiveIntegerField(null=True, blank=True, verbose_name="제품 가격") #음수 가격 예외
     category = models.CharField(max_length=255, verbose_name="제품 카테고리")
     url = models.URLField(null=True, blank=True, verbose_name="제품 링크") #urlfeild 사용
     price = models.PositiveIntegerField(null=True, blank=True, verbose_name="제품 가격") #음수 가격 예외
@@ -180,6 +152,13 @@ class Product(models.Model):
 
 
 class ProductShade(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 셰이드 식별자")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="shades", verbose_name="제품")
+    tone_tag = models.ForeignKey(ToneTag, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="톤 태그")
+    hex = models.CharField(max_length=7, null=True, blank=True, verbose_name="색상 HEX")#헥사 코드 숫자에 따라 max_length = 6~7
+    lab_l = models.FloatField(null=True, blank=True, verbose_name="명도(L)")
+    lab_a = models.FloatField(null=True, blank=True, verbose_name="채도(G/R)")
+    lab_b = models.FloatField(null=True, blank=True, verbose_name="채도(B/Y)")
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 셰이드 식별자")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="shades", verbose_name="제품")
     tone_tag = models.ForeignKey(ToneTag, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="톤 태그")
