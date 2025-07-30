@@ -30,6 +30,9 @@
       <div id="color-display-box" class="color-display-box" style="display:none;">
         <div id="selected-color-swatch" class="selected-color-swatch"></div>
         <span id="hex-code-display">#FFFFFF</span>
+        <button id="analyze-color-button" class="analyze-button">
+          이 색상 분석하기
+        </button>
       </div>
       <p id="click-instruction" style="display:none;">이미지를 클릭하여 색상을 추출해보세요</p>
     </div>
@@ -104,6 +107,7 @@
 
 {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
+<script src="{% static 'js/color_analyzer.js' %}"></script>
 <script>
   //이 페이지에서만 필요한 JavaScript이므로 여기에 유지
   function searchProduct() {
