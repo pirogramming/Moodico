@@ -44,6 +44,7 @@
       <p id="click-instruction" style="display:none;">이미지를 클릭하여 색상을 추출해보세요</p>
       <div id="recommendation-box" class="recommendation-box"></div>
     </div>
+
     
   </div>
 
@@ -130,7 +131,7 @@
 
 {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
-<script src="{% static 'js/color_recommend.js' %}"></script> 
+<script src="{% static 'js/color_analyzer.js' %}"></script> 
 {% if uploaded_image_url %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -142,5 +143,3 @@
 {% endif %}
 {% endblock %}
 {% endblock %}
-
-

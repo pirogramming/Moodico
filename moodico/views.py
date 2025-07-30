@@ -258,46 +258,30 @@ def upload_color_image(request):
         form = UploadForm()
     return render(request, 'upload.html', {'form': form})
 
+
 @csrf_exempt
-def compare_color(request):
+def recommend_by_color(request):
     if request.method == 'POST':
-        try:
-            body = json.loads(request.body)
-            hex_color = body.get("hex")  # e.g. "#E3B49E"
+        body = json.loads(request.body)
+        warm = body.get("warmCool")
+        deep = body.get("lightDeep")
 
-            if not hex_color or not hex_color.startswith("#") or len(hex_color) != 7:
-                return JsonResponse({"error": "Invalid HEX color format."}, status=400)
+        if warm is None or deep is None:
+            return JsonResponse({"error": "Missing coordinates"}, status=400)
 
-            # Convert HEX to RGB
-            r = int(hex_color[1:3], 16)
-            g = int(hex_color[3:5], 16)
-            b = int(hex_color[5:7], 16)
-            rgb = np.array([[[r, g, b]]]) / 255.0
-            lab = rgb2lab(rgb)[0][0]  # [L, a, b]
+        coord = np.array([warm, deep])
 
-            # Load product JSON
-            json_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'romand_products_enhanced.json')
-            with open(json_path, 'r', encoding='utf-8') as f:
-                products = json.load(f)
+        with open("static/data/cluster_centers.json", "r") as f:
+            centers = json.load(f)
+        with open("static/data/romand_products_clustered.json", "r", encoding="utf-8") as f:
+            products = json.load(f)
 
-            # Compute LAB distance
-            def lab_distance(p):
-                try:
-                    return np.linalg.norm([
-                        lab[0] - p["lab_l"],
-                        lab[1] - p["lab_a"],
-                        lab[2] - p["lab_b"]
-                    ])
-                except KeyError:
-                    return float('inf')
+        # Find closest cluster
+        cluster_idx = np.argmin([np.linalg.norm(coord - np.array(c)) for c in centers])
 
-            recommended = sorted(products, key=lab_distance)[:6]
+        # Recommend products from that cluster
+        matches = [p for p in products if p.get("cluster") == cluster_idx][:5]
 
-            return JsonResponse({"recommended": recommended}, json_dumps_params={'ensure_ascii': False})
+        return JsonResponse({"recommended": matches}, json_dumps_params={"ensure_ascii": False})
 
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
-
-    return JsonResponse({"error": "Only POST method is allowed."}, status=405)
-
-
+    return JsonResponse({"error": "Only POST method allowed"}, status=405)
