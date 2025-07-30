@@ -158,9 +158,9 @@ AWS_DEFAULT_ACL = None
 KAKAO_REDIRECT_URI = "http://localhost:8000/kakao/callback/"
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
 KAKAO_API_HOST = "https://kapi.kakao.com"
-from decouple import config
-KAKAO_CLIENT_ID = config("KAKAO_CLIENT_ID")
-KAKAO_CLIENT_SECRET = config("KAKAO_CLIENT_SECRET")
+# 카카오 API 키 (개발용 임시 설정)
+KAKAO_CLIENT_ID = os.environ.get('KAKAO_CLIENT_ID', '')
+KAKAO_CLIENT_SECRET = os.environ.get('KAKAO_CLIENT_SECRET', '')
 
 # 로그인 로그아웃 후 리다이렉트 URL 설정
 LOGIN_REDIRECT_URL = "/"
