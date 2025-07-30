@@ -105,8 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hexCodeDisplay = document.getElementById('hex-code-display');
     const analyzeColorButton = document.getElementById('analyze-color-button'); 
 
-    // 이미지에서 색상 추출 후 hex-code-display 업데이트 시 이 함수를 호출
-    // 또는 hex-code-display 값이 변경될 때마다 자동으로 실행되도록 옵저버 사용
     function analyzeSelectedColor() {
         const hex = hexCodeDisplay.textContent.trim(); // #FFFFFF 형태
         if (hex && hex !== '#FFFFFF') { // 초기값이 아니거나 유효한 경우
@@ -119,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(`Analyzed Color: ${hex}`);
                         console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
                         console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
-                        // 이제 이 coords 값을 사용하여 4분면에 배치하는 로직을 추가합니다.
-                        // 예: 특정 UI 요소를 업데이트하거나, 데이터 배열에 추가하는 등
+                        
+                        // 색상을 매트릭스에 표시
                         //displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
                     }
                 }
