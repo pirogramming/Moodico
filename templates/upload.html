@@ -5,6 +5,140 @@
     .image-preview-area canvas.color-picker-active {
         cursor: url("{% static 'images/eyedropper.svg' %}") 12 12, crosshair;
     }
+
+  /*임시 css*/
+  .color-matrix-container {
+  position: relative;
+  width: 600px; 
+  height: 600px; 
+  background: linear-gradient(to bottom right, #f8f0ff, #e0efff, #ffe0f0, #fff8e0); 
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden; 
+  border: 1px solid #ddd;
+  margin-right: 30px;
+}
+.color-matrix-container {
+  position: relative;
+  margin: 0 auto;
+} /*이 부분을 제외하고는 color_matrix_style.css와 같음*/
+
+.quadrant-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    z-index: 1; 
+}
+
+.quadrant {
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.axis-label {
+    position: absolute;
+    font-weight: bold;
+    color: #777;
+    font-size: 0.9em;
+    z-index: 5;
+}
+
+.top-label { top: 10px; left: 50%; transform: translateX(-50%); }
+.bottom-label { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.left-label { left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+.right-label { right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+
+.makeup-products-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; 
+}
+
+.product-circle {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 0.7em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    user-select: none;
+}
+
+.product-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.product-circle.selected {
+    outline: 3px solid #ff69b4;
+    transform: scale(1.2);
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
+}
+
+.mood-selection-area {
+    position: absolute;
+    border: 2px dashed #8a2be2; 
+    background-color: rgba(138, 43, 226, 0.1); 
+    cursor: grab;
+    z-index: 3; 
+    min-width: 50px;
+    min-height: 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border 0.1s ease, background-color 0.1s ease;
+}
+
+.mood-selection-area:active {
+    cursor: grabbing;
+}
+
+.mood-label {
+    background-color: rgba(138, 43, 226, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    user-select: none;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.resizer {
+    width: 12px;
+    height: 12px;
+    background-color: #8a2be2;
+    border: 1px solid white;
+    position: absolute;
+    border-radius: 50%;
+    cursor: nwse-resize;
+    z-index: 4;
+}
+
+.resizer.top-left-resizer { top: -6px; left: -6px; cursor: nwse-resize; }
+.resizer.top-right-resizer { top: -6px; right: -6px; cursor: nesw-resize; }
+.resizer.bottom-left-resizer { bottom: -6px; left: -6px; cursor: nesw-resize; }
+.resizer.bottom-right-resizer { bottom: -6px; right: -6px; cursor: nwse-resize; }
+
+
 </style>
 {% endblock%} 
 {% block content %}
@@ -38,6 +172,37 @@
     </div>
     
   </div>
+
+  <section class="color-matrix-container">
+    <div class="quadrant-grid">
+      <div class="quadrant top-left"></div>
+      <div class="quadrant top-right"></div>
+      <div class="quadrant bottom-left"></div>
+      <div class="quadrant bottom-right"></div>
+    </div>
+
+    <div class="axis-label top-label">Light</div>
+    <div class="axis-label bottom-label">Deep</div>
+    <div class="axis-label left-label">Cool</div>
+    <div class="axis-label right-label">Warm</div>
+
+    <div id="makeup-products-container" class="makeup-products-container">
+      </div>
+
+    
+    <!--유사 무드 제품 추천 구간 표시-->
+    <!--
+    <div id="mood-selection-area" class="mood-selection-area">
+      <span class="mood-label">추천 구간</span>
+      <div class="resizer top-left-resizer"></div>
+      <div class="resizer top-right-resizer"></div>
+      <div class="resizer bottom-left-resizer"></div>
+      <div class="resizer bottom-right-resizer"></div>
+    </div>
+    -->
+
+      
+  </section>
 
   <div class="search-results-section">
     <h3>검색 결과</h3>

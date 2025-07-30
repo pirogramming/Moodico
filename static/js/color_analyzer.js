@@ -61,7 +61,32 @@ function rgbToHsl(r, g, b) {
         h /= 6;
     }
 
-    return [h * 360, s, l]; // Hue: 0-360, Saturation: 0-1, Lightness: 0-1
+    return [h * 360, s, l];
+}
+
+function displayColorOnMatrix(hex, warmCool, lightDeep) {
+    const productsContainer = document.querySelector('.color-matrix-container');
+    if (!productsContainer) return;
+
+    // 기존에 표시된 색상 점 제거 - 버튼 누를 때마다 새로 표시
+    const existingColorPoint = productsContainer.querySelector('.temp-color-point');
+    if (existingColorPoint) {
+        existingColorPoint.remove();
+    }
+
+    const colorPoint = document.createElement('div');
+    colorPoint.classList.add('product-circle', 'temp-color-point');
+    colorPoint.style.backgroundColor = hex;
+    colorPoint.style.left = `${warmCool}%`;
+    colorPoint.style.top = `${lightDeep}%`;
+    colorPoint.title = `선택된 색상: ${hex}`;
+
+    colorPoint.style.transform = 'translate(-50%, -50%)';
+
+    colorPoint.style.border = '3px solid #8A2BE2';
+    colorPoint.style.boxShadow = '0 0 10px rgba(138, 43, 226, 0.6)';
+
+    productsContainer.appendChild(colorPoint);
 }
 
 
@@ -119,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
                         
                         // 색상을 매트릭스에 표시
-                        //displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
+                        displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
                     }
                 }
             }
