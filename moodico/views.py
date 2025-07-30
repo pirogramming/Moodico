@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 import requests
 from django.http import HttpResponse
 from django.http import HttpRequest
@@ -9,6 +9,10 @@ import json
 import os
 from django.views.decorators.http import require_http_methods
 from functools import wraps
+from .models import Upload
+from PIL import Image
+import numpy as np
+from skimage import color
 
 
 def login_or_kakao_required(view_func):
@@ -229,3 +233,65 @@ def kakao_logout(request):
     request.session.flush()
 
     return redirect("/?logout=success")
+
+# 이미지 업로드
+def upload_color_image(request):
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+
+            if request.user.is_authenticated:
+                upload.user = request.user
+            else:
+                upload.user = None  # or handle anonymous case
+
+            upload.save()
+            return render(request, 'upload.html', {
+                'form': UploadForm(),
+                'uploaded_image_url': upload.image_path.url
+            })
+    else:
+        form = UploadForm()
+    return render(request, 'upload.html', {'form': form})
+
+
+def analyze_image(request, upload_id):
+    upload = get_object_or_404(Upload, id=upload_id)
+
+    # Load uploaded image
+    image_path = upload.image_path.path
+    image = Image.open(image_path).convert('RGB')
+    image = image.resize((50, 50))  # Resize for faster processing
+
+    # Average RGB
+    np_image = np.array(image)
+    avg_rgb = np.mean(np_image.reshape(-1, 3), axis=0)
+    rgb_normalized = np.array([[avg_rgb]]) / 255.0
+    lab_color = color.rgb2lab(rgb_normalized)[0][0]
+
+    # Load product JSON
+    json_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products.json')
+    with open(json_path, 'r', encoding='utf-8') as f:
+        products = json.load(f)
+
+    # Compare LAB distances
+    def lab_distance(p):
+        try:
+            return np.linalg.norm([
+                lab_color[0] - p['lab_l'],
+                lab_color[1] - p['lab_a'],
+                lab_color[2] - p['lab_b']
+            ])
+        except:
+            return float('inf')  # In case some value is missing
+
+    sorted_products = sorted(products, key=lab_distance)
+    recommended = sorted_products[:3]  # Top 3 matches
+
+    return render(request, 'analyze_result.html', {
+        'lab': lab_color,
+        'recommended_products': recommended,
+        'image_url': upload.image_path.url
+    })
+

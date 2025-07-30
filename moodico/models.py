@@ -69,7 +69,7 @@ class UserProfile(models.Model):
 
 class Upload(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="업로드 식별자")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="유저")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="유저")
     
     STATUS_CHOICES = [
         ('pending', '대기중'),
@@ -85,7 +85,6 @@ class Upload(models.Model):
 
     def __str__(self):
         return f"{self.user.username} 업로드 - {self.id}"
-
 
 class AnalysisResult(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="분석 결과 식별자")

@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static 
 
 urlpatterns = [
     path('', views.main, name='main'), #메인 페이지
@@ -20,4 +22,10 @@ urlpatterns = [
     path('product/<int:product_id>/', views.product_detail, name='product_detail'), #제품 상세 페이지
     path('products/', views.product_list, name='product_list'),
     path('products_list/', views.product_list, name='products_list'),
+
+    path('upload_color_image/', views.upload_color_image, name='upload_color_image'), #색상 이미지 업로드
+    path('analyze/<uuid:upload_id>/', views.analyze_image, name='analyze_image'),
 ]
+
+# Enable media file serving (during development only)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

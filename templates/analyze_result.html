@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2>분석 결과</h2>
+<img src="{{ image_url }}" alt="업로드 이미지" style="max-width: 200px;" />
+<p>대표 색상 기반 추천 제품입니다:</p>
+<ul>
+  {% for product in recommended_products %}
+    <li style="margin: 20px 0;">
+      <img src="{{ product.image }}" alt="{{ product.name }}" style="height: 50px;">
+      <strong>{{ product.name }}</strong><br>
+      가격: {{ product.price }}<br>
+      <a href="{{ product.url }}" target="_blank">구매하러 가기</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

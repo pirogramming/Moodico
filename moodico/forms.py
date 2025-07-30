@@ -35,3 +35,8 @@ class CustomSignupForm(UserCreationForm):
         help_texts = {
             'username': '',
         }
+
+class UploadForm(forms.ModelForm):
+    class Meta:
+        model = Upload
+        fields = ['image_path']
