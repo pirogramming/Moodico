@@ -8,6 +8,16 @@ from django.contrib.auth import login
 import json
 import os
 from django.views.decorators.http import require_http_methods
+from functools import wraps
+
+
+def login_or_kakao_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated or request.session.get("nickname"):
+            return view_func(request, *args, **kwargs)
+        return redirect('login')
+    return _wrapped_view
 
 def color_matrix_explore(request):
     return render(request, 'color_matrix.html')
@@ -30,6 +40,7 @@ def signup_view(request):
         form = CustomSignupForm()
     return render(request, 'signup.html', {'form': form})
 
+# @login_or_kakao_required
 def my_item_recommendation(request):
     """내 아이템 기반 추천 페이지 뷰"""
     # 백엔드 연동을 위해 임시로 빈 리스트 전달
@@ -37,10 +48,12 @@ def my_item_recommendation(request):
     search_results = []
     return render(request, 'upload.html', {'search_results': search_results, 'recommended_items': recommended_items})
 
+# @login_or_kakao_required
 def mood_test(request):
     """무드 테스트 페이지 뷰"""
     return render(request, 'mood_test.html')
 
+# @login_or_kakao_required
 def mood_result(request):
     # 무드 테스트 결과 데이터 (백엔드에서 받아올 예정)
     """무드 테스트 결과 페이지 뷰"""
