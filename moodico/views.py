@@ -13,6 +13,9 @@ from .models import Upload
 from PIL import Image
 import numpy as np
 from skimage import color
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from skimage.color import rgb2lab
 
 
 def login_or_kakao_required(view_func):
@@ -255,43 +258,46 @@ def upload_color_image(request):
         form = UploadForm()
     return render(request, 'upload.html', {'form': form})
 
-
-def analyze_image(request, upload_id):
-    upload = get_object_or_404(Upload, id=upload_id)
-
-    # Load uploaded image
-    image_path = upload.image_path.path
-    image = Image.open(image_path).convert('RGB')
-    image = image.resize((50, 50))  # Resize for faster processing
-
-    # Average RGB
-    np_image = np.array(image)
-    avg_rgb = np.mean(np_image.reshape(-1, 3), axis=0)
-    rgb_normalized = np.array([[avg_rgb]]) / 255.0
-    lab_color = color.rgb2lab(rgb_normalized)[0][0]
-
-    # Load product JSON
-    json_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products.json')
-    with open(json_path, 'r', encoding='utf-8') as f:
-        products = json.load(f)
-
-    # Compare LAB distances
-    def lab_distance(p):
+@csrf_exempt
+def compare_color(request):
+    if request.method == 'POST':
         try:
-            return np.linalg.norm([
-                lab_color[0] - p['lab_l'],
-                lab_color[1] - p['lab_a'],
-                lab_color[2] - p['lab_b']
-            ])
-        except:
-            return float('inf')  # In case some value is missing
+            body = json.loads(request.body)
+            hex_color = body.get("hex")  # e.g. "#E3B49E"
 
-    sorted_products = sorted(products, key=lab_distance)
-    recommended = sorted_products[:3]  # Top 3 matches
+            if not hex_color or not hex_color.startswith("#") or len(hex_color) != 7:
+                return JsonResponse({"error": "Invalid HEX color format."}, status=400)
 
-    return render(request, 'analyze_result.html', {
-        'lab': lab_color,
-        'recommended_products': recommended,
-        'image_url': upload.image_path.url
-    })
+            # Convert HEX to RGB
+            r = int(hex_color[1:3], 16)
+            g = int(hex_color[3:5], 16)
+            b = int(hex_color[5:7], 16)
+            rgb = np.array([[[r, g, b]]]) / 255.0
+            lab = rgb2lab(rgb)[0][0]  # [L, a, b]
+
+            # Load product JSON
+            json_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'romand_products_enhanced.json')
+            with open(json_path, 'r', encoding='utf-8') as f:
+                products = json.load(f)
+
+            # Compute LAB distance
+            def lab_distance(p):
+                try:
+                    return np.linalg.norm([
+                        lab[0] - p["lab_l"],
+                        lab[1] - p["lab_a"],
+                        lab[2] - p["lab_b"]
+                    ])
+                except KeyError:
+                    return float('inf')
+
+            recommended = sorted(products, key=lab_distance)[:6]
+
+            return JsonResponse({"recommended": recommended}, json_dumps_params={'ensure_ascii': False})
+
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=500)
+
+    return JsonResponse({"error": "Only POST method is allowed."}, status=405)
+
 
