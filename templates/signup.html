@@ -8,22 +8,41 @@
 <div class="signup-container">
     <div class="signup-box">
         <h2>회원가입</h2>
-        <form action="#" method="post">
-            {% csrf_token %}
-            <div class="signup-input-group">
-                <label for="signup-username">아이디</label>
-                <input type="text" id="signup-username" name="username" placeholder="사용할 아이디를 입력하세요" required>
-            </div>
-            <div class="signup-input-group">
-                <label for="signup-password">비밀번호</label>
-                <input type="password" id="signup-password" name="password" placeholder="비밀번호를 입력하세요" required>
-            </div>
-            <div class="signup-input-group">
-                <label for="signup-confirm-password">비밀번호 확인</label>
-                <input type="password" id="signup-confirm-password" name="confirm_password" placeholder="비밀번호를 다시 입력하세요" required>
-            </div>
-            <button type="submit" class="signup-button">회원가입</button>
-        </form>
+        <form action="{% url 'signup' %}" method="post" autocomplete="off">
+    {% csrf_token %}
+
+    {% if form.errors %}
+        <div class="form-errors" style="color:red; margin-bottom: 10px;">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="signup-input-group">
+        <label for="{{ form.username.id_for_label }}">아이디</label>
+        {{ form.username }}
+    </div>
+
+    <div class="signup-input-group">
+        <label for="{{ form.password1.id_for_label }}">비밀번호</label>
+        {{ form.password1 }}
+    </div>
+
+    <div class="signup-input-group">
+        <label for="{{ form.password2.id_for_label }}">비밀번호 확인</label>
+        {{ form.password2 }}
+    </div>
+
+    <button type="submit" class="signup-button">회원가입</button>
+</form>
+
+
         <div class="login-link">
             이미 계정이 있으신가요? <a href="{% url 'login' %}">로그인</a>
         </div>
