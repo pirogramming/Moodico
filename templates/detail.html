@@ -1,22 +1,22 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block extra_head %}
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block extra_head %} {% endblock%} {% block content %}
 <div class="product-detail-container">
-    <div class="product-image-area">
-        <img src="{{ product.image }}" alt="{{ product.name }}">
+  <div class="product-image-area">
+    <img src="{{ product.image }}" alt="{{ product.name }}" />
+  </div>
+  <div class="product-info-area">
+    <p class="brand-name">제품 브랜드</p>
+    <h1>{{ product.name }}</h1>
+    <p class="price">{{ product.price }}</p>
+    <p class="description">{{ product.description }}</p>
+    <div class="purchase-links">
+      <button
+        class="color-matrix-explore"
+        onclick="location.href='{% url 'color_matrix_explore' %}'"
+      >
+        색상 매트릭스 보기
+      </button>
+      <a href="#" class="buy-now">바로 구매</a>
     </div>
-    <div class="product-info-area">
-        <p class="brand-name">제품 브랜드</p> <h1>{{ product.name }}</h1>
-        <p class="price">{{ product.price }}</p>
-        <p class="description">{{ product.description }}</p>
-        <div class="purchase-links">
-            <button class="color-matrix-explore" onclick="location.href='{% url 'color_matrix_explore' %}'">색상 매트릭스 보기</button>
-            <a href="#" class="buy-now">바로 구매</a>
-        </div>
-    </div>
+  </div>
 </div>
 {% endblock %}

@@ -42,18 +42,38 @@ def mood_test(request):
     return render(request, 'mood_test.html')
 
 def mood_result(request):
-    # 무드 테스트 결과 데이터 (백엔드에서 받아올 예정)
     """무드 테스트 결과 페이지 뷰"""
+    # products.json에서 크롤링 데이터 읽기
+    json_path = os.path.join('static', 'data', 'products.json')
+    
+    with open(json_path, 'r', encoding='utf-8') as f:
+        products = json.load(f)
+    
+    # 제품명에서 브랜드 추출 및 데이터 가공
+    processed_products = []
+    for product in products:
+        # 제품명에서 브랜드 추출 (첫 번째 공백까지)
+        product_name = product['name']
+        brand = product_name.split()[0] if product_name else "브랜드"
+        
+        processed_product = {
+            'type': '립',  # 기본값
+            'image': product['image'],
+            'brand': brand,
+            'product_name': product['name'],
+            'price': product['price'],
+            'rating': '4.0',  # 기본값 유지
+            'review_count': '123'  # 기본값 유지
+        }
+        processed_products.append(processed_product)
+    
+    # 무드 테스트 결과 데이터
     mood_data = {
         'mood_name': '로맨틱',
         'mood_description': '부드럽고 여성스러운 사랑스러운 느낌',
         'colors': ['#FEEBEB', '#FFD2CC', '#FFB7B3'],
         'tags': ['#soft', '#feminine', '#pink', '#shimmer'],
-        'recommended_products': [
-            {'type': '립스틱', 'image': '/static/images/test.jpg', 'brand': 'ETUDE HOUSE', 'product_name': '코랄 틴트 립', 'price': '12,000원', 'rating': '4.0', 'review_count': '123'},
-            {'type': '블러셔', 'image': '/static/images/test.jpg', 'brand': 'PERIPERA', 'product_name': '글로우 체크 블러셔', 'price': '18,000원', 'rating': '4.0', 'review_count': '456'},
-            {'type': '아이쉐도우', 'image': '/static/images/test.jpg', 'brand': 'INNISFREE', 'product_name': '내추럴 아이쉐도우', 'price': '22,000원', 'rating': '4.0', 'review_count': '789'},
-        ]
+        'recommended_products': processed_products
     }
     return render(request, 'mood_result.html', mood_data)
 

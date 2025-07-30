@@ -1,112 +1,128 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block extra_head %}
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block extra_head %} {% endblock%} {% block content %}
 <div class="my-item-recommendation-container">
-    <div class="search-section">
-        <h2>내 아이템 검색</h2>
-        <p>보유 중인 메이크업 제품을 검색하고 어울리는 조합을 추천받아보세요</p>
-        <div class="search-input-group">
-            <input type="text" id="product-search-input" placeholder="제품명을 입력하세요">
-            <button type="button" onclick="searchProduct()">🔍 검색</button>
-        </div>
-        <div class="separator">또는</div>
-        <div class="image-upload-area">
-            <label for="image-upload-input">
-                <span class="upload-icon">📸</span> 사진으로 검색
-                <input type="file" id="image-upload-input" accept="image/*">
-            </label>
-        </div>
+  <div class="search-section">
+    <h2>내 아이템 검색</h2>
+    <p>보유 중인 메이크업 제품을 검색하고 어울리는 조합을 추천받아보세요</p>
+    <div class="search-input-group">
+      <input
+        type="text"
+        id="product-search-input"
+        placeholder="제품명을 입력하세요"
+      />
+      <button type="button" onclick="searchProduct()">🔍 검색</button>
     </div>
+    <div class="separator">또는</div>
+    <div class="image-upload-area">
+      <label for="image-upload-input">
+        <span class="upload-icon">📸</span> 사진으로 검색
+        <input type="file" id="image-upload-input" accept="image/*" />
+      </label>
+    </div>
+  </div>
 
-    <div class="search-results-section">
-        <h3>검색 결과</h3>
-        <div class="product-list">
-            {% if search_results %}
-                {% for product in search_results %}
-                <div class="product-card">
-                    <img src="{{ product.image }}" alt="{{ product.name }}">
-                    <div class="product-info">
-                        <div class="brand">{{ product.brand }} <span class="tag">{{ product.tag }}</span></div>
-                        <div class="name">{{ product.name }}</div>
-                        <div class="price">{{ product.price }}</div>
-                    </div>
-                    <button class="recommendation-button">✨ 추천받기</button>
-                </div>
-                {% endfor %}
-            {% else %}
-                <div class="product-card">
-                    <img src="{% static 'images/test.jpg' %}" alt="페리페라 글로우 체크 블러셔">
-                    <div class="product-info">
-                        <div class="brand">PERIPERA <span class="tag">glossy</span></div>
-                        <div class="name">글로우 체크 블러셔</div>
-                        <div class="price">18,000원</div>
-                    </div>
-                    <button class="recommendation-button">✨ 추천받기</button>
-                </div>
-                <div class="product-card">
-                    <img src="{% static 'images/test.jpg' %}" alt="에뛰드하우스 코팅 틴트 립">
-                    <div class="product-info">
-                        <div class="brand">ETUDE HOUSE <span class="tag">glossy</span></div>
-                        <div class="name">코팅 틴트 립</div>
-                        <div class="price">12,000원</div>
-                    </div>
-                    <button class="recommendation-button">✨ 추천받기</button>
-                </div>
-                <div class="product-card">
-                    <img src="{% static 'images/test.jpg' %}" alt="이니스프리 내추럴 아이쉐도우">
-                    <div class="product-info">
-                        <div class="brand">INNISFREE <span class="tag">matte</span></div>
-                        <div class="name">내추럴 아이쉐도우</div>
-                        <div class="price">22,000원</div>
-                    </div>
-                    <button class="recommendation-button">✨ 추천받기</button>
-                </div>
-                <div class="product-card">
-                    <img src="{% static 'images/test.jpg' %}" alt="클리오 어스 온 아이쉐도우">
-                    <div class="product-info">
-                        <div class="brand">CLIO <span class="tag">matte</span></div>
-                        <div class="name">어스 온 아이쉐도우</div>
-                        <div class="price">32,000원</div>
-                    </div>
-                    <button class="recommendation-button">✨ 추천받기</button>
-                </div>
-                <div class="product-card">
-                    <img src="{% static 'images/test.jpg' %}" alt="롬앤 베이지 매트 립스틱">
-                    <div class="product-info">
-                        <div class="brand">ROMAND <span class="tag">matte</span></div>
-                        <div class="name">베이지 매트 립스틱</div>
-                        <div class="price">15,000원</div>
-                    </div>
-                    <button class="recommendation-button">✨ 추천받기</button>
-                </div>
-            {% endif %}
+  <div class="search-results-section">
+    <h3>검색 결과</h3>
+    <div class="product-list">
+      {% if search_results %} {% for product in search_results %}
+      <div class="product-card">
+        <img src="{{ product.image }}" alt="{{ product.name }}" />
+        <div class="product-info">
+          <div class="brand">
+            {{ product.brand }} <span class="tag">{{ product.tag }}</span>
+          </div>
+          <div class="name">{{ product.name }}</div>
+          <div class="price">{{ product.price }}</div>
         </div>
+        <button class="recommendation-button">✨ 추천받기</button>
+      </div>
+      {% endfor %} {% else %}
+      <div class="product-card">
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="페리페라 글로우 체크 블러셔"
+        />
+        <div class="product-info">
+          <div class="brand">PERIPERA <span class="tag">glossy</span></div>
+          <div class="name">글로우 체크 블러셔</div>
+          <div class="price">18,000원</div>
+        </div>
+        <button class="recommendation-button">✨ 추천받기</button>
+      </div>
+      <div class="product-card">
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="에뛰드하우스 코팅 틴트 립"
+        />
+        <div class="product-info">
+          <div class="brand">ETUDE HOUSE <span class="tag">glossy</span></div>
+          <div class="name">코팅 틴트 립</div>
+          <div class="price">12,000원</div>
+        </div>
+        <button class="recommendation-button">✨ 추천받기</button>
+      </div>
+      <div class="product-card">
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="이니스프리 내추럴 아이쉐도우"
+        />
+        <div class="product-info">
+          <div class="brand">INNISFREE <span class="tag">matte</span></div>
+          <div class="name">내추럴 아이쉐도우</div>
+          <div class="price">22,000원</div>
+        </div>
+        <button class="recommendation-button">✨ 추천받기</button>
+      </div>
+      <div class="product-card">
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="클리오 어스 온 아이쉐도우"
+        />
+        <div class="product-info">
+          <div class="brand">CLIO <span class="tag">matte</span></div>
+          <div class="name">어스 온 아이쉐도우</div>
+          <div class="price">32,000원</div>
+        </div>
+        <button class="recommendation-button">✨ 추천받기</button>
+      </div>
+      <div class="product-card">
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="롬앤 베이지 매트 립스틱"
+        />
+        <div class="product-info">
+          <div class="brand">ROMAND <span class="tag">matte</span></div>
+          <div class="name">베이지 매트 립스틱</div>
+          <div class="price">15,000원</div>
+        </div>
+        <button class="recommendation-button">✨ 추천받기</button>
+      </div>
+      {% endif %}
     </div>
+  </div>
 </div>
 
 {% block extra_js %}
 <script>
-    //이 페이지에서만 필요한 JavaScript이므로 여기에 유지
-    function searchProduct() {
-        const query = document.getElementById('product-search-input').value;
-        if (query) {
-            alert(`"${query}" 제품 검색 (백엔드 연동 필요)`);
-            //여기에 실제 백엔드 API 호출 로직 추가
-        } else {
-            alert("제품명을 입력해주세요.");
-        }
+  //이 페이지에서만 필요한 JavaScript이므로 여기에 유지
+  function searchProduct() {
+    const query = document.getElementById("product-search-input").value;
+    if (query) {
+      alert(`"${query}" 제품 검색 (백엔드 연동 필요)`);
+      //여기에 실제 백엔드 API 호출 로직 추가
+    } else {
+      alert("제품명을 입력해주세요.");
     }
+  }
 
-    document.getElementById('image-upload-input').addEventListener('change', function(event) {
-        if (event.target.files && event.target.files[0]) {
-            alert(`"${event.target.files[0].name}" 이미지 업로드 (백엔드 연동 필요)`);
-            //여기에 실제 백엔드 이미지 업로드 및 분석 API 호출 로직 추가
-        }
+  document
+    .getElementById("image-upload-input")
+    .addEventListener("change", function (event) {
+      if (event.target.files && event.target.files[0]) {
+        alert(
+          `"${event.target.files[0].name}" 이미지 업로드 (백엔드 연동 필요)`
+        );
+        //여기에 실제 백엔드 이미지 업로드 및 분석 API 호출 로직 추가
+      }
     });
 </script>
-{% endblock %}
-{% endblock %}
+{% endblock %} {% endblock %}
