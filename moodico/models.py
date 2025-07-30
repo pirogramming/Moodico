@@ -1,6 +1,3 @@
-# 몇몇 id를 charField보다 autoFeilf, uuidfield쓰면 좋을거 같은데 이미지 서버도 사용할 수 있을거 같아서 uuidfield 사용이 적합해보임
-
-
 import uuid
 # 몇몇 id를 charField보다 autoFeilf, uuidfield쓰면 좋을거 같은데 이미지 서버도 사용할 수 있을거 같아서 uuidfield 사용이 적합해보임
 
