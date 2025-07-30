@@ -2,6 +2,10 @@
 
 
 import uuid
+# 몇몇 id를 charField보다 autoFeilf, uuidfield쓰면 좋을거 같은데 이미지 서버도 사용할 수 있을거 같아서 uuidfield 사용이 적합해보임
+
+
+import uuid
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -126,6 +130,8 @@ class PaletteColor(models.Model):
 class Brand(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="브랜드 식별자")
     name = models.CharField(max_length=100,unique=True, verbose_name="브랜드 명")
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="브랜드 식별자")
+    name = models.CharField(max_length=100,unique=True, verbose_name="브랜드 명")
 
     def __str__(self):
         return self.name
@@ -133,7 +139,12 @@ class Brand(models.Model):
 class Product(models.Model):
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 식별자")
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드")
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 식별자")
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드")
     name = models.CharField(max_length=255, verbose_name="제품 이름")
+    category = models.CharField(max_length=255, verbose_name="제품 카테고리")
+    url = models.URLField(null=True, blank=True, verbose_name="제품 링크") #urlfeild 사용
+    price = models.PositiveIntegerField(null=True, blank=True, verbose_name="제품 가격") #음수 가격 예외
     category = models.CharField(max_length=255, verbose_name="제품 카테고리")
     url = models.URLField(null=True, blank=True, verbose_name="제품 링크") #urlfeild 사용
     price = models.PositiveIntegerField(null=True, blank=True, verbose_name="제품 가격") #음수 가격 예외
@@ -144,6 +155,13 @@ class Product(models.Model):
 
 
 class ProductShade(models.Model):
+    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 셰이드 식별자")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="shades", verbose_name="제품")
+    tone_tag = models.ForeignKey(ToneTag, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="톤 태그")
+    hex = models.CharField(max_length=7, null=True, blank=True, verbose_name="색상 HEX")#헥사 코드 숫자에 따라 max_length = 6~7
+    lab_l = models.FloatField(null=True, blank=True, verbose_name="명도(L)")
+    lab_a = models.FloatField(null=True, blank=True, verbose_name="채도(G/R)")
+    lab_b = models.FloatField(null=True, blank=True, verbose_name="채도(B/Y)")
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 셰이드 식별자")
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="shades", verbose_name="제품")
     tone_tag = models.ForeignKey(ToneTag, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="톤 태그")
