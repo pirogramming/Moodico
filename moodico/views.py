@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 import requests
 from django.http import HttpResponse
 from django.http import HttpRequest
@@ -9,6 +9,13 @@ import json
 import os
 from django.views.decorators.http import require_http_methods
 from functools import wraps
+from .models import Upload
+from PIL import Image
+import numpy as np
+from skimage import color
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from skimage.color import rgb2lab
 
 
 def login_or_kakao_required(view_func):
@@ -229,3 +236,52 @@ def kakao_logout(request):
     request.session.flush()
 
     return redirect("/?logout=success")
+
+# 이미지 업로드
+def upload_color_image(request):
+    if request.method == 'POST':
+        form = UploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+
+            if request.user.is_authenticated:
+                upload.user = request.user
+            else:
+                upload.user = None  # or handle anonymous case
+
+            upload.save()
+            return render(request, 'upload.html', {
+                'form': UploadForm(),
+                'uploaded_image_url': upload.image_path.url
+            })
+    else:
+        form = UploadForm()
+    return render(request, 'upload.html', {'form': form})
+
+
+@csrf_exempt
+def recommend_by_color(request):
+    if request.method == 'POST':
+        body = json.loads(request.body)
+        warm = body.get("warmCool")
+        deep = body.get("lightDeep")
+
+        if warm is None or deep is None:
+            return JsonResponse({"error": "Missing coordinates"}, status=400)
+
+        coord = np.array([warm, deep])
+
+        with open("static/data/cluster_centers.json", "r") as f:
+            centers = json.load(f)
+        with open("static/data/romand_products_clustered.json", "r", encoding="utf-8") as f:
+            products = json.load(f)
+
+        # Find closest cluster
+        cluster_idx = np.argmin([np.linalg.norm(coord - np.array(c)) for c in centers])
+
+        # Recommend products from that cluster
+        matches = [p for p in products if p.get("cluster") == cluster_idx][:5]
+
+        return JsonResponse({"recommended": matches}, json_dumps_params={"ensure_ascii": False})
+
+    return JsonResponse({"error": "Only POST method allowed"}, status=405)

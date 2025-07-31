@@ -61,6 +61,7 @@ function rgbToHsl(r, g, b) {
         h /= 6;
     }
 
+
     return [h * 360, s, l];
 }
 
@@ -70,7 +71,7 @@ function displayColorOnMatrix(hex, warmCool, lightDeep) {
 
     // 기존에 표시된 색상 점 제거 - 버튼 누를 때마다 새로 표시
     const existingColorPoint = productsContainer.querySelector('.temp-color-point');
-    if (existingColorPoint) {
+    if (existingColorPoint){ 
         existingColorPoint.remove();
     }
 
@@ -126,31 +127,88 @@ function calculateCoordinatesFromHsl(h, s, l) {
     return { warmCool: finalWarmCool, lightDeep: finalLightDeep };
 }
 
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+function renderRecommendations(products) {
+    const box = document.getElementById("recommendation-box");
+    box.innerHTML = "";
+    products.forEach(p => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+        card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}" />
+            <div class="product-info">
+                <div class="brand">${p.brand} <span class="tag">${p.category}</span></div>
+                <div class="name">${p.color_name}</div>
+                <div class="price">${p.price}</div>
+            </div>
+            <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
+        `;
+        box.appendChild(card);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const hexCodeDisplay = document.getElementById('hex-code-display');
     const analyzeColorButton = document.getElementById('analyze-color-button'); 
 
+
     function analyzeSelectedColor() {
-        const hex = hexCodeDisplay.textContent.trim(); // #FFFFFF 형태
-        if (hex && hex !== '#FFFFFF') { // 초기값이 아니거나 유효한 경우
-            const rgb = hexToRgb(hex);
-            if (rgb) {
-                const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-                if (hsl) {
-                    const coords = calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
-                    if (coords) {
-                        console.log(`Analyzed Color: ${hex}`);
-                        console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
-                        console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
-                        
-                        // 색상을 매트릭스에 표시
-                        displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
+      const hex = hexCodeDisplay.textContent.trim(); // #FFFFFF 형태
+      if (hex && hex !== '#FFFFFF') {
+          const rgb = hexToRgb(hex);
+          if (rgb) {
+              const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+              if (hsl) {
+                  const coords = calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
+                  if (coords) {
+                      console.log(`Analyzed Color: ${hex}`);
+                      console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
+                      console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
+                    
+                      // 색상을 매트릭스에 표시
+                      displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
+
+                      // Send to backend
+                      fetch("/recommend_by_color/", {
+                          method: "POST",
+                          headers: {
+                              "Content-Type": "application/json",
+                              "X-CSRFToken": getCookie("csrftoken"),
+                          },
+                          body: JSON.stringify({
+                              warmCool: coords.warmCool,
+                              lightDeep: coords.lightDeep,
+                          }),
+                      })
+                      .then(res => res.json())
+                      .then(data => {
+                          if (data.recommended) {
+                              renderRecommendations(data.recommended);
+                          } else {
+                              console.warn("No recommended field in response", data);
+                          }
+                      })
+                      .catch(err => console.error("추천 실패:", err));
                     }
                 }
             }
         }
     }
-
     if (analyzeColorButton) {
         analyzeColorButton.addEventListener('click', analyzeSelectedColor);
     }
