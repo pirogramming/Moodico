@@ -26,9 +26,6 @@ def login_or_kakao_required(view_func):
         return redirect('login')
     return _wrapped_view
 
-def color_matrix_explore(request):
-    return render(request, 'color_matrix.html')
-
 # Create your views here.
 
 def main(request):
@@ -64,10 +61,9 @@ def mood_test(request):
 def mood_result(request):
     """무드 테스트 결과 페이지 뷰"""
     # products.json에서 크롤링 데이터 읽기
-    json_path = os.path.join('static', 'data', 'products.json')
+    json_path = os.path.join(settings.BASE_DIR,'static', 'data', 'products.json')
     
-    with open(json_path, 'r', encoding='utf-8') as f:
-        products = json.load(f)
+    products = load_json_from_static('products.json')
     
     # 제품명에서 브랜드 추출 및 데이터 가공
     processed_products = []
@@ -118,8 +114,7 @@ def product_detail(request, product_id):
 def product_list(request):
     json_path = os.path.join('static', 'data', 'products.json')
     
-    with open(json_path, 'r', encoding='utf-8') as f:
-        products = json.load(f)
+    products = load_json_from_static('products.json')
     
     return render(request, 'product_list.html', {'products': products})
 
@@ -285,3 +280,10 @@ def recommend_by_color(request):
         return JsonResponse({"recommended": matches}, json_dumps_params={"ensure_ascii": False})
 
     return JsonResponse({"error": "Only POST method allowed"}, status=405)
+
+    # 제품 크롤링한거 가져오는거가 여러번 필요할거 같아서 따로 함수로 빼놓으면 좋을거 같아요
+    # 사용법 products = load_json_from_static('products.json')
+def load_json_from_static(filename):
+    path = os.path.join(settings.BASE_DIR, 'static', 'data', filename)
+    with open(path, 'r', encoding='utf-8') as f:
+        return json.load(f)
