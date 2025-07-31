@@ -13,26 +13,38 @@
     <h2>내 아이템 검색</h2>
     <p>보유 중인 메이크업 제품을 검색하고 어울리는 조합을 추천받아보세요</p>
     <div class="search-input-group">
-      <input type="text" id="product-search-input" placeholder="제품명을 입력하세요" />
+      <input
+        type="text"
+        id="product-search-input"
+        placeholder="제품명을 입력하세요"
+      />
       <button type="button" onclick="searchProduct()">🔍 검색</button>
     </div>
     <div class="separator">또는</div>
     <div class="image-upload-area">
-      <label for="image-upload-input">
-        <span class="upload-icon">📸</span> 사진으로 검색
-        <input type="file" id="image-upload-input" accept="image/*" />
-      </label>
+      <form method="POST" enctype="multipart/form-data" action="{% url 'upload_color_image' %}">
+        {% csrf_token %}
+        <label for="image-upload-input">
+          <span class="upload-icon">📸</span> 사진으로 검색
+          <input type="file" name="image_path" id="image-upload-input" accept="image/*" onchange="this.form.submit();" />
+        </label>
+      </form>
     </div>
-
+    
     <div id="image-preview-area" class="image-preview-area">
       <img id="uploaded-image" src="" alt="업로드된 이미지" style="display:none;">
       <canvas id="image-canvas" style="display:none;"></canvas>
       <div id="color-display-box" class="color-display-box" style="display:none;">
         <div id="selected-color-swatch" class="selected-color-swatch"></div>
         <span id="hex-code-display">#FFFFFF</span>
+        <button id="analyze-color-button" class="analyze-button">
+          추천받기
+        </button>
       </div>
       <p id="click-instruction" style="display:none;">이미지를 클릭하여 색상을 추출해보세요</p>
+      <div id="recommendation-box" class="recommendation-box"></div>
     </div>
+
     
   </div>
 
@@ -53,7 +65,10 @@
       </div>
       {% endfor %} {% else %}
       <div class="product-card">
-        <img src="{% static 'images/test.jpg' %}" alt="페리페라 글로우 체크 블러셔" />
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="페리페라 글로우 체크 블러셔"
+        />
         <div class="product-info">
           <div class="brand">PERIPERA <span class="tag">glossy</span></div>
           <div class="name">글로우 체크 블러셔</div>
@@ -62,7 +77,10 @@
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
       <div class="product-card">
-        <img src="{% static 'images/test.jpg' %}" alt="에뛰드하우스 코팅 틴트 립" />
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="에뛰드하우스 코팅 틴트 립"
+        />
         <div class="product-info">
           <div class="brand">ETUDE HOUSE <span class="tag">glossy</span></div>
           <div class="name">코팅 틴트 립</div>
@@ -71,7 +89,10 @@
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
       <div class="product-card">
-        <img src="{% static 'images/test.jpg' %}" alt="이니스프리 내추럴 아이쉐도우" />
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="이니스프리 내추럴 아이쉐도우"
+        />
         <div class="product-info">
           <div class="brand">INNISFREE <span class="tag">matte</span></div>
           <div class="name">내추럴 아이쉐도우</div>
@@ -80,7 +101,10 @@
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
       <div class="product-card">
-        <img src="{% static 'images/test.jpg' %}" alt="클리오 어스 온 아이쉐도우" />
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="클리오 어스 온 아이쉐도우"
+        />
         <div class="product-info">
           <div class="brand">CLIO <span class="tag">matte</span></div>
           <div class="name">어스 온 아이쉐도우</div>
@@ -89,7 +113,10 @@
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
       <div class="product-card">
-        <img src="{% static 'images/test.jpg' %}" alt="롬앤 베이지 매트 립스틱" />
+        <img
+          src="{% static 'images/test.jpg' %}"
+          alt="롬앤 베이지 매트 립스틱"
+        />
         <div class="product-info">
           <div class="brand">ROMAND <span class="tag">matte</span></div>
           <div class="name">베이지 매트 립스틱</div>
@@ -104,17 +131,15 @@
 
 {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
+<script src="{% static 'js/color_analyzer.js' %}"></script> 
+{% if uploaded_image_url %}
 <script>
-  //이 페이지에서만 필요한 JavaScript이므로 여기에 유지
-  function searchProduct() {
-    const query = document.getElementById("product-search-input").value;
-    if (query) {
-      alert(`"${query}" 제품 검색 (백엔드 연동 필요)`);
-      //여기에 실제 백엔드 API 호출 로직 추가
-    } else {
-      alert("제품명을 입력해주세요.");
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof drawImageToCanvas === 'function') {
+      drawImageToCanvas("{{ uploaded_image_url }}");
     }
-  }
-
+  });
 </script>
-{% endblock %} {% endblock %}
+{% endif %}
+{% endblock %}
+{% endblock %}
