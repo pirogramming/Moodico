@@ -379,6 +379,7 @@
             li.addEventListener('click', () => {
               inputSearch.value = item.name;
               resultsBox.style.display = 'none';
+              selectedProduct = item;
               analyzeSelectedProduct(item);
             });
             ul.appendChild(li);
@@ -404,8 +405,11 @@
 
   // 검색 결과 기능
   button.addEventListener('click', () => {
-    const query = inputSearch.value;
-    fetchSearchResults(query);
+    if (selectedProduct) {
+      analyzeSelectedProduct(selectedProduct);
+    } else {
+      console.warn("제품명을 입력해주세요");
+    }
   });
 
   // search-results-box 숨기기
