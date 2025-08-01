@@ -570,6 +570,7 @@
   .search-results-box li {
     padding: 8px 12px;
     cursor: pointer;
+    color: #333;
   }
 
   .search-results-box li:hover {
@@ -591,7 +592,7 @@
             id="product-search-input"
             placeholder="제품명을 입력하세요"
           />
-          <button type="button" onclick="searchProduct()">🔍 검색</button>
+          <button type="button" id="product-search-btn">🔍 검색</button>
         </div>
         <div id="search-results-box" class="search-results-box"></div>
         <div class="separator">또는</div>
@@ -759,6 +760,7 @@
     </div>
   </div>
 </div>
+{% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
@@ -849,6 +851,13 @@
     }
   });
 
+  inputSearch.addEventListener('focus', () => {
+    const query = inputSearch.value;
+    if (query.trim()) {
+      fetchSearchResults(query);
+    }
+  });
+
   // search-results-box 숨기기
   document.addEventListener('click', (e) => {
     if (!resultsBox.contains(e.target) && e.target !== inputSearch) {
@@ -864,4 +873,4 @@
     }
   });
 </script>
-{% endif %} {% endblock %} {% endblock %}
+{% endif %} {% endblock %}
