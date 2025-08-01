@@ -4,8 +4,10 @@ from io import BytesIO
 from PIL import Image
 import numpy as np
 from skimage import color
+import os
 
 # Load original data
+json_path = os.path.join('static', 'data', 'romand_products.json')
 with open('static/data/romand_products.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
 
@@ -26,19 +28,21 @@ for item in data:
 
     # 4. hex + lab (extract average color)
     try:
-        response = requests.get(image_url)
+        response = requests.get(image_url, timeout=5)
+        response.raise_for_status()
         img = Image.open(BytesIO(response.content)).convert('RGB')
         img = img.resize((50, 50))  # small size to average
         avg_color = np.array(img).mean(axis=(0, 1))  # R, G, B
 
         # HEX
+        avg_color = np.clip(avg_color, 0, 255)
         r, g, b = map(int, avg_color)
         hex_color = '#{:02x}{:02x}{:02x}'.format(r, g, b)
 
         # LAB
         rgb_norm = np.array([[avg_color]]) / 255.0
-        lab = color.rgb2lab(rgb_norm)[0][0]
-        lab_l, lab_a, lab_b = lab.round(2)
+        lab = color.rgb2lab(rgb_norm)[0][0].tolist()
+        lab_l, lab_a, lab_b = round(lab[0], 2), round(lab[1], 2), round(lab[2], 2)
 
     except Exception as e:
         print(f"[ERROR] {name}: {e}")
@@ -59,6 +63,7 @@ for item in data:
     enhanced_data.append(item)
 
 # Save to new file
+save_path = os.path.join('static', 'data', 'romand_products_enhanced.json')
 with open('static/data/romand_products_enhanced.json', 'w', encoding='utf-8') as f:
     json.dump(enhanced_data, f, ensure_ascii=False, indent=2)
 

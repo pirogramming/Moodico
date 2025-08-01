@@ -1,3 +1,4 @@
+from django.templatetags.static import static
 from django.shortcuts import render,redirect, get_object_or_404
 import requests
 from django.http import HttpResponse
@@ -106,7 +107,7 @@ def product_detail(request, product_id):
         'name': f'제품 {product_id}',
         'description': '이 제품은 아주 좋은 제품입니다.',
         'price': '30,000원',
-        'image': '/static/images/test.jpg', # 임시 이미지
+        'image': static('images/test.jpg'), # 임시 이미지
     }
     return render(request, 'detail.html', {'product': product})
 
@@ -271,11 +272,31 @@ def recommend_by_color(request):
         with open("static/data/romand_products_clustered.json", "r", encoding="utf-8") as f:
             products = json.load(f)
 
+        # 거리 기준 설정 (예: 0.3 이내만 추천)
+        max_distance = 0.3
+
+        # coord 정보 없는 제품이 하나라도 있으면 추천하지 않음
+        if any("coord" not in p for p in products):
+            return JsonResponse({"error": "추천할 수 없습니다. 제품 좌표 정보가 없습니다."}, status=400)
+
         # Find closest cluster
         cluster_idx = np.argmin([np.linalg.norm(coord - np.array(c)) for c in centers])
 
+         # 해당 클러스터 제품 필터링
+        cluster_products = [p for p in products if p.get("cluster") == cluster_idx]
+
+
+         # 후보 제품 중 좌표와의 거리 계산하여 max_distance 이내 제품만 추출
+        filtered_products = []
+        for p in cluster_products:
+            product_coord = np.array(p.get("coord", [0, 0]))  # 제품 좌표가 저장돼 있다고 가정
+            dist = np.linalg.norm(coord - product_coord)
+            if dist <= max_distance:
+                filtered_products.append(p)
+
         # Recommend products from that cluster
-        matches = [p for p in products if p.get("cluster") == cluster_idx][:5]
+        # 제한 개수는 최대 5개
+        matches = filtered_products[:5]
 
         return JsonResponse({"recommended": matches}, json_dumps_params={"ensure_ascii": False})
 
@@ -287,3 +308,4 @@ def load_json_from_static(filename):
     path = os.path.join(settings.BASE_DIR, 'static', 'data', filename)
     with open(path, 'r', encoding='utf-8') as f:
         return json.load(f)
+

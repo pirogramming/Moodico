@@ -140,7 +140,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용
 ###############
 # NCP Object Storage setting(S3)
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 
 AWS_STORAGE_BUCKET_NAME = ''# 추후 버킷 명 기입
