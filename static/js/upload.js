@@ -68,28 +68,3 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// 검색창 이벤트
-
-function searchProduct(query){
-    fetch(`/searchProduct/?q=${encodeURIComponent(query)}&t=${Date.now()}`)
-        .then(res => res.json())
-        .then(data => {
-            console.log('검색 결과:', data.results);
-
-            if (data.results.length === 1) {
-                const product = data.results[0];
-                
-                // 해당 제품을 가져와서 추천 로직에 추가
-                
-            }
-        })
-        .catch(err => console.error('검색 실패:', err));
-}
-
-document.getElementById('product-search-btn').addEventListener('click', () => {
-    const query = document.getElementById('product-search-input').value;
-    console.log(`쿼리: ${query}`);
-    searchProduct(query);
-});
-
-
