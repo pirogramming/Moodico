@@ -70,13 +70,13 @@ function displayColorOnMatrix(hex, warmCool, lightDeep) {
     if (!productsContainer) return;
 
     // 기존에 표시된 색상 점 제거 - 버튼 누를 때마다 새로 표시
-    const existingColorPoint = productsContainer.querySelector('.temp-color-point');
+    const existingColorPoint = productsContainer.querySelector('.user-color-point');
     if (existingColorPoint){ 
         existingColorPoint.remove();
     }
 
     const colorPoint = document.createElement('div');
-    colorPoint.classList.add('product-circle', 'temp-color-point');
+    colorPoint.classList.add('product-circle', 'user-color-point');
     colorPoint.style.backgroundColor = hex;
     colorPoint.style.left = `${warmCool}%`;
     colorPoint.style.top = `${lightDeep}%`;
@@ -86,6 +86,8 @@ function displayColorOnMatrix(hex, warmCool, lightDeep) {
 
     colorPoint.style.border = '3px solid #8A2BE2';
     colorPoint.style.boxShadow = '0 0 10px rgba(138, 43, 226, 0.6)';
+    colorPoint.style.zIndex = '20'; 
+    colorPoint.style.opacity = '0.8';
 
     productsContainer.appendChild(colorPoint);
 }
@@ -162,6 +164,32 @@ function renderRecommendations(products) {
     });
 }
 
+function displayRecommendatioinsOnMatrix(products) {
+    const productsContainer = document.querySelector('.color-matrix-container');
+    if (!productsContainer) return;
+
+    // 기존의 모든 색상 점 제거 - 버튼 누를 때마다 새로 표시
+    const existingColorPoints = productsContainer.querySelectorAll('.temp-color-point');
+    existingColorPoints.forEach(point => point.remove());
+
+    products.forEach(p => {
+        const colorPoint = document.createElement('div');
+        colorPoint.classList.add('product-circle', 'temp-color-point');
+        colorPoint.style.backgroundColor = p.hex;
+        colorPoint.style.left = `${p.warmCool}%`;
+        colorPoint.style.top = `${p.lightDeep}%`;
+        colorPoint.title = `선택된 색상: ${p.hex}`;
+
+        colorPoint.style.transform = 'translate(-50%, -50%)';
+
+        colorPoint.style.border = '3px solid #F7F7F7';
+        colorPoint.style.boxShadow = '0 0 8px rgba(247, 247, 247, 0.8)';
+        colorPoint.style.zIndex = '10'; 
+
+        productsContainer.appendChild(colorPoint);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const hexCodeDisplay = document.getElementById('hex-code-display');
     const analyzeColorButton = document.getElementById('analyze-color-button'); 
@@ -199,6 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
                       .then(data => {
                           if (data.recommended) {
                               renderRecommendations(data.recommended);
+                              displayRecommendatioinsOnMatrix(data.recommended);
                           } else {
                               console.warn("No recommended field in response", data);
                           }
