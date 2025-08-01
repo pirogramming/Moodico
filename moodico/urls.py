@@ -25,6 +25,7 @@ urlpatterns = [
 
     path('upload_color_image/', views.upload_color_image, name='upload_color_image'), #색상 이미지 업로드
     path('recommend_by_color/', views.recommend_by_color, name='recommend_by_color'),  # 색상 추천
+    path('search_product/', views.search_product, name='search_product'), # 제품 검색
 ]
 
 # Enable media file serving (during development only)

@@ -285,3 +285,26 @@ def recommend_by_color(request):
         return JsonResponse({"recommended": matches}, json_dumps_params={"ensure_ascii": False})
 
     return JsonResponse({"error": "Only POST method allowed"}, status=405)
+
+
+# DB 구현 이후 검색 로직 수정 가능성 있음(제품 데이터를 밑에 표시함으로써 이 문제 완화 가능)
+## 현재는 단어 단위의 검색만 가능.. 
+## 만일 사용자가 "조선무화과"를 검색한다면 "조선 무화과" 검색어는 서치에 걸리지 않음("조선", "무화과"는 정상적으로 검색 가능)
+def search_product(request):
+    query = request.GET.get('q', '').lower().strip()
+    query_words = query.split()
+
+    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'romand_products_enhanced.json')
+    with open(product_path, 'r', encoding='utf-8') as f:
+        products = json.load(f)
+
+    def normalize(text):
+        return text.lower()
+    
+    filtered = []
+    for p in products:
+        search_for = normalize(p['brand'] + ' ' + p['name'])
+        if all(word in search_for for word in query_words):
+            filtered.append(p)
+
+    return JsonResponse({'results':filtered})

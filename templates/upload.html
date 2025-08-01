@@ -138,6 +138,33 @@
 .resizer.bottom-left-resizer { bottom: -6px; left: -6px; cursor: nesw-resize; }
 .resizer.bottom-right-resizer { bottom: -6px; right: -6px; cursor: nwse-resize; }
 
+/*검색 결과 드롭다운박스용 css*/
+.search-results-box {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 300px;
+  margin-top: 5px;
+  z-index: 100;
+  display: none; /* 처음에는 숨김 */
+}
+
+.search-results-box ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-results-box li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.search-results-box li:hover {
+  background-color: #f0f0f0;
+}
 
 </style>
 {% endblock%} 
@@ -152,8 +179,10 @@
         id="product-search-input"
         placeholder="제품명을 입력하세요"
       />
-      <button type="button" onclick="searchProduct()">🔍 검색</button>
+      <button type="button" id="product-search-btn">🔍 검색</button>
     </div>
+    <div id="search-results-box" class="search-results-box"></div>
+
     <div class="separator">또는</div>
     <div class="image-upload-area">
       <form method="POST" enctype="multipart/form-data" action="{% url 'upload_color_image' %}">
@@ -297,6 +326,66 @@
 {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
 <script src="{% static 'js/color_analyzer.js' %}"></script> 
+<script>
+  // search-results-box 관련 부분
+  const inputSearch = document.getElementById('product-search-input');
+  const button = document.getElementById('product-search-btn');
+  const resultsBox = document.getElementById('search-results-box');
+
+  function fetchSearchResults(query) {
+    if (!query.trim()) {
+      resultsBox.style.display = 'none';
+      return;
+    }
+
+    fetch(`/search_product/?q=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+      .then(data => {
+        resultsBox.innerHTML = ''; // 기존 결과 삭제
+
+        if (data.results.length > 0) {
+          const ul = document.createElement('ul');
+          data.results.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.name;
+            li.addEventListener('click', () => {
+              inputSearch.value = item.name;
+              resultsBox.style.display = 'none';
+            });
+            ul.appendChild(li);
+          });
+          resultsBox.appendChild(ul);
+          resultsBox.style.display = 'block';
+        } else {
+          resultsBox.innerHTML = '<p style="padding:8px">검색 결과가 없습니다.</p>';
+          resultsBox.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        console.error('검색 오류:', error);
+        resultsBox.style.display = 'none';
+      });
+  }
+
+  // 자동 검색 목록 기능 (keyup)
+  inputSearch.addEventListener('keyup', (e) => {
+    const query = e.target.value;
+    fetchSearchResults(query);
+  });
+
+  // 검색 결과 기능
+  button.addEventListener('click', () => {
+    const query = inputSearch.value;
+    fetchSearchResults(query);
+  });
+
+  // search-results-box 숨기기
+  document.addEventListener('click', (e) => {
+    if (!resultsBox.contains(e.target) && e.target !== inputSearch) {
+      resultsBox.style.display = 'none';
+    }
+  });
+</script>
 {% if uploaded_image_url %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
