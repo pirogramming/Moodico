@@ -1,46 +1,37 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/color_matrix_style.css' %}" />
+{% endblock %} {% block content %}
+<section class="color-matrix-container">
+  <div class="quadrant-grid">
+    <div class="quadrant top-left"></div>
+    <div class="quadrant top-right"></div>
+    <div class="quadrant bottom-left"></div>
+    <div class="quadrant bottom-right"></div>
+  </div>
 
-{% block extra_head %}
-    <link rel="stylesheet" href="{% static 'css/color_matrix_style.css' %}">
-{% endblock %}
+  <div class="axis-label top-label">Light</div>
+  <div class="axis-label bottom-label">Deep</div>
+  <div class="axis-label left-label">Cool</div>
+  <div class="axis-label right-label">Warm</div>
 
-{% block content %}
-    <section class="color-matrix-container">
-        <div class="quadrant-grid">
-            <div class="quadrant top-left"></div>
-            <div class="quadrant top-right"></div>
-            <div class="quadrant bottom-left"></div>
-            <div class="quadrant bottom-right"></div>
-        </div>
+  <div id="makeup-products-container" class="makeup-products-container"></div>
 
-        <div class="axis-label top-label">Light</div>
-        <div class="axis-label bottom-label">Deep</div>
-        <div class="axis-label left-label">Cool</div>
-        <div class="axis-label right-label">Warm</div>
+  <div id="mood-selection-area" class="mood-selection-area">
+    <span class="mood-label">선택 무드 영역</span>
+    <div class="resizer top-left-resizer"></div>
+    <div class="resizer top-right-resizer"></div>
+    <div class="resizer bottom-left-resizer"></div>
+    <div class="resizer bottom-right-resizer"></div>
+  </div>
+</section>
 
-        <div id="makeup-products-container" class="makeup-products-container">
-            </div>
-
-        <div id="mood-selection-area" class="mood-selection-area">
-            <span class="mood-label">선택 무드 영역</span>
-            <div class="resizer top-left-resizer"></div>
-            <div class="resizer top-right-resizer"></div>
-            <div class="resizer bottom-left-resizer"></div>
-            <div class="resizer bottom-right-resizer"></div>
-        </div>
-
-        
-    </section>
-
-    <div id="selected-products-display" class="selected-products-display">
-            <h2>선택된 무드 영역 제품</h2>
-            <ul id="selected-products-list">
-                </ul>
-            <p id="no-products-message" class="hidden">선택된 무드 영역에 해당하는 제품이 없습니다.</p>
-        </div>
-{% endblock %}
-
-{% block extra_js %}
-    <script src="{% static 'js/color_matrix_script.js' %}"></script>
+<div id="selected-products-display" class="selected-products-display">
+  <h2>선택된 무드 영역 제품</h2>
+  <ul id="selected-products-list"></ul>
+  <p id="no-products-message" class="hidden">
+    선택된 무드 영역에 해당하는 제품이 없습니다.
+  </p>
+</div>
+{% endblock %} {% block extra_js %}
+<script src="{% static 'js/color_matrix_script.js' %}"></script>
 {% endblock %}
