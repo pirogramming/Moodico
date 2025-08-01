@@ -1,29 +1,407 @@
-{% extends 'base.html' %} {% load static %} 
-{% block extra_head %} 
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
 <style>
-    .image-preview-area img.color-picker-active,
-    .image-preview-area canvas.color-picker-active {
-        cursor: url("{% static 'images/eyedropper.svg' %}") 12 12, crosshair;
+  .image-preview-area img.color-picker-active,
+  .image-preview-area canvas.color-picker-active {
+    cursor: url("{% static 'images/eyedropper.svg' %}") 12 12, crosshair;
+  }
+
+  /* 새로운 레이아웃 스타일 */
+  .main-content-wrapper {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+  }
+
+  .upload-section {
+    flex: 1;
+    min-width: 400px;
+  }
+
+  .matrix-section {
+    flex: 1;
+    min-width: 600px;
+  }
+
+  .color-matrix-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    background: linear-gradient(
+      to bottom right,
+      #f8f0ff,
+      #e0efff,
+      #ffe0f0,
+      #fff8e0
+    );
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+
+  .search-section {
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .search-section h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  .search-section p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+
+  .search-input-group {
+    display: flex;
+    max-width: 400px;
+    margin: 0 auto 15px;
+    gap: 10px;
+  }
+
+  .search-input-group input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+  }
+
+  .search-input-group button {
+    padding: 12px 20px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .search-input-group button:hover {
+    background: #ff5252;
+  }
+
+  .separator {
+    margin: 15px 0;
+    font-size: 12px;
+    opacity: 0.8;
+  }
+
+  .image-upload-area {
+    margin-top: 15px;
+  }
+
+  .image-upload-area label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
+  }
+
+  .image-upload-area label:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  .image-upload-area input[type="file"] {
+    display: none;
+  }
+
+  .upload-icon {
+    font-size: 18px;
+  }
+
+  .image-preview-area {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .image-preview-area img,
+  .image-preview-area canvas {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .color-display-box {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .selected-color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .analyze-button {
+    padding: 8px 16px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+
+  .analyze-button:hover {
+    background: #ff5252;
+  }
+
+  /* 동적 추천 제품 영역 스타일 */
+  .recommendation-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+
+  .recommendation-box:empty {
+    display: none;
+  }
+
+  .recommendation-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .recommendation-box .product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 160px;
+  }
+
+  .recommendation-box .product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .recommendation-box .product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+
+  .recommendation-box .product-card .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .recommendation-box .product-card .brand {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 2px;
+  }
+
+  .recommendation-box .product-card .name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .recommendation-box .product-card .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-top: auto;
+  }
+
+  /* 추천 제품 섹션 스타일 */
+  .recommendations-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .recommendations-section h3 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
+    border-left: 4px solid #667eea;
+    padding-left: 15px;
+  }
+
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: 15px;
+    padding: 16px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 220px;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+
+  .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .brand {
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  .tag {
+    background: #667eea;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .name {
+    font-size: 1em;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.3;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .price {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: #333;
+    margin-top: auto;
+  }
+
+  .recommendation-button {
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .recommendation-button:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+  }
+
+  /* 반응형 디자인 */
+  @media (max-width: 1200px) {
+    .main-content-wrapper {
+      flex-direction: column;
+      gap: 20px;
     }
 
-  /*임시 css*/
-  .color-matrix-container {
-  position: relative;
-  width: 600px; 
-  height: 600px; 
-  background: linear-gradient(to bottom right, #f8f0ff, #e0efff, #ffe0f0, #fff8e0); 
-  border-radius: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  overflow: hidden; 
-  border: 1px solid #ddd;
-  margin-right: 30px;
-}
-.color-matrix-container {
-  position: relative;
-  margin: 0 auto;
-} /*이 부분을 제외하고는 color_matrix_style.css와 같음*/
+    .upload-section,
+    .matrix-section {
+      min-width: auto;
+    }
 
-.quadrant-grid {
+    .color-matrix-container {
+      height: 500px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .search-input-group {
+      flex-direction: column;
+    }
+
+    .product-list {
+      grid-template-columns: 1fr;
+    }
+
+    .recommendation-box {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+
+    .color-matrix-container {
+      height: 400px;
+    }
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .recommendation-box {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+  }
+
+  .quadrant-grid {
     position: absolute;
     top: 0;
     left: 0;
@@ -32,38 +410,53 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    z-index: 1; 
-}
+    z-index: 1;
+  }
 
-.quadrant {
+  .quadrant {
     border: 1px dashed rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
-}
+  }
 
-.axis-label {
+  .axis-label {
     position: absolute;
     font-weight: bold;
     color: #777;
     font-size: 0.9em;
     z-index: 5;
-}
+  }
 
-.top-label { top: 10px; left: 50%; transform: translateX(-50%); }
-.bottom-label { bottom: 10px; left: 50%; transform: translateX(-50%); }
-.left-label { left: 10px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
-.right-label { right: 10px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+  .top-label {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .bottom-label {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .left-label {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+  }
+  .right-label {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+  }
 
-
-.makeup-products-container {
+  .makeup-products-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2; 
-}
+    z-index: 2;
+  }
 
-.product-circle {
+  .product-circle {
     position: absolute;
     width: 25px;
     height: 25px;
@@ -76,28 +469,29 @@
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.7);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+      border-color 0.2s ease;
     user-select: none;
-}
+  }
 
-.product-circle:hover {
+  .product-circle:hover {
     transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     border-color: rgba(255, 255, 255, 1);
-}
+  }
 
-.product-circle.selected {
+  .product-circle.selected {
     outline: 3px solid #ff69b4;
     transform: scale(1.2);
     box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
-}
+  }
 
-.mood-selection-area {
+  .mood-selection-area {
     position: absolute;
-    border: 2px dashed #8a2be2; 
-    background-color: rgba(138, 43, 226, 0.1); 
+    border: 2px dashed #8a2be2;
+    background-color: rgba(138, 43, 226, 0.1);
     cursor: grab;
-    z-index: 3; 
+    z-index: 3;
     min-width: 50px;
     min-height: 50px;
     box-sizing: border-box;
@@ -105,13 +499,13 @@
     justify-content: center;
     align-items: center;
     transition: border 0.1s ease, background-color 0.1s ease;
-}
+  }
 
-.mood-selection-area:active {
+  .mood-selection-area:active {
     cursor: grabbing;
-}
+  }
 
-.mood-label {
+  .mood-label {
     background-color: rgba(138, 43, 226, 0.8);
     color: white;
     padding: 4px 8px;
@@ -120,9 +514,9 @@
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
-}
+  }
 
-.resizer {
+  .resizer {
     width: 12px;
     height: 12px;
     background-color: #8a2be2;
@@ -131,119 +525,162 @@
     border-radius: 50%;
     cursor: nwse-resize;
     z-index: 4;
-}
+  }
 
-.resizer.top-left-resizer { top: -6px; left: -6px; cursor: nwse-resize; }
-.resizer.top-right-resizer { top: -6px; right: -6px; cursor: nesw-resize; }
-.resizer.bottom-left-resizer { bottom: -6px; left: -6px; cursor: nesw-resize; }
-.resizer.bottom-right-resizer { bottom: -6px; right: -6px; cursor: nwse-resize; }
+  .resizer.top-left-resizer {
+    top: -6px;
+    left: -6px;
+    cursor: nwse-resize;
+  }
+  .resizer.top-right-resizer {
+    top: -6px;
+    right: -6px;
+    cursor: nesw-resize;
+  }
+  .resizer.bottom-left-resizer {
+    bottom: -6px;
+    left: -6px;
+    cursor: nesw-resize;
+  }
+  .resizer.bottom-right-resizer {
+    bottom: -6px;
+    right: -6px;
+    cursor: nwse-resize;
+  }
 
-/*검색 결과 드롭다운박스용 css*/
-.search-results-box {
-  position: absolute;
-  background-color: white;
-  border: 1px solid #ddd;
-  max-height: 200px;
-  overflow-y: auto;
-  width: 300px;
-  margin-top: 5px;
-  z-index: 100;
-  display: none; /* 처음에는 숨김 */
-}
+  /*검색 결과 드롭다운박스용 css*/
+  .search-results-box {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 300px;
+    margin-top: 5px;
+    z-index: 100;
+    display: none; /* 처음에는 숨김 */
+  }
 
-.search-results-box ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .search-results-box ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 
-.search-results-box li {
-  padding: 8px 12px;
-  cursor: pointer;
-}
+  .search-results-box li {
+    padding: 8px 12px;
+    cursor: pointer;
+  }
 
-.search-results-box li:hover {
-  background-color: #f0f0f0;
-}
-
+  .search-results-box li:hover {
+    background-color: #f0f0f0;
+  }
 </style>
-{% endblock%} 
-{% block content %}
+{% endblock%} {% block content %}
 <div class="my-item-recommendation-container">
-  <div class="search-section">
-    <h2>내 아이템 검색</h2>
-    <p>보유 중인 메이크업 제품을 검색하고 어울리는 조합을 추천받아보세요</p>
-    <div class="search-input-group">
-      <input
-        type="text"
-        id="product-search-input"
-        placeholder="제품명을 입력하세요"
-      />
-      <button type="button" id="product-search-btn">🔍 검색</button>
-    </div>
-    <div id="search-results-box" class="search-results-box"></div>
+  <!-- 메인 콘텐츠 영역: 업로드 창과 매트릭스를 나란히 배치 -->
+  <div class="main-content-wrapper">
+    <!-- 업로드 섹션 -->
+    <div class="upload-section">
+      <div class="search-section">
+        <h2>내 아이템 검색</h2>
+        <p>보유 중인 메이크업 제품을 검색하고 어울리는 조합을 추천받아보세요</p>
+        <div class="search-input-group">
+          <input
+            type="text"
+            id="product-search-input"
+            placeholder="제품명을 입력하세요"
+          />
+          <button type="button" onclick="searchProduct()">🔍 검색</button>
+        </div>
+        <div id="search-results-box" class="search-results-box"></div>
+        <div class="separator">또는</div>
+        <div class="image-upload-area">
+          <form
+            method="POST"
+            enctype="multipart/form-data"
+            action="{% url 'upload_color_image' %}"
+          >
+            {% csrf_token %}
+            <label for="image-upload-input">
+              <span class="upload-icon">📸</span> 사진으로 검색
+              <input
+                type="file"
+                name="image_path"
+                id="image-upload-input"
+                accept="image/*"
+                onchange="this.form.submit();"
+              />
+            </label>
+          </form>
+        </div>
 
-    <div class="separator">또는</div>
-    <div class="image-upload-area">
-      <form method="POST" enctype="multipart/form-data" action="{% url 'upload_color_image' %}">
-        {% csrf_token %}
-        <label for="image-upload-input">
-          <span class="upload-icon">📸</span> 사진으로 검색
-          <input type="file" name="image_path" id="image-upload-input" accept="image/*" onchange="this.form.submit();" />
-        </label>
-      </form>
-    </div>
-    
-    <div id="image-preview-area" class="image-preview-area">
-      <img id="uploaded-image" src="" alt="업로드된 이미지" style="display:none;">
-      <canvas id="image-canvas" style="display:none;"></canvas>
-      <div id="color-display-box" class="color-display-box" style="display:none;">
-        <div id="selected-color-swatch" class="selected-color-swatch"></div>
-        <span id="hex-code-display">#FFFFFF</span>
-        <button id="analyze-color-button" class="analyze-button">
-          추천받기
-        </button>
+        <div id="image-preview-area" class="image-preview-area">
+          <img
+            id="uploaded-image"
+            src=""
+            alt="업로드된 이미지"
+            style="display: none"
+          />
+          <canvas id="image-canvas" style="display: none"></canvas>
+          <div
+            id="color-display-box"
+            class="color-display-box"
+            style="display: none"
+          >
+            <div id="selected-color-swatch" class="selected-color-swatch"></div>
+            <span id="hex-code-display">#FFFFFF</span>
+            <button id="analyze-color-button" class="analyze-button">
+              추천받기
+            </button>
+          </div>
+          <p id="click-instruction" style="display: none">
+            이미지를 클릭하여 색상을 추출해보세요
+          </p>
+        </div>
       </div>
-      <p id="click-instruction" style="display:none;">이미지를 클릭하여 색상을 추출해보세요</p>
-      <div id="recommendation-box" class="recommendation-box"></div>
     </div>
 
-    
+    <!-- 매트릭스 섹션 -->
+    <div class="matrix-section">
+      <section class="color-matrix-container">
+        <div class="quadrant-grid">
+          <div class="quadrant top-left"></div>
+          <div class="quadrant top-right"></div>
+          <div class="quadrant bottom-left"></div>
+          <div class="quadrant bottom-right"></div>
+        </div>
+
+        <div class="axis-label top-label">Light</div>
+        <div class="axis-label bottom-label">Deep</div>
+        <div class="axis-label left-label">Cool</div>
+        <div class="axis-label right-label">Warm</div>
+
+        <div
+          id="makeup-products-container"
+          class="makeup-products-container"
+        ></div>
+
+        <!--유사 무드 제품 추천 구간 표시-->
+        <!--
+        <div id="mood-selection-area" class="mood-selection-area">
+          <span class="mood-label">추천 구간</span>
+          <div class="resizer top-left-resizer"></div>
+          <div class="resizer top-right-resizer"></div>
+          <div class="resizer bottom-left-resizer"></div>
+          <div class="resizer bottom-right-resizer"></div>
+        </div>
+        -->
+      </section>
+    </div>
   </div>
 
-  <section class="color-matrix-container">
-    <div class="quadrant-grid">
-      <div class="quadrant top-left"></div>
-      <div class="quadrant top-right"></div>
-      <div class="quadrant bottom-left"></div>
-      <div class="quadrant bottom-right"></div>
-    </div>
+  <!-- 동적 추천 제품 영역: 업로드/매트릭스 하단에 배치 -->
+  <div id="recommendation-box" class="recommendation-box"></div>
 
-    <div class="axis-label top-label">Light</div>
-    <div class="axis-label bottom-label">Deep</div>
-    <div class="axis-label left-label">Cool</div>
-    <div class="axis-label right-label">Warm</div>
-
-    <div id="makeup-products-container" class="makeup-products-container">
-      </div>
-
-    
-    <!--유사 무드 제품 추천 구간 표시-->
-    <!--
-    <div id="mood-selection-area" class="mood-selection-area">
-      <span class="mood-label">추천 구간</span>
-      <div class="resizer top-left-resizer"></div>
-      <div class="resizer top-right-resizer"></div>
-      <div class="resizer bottom-left-resizer"></div>
-      <div class="resizer bottom-right-resizer"></div>
-    </div>
-    -->
-
-      
-  </section>
-
-  <div class="search-results-section">
-    <h3>검색 결과</h3>
+  <!-- 추천 제품 섹션: 하단에 배치 -->
+  <div class="recommendations-section">
+    <h3>추천 제품</h3>
     <div class="product-list">
       {% if search_results %} {% for product in search_results %}
       <div class="product-card">
@@ -422,11 +859,9 @@
 {% if uploaded_image_url %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    if (typeof drawImageToCanvas === 'function') {
+    if (typeof drawImageToCanvas === "function") {
       drawImageToCanvas("{{ uploaded_image_url }}");
     }
   });
 </script>
-{% endif %}
-{% endblock %}
-{% endblock %}
+{% endif %} {% endblock %} {% endblock %}
