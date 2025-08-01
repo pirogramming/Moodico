@@ -327,10 +327,38 @@
 <script src="{% static 'js/upload.js' %}"></script>
 <script src="{% static 'js/color_analyzer.js' %}"></script> 
 <script>
-  // search-results-box 관련 부분
+  // 검색 로직 & search-results-box 관련 부분
   const inputSearch = document.getElementById('product-search-input');
   const button = document.getElementById('product-search-btn');
   const resultsBox = document.getElementById('search-results-box');
+  let selectedProduct = null;
+
+  function analyzeSelectedProduct(product){
+    displayColorOnMatrix(product.hex, product.warmCool, product.lightDeep);
+    // Send to backend
+    fetch("/recommend_by_color/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify({
+        warmCool: product.warmCool,
+        lightDeep: product.lightDeep,
+        
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.recommended) {
+        renderRecommendations(data.recommended);
+        displayRecommendatioinsOnMatrix(data.recommended);
+      } else {
+        console.warn("No recommended field in response", data);
+      }
+    })
+    .catch(err => console.error("추천 실패:", err));
+  }
 
   function fetchSearchResults(query) {
     if (!query.trim()) {
@@ -347,10 +375,11 @@
           const ul = document.createElement('ul');
           data.results.forEach(item => {
             const li = document.createElement('li');
-            li.textContent = item.name;
+            li.textContent = `${item.brand} - ${item.name}`;
             li.addEventListener('click', () => {
               inputSearch.value = item.name;
               resultsBox.style.display = 'none';
+              analyzeSelectedProduct(item);
             });
             ul.appendChild(li);
           });

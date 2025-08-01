@@ -294,7 +294,7 @@ def search_product(request):
     query = request.GET.get('q', '').lower().strip()
     query_words = query.split()
 
-    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'romand_products_enhanced.json')
+    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'romand_products_clustered.json')
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
 
