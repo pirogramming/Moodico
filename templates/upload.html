@@ -720,7 +720,7 @@
   // 검색 결과 기능
   button.addEventListener('click', () => {
     const currentInput = inputSearch.value.trim();
-    const expectedInput = selectedProduct ? `${selectedProduct.brand} - ${selectedProduct.name}` : '';
+    const expectedInput = selectedProduct ? `${selectedProduct.name}` : '';
 
     if (selectedProduct && currentInput === expectedInput) {
       analyzeSelectedProduct(selectedProduct);
