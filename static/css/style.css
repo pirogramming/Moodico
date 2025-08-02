@@ -23,8 +23,13 @@ header nav {
 }
 
 header .logo {
+    color: mediumpurple;
     font-size: 1.8em;
     font-weight: bold;
+    text-decoration: none;
+}
+
+header .login-icon:hover {
     text-decoration: none;
 }
 
