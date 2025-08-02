@@ -816,7 +816,7 @@
             const li = document.createElement('li');
             li.textContent = `${item.brand} - ${item.name}`;
             li.addEventListener('click', () => {
-              inputSearch.value = `${item.brand} - ${item.name}`;
+              inputSearch.value = `${item.name}`;
               resultsBox.style.display = 'none';
               selectedProduct = item;
               analyzeSelectedProduct(item);
