@@ -1478,6 +1478,8 @@ a.model-card {
     background-color: mediumpurple;
     border-radius: 4px;
     animation: wave 1s infinite ease-in-out;
+    background: linear-gradient(to bottom, #d291bc, #9c62c3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .wave-bar:nth-child(1) { animation-delay: 0s; }
@@ -1490,8 +1492,10 @@ a.model-card {
 @keyframes wave {
     0%, 100% {
         transform: scale(0.7);
+        opacity: 0.8;
     }
     50% {
         transform: scale(1.3);
+        opacity: 1;
     }
 }
