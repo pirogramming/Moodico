@@ -287,8 +287,8 @@ def recommend_by_color(request):
     return JsonResponse({"error": "Only POST method allowed"}, status=405)
 
 
-# DB 구현 이후 검색 로직 수정 가능성 있음(제품 데이터를 밑에 표시함으로써 이 문제 완화 가능)
-## 현재는 단어 단위의 검색만 가능.. 
+# DB 구현 이후 검색 로직 수정 필요 - 현재는 검색시마다 json 파일을 매번 불러오고 있음
+## 현재는 단어 단위의 검색만 가능.. (제품 데이터를 밑에 표시함으로써 이 문제 완화 가능) 
 ## 만일 사용자가 "조선무화과"를 검색한다면 "조선 무화과" 검색어는 서치에 걸리지 않음("조선", "무화과"는 정상적으로 검색 가능)
 def search_product(request):
     query = request.GET.get('q', '').lower().strip()
@@ -299,11 +299,12 @@ def search_product(request):
         products = json.load(f)
 
     def normalize(text):
-        return text.lower()
+        text = text.lower()
+        return text
     
     filtered = []
     for p in products:
-        search_for = normalize(p['brand'] + ' ' + p['name'])
+        search_for = normalize(p['brand'] + ' - ' + p['name'])
         if all(word in search_for for word in query_words):
             filtered.append(p)
 

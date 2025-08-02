@@ -816,7 +816,7 @@
             const li = document.createElement('li');
             li.textContent = `${item.brand} - ${item.name}`;
             li.addEventListener('click', () => {
-              inputSearch.value = item.name;
+              inputSearch.value = `${item.brand} - ${item.name}`;
               resultsBox.style.display = 'none';
               selectedProduct = item;
               analyzeSelectedProduct(item);
@@ -837,25 +837,34 @@
   }
 
   // 자동 검색 목록 기능 (keyup)
-  inputSearch.addEventListener('keyup', (e) => {
+  function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+  } // 300ms 동안 추가 입력이 없을 때 호출 - API의 불필요한 호출 방지
+  inputSearch.addEventListener('keyup', debounce((e) => {
     const query = e.target.value;
+    selectedProduct = null; 
     fetchSearchResults(query);
-  });
+  }, 300));
 
   // 검색 결과 기능
   button.addEventListener('click', () => {
-    if (selectedProduct) {
+    const currentInput = inputSearch.value.trim();
+    const expectedInput = selectedProduct ? `${selectedProduct.brand} - ${selectedProduct.name}` : '';
+
+    if (selectedProduct && currentInput === expectedInput) {
       analyzeSelectedProduct(selectedProduct);
     } else {
-      console.warn("제품명을 입력해주세요");
+      alert("제품을 목록에서 정확히 선택해주세요.");
     }
   });
 
   inputSearch.addEventListener('focus', () => {
-    const query = inputSearch.value;
-    if (query.trim()) {
-      fetchSearchResults(query);
-    }
+    resultsBox.style.display = 'none';
+    inputSearch.select();
   });
 
   // search-results-box 숨기기
