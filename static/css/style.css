@@ -11,7 +11,7 @@ header {
     background-color: #fff;
     padding: 20px 40px;
     border-bottom: 1px solid #eee;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 header nav {
@@ -23,8 +23,13 @@ header nav {
 }
 
 header .logo {
+    color: mediumpurple;
     font-size: 1.8em;
     font-weight: bold;
+    text-decoration: none;
+}
+
+header .login-icon:hover {
     text-decoration: none;
 }
 
@@ -58,7 +63,9 @@ a:hover {
 }
 
 /* Input field reset */
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"],
+input[type="password"],
+input[type="email"] {
     box-sizing: border-box;
 }
 
@@ -73,6 +80,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     padding: 20px;
     box-sizing: border-box;
 }
+
 .login-box {
     background-color: #fff;
     padding: 40px;
@@ -82,21 +90,25 @@ input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
     max-width: 400px;
 }
+
 .login-box h2 {
     margin-bottom: 30px;
     color: #333;
     font-size: 28px;
 }
+
 .login-input-group {
     margin-bottom: 20px;
     text-align: left;
 }
+
 .login-input-group label {
     display: block;
     margin-bottom: 8px;
     color: #555;
     font-weight: bold;
 }
+
 .login-input-group input {
     width: calc(100% - 20px);
     padding: 12px 10px;
@@ -104,6 +116,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     border-radius: 6px;
     font-size: 16px;
 }
+
 .login-button {
     width: 100%;
     padding: 15px;
@@ -116,21 +129,25 @@ input[type="text"], input[type="password"], input[type="email"] {
     transition: background-color 0.3s ease;
     margin-top: 10px;
 }
+
 .login-button:hover {
     background-color: darkgray;
 }
+
 .social-login {
     margin-top: 25px;
     border-top: 1px solid #eee;
     padding-top: 25px;
 }
+
 .social-login p {
     color: #777;
     margin-bottom: 15px;
     font-size: 15px;
 }
+
 .kakao-login-button {
-    background-color: #FEE500; 
+    background-color: #FEE500;
     color: #3C1E1E;
     padding: 15px;
     border-radius: 6px;
@@ -142,24 +159,29 @@ input[type="text"], input[type="password"], input[type="email"] {
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
+
 .kakao-login-button:hover {
     background-color: #FEDA00;
 }
+
 .kakao-login-button img {
     width: 24px;
     height: 24px;
     margin-right: 10px;
 }
+
 .signup-link {
     margin-top: 20px;
     font-size: 15px;
     color: #666;
 }
+
 .signup-link a {
     color: darkslategray;
     text-decoration: none;
     font-weight: bold;
 }
+
 .signup-link a:hover {
     text-decoration: underline;
 }
@@ -175,6 +197,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     padding: 20px;
     box-sizing: border-box;
 }
+
 .signup-box {
     background-color: #fff;
     padding: 40px;
@@ -184,21 +207,25 @@ input[type="text"], input[type="password"], input[type="email"] {
     width: 100%;
     max-width: 450px;
 }
+
 .signup-box h2 {
     margin-bottom: 30px;
     color: #333;
     font-size: 28px;
 }
+
 .signup-input-group {
     margin-bottom: 20px;
     text-align: left;
 }
+
 .signup-input-group label {
     display: block;
     margin-bottom: 8px;
     color: #555;
     font-weight: bold;
 }
+
 .signup-input-group input {
     width: calc(100% - 20px);
     padding: 12px 10px;
@@ -206,6 +233,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     border-radius: 6px;
     font-size: 16px;
 }
+
 .signup-button {
     width: 100%;
     padding: 15px;
@@ -218,19 +246,23 @@ input[type="text"], input[type="password"], input[type="email"] {
     transition: background-color 0.3s ease;
     margin-top: 10px;
 }
+
 .signup-button:hover {
     background-color: darkgray;
 }
+
 .login-link {
     margin-top: 20px;
     font-size: 15px;
     color: #666;
 }
+
 .login-link a {
     color: darkslategray;
     text-decoration: none;
     font-weight: bold;
 }
+
 .login-link a:hover {
     text-decoration: underline;
 }
@@ -243,14 +275,17 @@ input[type="text"], input[type="password"], input[type="email"] {
     padding: 50px 20px;
     text-align: center;
 }
+
 .main-container h1 {
     color: #333;
     margin-bottom: 30px;
 }
+
 .main-container p {
     color: #666;
     margin-bottom: 50px;
 }
+
 .exploration-models {
     display: flex;
     flex-wrap: wrap;
@@ -260,6 +295,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     gap: 30px;
     width: 70%;
 }
+
 .model-card {
     background-color: #fff;
     border-radius: 15px;
@@ -273,10 +309,12 @@ input[type="text"], input[type="password"], input[type="email"] {
     gap: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .model-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
 }
+
 .model-card .icon-circle {
     width: 60px;
     height: 60px;
@@ -302,32 +340,39 @@ input[type="text"], input[type="password"], input[type="email"] {
 }
 
 .model-card.item-based .icon-circle {
-    background-color: #fdcad4; 
+    background-color: #fdcad4;
 }
+
 .model-card.mood-test .icon-circle {
-    background-color: #e0ceff; 
+    background-color: #e0ceff;
 }
+
 .model-card.color-matrix .icon-circle {
-    background-color: #fdead2; 
+    background-color: #fdead2;
 }
+
 .model-card-content {
     flex-grow: 1;
 }
+
 .model-card-content h3 {
     font-size: 1.5em;
     color: #333;
     margin-bottom: 10px;
 }
+
 .model-card-content p {
     font-size: 1em;
     color: #777;
     margin-bottom: 0;
     line-height: 1.4;
 }
+
 .model-card .arrow-icon {
     font-size: 1.8em;
     color: #ccc;
 }
+
 a.model-card {
     text-decoration: none;
 }
@@ -338,27 +383,35 @@ a.model-card {
     max-width: 1000px;
     margin: 0 auto;
 }
+
 .search-section {
     background-color: #fff;
     padding: 30px;
-    border-radius: 10px;
+    border-radius: 15px;
+    text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    margin-bottom: 40px;
-}
-.search-section h2 {
-    font-size: 1.8em;
-    color: #333;
     margin-bottom: 20px;
 }
-.search-section p {
-    color: #666;
-    margin-bottom: 25px;
+
+.search-section h2 {
+    margin-top: 0;
+    font-size: 1.8em;
+    color: mediumpurple;
+    margin-bottom: 10px;
 }
+
+.search-section p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
 .search-input-group {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
+
 .search-input-group input[type="text"] {
     flex-grow: 1;
     padding: 12px 15px;
@@ -366,6 +419,7 @@ a.model-card {
     border-radius: 8px;
     font-size: 1.1em;
 }
+
 .search-input-group button {
     padding: 12px 20px;
     background-color: darkslategray;
@@ -376,16 +430,20 @@ a.model-card {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .search-input-group button:hover {
     background-color: darkgray;
 }
+
 .separator {
     text-align: center;
     color: #aaa;
     margin: 20px 0;
     position: relative;
 }
-.separator::before, .separator::after {
+
+.separator::before,
+.separator::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -393,53 +451,69 @@ a.model-card {
     height: 1px;
     background-color: #eee;
 }
+
 .separator::before {
     left: 0;
 }
+
 .separator::after {
     right: 0;
 }
+
 .image-upload-area {
+    margin-top: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #f0f0f0;
     border: 2px dashed #ccc;
     border-radius: 10px;
-    padding: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
 .image-upload-area:hover {
     background-color: #e5e5e5;
     border-color: #b0b0b0;
 }
+
 .image-upload-area label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    font-size: 1.1em;
     color: #555;
+    gap: 8px;
+    padding: 4px 10px;
+
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 14px;
 }
+
 .image-upload-area input[type="file"] {
     display: none;
 }
+
 .image-upload-area .upload-icon {
     font-size: 1.5em;
     margin-right: 10px;
 }
+
 .search-results-section {
     margin-top: 40px;
 }
+
 .search-results-section h3 {
     font-size: 1.5em;
     color: #333;
     margin-bottom: 20px;
 }
+
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 20px;
 }
+
 .product-card {
     background-color: #fff;
     border-radius: 10px;
@@ -449,6 +523,7 @@ a.model-card {
     align-items: center;
     padding: 15px;
 }
+
 .product-card img {
     width: 80px;
     height: 80px;
@@ -456,23 +531,28 @@ a.model-card {
     border-radius: 8px;
     margin-right: 15px;
 }
+
 .product-info {
     flex-grow: 1;
 }
+
 .product-info .brand {
     font-size: 0.9em;
     color: #888;
     margin-bottom: 5px;
 }
+
 .product-info .name {
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
 }
+
 .product-info .price {
     font-size: 0.95em;
     color: #555;
 }
+
 .product-card .tag {
     display: inline-block;
     background-color: #eee;
@@ -482,6 +562,7 @@ a.model-card {
     font-size: 0.8em;
     margin-left: 8px;
 }
+
 .recommendation-button {
     background-color: darkslategrey;
     color: white;
@@ -494,6 +575,7 @@ a.model-card {
     white-space: nowrap;
     transition: background-color 0.3s ease;
 }
+
 .recommendation-button:hover {
     background-color: darkgray;
 }
@@ -504,19 +586,23 @@ a.model-card {
     max-width: 800px;
     margin: 0 auto;
 }
+
 .test-header {
     text-align: center;
     margin-bottom: 40px;
 }
+
 .test-header h2 {
     font-size: 1.8em;
     color: #333;
     margin-bottom: 10px;
 }
+
 .test-header p {
     color: #666;
     font-size: 1.1em;
 }
+
 .progress-bar-container {
     width: 100%;
     background-color: #eee;
@@ -524,29 +610,34 @@ a.model-card {
     height: 10px;
     margin-top: 20px;
 }
+
 .progress-bar {
     width: 20%;
     height: 100%;
     background-color: violet;
     border-radius: 5px;
 }
+
 .question-section {
     background-color: #fff;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
+
 .question-section h3 {
     font-size: 1.5em;
     color: #333;
     margin-bottom: 30px;
     text-align: center;
 }
+
 .options-group {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 .option-card {
     background-color: #f7f7f7;
     padding: 20px 25px;
@@ -557,17 +648,21 @@ a.model-card {
     display: flex;
     align-items: center;
 }
+
 .option-card:hover {
     background-color: #ffeef2;
     border-color: darkslategray;
     box-shadow: 0 2px 8px rgba(255, 153, 204, 0.2);
 }
+
 .option-card input[type="radio"] {
     display: none;
 }
-.option-card input[type="radio"]:checked + .option-content {
+
+.option-card input[type="radio"]:checked+.option-content {
     border-color: mediumpurple;
 }
+
 .option-card .radio-custom {
     width: 20px;
     height: 20px;
@@ -581,11 +676,13 @@ a.model-card {
     flex-shrink: 0;
     transition: border-color 0.3s ease, background-color 0.3s ease;
 }
-.option-card input[type="radio"]:checked + .option-content .radio-custom {
+
+.option-card input[type="radio"]:checked+.option-content .radio-custom {
     border-color: white;
     background-color: white;
 }
-.option-card input[type="radio"]:checked + .option-content .radio-custom::after {
+
+.option-card input[type="radio"]:checked+.option-content .radio-custom::after {
     background-color: mediumpurple;
     content: '';
     width: 10px;
@@ -593,6 +690,7 @@ a.model-card {
     border-radius: 50%;
     display: block;
 }
+
 .option-card .option-text {
     font-size: 1.1em;
     color: #333;
@@ -603,6 +701,7 @@ a.model-card {
     text-align: center;
     margin-top: 40px;
 }
+
 .submit-button {
     padding: 15px 40px;
     background-color: darkslategray;
@@ -613,6 +712,7 @@ a.model-card {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+
 .submit-button:hover {
     background-color: darkgray;
 }
@@ -628,6 +728,7 @@ a.model-card {
     gap: 40px;
     justify-content: center;
 }
+
 .mood-summary-section {
     flex: 1 1 350px;
     background-color: #fff;
@@ -636,34 +737,40 @@ a.model-card {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     text-align: center;
 }
+
 .mood-summary-section .icon {
     font-size: 2.5em;
     margin-bottom: 15px;
     color: darkslategray;
 }
+
 .mood-summary-section h2 {
     font-size: 1.8em;
     color: #333;
     margin-bottom: 10px;
 }
+
 .mood-summary-section p {
     color: #666;
     font-size: 1.1em;
     margin-bottom: 25px;
     line-height: 1.5;
 }
+
 .color-palette {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 25px;
 }
+
 .color-box {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
+
 .tag-list {
     display: flex;
     flex-wrap: wrap;
@@ -671,8 +778,9 @@ a.model-card {
     gap: 10px;
     margin-bottom: 30px;
     font-weight: bold;
-    
+
 }
+
 .tag {
     background-color: #f0f0f0;
     color: #555;
@@ -680,12 +788,14 @@ a.model-card {
     border-radius: 20px;
     font-size: 0.9em;
 }
+
 .mood-category-selector {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-bottom: 30px;
 }
+
 .mood-category-selector button {
     background-color: #f7f7f7;
     color: #555;
@@ -696,11 +806,13 @@ a.model-card {
     font-size: 1em;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
 .mood-category-selector button.active {
-    background-color: darkslategray ;
+    background-color: darkslategray;
     color: white;
     border-color: darkslategray;
 }
+
 .mood-category-selector button:hover:not(.active) {
     background-color: #ffeef2;
     border-color: #ffb3c1;
@@ -708,23 +820,26 @@ a.model-card {
 
 .recommendation-section {
     flex: 2 1 600px;
-    min-width: 600px; 
+    min-width: 600px;
     background-color: #fff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
+
 .recommendation-section h3 {
     font-size: 1.5em;
     color: #333;
     margin-bottom: 25px;
     text-align: center;
 }
+
 .recommended-product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 25px;
 }
+
 .recommended-product-card {
     border: 1px solid #eee;
     border-radius: 10px;
@@ -736,10 +851,12 @@ a.model-card {
     align-items: center;
     transition: box-shadow 0.3s ease;
 }
+
 .recommended-product-card:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-decoration: none;
 }
+
 .recommended-product-card .product-type-label {
     background-color: #ffeef2;
     color: darkslategray;
@@ -749,33 +866,38 @@ a.model-card {
     font-weight: bold;
     margin-bottom: 15px;
 }
+
 .recommended-product-card img {
     width: 120px;
     height: 120px;
     object-fit: contain;
     margin-bottom: 15px;
 }
+
 .recommended-product-card .brand-name {
     font-size: 0.9em;
     color: #888;
     margin-bottom: 5px;
 }
+
 .recommended-product-card .product-name {
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
-    min-height: 40px; 
+    min-height: 40px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
 .recommended-product-card .price {
     font-size: 1em;
     color: #ff6699;
     font-weight: bold;
     margin-bottom: 15px;
 }
+
 .product-rating {
     display: flex;
     align-items: center;
@@ -784,10 +906,12 @@ a.model-card {
     color: #888;
     margin-bottom: 10px;
 }
+
 .product-rating .star-icon {
     color: gold;
     margin-right: 5px;
 }
+
 .purchase-button {
     background-color: darkslategray;
     color: white;
@@ -800,6 +924,7 @@ a.model-card {
     width: 100%;
     max-width: 150px;
 }
+
 .purchase-button:hover {
     background-color: darkgray;
 }
@@ -807,17 +932,20 @@ a.model-card {
 .feedback-section {
     margin-top: 40px;
     text-align: center;
-    grid-column: 1 / -1; 
+    grid-column: 1 / -1;
 }
+
 .feedback-section p {
     color: #555;
     margin-bottom: 20px;
 }
+
 .feedback-buttons {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
+
 .feedback-buttons button {
     padding: 12px 25px;
     border-radius: 25px;
@@ -825,19 +953,23 @@ a.model-card {
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
+
 .feedback-buttons .retake-test {
     background-color: #eee;
     color: #666;
     border: 1px solid #ddd;
 }
+
 .feedback-buttons .retake-test:hover {
     background-color: #e5e5e5;
 }
+
 .feedback-buttons .explore-other {
     background-color: darkslategray;
     color: white;
     border: none;
 }
+
 .feedback-buttons .explore-other:hover {
     background-color: darkgray;
 }
@@ -849,42 +981,48 @@ a.model-card {
     margin: 0 auto;
     text-align: center;
 }
+
 .color-matrix-container h1 {
     font-size: 2.2em;
     color: #333;
     margin-bottom: 20px;
 }
+
 .color-matrix-container p {
     font-size: 1.1em;
     color: #666;
     margin-bottom: 40px;
 }
+
 .color-matrix-display {
     position: relative;
     width: 100%;
-    padding-top: 75%; 
+    padding-top: 75%;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 10px;
     margin-bottom: 40px;
     overflow: hidden;
 }
+
 .color-matrix-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; 
+    object-fit: contain;
     display: block;
 }
+
 .color-matrix-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.5) 100%); /* 그라데이션 오버레이 예시 */
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.5) 100%);
+    /* 그라데이션 오버레이 예시 */
     pointer-events: none;
 }
 
@@ -897,6 +1035,7 @@ a.model-card {
     color: #555;
     font-size: 0.9em;
 }
+
 .matrix-axis-label.y-axis {
     position: absolute;
     left: 10px;
@@ -911,15 +1050,17 @@ a.model-card {
 
 .mood-area {
     position: absolute;
-    border: 2px dashed rgba(255, 153, 204, 0.7); 
-    background-color: rgba(255, 153, 204, 0.1); 
+    border: 2px dashed rgba(255, 153, 204, 0.7);
+    background-color: rgba(255, 153, 204, 0.1);
     cursor: pointer;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
+
 .mood-area:hover {
     background-color: rgba(255, 153, 204, 0.3);
     border-color: #ff6699;
 }
+
 .mood-area-label {
     position: absolute;
     font-size: 0.9em;
@@ -928,29 +1069,67 @@ a.model-card {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 /* 예시구역 */
-.mood-area.warm-light { top: 0; left: 50%; width: 50%; height: 50%; border-top-right-radius: 8px; border-left: none; border-bottom: none; }
-.mood-area.cool-light { top: 0; left: 0; width: 50%; height: 50%; border-top-left-radius: 8px; border-right: none; border-bottom: none; }
-.mood-area.warm-deep { bottom: 0; left: 50%; width: 50%; height: 50%; border-bottom-right-radius: 8px; border-left: none; border-top: none; }
-.mood-area.cool-deep { bottom: 0; left: 0; width: 50%; height: 50%; border-bottom-left-radius: 8px; border-right: none; border-top: none; }
+.mood-area.warm-light {
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    border-top-right-radius: 8px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.mood-area.cool-light {
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    border-top-left-radius: 8px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.mood-area.warm-deep {
+    bottom: 0;
+    left: 50%;
+    width: 50%;
+    height: 50%;
+    border-bottom-right-radius: 8px;
+    border-left: none;
+    border-top: none;
+}
+
+.mood-area.cool-deep {
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    border-bottom-left-radius: 8px;
+    border-right: none;
+    border-top: none;
+}
 
 
 .popular-items-section {
     margin-top: 50px;
 }
+
 .popular-items-section h3 {
     font-size: 1.8em;
     color: #333;
     margin-bottom: 30px;
 }
+
 .popular-product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 30px;
 }
+
 .popular-product-card {
     background-color: #fff;
     border-radius: 10px;
@@ -960,21 +1139,25 @@ a.model-card {
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .popular-product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
+
 .popular-product-card img {
     width: 150px;
     height: 150px;
     object-fit: contain;
     margin-bottom: 15px;
 }
+
 .popular-product-card .brand-name {
     font-size: 0.9em;
     color: #888;
     margin-bottom: 5px;
 }
+
 .popular-product-card .product-name {
     font-weight: bold;
     color: #333;
@@ -985,12 +1168,14 @@ a.model-card {
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
 .popular-product-card .price {
     font-size: 1.1em;
     color: #ff6699;
     font-weight: bold;
     margin-bottom: 15px;
 }
+
 .popular-product-card .view-detail-button {
     background-color: darkslategray;
     color: white;
@@ -1001,6 +1186,7 @@ a.model-card {
     font-size: 0.9em;
     transition: background-color 0.3s ease;
 }
+
 .popular-product-card .view-detail-button:hover {
     background-color: darkgray;
 }
@@ -1015,6 +1201,7 @@ a.model-card {
     gap: 40px;
     justify-content: center;
 }
+
 .product-image-area {
     flex: 1 1 350px;
     display: flex;
@@ -1024,46 +1211,55 @@ a.model-card {
     border-radius: 10px;
     overflow: hidden;
 }
+
 .product-image-area img {
     max-width: 100%;
     max-height: 400px;
     object-fit: contain;
     display: block;
 }
+
 .product-info-area {
     flex: 1 1 450px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .product-info-area h1 {
     font-size: 2.5em;
     color: #333;
     margin-bottom: 10px;
 }
+
 .product-info-area .brand-name {
     font-size: 1.2em;
     color: #777;
     margin-bottom: 20px;
 }
+
 .product-info-area .price {
     font-size: 2em;
     color: #ff6699;
     font-weight: bold;
     margin-bottom: 25px;
 }
+
 .product-info-area .description {
     font-size: 1.1em;
     color: #555;
     line-height: 1.6;
     margin-bottom: 30px;
 }
+
 .purchase-links {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
 }
-.purchase-links button, .purchase-links a {
+
+.purchase-links button,
+.purchase-links a {
     padding: 15px 30px;
     border-radius: 8px;
     font-size: 1.1em;
@@ -1075,19 +1271,23 @@ a.model-card {
     justify-content: center;
     font-weight: bold;
 }
+
 .purchase-links .color-matrix-explore {
     background-color: #eee;
     color: #555;
     border: 1px solid #ddd;
 }
+
 .purchase-links .color-matrix-explore:hover {
     background-color: #e5e5e5;
 }
+
 .purchase-links .buy-now {
     background-color: darkslategray;
     color: white;
     border: none;
 }
+
 .purchase-links .buy-now:hover {
     background-color: darkgray;
 }
@@ -1118,21 +1318,24 @@ a.model-card {
 }
 
 .color-display-box {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
+    width: 240px;
+    justify-self: center;
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px 15px;
     display: flex;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     font-size: 1.1em;
     font-weight: bold;
-    color: #333;
+    color: mediumpurple;
     z-index: 10;
+    flex-wrap: wrap;
+    gap: 10px;
 }
+
 
 .selected-color-swatch {
     width: 30px;
@@ -1140,13 +1343,159 @@ a.model-card {
     border: 2px solid #fff;
     border-radius: 50%;
     margin-right: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 #click-instruction {
     margin-right: 15px;
     color: #888;
     font-style: italic;
-    margin-top: 15px;
+
     margin-left: 15px;
+}
+
+  .recommendations-section {
+    margin-top: 40px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: auto;
+  }
+
+  .recommendations-section h3 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: mediumpurple;
+    border-left: 4px solid rgb(100, 55, 190);
+    padding-left: 15px;
+  }
+.recommendations-section .product-card {
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    height: 300px;
+    width: 240px;
+}
+
+
+/* 동적 추천 제품 영역 스타일 */
+.recommendation-box {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.recommendation-box:empty {
+    display: none;
+}
+
+.recommendation-box .product-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-shrink: 0;
+    min-width: 250px;
+    max-width: 300px;
+    flex-direction: column;
+    height: 100%;
+    min-height: 160px;
+
+}
+
+.recommendation-box .product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.recommendation-box .product-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.recommendation-box .product-card .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.recommendation-box .product-card .brand {
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.recommendation-box .product-card .name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+.recommendation-box .product-card .price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-top: auto;
+}
+
+.wave-loader {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 10px;
+    height: 20vh;
+    padding-bottom: 50px;
+}
+
+.wave-bar {
+    height: 140px;
+    width: 20px;
+    background-color: mediumpurple;
+    border-radius: 4px;
+    animation: wave 1s infinite ease-in-out;
+    background: linear-gradient(to bottom, #d291bc, #9c62c3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wave-bar:nth-child(1) { animation-delay: 0s; }
+.wave-bar:nth-child(2) { animation-delay: 0.1s; }
+.wave-bar:nth-child(3) { animation-delay: 0.2s; }
+.wave-bar:nth-child(4) { animation-delay: 0.3s; }
+.wave-bar:nth-child(5) { animation-delay: 0.4s; }
+.wave-bar:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes wave {
+    0%, 100% {
+        transform: scale(0.7);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
 }

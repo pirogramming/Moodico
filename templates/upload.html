@@ -40,25 +40,6 @@
     border: 1px solid #ddd;
   }
 
-  .search-section {
-    color: white;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .search-section h2 {
-    font-size: 2em;
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
-
-  .search-section p {
-    font-size: 1em;
-    margin-bottom: 20px;
-    opacity: 0.9;
-  }
 
   .search-input-group {
     display: flex;
@@ -86,6 +67,7 @@
     font-size: 14px;
     font-weight: 600;
     transition: background 0.3s;
+    white-space: nowrap;
   }
 
   .search-input-group button:hover {
@@ -98,31 +80,7 @@
     opacity: 0.8;
   }
 
-  .image-upload-area {
-    margin-top: 15px;
-  }
 
-  .image-upload-area label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px dashed rgba(255, 255, 255, 0.5);
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-size: 14px;
-  }
-
-  .image-upload-area label:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.8);
-  }
-
-  .image-upload-area input[type="file"] {
-    display: none;
-  }
 
   .upload-icon {
     font-size: 18px;
@@ -131,6 +89,7 @@
   .image-preview-area {
     margin-top: 20px;
     text-align: center;
+    height: 220px;
   }
 
   .image-preview-area img,
@@ -141,14 +100,6 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
 
-  .color-display-box {
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
 
   .selected-color-swatch {
     width: 40px;
@@ -174,105 +125,7 @@
     background: #ff5252;
   }
 
-  /* 동적 추천 제품 영역 스타일 */
-  .recommendation-box {
-    margin-top: 30px;
-    padding: 20px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #eee;
-  }
-
-  .recommendation-box:empty {
-    display: none;
-  }
-
-  .recommendation-box {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .recommendation-box .product-card {
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #eee;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 160px;
-  }
-
-  .recommendation-box .product-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  .recommendation-box .product-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-
-  .recommendation-box .product-card .product-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .recommendation-box .product-card .brand {
-    font-size: 12px;
-    font-weight: 600;
-    color: #666;
-    margin-bottom: 2px;
-  }
-
-  .recommendation-box .product-card .name {
-    font-size: 14px;
-    font-weight: 500;
-    color: #333;
-    line-height: 1.3;
-    margin-bottom: 5px;
-    word-break: keep-all;
-    overflow-wrap: break-word;
-  }
-
-  .recommendation-box .product-card .price {
-    font-size: 16px;
-    font-weight: 700;
-    color: #333;
-    margin-top: auto;
-  }
-
   /* 추천 제품 섹션 스타일 */
-  .recommendations-section {
-    margin-top: 40px;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  .recommendations-section h3 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    color: #333;
-    border-left: 4px solid #667eea;
-    padding-left: 15px;
-  }
-
-  .product-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-  }
 
   .product-card {
     background: white;
@@ -458,8 +311,8 @@
 
   .product-circle {
     position: absolute;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -547,7 +400,37 @@
     right: -6px;
     cursor: nwse-resize;
   }
+
+  /*검색 결과 드롭다운박스용 css*/
+  .search-results-box {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ddd;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 300px;
+    margin-top: 5px;
+    z-index: 100;
+    display: none; /* 처음에는 숨김 */
+  }
+
+  .search-results-box ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .search-results-box li {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #333;
+  }
+
+  .search-results-box li:hover {
+    background-color: #f0f0f0;
+  }
 </style>
+
 {% endblock%} {% block content %}
 <div class="my-item-recommendation-container">
   <!-- 메인 콘텐츠 영역: 업로드 창과 매트릭스를 나란히 배치 -->
@@ -563,8 +446,9 @@
             id="product-search-input"
             placeholder="제품명을 입력하세요"
           />
-          <button type="button" onclick="searchProduct()">🔍 검색</button>
+          <button type="button" id="product-search-btn">🔍 검색</button>
         </div>
+        <div id="search-results-box" class="search-results-box"></div>
         <div class="separator">또는</div>
         <div class="image-upload-area">
           <form
@@ -574,7 +458,7 @@
           >
             {% csrf_token %}
             <label for="image-upload-input">
-              <span class="upload-icon">📸</span> 사진으로 검색
+              <span class="upload-icon">📸</span>사진으로 검색
               <input
                 type="file"
                 name="image_path"
@@ -594,7 +478,12 @@
             style="display: none"
           />
           <canvas id="image-canvas" style="display: none"></canvas>
-          <div
+          
+        </div>
+        <p id="click-instruction" style="display: none">
+            이미지를 클릭하여 색상을 추출해보세요
+          </p>
+        <div
             id="color-display-box"
             class="color-display-box"
             style="display: none"
@@ -605,10 +494,6 @@
               추천받기
             </button>
           </div>
-          <p id="click-instruction" style="display: none">
-            이미지를 클릭하여 색상을 추출해보세요
-          </p>
-        </div>
       </div>
     </div>
 
@@ -647,7 +532,19 @@
   </div>
 
   <!-- 동적 추천 제품 영역: 업로드/매트릭스 하단에 배치 -->
-  <div id="recommendation-box" class="recommendation-box"></div>
+  <div class="recommendations-section">
+    <h3>mood 기반 추천 제품</h3>
+  <div id="recommendation-box" class="recommendation-box">
+    <div class="wave-loader">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+        </div>
+  </div>
+  </div>
 
   <!-- 추천 제품 섹션: 하단에 배치 -->
   <div class="recommendations-section">
@@ -730,10 +627,120 @@
     </div>
   </div>
 </div>
+{% endblock %}
 
 {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
-<script src="{% static 'js/color_analyzer.js' %}"></script>
+<script src="{% static 'js/color_analyzer.js' %}"></script> 
+<script>
+  // 검색 로직 & search-results-box 관련 부분
+  const inputSearch = document.getElementById('product-search-input');
+  const button = document.getElementById('product-search-btn');
+  const resultsBox = document.getElementById('search-results-box');
+  let selectedProduct = null;
+
+  function analyzeSelectedProduct(product){
+    displayColorOnMatrix(product.hex, product.warmCool, product.lightDeep);
+    // Send to backend
+    fetch("/recommend_by_color/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": getCookie("csrftoken"),
+      },
+      body: JSON.stringify({
+        warmCool: product.warmCool,
+        lightDeep: product.lightDeep,
+
+      }),
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.recommended) {
+        renderRecommendations(data.recommended);
+        displayRecommendatioinsOnMatrix(data.recommended);
+      } else {
+        console.warn("No recommended field in response", data);
+      }
+    })
+    .catch(err => console.error("추천 실패:", err));
+  }
+
+  function fetchSearchResults(query) {
+    if (!query.trim()) {
+      resultsBox.style.display = 'none';
+      return;
+    }
+
+    fetch(`/search_product/?q=${encodeURIComponent(query)}`)
+      .then(response => response.json())
+      .then(data => {
+        resultsBox.innerHTML = ''; // 기존 결과 삭제
+
+        if (data.results.length > 0) {
+          const ul = document.createElement('ul');
+          data.results.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.brand} - ${item.name}`;
+            li.addEventListener('click', () => {
+              inputSearch.value = `${item.name}`;
+              resultsBox.style.display = 'none';
+              selectedProduct = item;
+              analyzeSelectedProduct(item);
+            });
+            ul.appendChild(li);
+          });
+          resultsBox.appendChild(ul);
+          resultsBox.style.display = 'block';
+        } else {
+          resultsBox.innerHTML = '<p style="padding:8px">검색 결과가 없습니다.</p>';
+          resultsBox.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        console.error('검색 오류:', error);
+        resultsBox.style.display = 'none';
+      });
+  }
+
+  // 자동 검색 목록 기능 (keyup)
+  function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+  } // 300ms 동안 추가 입력이 없을 때 호출 - API의 불필요한 호출 방지
+  inputSearch.addEventListener('keyup', debounce((e) => {
+    const query = e.target.value;
+    selectedProduct = null; 
+    fetchSearchResults(query);
+  }, 300));
+
+  // 검색 결과 기능
+  button.addEventListener('click', () => {
+    const currentInput = inputSearch.value.trim();
+    const expectedInput = selectedProduct ? `${selectedProduct.name}` : '';
+
+    if (selectedProduct && currentInput === expectedInput) {
+      analyzeSelectedProduct(selectedProduct);
+    } else {
+      alert("제품을 목록에서 정확히 선택해주세요.");
+    }
+  });
+
+  inputSearch.addEventListener('focus', () => {
+    resultsBox.style.display = 'none';
+    inputSearch.select();
+  });
+
+  // search-results-box 숨기기
+  document.addEventListener('click', (e) => {
+    if (!resultsBox.contains(e.target) && e.target !== inputSearch) {
+      resultsBox.style.display = 'none';
+    }
+  });
+</script>
 {% if uploaded_image_url %}
 <script>
   document.addEventListener("DOMContentLoaded", function () {
@@ -742,4 +749,4 @@
     }
   });
 </script>
-{% endif %} {% endblock %} {% endblock %}
+{% endif %} {% endblock %}
