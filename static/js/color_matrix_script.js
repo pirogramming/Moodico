@@ -6,6 +6,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedProductsList = document.getElementById('selected-products-list');
     const noProductsMessage = document.getElementById('no-products-message');
 
+    // 무드별 구역 정의
+    const moodZones = {
+        '러블리': {
+            name: '러블리',
+            area: { left: 60, top: 10, width: 30, height: 40 }, // 웜 라이트 영역
+            color: '#FFE5E5',
+            description: '상큼하고 기분 좋은 무드'
+        },
+        '활기찬': {
+            name: '활기찬', 
+            area: { left: 70, top: 30, width: 25, height: 30 }, // 웜 브라이트 영역
+            color: '#FFF2E5',
+            description: '밝고 친근한 무드'
+        },
+        '고급스러운': {
+            name: '고급스러운',
+            area: { left: 65, top: 60, width: 30, height: 35 }, // 웜 딥 영역
+            color: '#E5D4C8',
+            description: '포인트 있는 강렬한 무드'
+        },
+        '내추럴': {
+            name: '내추럴',
+            area: { left: 20, top: 10, width: 35, height: 40 }, // 쿨 라이트 영역
+            color: '#E5F0FF',
+            description: '자연스러운 무드'
+        },
+        '시크': {
+            name: '시크',
+            area: { left: 15, top: 60, width: 35, height: 35 }, // 쿨 딥 영역
+            color: '#E5E5F0',
+            description: '스타일리시한 무드'
+        }
+    };
+
 
     const makeupProducts = [ //쥬시래스팅 제품 데이터 임시로 찾아서 넣음
         { id: 'jr01', name: '쥬시래스팅 틴트 #01 쥬시오', color: '#FF8000', warmCool: 90, lightDeep: 45, mood: '맑은 오렌지 (봄웜 브라이트)' },
@@ -52,8 +86,46 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'jr42', name: '쥬시래스팅 틴트 #42 펀치 키스', color: '#FF7F50', warmCool: 80, lightDeep: 40, mood: '생기 코랄 오렌지 (봄웜)' },
     ];
 
+    // 무드 구역 렌더링
+    const renderMoodZones = () => {
+        Object.values(moodZones).forEach(zone => {
+            const zoneElement = document.createElement('div');
+            zoneElement.classList.add('mood-zone');
+            zoneElement.style.left = `${zone.area.left}%`;
+            zoneElement.style.top = `${zone.area.top}%`;
+            zoneElement.style.width = `${zone.area.width}%`;
+            zoneElement.style.height = `${zone.area.height}%`;
+            zoneElement.style.backgroundColor = zone.color;
+            zoneElement.style.opacity = '0.3';
+            zoneElement.style.border = '2px dashed #666';
+            zoneElement.style.position = 'absolute';
+            zoneElement.style.borderRadius = '10px';
+            zoneElement.title = `${zone.name}: ${zone.description}`;
+            
+            // 구역 라벨 추가
+            const label = document.createElement('div');
+            label.textContent = zone.name;
+            label.style.position = 'absolute';
+            label.style.top = '5px';
+            label.style.left = '5px';
+            label.style.fontSize = '12px';
+            label.style.fontWeight = 'bold';
+            label.style.color = '#333';
+            label.style.backgroundColor = 'rgba(255,255,255,0.8)';
+            label.style.padding = '2px 6px';
+            label.style.borderRadius = '4px';
+            
+            zoneElement.appendChild(label);
+            productsContainer.appendChild(zoneElement);
+        });
+    };
+
     const renderProducts = () => {
         productsContainer.innerHTML = ''; 
+        
+        // 먼저 무드 구역 렌더링
+        renderMoodZones();
+        
         makeupProducts.forEach(product => {
             const productCircle = document.createElement('div');
             productCircle.classList.add('product-circle');
@@ -66,6 +138,22 @@ document.addEventListener('DOMContentLoaded', () => {
             productCircle.style.transform = 'translate(-50%, -50%)';
 
             productsContainer.appendChild(productCircle);
+        });
+    };
+
+    // 무드별 제품 필터링 함수
+    const getProductsByMood = (mood) => {
+        if (!moodZones[mood]) return [];
+        
+        const zone = moodZones[mood];
+        const zoneLeft = zone.area.left;
+        const zoneTop = zone.area.top;
+        const zoneRight = zoneLeft + zone.area.width;
+        const zoneBottom = zoneTop + zone.area.height;
+        
+        return makeupProducts.filter(product => {
+            return product.warmCool >= zoneLeft && product.warmCool <= zoneRight &&
+                   product.lightDeep >= zoneTop && product.lightDeep <= zoneBottom;
         });
     };
 
@@ -245,5 +333,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         updateSelectedProducts();
     });
+
+    // 전역 변수로 노출 (다른 스크립트에서 사용 가능)
+    window.getProductsByMood = getProductsByMood;
+    window.moodZones = moodZones;
 
 });

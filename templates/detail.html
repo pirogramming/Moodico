@@ -1,13 +1,180 @@
-{% extends 'base.html' %} {% load static %} {% block extra_head %} {% endblock%} {% block content %}
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
+<style>
+  .product-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  .product-image-area {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .product-image-area img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-info-area {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .brand-name {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+  }
+
+  .product-info-area h1 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .price {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 30px;
+  }
+
+  .product-details {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  }
+
+  .detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .detail-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .detail-value {
+    color: #666;
+  }
+
+  .color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .purchase-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .color-matrix-explore {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .color-matrix-explore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  .buy-now {
+    padding: 12px 24px;
+    background: #ff6b6b;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .buy-now:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .product-detail-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .product-image-area {
+      max-width: 100%;
+    }
+
+    .product-info-area h1 {
+      font-size: 2em;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
 <div class="product-detail-container">
   <div class="product-image-area">
     <img src="{{ product.image }}" alt="{{ product.name }}" />
   </div>
   <div class="product-info-area">
-    <p class="brand-name">제품 브랜드</p>
+    <p class="brand-name">{{ product.brand }}</p>
     <h1>{{ product.name }}</h1>
     <p class="price">{{ product.price }}</p>
     <p class="description">{{ product.description }}</p>
+
+    <div class="product-details">
+      <div class="detail-item">
+        <span class="detail-label">색상:</span>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <div
+            class="color-swatch"
+            style="background-color: {{ product.color }};"
+          ></div>
+          <span class="detail-value">{{ product.color }}</span>
+        </div>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">무드:</span>
+        <span class="detail-value">{{ product.mood }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">웜/쿨:</span>
+        <span class="detail-value">{{ product.warmCool }}%</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">라이트/딥:</span>
+        <span class="detail-value">{{ product.lightDeep }}%</span>
+      </div>
+    </div>
+
     <div class="purchase-links">
       <button
         class="color-matrix-explore"
