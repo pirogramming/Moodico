@@ -203,14 +203,17 @@ function displayRecommendationsOnMatrix(products) {
     existingColorPoints.forEach(point => point.remove());
 
     products.forEach(p => {
-        const colorPoint = document.createElement('div');
+        const colorPoint = document.createElement('a');
         colorPoint.classList.add('product-circle', 'temp-color-point');
         colorPoint.style.backgroundColor = p.hex;
         // colorPoint.style.left = `${p.warmCool}%`;
         colorPoint.style.left = `${parseFloat(p.warmCool)}%`;
         colorPoint.style.top = `${parseFloat(p.lightDeep)}%`;
         // colorPoint.style.top = `${p.lightDeep}%`;
-        colorPoint.title = `선택된 색상: ${p.hex}`;
+        colorPoint.title = `제품: ${p.name} (${p.brand})`;
+
+        colorPoint.href = p.url;
+        colorPoint.target = "_blank"; // 새 탭에서 열기
 
         colorPoint.style.transform = 'translate(-50%, -50%)';
 
