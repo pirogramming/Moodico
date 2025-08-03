@@ -1,8 +1,9 @@
 import json
 import numpy as np
 from sklearn.cluster import KMeans
+from sklearn.metrics import silhouette_score
 
-# --- Color conversion utilities ---
+# 클러스터링을 위한 함수들
 def hex_to_rgb(hex):
     hex = hex.lstrip('#')
     if len(hex) == 3:
@@ -56,14 +57,13 @@ def calculate_coordinates(h, s, l):
 
     return round(final_warm, 2), round(final_deep, 2)
 
-# Step 1: Load raw data
-with open("static/data/romand_products_enhanced.json", "r", encoding="utf-8") as f:
+# 데이터 로드
+with open("static/data/all_products.json", "r", encoding="utf-8") as f:
     products = json.load(f)
 
 coordinates = []
 valid_products = []
 
-# Step 2: Calculate warm_cool and light_deep
 for p in products:
     hex_color = p.get("hex")
     if hex_color:
@@ -71,28 +71,43 @@ for p in products:
             r, g, b = hex_to_rgb(hex_color)
             h, s, l = rgb_to_hsl(r, g, b)
             warm, deep = calculate_coordinates(h, s, l)
+            lab_l = p.get("lab_l", 0)
+            lab_a = p.get("lab_a", 0)
+            lab_b = p.get("lab_b", 0)
+
             p["warmCool"] = warm
             p["lightDeep"] = deep
-            coordinates.append([warm, deep])
+            coordinates.append([warm, deep, lab_l, lab_a, lab_b])
             valid_products.append(p)
         except:
             continue
 
-# Step 3: Cluster coordinates
+# 클러스터링을 위한 데이터 정규화
+from sklearn.preprocessing import StandardScaler
+coords_np = StandardScaler().fit_transform(np.array(coordinates))
+
+# KMeans 클러스터링
 coords_np = np.array(coordinates)
-kmeans = KMeans(n_clusters=6, random_state=42, n_init='auto')
+kmeans = KMeans(n_clusters=4, random_state=42, n_init='auto')
 labels = kmeans.fit_predict(coords_np)
 
-# Step 4: Assign cluster labels
+# 클러스터 레이블을 제품에 추가
 for i, label in enumerate(labels):
     valid_products[i]["cluster"] = int(label)
 
-# Step 5: Save clustered data
-with open("static/data/romand_products_clustered.json", "w", encoding="utf-8") as f:
+# 클러스터링 결과를 JSON 파일로 저장
+with open("static/data/products_clustered.json", "w", encoding="utf-8") as f:
     json.dump(valid_products, f, ensure_ascii=False, indent=2)
 
-# Step 6: Save cluster centers
+# 클러스터 중심 좌표 저장
 with open("static/data/cluster_centers.json", "w", encoding="utf-8") as f:
     json.dump(kmeans.cluster_centers_.tolist(), f, ensure_ascii=False, indent=2)
 
 print(" Clustering complete. Files saved.")
+
+# 실루엣 점수 계산
+for k in range(2, 11):
+    model = KMeans(n_clusters=k, random_state=42, n_init='auto')
+    labels = model.fit_predict(coords_np)
+    score = silhouette_score(coords_np, labels)
+    print(f"k={k}, Silhouette Score={score}")

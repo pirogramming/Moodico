@@ -65,6 +65,36 @@ function rgbToHsl(r, g, b) {
     return [h * 360, s, l];
 }
 
+function rgbToLab(r, g, b) {
+    // Normalize RGB
+    r /= 255; g /= 255; b /= 255;
+
+    // Linearize sRGB
+    const toLinear = c => (c <= 0.04045) ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+    r = toLinear(r); g = toLinear(g); b = toLinear(b);
+
+    // Convert to XYZ
+    const x = r * 0.4124 + g * 0.3576 + b * 0.1805;
+    const y = r * 0.2126 + g * 0.7152 + b * 0.0722;
+    const z = r * 0.0193 + g * 0.1192 + b * 0.9505;
+
+    // Normalize for D65 white point
+    const X = x / 0.95047;
+    const Y = y / 1.00000;
+    const Z = z / 1.08883;
+
+    const f = t => (t > 0.008856) ? Math.cbrt(t) : (903.3 * t + 16) / 116;
+
+    const fx = f(X), fy = f(Y), fz = f(Z);
+
+    const L = 116 * fy - 16;
+    const A = 500 * (fx - fy);
+    const B = 200 * (fy - fz);
+
+    return [L, A, B];
+}
+
+
 function displayColorOnMatrix(hex, warmCool, lightDeep) {
     const productsContainer = document.querySelector('.color-matrix-container');
     if (!productsContainer) return;
@@ -164,7 +194,7 @@ function renderRecommendations(products) {
     });
 }
 
-function displayRecommendatioinsOnMatrix(products) {
+function displayRecommendationsOnMatrix(products) {
     const productsContainer = document.querySelector('.color-matrix-container');
     if (!productsContainer) return;
 
@@ -176,8 +206,10 @@ function displayRecommendatioinsOnMatrix(products) {
         const colorPoint = document.createElement('div');
         colorPoint.classList.add('product-circle', 'temp-color-point');
         colorPoint.style.backgroundColor = p.hex;
-        colorPoint.style.left = `${p.warmCool}%`;
-        colorPoint.style.top = `${p.lightDeep}%`;
+        // colorPoint.style.left = `${p.warmCool}%`;
+        colorPoint.style.left = `${parseFloat(p.warmCool)}%`;
+        colorPoint.style.top = `${parseFloat(p.lightDeep)}%`;
+        // colorPoint.style.top = `${p.lightDeep}%`;
         colorPoint.title = `선택된 색상: ${p.hex}`;
 
         colorPoint.style.transform = 'translate(-50%, -50%)';
@@ -212,26 +244,33 @@ document.addEventListener('DOMContentLoaded', () => {
                       displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
 
                       // Send to backend
-                      fetch("/recommend_by_color/", {
-                          method: "POST",
-                          headers: {
-                              "Content-Type": "application/json",
-                              "X-CSRFToken": getCookie("csrftoken"),
-                          },
-                          body: JSON.stringify({
-                              warmCool: coords.warmCool,
-                              lightDeep: coords.lightDeep,
-                          }),
-                      })
+                      const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
+                    fetch("/recommend_by_color/", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": getCookie("csrftoken"),
+                        },
+                        body: JSON.stringify({
+                            warmCool: coords.warmCool,
+                            lightDeep: coords.lightDeep,
+                            lab_l: lab_l,
+                            lab_a: lab_a,
+                            lab_b: lab_b
+                        }),
+                    })
+
                       .then(res => res.json())
                       .then(data => {
                           if (data.recommended) {
                               renderRecommendations(data.recommended);
-                              displayRecommendatioinsOnMatrix(data.recommended);
+                              displayRecommendationsOnMatrix(data.recommended);
                           } else {
                               console.warn("No recommended field in response", data);
                           }
-                      })
+                    console.log(data.recommended);
+                      }
+                    )
                       .catch(err => console.error("추천 실패:", err));
                     }
                 }

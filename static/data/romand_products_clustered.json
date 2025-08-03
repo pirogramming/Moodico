@@ -13,7 +13,7 @@
     "lab_b": 2.91,
     "warmCool": 57.75,
     "lightDeep": 12.16,
-    "cluster": 5
+    "cluster": 2
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 #레어시리즈 / 29 조선 무화과",
@@ -93,7 +93,7 @@
     "lab_b": 0.31,
     "warmCool": 53.87,
     "lightDeep": 12.55,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 03 베어 그레이프",
@@ -109,7 +109,7 @@
     "lab_b": 0.64,
     "warmCool": 54.38,
     "lightDeep": 10.0,
-    "cluster": 5
+    "cluster": 0
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 02 누카다미아",
@@ -157,7 +157,7 @@
     "lab_b": 2.52,
     "warmCool": 57.04,
     "lightDeep": 12.16,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 24 베어 쥬시 오",
@@ -173,7 +173,7 @@
     "lab_b": 7.26,
     "warmCool": 56.52,
     "lightDeep": 8.43,
-    "cluster": 5
+    "cluster": 0
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 23 피치 피치 미",
@@ -301,7 +301,7 @@
     "lab_b": 0.03,
     "warmCool": 53.31,
     "lightDeep": 12.16,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 14 아몬드 로즈",
@@ -317,7 +317,7 @@
     "lab_b": 2.02,
     "warmCool": 56.31,
     "lightDeep": 11.96,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 13 잇 도토리",
@@ -333,7 +333,7 @@
     "lab_b": 4.05,
     "warmCool": 58.39,
     "lightDeep": 13.92,
-    "cluster": 1
+    "cluster": 2
   },
   {
     "name": "롬앤 더 쥬시 래스팅 틴트 / 12 애플 브라운",
@@ -701,7 +701,7 @@
     "lab_b": -0.34,
     "warmCool": 50,
     "lightDeep": 20.2,
-    "cluster": 4
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 16 키튼 피치",
@@ -733,7 +733,7 @@
     "lab_b": 0.98,
     "warmCool": 52.0,
     "lightDeep": 18.24,
-    "cluster": 4
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 멜팅 밤 #뉴베어 / 09 피오니즈",
@@ -845,7 +845,7 @@
     "lab_b": 2.27,
     "warmCool": 56.6,
     "lightDeep": 11.57,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 01 코코 누드",
@@ -909,7 +909,7 @@
     "lab_b": 2.3,
     "warmCool": 57.49,
     "lightDeep": 11.57,
-    "cluster": 5
+    "cluster": 2
   },
   {
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 05 누가 샌드",
@@ -941,7 +941,7 @@
     "lab_b": 0.93,
     "warmCool": 54.72,
     "lightDeep": 10.59,
-    "cluster": 5
+    "cluster": 0
   },
   {
     "name": "롬앤 쥬시 래스팅 틴트 #스파클링 / 16 코니 소다",
@@ -1149,7 +1149,7 @@
     "lab_b": 1.44,
     "warmCool": 55.8,
     "lightDeep": 12.55,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 워터 틴트 #오리지널 / 08 로제 스트림",
@@ -1165,7 +1165,7 @@
     "lab_b": 2.04,
     "warmCool": 56.07,
     "lightDeep": 12.16,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 워터 글로스 / 00 메테오 트랙",
@@ -1229,7 +1229,7 @@
     "lab_b": -0.44,
     "warmCool": 54.23,
     "lightDeep": 11.57,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 듀이풀 워터 틴트 #오리지널 / 07 체리 웨이",
@@ -1261,7 +1261,7 @@
     "lab_b": 2.79,
     "warmCool": 56.97,
     "lightDeep": 12.55,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 컬러 글로스 / 05 딤 모브",
@@ -1309,7 +1309,7 @@
     "lab_b": 0.58,
     "warmCool": 54.75,
     "lightDeep": 11.76,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 컬러 글로스 / 03 로즈 핀치",
@@ -1325,7 +1325,7 @@
     "lab_b": 1.81,
     "warmCool": 55.72,
     "lightDeep": 12.35,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 컬러 글로스 / 06 디픈 무어",
@@ -1453,7 +1453,7 @@
     "lab_b": 1.87,
     "warmCool": 56.02,
     "lightDeep": 11.57,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 워터 틴트 #선셋 / 17 우디 선셋",
@@ -1485,7 +1485,7 @@
     "lab_b": 0.06,
     "warmCool": 52.26,
     "lightDeep": 12.55,
-    "cluster": 5
+    "cluster": 1
   },
   {
     "name": "[COHA] 쥬시 래스팅 틴트 MINI / 41 자두인냥",
@@ -1549,7 +1549,7 @@
     "lab_b": -6.48,
     "warmCool": 45.74,
     "lightDeep": 20.0,
-    "cluster": 4
+    "cluster": 1
   },
   {
     "name": "롬앤 글래스팅 멜팅 팟 / 01 코튼 밀크 팟",
