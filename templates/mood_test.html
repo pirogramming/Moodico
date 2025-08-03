@@ -1,89 +1,440 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
+<style>
+  .mood-test-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: white;
+  }
 
-{% block extra_head %}
-{% endblock %}
+  .mood-test-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
 
-{% block content %}
+  .mood-test-header h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .mood-test-header p {
+    font-size: 1.2em;
+    opacity: 0.9;
+    line-height: 1.6;
+  }
+
+  .question-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s ease;
+    display: none;
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  .question-container.active {
+    display: block;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .question-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .question-text {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .answer-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .answer-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 20px 15px;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .answer-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .answer-btn.selected {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    border-color: #ff6b6b;
+    box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4);
+  }
+
+  .answer-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin-bottom: 30px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b6b, #ff8e8e);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+    width: 0%;
+  }
+
+  .submit-btn {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 40px auto 0;
+    box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .question-counter {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 768px) {
+    .mood-test-container {
+      padding: 20px 15px;
+    }
+
+    .mood-test-header h1 {
+      font-size: 2.5em;
+    }
+
+    .answer-buttons {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .answer-btn {
+      padding: 15px 12px;
+      font-size: 1em;
+      min-height: 60px;
+    }
+
+    .question-text {
+      font-size: 1.2em;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
 <div class="mood-test-container">
-    <div class="test-header">
-        <h2>무드 테스트</h2>
-        <p>5가지 질문으로 10가지 추구미 중 당신만의 스타일을 찾아보세요</p>
-        <div class="progress-bar-container">
-            <div class="progress-bar" style="width: 20%;"></div> </div>
-        <p class="progress-text">1/5</p>
+  <div class="mood-test-header">
+    <h1>✨ 무드 테스트 ✨</h1>
+    <p>당신의 무드를 파악하여 맞춤형 메이크업을 추천해드려요!</p>
+  </div>
+
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <div class="question-counter"><span id="current-question">1</span> / 7</div>
+
+  <form id="mood-form" method="POST" action="{% url 'mood_result' %}">
+    {% csrf_token %}
+
+    <div class="question-container active" data-index="0">
+      <div class="question-text">Q1. 오늘 하루 나는?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('러블리', 0)"
+        >
+          상큼하고 기분 좋은 하루
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('시크', 0)"
+        >
+          무심하고 차분한 하루
+        </button>
+      </div>
     </div>
 
-    <div class="question-section">
-        <h3>평소 선호하는 메이크업 스타일은?</h3>
-        <form id="moodTestForm" action="{% url 'mood_result' %}" method="post">
-            {% csrf_token %}
-            <div class="options-group">
-                <label class="option-card">
-                    <input type="radio" name="q1" value="natural_daily_look">
-                    <div class="option-content">
-                        <span class="radio-custom"></span>
-                        <span class="option-text">자연스럽고 깔끔한 데일리 룩</span>
-                    </div>
-                </label>
-                <label class="option-card">
-                    <input type="radio" name="q1" value="bold_unique_point_look">
-                    <div class="option-content">
-                        <span class="radio-custom"></span>
-                        <span class="option-text">화려하고 개성있는 포인트 룩</span>
-                    </div>
-                </label>
-                <label class="option-card">
-                    <input type="radio" name="q1" value="soft_feminine_romantic_look">
-                    <div class="option-content">
-                        <span class="radio-custom"></span>
-                        <span class="option-text">부드럽고 여성스러운 로맨틱 룩</span>
-                    </div>
-                </label>
-                <label class="option-card">
-                    <input type="radio" name="q1" value="sophisticated_chic_urban_look">
-                    <div class="option-content">
-                        <span class="radio-custom"></span>
-                        <span class="option-text">세련되고 도시적인 시크 룩</span>
-                    </div>
-                </label>
-            </div>
-            <div class="submit-button-container">
-                <button type="submit" class="submit-button">다음 질문</button>
-            </div>
-        </form>
+    <div class="question-container" data-index="1">
+      <div class="question-text">Q2. 내가 선호하는 메이크업 스타일은?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('내추럴', 1)"
+        >
+          자연스러움
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('고급스러운', 1)"
+        >
+          포인트 있는 강렬함
+        </button>
+      </div>
     </div>
+
+    <div class="question-container" data-index="2">
+      <div class="question-text">Q3. 옷 스타일을 고르자면?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('내추럴', 2)"
+        >
+          편안한 캐주얼
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('시크', 2)"
+        >
+          스타일리시한 연출
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="3">
+      <div class="question-text">Q4. 내가 끌리는 컬러는?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('러블리', 3)"
+        >
+          코랄/핑크 계열
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('고급스러운', 3)"
+        >
+          딥한 브라운/버건디
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="4">
+      <div class="question-text">Q5. 약속 있는 날, 나는?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('활기찬', 4)"
+        >
+          밝고 친근한 인상
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('시크', 4)"
+        >
+          시크한 인상
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="5">
+      <div class="question-text">Q6. 파우치 안 필수템은?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('러블리', 5)"
+        >
+          촉촉한 틴트
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('고급스러운', 5)"
+        >
+          음영 섀도우
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="6">
+      <div class="question-text">Q7. 사람들이 나에게 자주 하는 말은?</div>
+      <div class="answer-buttons">
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('활기찬', 6)"
+        >
+          귀엽다/밝다
+        </button>
+        <button
+          type="button"
+          class="answer-btn"
+          onclick="selectMood('시크', 6)"
+        >
+          분위기 있다/도도하다
+        </button>
+      </div>
+    </div>
+
+    <!-- 결과 제출 버튼 (마지막 질문에서만 표시) -->
+    <div class="submit-container" id="submit-container" style="display: none">
+      <button type="submit" class="submit-btn">결과 보기 ✨</button>
+    </div>
+  </form>
 </div>
 
-{% block extra_js %}
 <script>
-    document.querySelectorAll('.option-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const radio = this.querySelector('input[type="radio"]');
-            radio.checked = true;
-            document.querySelectorAll('.option-card').forEach(otherCard => {
-                otherCard.querySelector('.option-content').style.backgroundColor = '';
-                otherCard.querySelector('.option-content').style.color = '';
-                otherCard.querySelector('.option-content').style.borderColor = '';
-                otherCard.querySelector('.option-text').style.color = '';
-                const customRadio = otherCard.querySelector('.radio-custom');
-                if (customRadio) {
-                    customRadio.style.borderColor = '#ccc';
-                    customRadio.style.backgroundColor = '';
-                    customRadio.innerHTML = '';
-                }
-            });     
-        });
+  const scores = {
+    러블리: 0,
+    시크: 0,
+    내추럴: 0,
+    활기찬: 0,
+    고급스러운: 0,
+  };
+
+  const answered = new Set();
+  const totalQuestions = 7;
+
+  function selectMood(mood, questionIndex) {
+    // 중복 선택 방지
+    if (answered.has(questionIndex)) return;
+
+    scores[mood]++;
+    answered.add(questionIndex);
+
+    // 현재 질문의 모든 버튼 비활성화
+    const currentQuestion = document.querySelector(
+      `[data-index="${questionIndex}"]`
+    );
+    currentQuestion.querySelectorAll(".answer-btn").forEach((btn) => {
+      btn.classList.remove("selected");
+      btn.disabled = true;
     });
 
-    document.getElementById('moodTestForm').addEventListener('submit', function(event) {
-        const selectedOption = this.querySelector('input[name="q1"]:checked');
-        if (!selectedOption) {
-            event.preventDefault(); //제출 방지
-            alert('옵션을 선택해주세요.');
-        }
-        //실제로는 다음 질문으로 넘어가거나, 마지막 질문일 경우 결과 페이지로 이동하도록 로직 구현
-    });
+    // 선택된 버튼 스타일 적용
+    event.target.classList.add("selected");
+
+    // 진행률 업데이트
+    updateProgress();
+
+    // 잠시 후 다음 질문으로 이동
+    setTimeout(() => {
+      showNextQuestion(questionIndex);
+    }, 800);
+  }
+
+  function showNextQuestion(currentIndex) {
+    const nextIndex = currentIndex + 1;
+
+    // 현재 질문 숨기기
+    const currentQuestion = document.querySelector(
+      `[data-index="${currentIndex}"]`
+    );
+    currentQuestion.classList.remove("active");
+
+    // 다음 질문이 있으면 보여주기
+    if (nextIndex < totalQuestions) {
+      const nextQuestion = document.querySelector(
+        `[data-index="${nextIndex}"]`
+      );
+      nextQuestion.classList.add("active");
+    } else {
+      // 마지막 질문이면 결과 제출 버튼 보여주기
+      document.getElementById("submit-container").style.display = "block";
+    }
+  }
+
+  function updateProgress() {
+    const progress = (answered.size / totalQuestions) * 100;
+    document.getElementById("progress-fill").style.width = progress + "%";
+    document.getElementById("current-question").textContent = answered.size + 1;
+  }
+
+  document.getElementById("mood-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (answered.size !== totalQuestions) {
+      alert("모든 질문에 답해주세요!");
+      return;
+    }
+
+    // 최대값 추출
+    let resultMood = "러블리"; // default
+    let maxScore = 0;
+    for (const mood in scores) {
+      if (scores[mood] > maxScore) {
+        maxScore = scores[mood];
+        resultMood = mood;
+      }
+    }
+
+    // 결과를 hidden input으로 추가
+    const moodInput = document.createElement("input");
+    moodInput.type = "hidden";
+    moodInput.name = "mood";
+    moodInput.value = resultMood;
+    this.appendChild(moodInput);
+
+    // 폼 제출
+    this.submit();
+  });
+
+  // 초기 진행률 설정
+  updateProgress();
 </script>
-{% endblock %}
 {% endblock %}
