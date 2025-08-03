@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedProductsDisplay = document.getElementById('selected-products-display');
     const selectedProductsList = document.getElementById('selected-products-list');
     const noProductsMessage = document.getElementById('no-products-message');
+    const moodDropdown = document.getElementById('mood-dropdown');
 
     // 무드별 구역 정의
     const moodZones = {
@@ -88,9 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 무드 구역 렌더링
     const renderMoodZones = () => {
+        // 기존 무드 구역 제거
+        const existingZones = productsContainer.querySelectorAll('.mood-zone');
+        existingZones.forEach(zone => zone.remove());
+        
         Object.values(moodZones).forEach(zone => {
             const zoneElement = document.createElement('div');
             zoneElement.classList.add('mood-zone');
+            zoneElement.dataset.mood = zone.name;
             zoneElement.style.left = `${zone.area.left}%`;
             zoneElement.style.top = `${zone.area.top}%`;
             zoneElement.style.width = `${zone.area.width}%`;
@@ -100,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
             zoneElement.style.border = '2px dashed #666';
             zoneElement.style.position = 'absolute';
             zoneElement.style.borderRadius = '10px';
+            zoneElement.style.display = 'none'; // 초기에는 숨김
             zoneElement.title = `${zone.name}: ${zone.description}`;
             
             // 구역 라벨 추가
@@ -117,6 +124,27 @@ document.addEventListener('DOMContentLoaded', () => {
             
             zoneElement.appendChild(label);
             productsContainer.appendChild(zoneElement);
+        });
+    };
+
+    // 선택된 무드 구역만 표시
+    const showSelectedMoodZone = (selectedMood) => {
+        const allZones = productsContainer.querySelectorAll('.mood-zone');
+        
+        allZones.forEach(zone => {
+            if (selectedMood === '') {
+                // 모든 무드 보기 선택 시 모든 구역 숨김
+                zone.style.display = 'none';
+            } else if (zone.dataset.mood === selectedMood) {
+                // 선택된 무드 구역만 표시
+                zone.style.display = 'block';
+                zone.style.opacity = '0.7';
+                zone.style.borderColor = '#ff6b6b';
+                zone.style.borderWidth = '3px';
+            } else {
+                // 다른 구역들은 숨김
+                zone.style.display = 'none';
+            }
         });
     };
 
@@ -332,6 +360,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('resize', () => {
         updateSelectedProducts();
+    });
+
+    // 드롭다운 이벤트 리스너 추가
+    moodDropdown.addEventListener('change', (e) => {
+        const selectedMood = e.target.value;
+        showSelectedMoodZone(selectedMood);
     });
 
     // 전역 변수로 노출 (다른 스크립트에서 사용 가능)
