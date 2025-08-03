@@ -133,13 +133,16 @@ class Brand(models.Model):
         return self.name
 
 class Product(models.Model):
-    id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 식별자")
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드")
+    #lsy 2025-08-03 제품 필터링 부분 
+    CATEGORY_CHOICES = [
+        ('eyeshadow', '아이섀도우'),
+        ('lip', '립'),
+        ('blush', '블러셔'),
+        # 필요시 추가
+    ]
     id = models.UUIDField(primary_key=True,default=uuid.uuid4,editable=False,verbose_name="제품 식별자")
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name="브랜드")
     name = models.CharField(max_length=255, verbose_name="제품 이름")
-    category = models.CharField(max_length=255, verbose_name="제품 카테고리")
-    url = models.URLField(null=True, blank=True, verbose_name="제품 링크") #urlfeild 사용
     price = models.PositiveIntegerField(null=True, blank=True, verbose_name="제품 가격") #음수 가격 예외
     category = models.CharField(max_length=255, verbose_name="제품 카테고리")
     url = models.URLField(null=True, blank=True, verbose_name="제품 링크") #urlfeild 사용

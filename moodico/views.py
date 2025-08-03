@@ -483,3 +483,12 @@ def search_product(request):
             filtered.append(p)
 
     return JsonResponse({'results':filtered})
+
+
+def filtered_products(request):
+    #lsy 2025-08-03 제품 필터링 부분
+    category = request.GET.get('category')  # URL에서 'category' 값을 가져옴 (?category=lip)
+    qs = Product.objects.all()              # 전체 제품 리스트 가져오기
+    if category:                            # category 값이 존재하면
+        qs = qs.filter(category=category)   # 해당 카테고리만 필터링
+    return render(request, 'product_list.html', {'products': qs})  # 결과를 템플릿에 전달
