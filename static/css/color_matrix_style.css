@@ -131,9 +131,19 @@ main {
 }
 
 .product-circle.selected {
-    outline: 3px solid #ff69b4;
-    transform: scale(1.2);
+    outline: 3px solid mediumpurple;
     box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
+    transform: scale(1.2);
+    animation: twinkle 1s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
 }
 
 /* 무드 구역 스타일 */
@@ -185,6 +195,7 @@ main {
     user-select: none;
     pointer-events: none;
     white-space: nowrap;
+    opacity: 0.6;
 }
 
 .resizer {

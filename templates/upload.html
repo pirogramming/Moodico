@@ -36,7 +36,7 @@
     );
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid #ddd;
   }
 
@@ -322,8 +322,7 @@
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.7);
-    transition: transform 0.2s ease, box-shadow 0.2s ease,
-      border-color 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     user-select: none;
   }
 
@@ -334,7 +333,7 @@
   }
 
   .product-circle.selected {
-    outline: 3px solid #ff69b4;
+    outline: 3px solid mediumpurple;
     transform: scale(1.2);
     box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
   }
