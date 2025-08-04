@@ -203,7 +203,7 @@ function displayRecommendationsOnMatrix(products) {
     existingColorPoints.forEach(point => point.remove());
 
     products.forEach(p => {
-        const colorPoint = document.createElement('a');
+        const colorPoint = document.createElement('div');
         colorPoint.classList.add('product-circle', 'temp-color-point');
         colorPoint.style.backgroundColor = p.hex;
         // colorPoint.style.left = `${p.warmCool}%`;
@@ -221,6 +221,24 @@ function displayRecommendationsOnMatrix(products) {
         colorPoint.style.boxShadow = '0 0 8px rgba(247, 247, 247, 0.8)';
         colorPoint.style.zIndex = '10'; 
 
+        //툴팁 생성
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('product-tooltip');
+        tooltip.innerHTML = `
+            <img src="${p.image}" alt="${p.name}" />
+            <div class="tooltip-brand">${p.brand}</div>
+            <div class="tooltip-name">${p.name}</div>
+            <div class="tooltip-price">${p.price}</div>
+        `;
+        
+        colorPoint.appendChild(tooltip);
+
+
+        colorPoint.addEventListener('click', (event) => {
+            event.preventDefault(); // 기본 링크 동작 방지
+            window.open(p.url, '_blank'); // 새 탭에서 URL 열기
+        });
+        
         productsContainer.appendChild(colorPoint);
     });
 }

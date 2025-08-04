@@ -1499,3 +1499,66 @@ a.model-card {
         opacity: 1;
     }
 }
+
+/* 툴팁 관련 css */
+.product-tooltip {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background-color: mediumpurple;
+    opacity: 0.8;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    z-index: 100;
+    display: none;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+.product-tooltip::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid mediumpurple;
+}
+
+.product-tooltip img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.product-tooltip .tooltip-brand {
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.product-tooltip .tooltip-name {
+    font-weight: 500;
+    margin-top: 4px;
+}
+
+.product-tooltip .tooltip-price {
+    font-weight: bold;
+    color: #90ee90;
+    margin-top: 4px;
+}
+
+.product-circle:hover .product-tooltip {
+    display: block;
+}
