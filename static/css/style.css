@@ -22,6 +22,40 @@ header nav {
     margin: 0 auto;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.nav-link:hover {
+    background: rgba(255, 107, 107, 0.1);
+    color: #ff6b6b;
+    transform: translateY(-1px);
+}
+
+.liked-products-link {
+    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+}
+
+.liked-products-link:hover {
+    background: linear-gradient(135deg, #ff5252, #ff7676);
+    color: white;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
 header .logo {
     color: mediumpurple;
     font-size: 1.8em;
@@ -522,6 +556,7 @@ a.model-card {
     display: flex;
     align-items: center;
     padding: 15px;
+    position: relative;
 }
 
 .product-card img {
@@ -850,6 +885,7 @@ a.model-card {
     flex-direction: column;
     align-items: center;
     transition: box-shadow 0.3s ease;
+    position: relative;
 }
 
 .recommended-product-card:hover {
@@ -927,6 +963,51 @@ a.model-card {
 
 .purchase-button:hover {
     background-color: darkgray;
+}
+
+/* 좋아요 버튼 스타일 */
+.like-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #ff6b6b;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    font-size: 16px;
+}
+
+.like-button:hover {
+    background: #ff6b6b;
+    color: white;
+    transform: scale(1.1);
+}
+
+.like-button.liked {
+    background: #ff6b6b;
+    color: white;
+    animation: heartBeat 0.6s ease-in-out;
+}
+
+.like-button.liked::before {
+    content: "❤️";
+}
+
+.like-button:not(.liked)::before {
+    content: "🤍";
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
 }
 
 .feedback-section {
@@ -1138,6 +1219,7 @@ a.model-card {
     text-align: center;
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
 }
 
 .popular-product-card:hover {
@@ -1381,6 +1463,7 @@ a.model-card {
     padding: 15px;
     height: 300px;
     width: 240px;
+    position: relative;
 }
 
 
@@ -1415,7 +1498,7 @@ a.model-card {
     flex-direction: column;
     height: 100%;
     min-height: 160px;
-
+    position: relative;
 }
 
 .recommendation-box .product-card:hover {
@@ -1561,4 +1644,20 @@ a.model-card {
 
 .product-circle:hover .product-tooltip {
     display: block;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+    
+    .liked-products-link {
+        padding: 6px 12px;
+    }
 }
