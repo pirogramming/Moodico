@@ -613,3 +613,47 @@ def profile(request):
     }
 
     return render(request, 'profile.html', context)
+
+# upload.html에서 검색한 제품의 이미지를 가져옴
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse("URL not provided", status=400)
+    
+    try:
+        response = requests.get(image_url, stream=True)
+        response.raise_for_status()
+        
+        content_type = response.headers.get('content-type', 'image/jpeg')
+        return HttpResponse(response.content, content_type=content_type)
+    except requests.exceptions.RequestException as e:
+        return HttpResponse(f"Error fetching image: {e}", status=500)
+
+
+@login_required
+def profile(request):
+    user_name = request.user.username if request.user.is_authenticated else request.session.get("nickname", "게스트")
+    user_mood = "정보 없음"  # mood_result 저장 로직 구현 후 변경 예정
+    liked_products = ProductLike.objects.filter(user=request.user).order_by('-created_at')
+
+    context = {
+        'user_name': user_name,
+        'user_mood': user_mood,
+        'liked_products': liked_products,
+    }
+
+    return render(request, 'profile.html', context)
+# upload.html에서 검색한 제품의 이미지를 가져옴
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse("URL not provided", status=400)
+    
+    try:
+        response = requests.get(image_url, stream=True)
+        response.raise_for_status()
+        
+        content_type = response.headers.get('content-type', 'image/jpeg')
+        return HttpResponse(response.content, content_type=content_type)
+    except requests.exceptions.RequestException as e:
+        return HttpResponse(f"Error fetching image: {e}", status=500)
