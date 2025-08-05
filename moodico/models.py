@@ -190,3 +190,25 @@ class Recommendation(models.Model):
 
     class Meta:
         ordering = ['rank', '-score']
+
+
+# ------------------------------
+# 좋아요 기능
+# ------------------------------
+
+class ProductLike(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="좋아요 식별자")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="사용자")
+    product_id = models.CharField(max_length=255, verbose_name="제품 ID")
+    product_name = models.CharField(max_length=255, verbose_name="제품명")
+    product_brand = models.CharField(max_length=255, verbose_name="브랜드")
+    product_price = models.CharField(max_length=100, verbose_name="가격")
+    product_image = models.URLField(null=True, blank=True, verbose_name="제품 이미지")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="좋아요 날짜")
+
+    class Meta:
+        unique_together = ['user', 'product_id']  # 같은 사용자가 같은 제품을 중복 좋아요 방지
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.product_name}"

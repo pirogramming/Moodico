@@ -9,7 +9,7 @@ import json
 import os
 from django.views.decorators.http import require_http_methods
 from functools import wraps
-from .models import Upload
+from .models import Upload, ProductLike
 from PIL import Image
 import numpy as np
 from skimage import color
@@ -483,6 +483,121 @@ def search_product(request):
             filtered.append(p)
 
     return JsonResponse({'results':filtered})
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def toggle_product_like(request):
+    """제품 좋아요 토글 API"""
+    try:
+        data = json.loads(request.body)
+        product_id = data.get('product_id')
+        product_name = data.get('product_name')
+        product_brand = data.get('product_brand')
+        product_price = data.get('product_price')
+        product_image = data.get('product_image', '')
+        
+        if not all([product_id, product_name, product_brand, product_price]):
+            return JsonResponse({
+                'success': False,
+                'message': '필수 제품 정보가 누락되었습니다.'
+            }, status=400)
+        
+        # 사용자 확인 (임시로 세션 기반)
+        user = request.user if request.user.is_authenticated else None
+        if not user:
+            return JsonResponse({
+                'success': False,
+                'message': '로그인이 필요합니다.'
+            }, status=401)
+        
+        # 기존 좋아요 확인
+        existing_like = ProductLike.objects.filter(
+            user=user,
+            product_id=product_id
+        ).first()
+        
+        if existing_like:
+            # 좋아요 취소
+            existing_like.delete()
+            is_liked = False
+            message = '좋아요가 취소되었습니다.'
+        else:
+            # 좋아요 추가
+            ProductLike.objects.create(
+                user=user,
+                product_id=product_id,
+                product_name=product_name,
+                product_brand=product_brand,
+                product_price=product_price,
+                product_image=product_image
+            )
+            is_liked = True
+            message = '좋아요에 추가되었습니다! 💖'
+        
+        return JsonResponse({
+            'success': True,
+            'is_liked': is_liked,
+            'message': message
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'message': '잘못된 JSON 형식입니다.'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"좋아요 토글 오류: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'message': '서버 오류가 발생했습니다.'
+        }, status=500)
+
+
+@require_http_methods(["GET"])
+def get_user_likes(request):
+    """사용자의 좋아요 목록 조회 API"""
+    try:
+        # 사용자 확인
+        user = request.user if request.user.is_authenticated else None
+        if not user:
+            return JsonResponse({
+                'success': False,
+                'message': '로그인이 필요합니다.'
+            }, status=401)
+        
+        # 사용자의 좋아요 목록 조회
+        likes = ProductLike.objects.filter(user=user).values(
+            'product_id', 'product_name', 'product_brand', 
+            'product_price', 'product_image', 'created_at'
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'likes': list(likes)
+        })
+        
+    except Exception as e:
+        logger.error(f"좋아요 목록 조회 오류: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'message': '서버 오류가 발생했습니다.'
+        }, status=500)
+
+
+def liked_products_page(request):
+    """찜한 아이템 페이지 뷰"""
+    # 사용자 확인
+    user = request.user if request.user.is_authenticated else None
+    if not user:
+        return redirect('login')
+    
+    # 사용자의 좋아요 목록 조회
+    liked_products = ProductLike.objects.filter(user=user).order_by('-created_at')
+    
+    return render(request, 'liked_products.html', {
+        'liked_products': liked_products
+    })
 
 
 def filtered_products(request):

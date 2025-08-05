@@ -36,10 +36,9 @@
     );
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid #ddd;
   }
-
 
   .search-input-group {
     display: flex;
@@ -80,8 +79,6 @@
     opacity: 0.8;
   }
 
-
-
   .upload-icon {
     font-size: 18px;
   }
@@ -99,7 +96,6 @@
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
-
 
   .selected-color-swatch {
     width: 40px;
@@ -334,7 +330,7 @@
   }
 
   .product-circle.selected {
-    outline: 3px solid #ff69b4;
+    outline: 3px solid mediumpurple;
     transform: scale(1.2);
     box-shadow: 0 5px 15px rgba(255, 105, 180, 0.6);
   }
@@ -478,22 +474,21 @@
             style="display: none"
           />
           <canvas id="image-canvas" style="display: none"></canvas>
-          
         </div>
         <p id="click-instruction" style="display: none">
-            이미지를 클릭하여 색상을 추출해보세요
-          </p>
+          이미지를 클릭하여 색상을 추출해보세요
+        </p>
         <div
-            id="color-display-box"
-            class="color-display-box"
-            style="display: none"
-          >
-            <div id="selected-color-swatch" class="selected-color-swatch"></div>
-            <span id="hex-code-display">#FFFFFF</span>
-            <button id="analyze-color-button" class="analyze-button">
-              추천받기
-            </button>
-          </div>
+          id="color-display-box"
+          class="color-display-box"
+          style="display: none"
+        >
+          <div id="selected-color-swatch" class="selected-color-swatch"></div>
+          <span id="hex-code-display">#FFFFFF</span>
+          <button id="analyze-color-button" class="analyze-button">
+            추천받기
+          </button>
+        </div>
       </div>
     </div>
 
@@ -534,16 +529,16 @@
   <!-- 동적 추천 제품 영역: 업로드/매트릭스 하단에 배치 -->
   <div class="recommendations-section">
     <h3>mood 기반 추천 제품</h3>
-  <div id="recommendation-box" class="recommendation-box">
-    <div class="wave-loader">
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-        </div>
-  </div>
+    <div id="recommendation-box" class="recommendation-box">
+      <div class="wave-loader">
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+        <div class="wave-bar"></div>
+      </div>
+    </div>
   </div>
 
   <!-- 추천 제품 섹션: 하단에 배치 -->
@@ -551,7 +546,11 @@
     <h3>추천 제품</h3>
     <div class="product-list">
       {% if search_results %} {% for product in search_results %}
-      <div class="product-card">
+      <div
+        class="product-card"
+        data-product-id="{{ product.id|default:forloop.counter }}"
+      >
+        <button class="like-button" title="좋아요"></button>
         <img src="{{ product.image }}" alt="{{ product.name }}" />
         <div class="product-info">
           <div class="brand">
@@ -563,7 +562,8 @@
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
       {% endfor %} {% else %}
-      <div class="product-card">
+      <div class="product-card" data-product-id="peripera-glow">
+        <button class="like-button" title="좋아요"></button>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="페리페라 글로우 체크 블러셔"
@@ -575,7 +575,8 @@
         </div>
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-product-id="etude-coating">
+        <button class="like-button" title="좋아요"></button>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="에뛰드하우스 코팅 틴트 립"
@@ -627,121 +628,121 @@
     </div>
   </div>
 </div>
-{% endblock %}
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script src="{% static 'js/upload.js' %}"></script>
-<script src="{% static 'js/color_analyzer.js' %}"></script> 
+<script src="{% static 'js/color_analyzer.js' %}"></script>
 <script>
   // 검색 로직 & search-results-box 관련 부분
-  const inputSearch = document.getElementById('product-search-input');
-  const button = document.getElementById('product-search-btn');
-  const resultsBox = document.getElementById('search-results-box');
+  const inputSearch = document.getElementById("product-search-input");
+  const button = document.getElementById("product-search-btn");
+  const resultsBox = document.getElementById("search-results-box");
   let selectedProduct = null;
 
-  function analyzeSelectedProduct(product){
+  function analyzeSelectedProduct(product) {
     const rgb = hexToRgb(product.hex);
-          if (rgb) {
-              const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-              if (hsl) {
-                  const coords = calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
-                  if (coords) {
-                      console.log(`Analyzed Color: ${product.hex}`);
-                      console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
-                      console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
-                    
-                      // 색상을 매트릭스에 표시
-                      displayColorOnMatrix(product.hex, coords.warmCool, coords.lightDeep);
+    if (rgb) {
+      const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+      if (hsl) {
+        const coords = calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
+        if (coords) {
+          console.log(`Analyzed Color: ${product.hex}`);
+          console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
+          console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
 
-                      // Send to backend
-                      const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
-                      fetch("/recommend_by_color/", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": getCookie("csrftoken"),
-                        },
-                        body: JSON.stringify({
-                            warmCool: coords.warmCool,
-                            lightDeep: coords.lightDeep,
-                            lab_l: lab_l,
-                            lab_a: lab_a,
-                            lab_b: lab_b
-                        }),
-                    })
+          // 색상을 매트릭스에 표시
+          displayColorOnMatrix(product.hex, coords.warmCool, coords.lightDeep);
 
-                      .then(res => res.json())
-                      .then(data => {
-                          if (data.recommended) {
-                              renderRecommendations(data.recommended);
-                              displayRecommendationsOnMatrix(data.recommended);
-                          } else {
-                              console.warn("No recommended field in response", data);
-                          }
-                    console.log(data.recommended);
-                      }
-                    )
-                      .catch(err => console.error("추천 실패:", err));
-                    }
-                }
-            }
+          // Send to backend
+          const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
+          fetch("/recommend_by_color/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: JSON.stringify({
+              warmCool: coords.warmCool,
+              lightDeep: coords.lightDeep,
+              lab_l: lab_l,
+              lab_a: lab_a,
+              lab_b: lab_b,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.recommended) {
+                renderRecommendations(data.recommended);
+                displayRecommendationsOnMatrix(data.recommended);
+              } else {
+                console.warn("No recommended field in response", data);
+              }
+              console.log(data.recommended);
+            })
+            .catch((err) => console.error("추천 실패:", err));
+        }
+      }
+    }
   }
 
   function fetchSearchResults(query) {
     if (!query.trim()) {
-      resultsBox.style.display = 'none';
+      resultsBox.style.display = "none";
       return;
     }
 
     fetch(`/search_product/?q=${encodeURIComponent(query)}`)
-      .then(response => response.json())
-      .then(data => {
-        resultsBox.innerHTML = ''; // 기존 결과 삭제
+      .then((response) => response.json())
+      .then((data) => {
+        resultsBox.innerHTML = ""; // 기존 결과 삭제
 
         if (data.results.length > 0) {
-          const ul = document.createElement('ul');
-          data.results.forEach(item => {
-            const li = document.createElement('li');
+          const ul = document.createElement("ul");
+          data.results.forEach((item) => {
+            const li = document.createElement("li");
             li.textContent = `${item.brand} - ${item.name}`;
-            li.addEventListener('click', () => {
+            li.addEventListener("click", () => {
               inputSearch.value = `${item.name}`;
-              resultsBox.style.display = 'none';
+              resultsBox.style.display = "none";
               selectedProduct = item;
               analyzeSelectedProduct(item);
             });
             ul.appendChild(li);
           });
           resultsBox.appendChild(ul);
-          resultsBox.style.display = 'block';
+          resultsBox.style.display = "block";
         } else {
-          resultsBox.innerHTML = '<p style="padding:8px">검색 결과가 없습니다.</p>';
-          resultsBox.style.display = 'block';
+          resultsBox.innerHTML =
+            '<p style="padding:8px">검색 결과가 없습니다.</p>';
+          resultsBox.style.display = "block";
         }
       })
-      .catch(error => {
-        console.error('검색 오류:', error);
-        resultsBox.style.display = 'none';
+      .catch((error) => {
+        console.error("검색 오류:", error);
+        resultsBox.style.display = "none";
       });
   }
 
   // 자동 검색 목록 기능 (keyup)
   function debounce(func, delay) {
     let timeoutId;
-    return function(...args) {
+    return function (...args) {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => func.apply(this, args), delay);
     };
   } // 300ms 동안 추가 입력이 없을 때 호출 - API의 불필요한 호출 방지
-  inputSearch.addEventListener('keyup', debounce((e) => {
-    const query = e.target.value;
-    selectedProduct = null; 
-    fetchSearchResults(query);
-  }, 300));
+  inputSearch.addEventListener(
+    "keyup",
+    debounce((e) => {
+      const query = e.target.value;
+      selectedProduct = null;
+      fetchSearchResults(query);
+    }, 300)
+  );
 
   // 검색 결과 기능
-  button.addEventListener('click', () => {
+  button.addEventListener("click", () => {
     const currentInput = inputSearch.value.trim();
-    const expectedInput = selectedProduct ? `${selectedProduct.name}` : '';
+    const expectedInput = selectedProduct ? `${selectedProduct.name}` : "";
 
     if (selectedProduct && currentInput === expectedInput) {
       analyzeSelectedProduct(selectedProduct);
@@ -750,15 +751,15 @@
     }
   });
 
-  inputSearch.addEventListener('focus', () => {
-    resultsBox.style.display = 'none';
+  inputSearch.addEventListener("focus", () => {
+    resultsBox.style.display = "none";
     inputSearch.select();
   });
 
   // search-results-box 숨기기
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     if (!resultsBox.contains(e.target) && e.target !== inputSearch) {
-      resultsBox.style.display = 'none';
+      resultsBox.style.display = "none";
     }
   });
 </script>

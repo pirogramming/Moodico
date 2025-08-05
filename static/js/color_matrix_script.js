@@ -155,13 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
         renderMoodZones();
         
         makeupProducts.forEach(product => {
-            const productCircle = document.createElement('div');
+            const productCircle = document.createElement('a');
             productCircle.classList.add('product-circle');
             productCircle.style.backgroundColor = product.color;
             productCircle.style.left = `${product.warmCool}%`;
             productCircle.style.top = `${product.lightDeep}%`;
             productCircle.dataset.productId = product.id;
             productCircle.title = `${product.name} (${product.mood})`;
+
+            productCircle.href = product.url;
+            productCircle.target = "_blank";
 
             productCircle.style.transform = 'translate(-50%, -50%)';
 
@@ -366,6 +369,17 @@ document.addEventListener('DOMContentLoaded', () => {
     moodDropdown.addEventListener('change', (e) => {
         const selectedMood = e.target.value;
         showSelectedMoodZone(selectedMood);
+
+        //선택한 무드에 따라 mood-selection-area의 크기와 위치를 변경
+        if (selectedMood && moodZones[selectedMood]) {
+            const zone = moodZones[selectedMood].area;
+            moodSelectionArea.style.left = `${zone.left}%`;
+            moodSelectionArea.style.top = `${zone.top}%`;
+            moodSelectionArea.style.width = `${zone.width}%`;
+            moodSelectionArea.style.height = `${zone.height}%`;
+            moodSelectionArea.style.display = 'block';
+            updateSelectedProducts();
+        }
     });
 
     // 전역 변수로 노출 (다른 스크립트에서 사용 가능)

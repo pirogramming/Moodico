@@ -178,10 +178,12 @@ function getCookie(name) {
 function renderRecommendations(products) {
     const box = document.getElementById("recommendation-box");
     box.innerHTML = "";
-    products.forEach(p => {
+    products.forEach((p, index) => {
         const card = document.createElement("div");
         card.classList.add("product-card");
+        card.dataset.productId = p.id || `dynamic-${index}`;
         card.innerHTML = `
+            <button class="like-button" title="좋아요"></button>
             <img src="${p.image}" alt="${p.name}" />
             <div class="product-info">
                 <div class="brand">${p.brand} <span class="tag">${p.category}</span></div>
@@ -191,6 +193,11 @@ function renderRecommendations(products) {
             <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
         `;
         box.appendChild(card);
+        
+        // 새로 추가된 카드의 좋아요 상태 복원
+        if (window.restoreLikeStateForCard) {
+            window.restoreLikeStateForCard(card);
+        }
     });
 }
 
@@ -203,7 +210,7 @@ function displayRecommendationsOnMatrix(products) {
     existingColorPoints.forEach(point => point.remove());
 
     products.forEach(p => {
-        const colorPoint = document.createElement('a');
+        const colorPoint = document.createElement('div');
         colorPoint.classList.add('product-circle', 'temp-color-point');
         colorPoint.style.backgroundColor = p.hex;
         // colorPoint.style.left = `${p.warmCool}%`;
@@ -221,6 +228,24 @@ function displayRecommendationsOnMatrix(products) {
         colorPoint.style.boxShadow = '0 0 8px rgba(247, 247, 247, 0.8)';
         colorPoint.style.zIndex = '10'; 
 
+        //툴팁 생성
+        const tooltip = document.createElement('div');
+        tooltip.classList.add('product-tooltip');
+        tooltip.innerHTML = `
+            <img src="${p.image}" alt="${p.name}" />
+            <div class="tooltip-brand">${p.brand}</div>
+            <div class="tooltip-name">${p.name}</div>
+            <div class="tooltip-price">${p.price}</div>
+        `;
+        
+        colorPoint.appendChild(tooltip);
+
+
+        colorPoint.addEventListener('click', (event) => {
+            event.preventDefault(); // 기본 링크 동작 방지
+            window.open(p.url, '_blank'); // 새 탭에서 URL 열기
+        });
+        
         productsContainer.appendChild(colorPoint);
     });
 }
