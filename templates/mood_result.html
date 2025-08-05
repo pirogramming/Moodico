@@ -285,7 +285,11 @@
       <h2>추천 제품</h2>
       <div class="products-grid">
         {% for product in recommended_products %}
-        <div class="product-card">
+        <div
+          class="product-card"
+          data-product-id="{{ product.id|default:forloop.counter }}"
+        >
+          <button class="like-button" title="좋아요"></button>
           <img
             src="{{ product.image }}"
             alt="{{ product.product_name }}"

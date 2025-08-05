@@ -178,10 +178,12 @@ function getCookie(name) {
 function renderRecommendations(products) {
     const box = document.getElementById("recommendation-box");
     box.innerHTML = "";
-    products.forEach(p => {
+    products.forEach((p, index) => {
         const card = document.createElement("div");
         card.classList.add("product-card");
+        card.dataset.productId = p.id || `dynamic-${index}`;
         card.innerHTML = `
+            <button class="like-button" title="좋아요"></button>
             <img src="${p.image}" alt="${p.name}" />
             <div class="product-info">
                 <div class="brand">${p.brand} <span class="tag">${p.category}</span></div>
@@ -191,6 +193,11 @@ function renderRecommendations(products) {
             <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
         `;
         box.appendChild(card);
+        
+        // 새로 추가된 카드의 좋아요 상태 복원
+        if (window.restoreLikeStateForCard) {
+            window.restoreLikeStateForCard(card);
+        }
     });
 }
 
