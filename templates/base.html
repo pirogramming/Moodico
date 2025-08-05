@@ -1,30 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moodico"</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% block extra_head %}{% endblock %}
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <nav>
-            <a href="{% url 'main' %}" class="logo" style="text-decoration: none;">Moodico"</a>
-            <a href="{% url 'login' %}" class="login-icon">👤</a>
-        </nav>
+      <nav>
+        <a href="{% url 'main' %}" class="logo" style="text-decoration: none"
+          >Moodico"</a
+        >
+        <div class="nav-links">
+          <a
+            href="{% url 'liked_products' %}"
+            class="nav-link liked-products-link"
+          >
+            💖 찜한 아이템
+          </a>
+          <a href="{% url 'login' %}" class="login-icon">👤</a>
+        </div>
+      </nav>
     </header>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    <main>{% block content %} {% endblock %}</main>
 
     <footer>
-        <p>&copy; 2025 Moodico" All rights reserved.</p>
+      <p>&copy; 2025 Moodico" All rights reserved.</p>
     </footer>
     <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/like_button.js' %}"></script>
     {% block extra_js %}{% endblock %}
-</body>
+  </body>
 </html>
