@@ -12,6 +12,14 @@ header {
     padding: 20px 40px;
     border-bottom: 1px solid #eee;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+
+header.is-visible {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 header nav {
@@ -294,6 +302,27 @@ input[type="email"] {
     align-items: center;
     gap: 30px;
     width: 70%;
+}
+
+.exploration-models .model-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.exploration-models.is-visible .model-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exploration-models.is-visible .model-card:nth-child(1) {
+    transition-delay: 0.1s;
+}
+.exploration-models.is-visible .model-card:nth-child(2) {
+    transition-delay: 0.2s;
+}
+.exploration-models.is-visible .model-card:nth-child(3) {
+    transition-delay: 0.3s;
 }
 
 .model-card {

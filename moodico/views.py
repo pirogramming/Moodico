@@ -19,6 +19,7 @@ from skimage.color import rgb2lab
 import logging
 logger = logging.getLogger(__name__)
 from sklearn.metrics.pairwise import cosine_similarity
+from django.contrib.auth.decorators import login_required
 
 
 def login_or_kakao_required(view_func):
@@ -483,3 +484,7 @@ def search_product(request):
             filtered.append(p)
 
     return JsonResponse({'results':filtered})
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')

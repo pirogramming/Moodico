@@ -10,4 +10,21 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = '/';
         });
     }
+
+    //페이지 접속하면 밑에서 올라오는듯한 애니메이션
+    const explorationModels = document.querySelector('.exploration-models');
+    if (explorationModels) {
+
+        setTimeout(() => {
+            explorationModels.classList.add('is-visible');
+        }, 100);
+    }
+
+    //이건 헤더 위에서 아래로 내려오는 애니메이션
+    const header = document.querySelector('header');
+    if (header) {
+        setTimeout(() => {
+            header.classList.add('is-visible');
+        }, 100);
+    }
 });
