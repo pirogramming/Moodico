@@ -12,7 +12,7 @@ urlpatterns = [
 
     path("authorize/", views.kakao_authorize, name="kakao_authorize"), # 카카오 로그인 인증
     path("kakao/callback/", views.kakao_callback, name="kakao_callback"),  # 카카오 로그인 콜백
-    path("profile/", views.kakao_profile, name="kakao_profile"), # 카카오 프로필 정보 가져오기
+    #path("profile/", views.kakao_profile, name="kakao_profile"), # 카카오 프로필 정보 가져오기
     path("kakao_logout/", views.kakao_logout, name="kakao_logout"), # 카카오 로그아웃
 
     path('my_item_recommendation/', views.my_item_recommendation, name='my_item_recommendation'), #내 아이템 기반 추천 페이지

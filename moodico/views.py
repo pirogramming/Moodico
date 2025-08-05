@@ -487,4 +487,14 @@ def search_product(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    user_name = request.user.username if request.user.is_authenticated else request.session.get("nickname", "게스트")
+    user_mood = "정보 없음"  # mood_result 저장 로직 구현 후 변경 예정
+    liked_products = []  # 추후 좋아요 제품 목록을 DB에서 가져오는 로직 추가
+
+    context = {
+        'user_name': user_name,
+        'user_mood': user_mood,
+        'liked_products': liked_products,
+    }
+
+    return render(request, 'profile.html', context)
