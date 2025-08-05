@@ -598,3 +598,18 @@ def liked_products_page(request):
     return render(request, 'liked_products.html', {
         'liked_products': liked_products
     })
+
+# upload.html에서 검색한 제품의 이미지를 가져옴
+def proxy_image(request):
+    image_url = request.GET.get('url')
+    if not image_url:
+        return HttpResponse("URL not provided", status=400)
+    
+    try:
+        response = requests.get(image_url, stream=True)
+        response.raise_for_status()
+        
+        content_type = response.headers.get('content-type', 'image/jpeg')
+        return HttpResponse(response.content, content_type=content_type)
+    except requests.exceptions.RequestException as e:
+        return HttpResponse(f"Error fetching image: {e}", status=500)
