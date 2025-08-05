@@ -464,6 +464,7 @@
               />
             </label>
           </form>
+          <div id="search-product-image-area"></div>
         </div>
 
         <div id="image-preview-area" class="image-preview-area">
@@ -705,6 +706,27 @@
               resultsBox.style.display = "none";
               selectedProduct = item;
               analyzeSelectedProduct(item);
+
+              // 선택한 제품의 이미지를 추가
+              const searchImageInput = document.getElementById("uploaded-image");
+              const canvas = document.getElementById("image-canvas");
+
+              if (searchImageInput && canvas) {
+                // 기존 입력 초기화
+                searchImageInput.src = "";
+                //searchImageInput.style.display = "none";
+                // 기존 캔버스 초기화
+                const context = canvas.getContext('2d');
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                const proxyUrl = `/proxy_image/?url=${encodeURIComponent(item.image)}`;
+                drawImageToCanvas(proxyUrl);
+
+                const selectedColorSwatch = document.getElementById('selected-color-swatch');
+                const hexCodeDisplay = document.getElementById('hex-code-display');
+                selectedColorSwatch.style.backgroundColor = item.hex;
+                hexCodeDisplay.textContent = item.hex;
+              }
             });
             ul.appendChild(li);
           });
