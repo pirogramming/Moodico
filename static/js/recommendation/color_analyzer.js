@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                       // Send to backend
                       const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
-                    fetch("/recommend_by_color/", {
+                    fetch("/recommend/recommend_by_color/", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

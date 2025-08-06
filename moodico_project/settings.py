@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'moodico',
+    'moodico.main', # 메인 앱
+    'moodico.upload', # 이미지 업로드 앱
+    'moodico.recommendation', # 추천 시스템 앱
+    'moodico.products', # 제품 관련 앱
+    'moodico.moodtest', # 무드 테스트 앱
+    'moodico.users', # 유저 앱
     'storages'
 ]
 
@@ -65,7 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'moodico.context_processors.kakao_user',
+                'moodico.users.context_processors.kakao_user',
             ],
         },
     },
@@ -155,7 +160,7 @@ AWS_DEFAULT_ACL = None
 
 
 # 카카오 로그인 설정
-KAKAO_REDIRECT_URI = "http://localhost:8000/kakao/callback/"
+KAKAO_REDIRECT_URI = "http://localhost:8000/users/kakao/callback/"
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
 KAKAO_API_HOST = "https://kapi.kakao.com"
 from decouple import config
