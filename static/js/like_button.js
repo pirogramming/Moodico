@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 107, 107, 0.9);
+            background: mediumpurple;
             color: white;
             padding: 12px 20px;
             border-radius: 25px;

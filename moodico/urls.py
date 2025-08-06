@@ -12,7 +12,6 @@ urlpatterns = [
 
     path("authorize/", views.kakao_authorize, name="kakao_authorize"), # 카카오 로그인 인증
     path("kakao/callback/", views.kakao_callback, name="kakao_callback"),  # 카카오 로그인 콜백
-    path("profile/", views.kakao_profile, name="kakao_profile"), # 카카오 프로필 정보 가져오기
     path("kakao_logout/", views.kakao_logout, name="kakao_logout"), # 카카오 로그아웃
 
     path('my_item_recommendation/', views.my_item_recommendation, name='my_item_recommendation'), #내 아이템 기반 추천 페이지
@@ -32,6 +31,8 @@ urlpatterns = [
     path('api/toggle_like/', views.toggle_product_like, name='toggle_product_like'),
     path('api/get_likes/', views.get_user_likes, name='get_user_likes'),
     path('liked_products/', views.liked_products_page, name='liked_products'),
+
+    path('profile/', views.profile, name='profile') #유저 프로필 페이지 
 ]
 
 # Enable media file serving (during development only)
