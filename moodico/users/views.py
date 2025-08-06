@@ -7,6 +7,7 @@ from django.conf import settings
 from django.views.decorators.http import require_http_methods
 from moodico.products.models import ProductLike
 from .utils import login_or_kakao_required
+from moodico.users.models import UserProfile
 
 # Create your views here.
 def signup_view(request):
@@ -137,16 +138,17 @@ def kakao_logout(request):
 
 @login_or_kakao_required
 def profile(request):
-    if request.user.is_authenticated:
-        user_name = request.user.username
-        liked_products = ProductLike.objects.filter(user=request.user).order_by('-created_at')
-    else:
-        user_name = request.session.get("nickname", "게스트")
-        liked_products = []  # Kakao users not stored in DB, so skip
+    user_name = request.user.username if request.user.is_authenticated else request.session.get("nickname", "게스트")
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_mood = user_profile.mood_result if user_profile.mood_result else "정보 없음"
+    except UserProfile.DoesNotExist:
+        user_mood = "정보 없음"
+    liked_products = ProductLike.objects.filter(user=request.user).order_by('-created_at')
 
     context = {
         'user_name': user_name,
-        'user_mood': "정보 없음",  # mood_result 저장 로직 나중에 연결
+        'user_mood': user_mood,
         'liked_products': liked_products,
     }
 

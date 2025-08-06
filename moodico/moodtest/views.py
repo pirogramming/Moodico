@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-
+from moodico.users.models import UserProfile
+import logging
+logger = logging.getLogger(__name__)
 # Create your views here.
 
 def mood_test(request):
@@ -11,6 +13,14 @@ def mood_result(request):
     """무드 테스트 결과 페이지 뷰"""
     if request.method == 'POST':
         mood = request.POST.get('mood', '러블리')
+        if request.user.is_authenticated:
+            try:
+                user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+                user_profile.mood_result = mood
+                user_profile.save()
+                logger.info(f"사용자 {request.user.username}의 무드 테스트 결과 '{mood}'가 저장되었습니다.")
+            except Exception as e:
+                logger.error(f"무드 테스트 결과 저장 실패: {e}")
     else:
         mood = '러블리'  # 기본값
     
