@@ -209,3 +209,11 @@ class ProductLike(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.product_name}"
+    
+class UserProfile(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="유저 프로필 식별자")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profiles', verbose_name="유저")    
+    mood_result = models.CharField(max_length=50, null=True, blank=True, verbose_name="무드 테스트 결과")
+
+    def __str__(self):
+        return f"{self.user.username}의 프로필 ({self.id})"

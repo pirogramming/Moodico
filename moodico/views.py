@@ -69,8 +69,19 @@ def mood_result(request):
     """무드 테스트 결과 페이지 뷰"""
     if request.method == 'POST':
         mood = request.POST.get('mood', '러블리')
+        
+        if request.user.is_authenticated:
+            try:
+                user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+                user_profile.mood_result = mood
+                user_profile.save()
+                logger.info(f"사용자 {request.user.username}의 무드 테스트 결과 '{mood}'가 저장되었습니다.")
+            except Exception as e:
+                logger.error(f"무드 테스트 결과 저장 실패: {e}")
+                
     else:
         mood = '러블리'  # 기본값
+    
     
     # 무드별 결과 데이터 정의
     mood_results = {
@@ -501,6 +512,7 @@ def toggle_product_like(request):
         product_brand = data.get('product_brand')
         product_price = data.get('product_price')
         product_image = data.get('product_image', '')
+        product_url = data.get('product_url', '')
         
         if not all([product_id, product_name, product_brand, product_price]):
             return JsonResponse({
@@ -535,7 +547,8 @@ def toggle_product_like(request):
                 product_name=product_name,
                 product_brand=product_brand,
                 product_price=product_price,
-                product_image=product_image
+                product_image=product_image,
+                product_url=product_url
             )
             is_liked = True
             message = '좋아요에 추가되었습니다! 💖'
@@ -607,7 +620,11 @@ def liked_products_page(request):
 @login_required
 def profile(request):
     user_name = request.user.username if request.user.is_authenticated else request.session.get("nickname", "게스트")
-    user_mood = "정보 없음"  # mood_result 저장 로직 구현 후 변경 예정
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        user_mood = user_profile.mood_result if user_profile.mood_result else "정보 없음"
+    except UserProfile.DoesNotExist:
+        user_mood = "정보 없음"
     liked_products = ProductLike.objects.filter(user=request.user).order_by('-created_at')
 
     context = {
