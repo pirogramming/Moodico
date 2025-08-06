@@ -19,7 +19,7 @@ def signup_view(request):
             return redirect('/')
     else:
         form = CustomSignupForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'users/signup.html', {'form': form})
 
 # 카카오 로그인 관련 뷰
 def kakao_authorize(request):
@@ -104,7 +104,7 @@ def kakao_profile(request):
         "raw_json": result  # 디버깅용
     }
 
-    return render(request, "main.html", context)
+    return render(request, "main/main.html", context)
 
 @require_http_methods(["GET"])
 def kakao_logout(request):
@@ -150,4 +150,4 @@ def profile(request):
         'liked_products': liked_products,
     }
 
-    return render(request, 'profile.html', context)
+    return render(request, 'users/profile.html', context)

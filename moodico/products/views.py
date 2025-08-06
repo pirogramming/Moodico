@@ -16,7 +16,7 @@ from moodico.users.utils import login_or_kakao_required
 # Create your views here.
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
-    return render(request, 'color_matrix.html')
+    return render(request, 'recommendation/color_matrix.html')
 
 def product_detail(request, product_id):
     """제품 상세 페이지 뷰"""
@@ -28,7 +28,7 @@ def product_detail(request, product_id):
         'price': '30,000원',
         'image': '/static/images/test.jpg', # 임시 이미지
     }
-    return render(request, 'detail.html', {'product': product})
+    return render(request, 'products/detail.html', {'product': product})
 
 def product_list(request):
     json_path = os.path.join('static', 'data', 'products.json')
@@ -36,7 +36,7 @@ def product_list(request):
     with open(json_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
     
-    return render(request, 'product_list.html', {'products': products})
+    return render(request, 'products/product_list.html', {'products': products})
 
 # DB 구현 이후 검색 로직 수정 필요 - 현재는 검색시마다 json 파일을 매번 불러오고 있음
 ## 현재는 단어 단위의 검색만 가능.. (제품 데이터를 밑에 표시함으로써 이 문제 완화 가능) 
@@ -171,7 +171,7 @@ def liked_products_page(request):
     # 사용자의 좋아요 목록 조회
     liked_products = ProductLike.objects.filter(user=user).order_by('-created_at')
     
-    return render(request, 'liked_products.html', {
+    return render(request, 'products/liked_products.html', {
         'liked_products': liked_products
     })
 

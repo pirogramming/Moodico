@@ -4,6 +4,6 @@ from django.shortcuts import render
 
 def main(request):
     """메인 페이지 뷰"""
-    return render(request, 'main.html')
+    return render(request, 'main/main.html')
 
 

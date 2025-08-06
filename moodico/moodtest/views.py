@@ -5,7 +5,7 @@ from django.views.decorators.http import require_http_methods
 
 def mood_test(request):
     """무드 테스트 페이지 뷰"""
-    return render(request, 'mood_test.html')
+    return render(request, 'moodtest/mood_test.html')
 
 def mood_result(request):
     """무드 테스트 결과 페이지 뷰"""
@@ -151,4 +151,4 @@ def mood_result(request):
     # 선택된 무드의 결과 데이터 가져오기
     result_data = mood_results.get(mood, mood_results['러블리'])
     
-    return render(request, 'mood_result.html', result_data)
+    return render(request, 'moodtest/mood_result.html', result_data)

@@ -17,13 +17,13 @@ def upload_color_image(request):
                 upload.user = None 
 
             upload.save()
-            return render(request, 'upload.html', {
+            return render(request, 'upload/upload.html', {
                 'form': UploadForm(),
                 'uploaded_image_url': upload.image_path.url
             })
     else:
         form = UploadForm()
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'upload/upload.html', {'form': form})
 
 # upload.html에서 검색한 제품의 이미지를 가져옴
 def proxy_image(request):

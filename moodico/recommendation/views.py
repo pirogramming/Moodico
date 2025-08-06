@@ -14,7 +14,7 @@ def my_item_recommendation(request):
     # 백엔드 연동을 위해 임시로 빈 리스트 전달
     recommended_items = []
     search_results = []
-    return render(request, 'upload.html', {'search_results': search_results, 'recommended_items': recommended_items})
+    return render(request, 'upload/upload.html', {'search_results': search_results, 'recommended_items': recommended_items})
 
 @csrf_exempt
 def recommend_by_color(request):
