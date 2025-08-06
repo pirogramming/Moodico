@@ -77,6 +77,7 @@ def toggle_product_like(request):
         product_brand = data.get('product_brand')
         product_price = data.get('product_price')
         product_image = data.get('product_image', '')
+        product_url = data.get('product_url', '')
         
         if not all([product_id, product_name, product_brand, product_price]):
             return JsonResponse({
@@ -86,17 +87,21 @@ def toggle_product_like(request):
         
         # 사용자 확인 (임시로 세션 기반)
         user = request.user if request.user.is_authenticated else None
-        if not user:
+        session_nickname = request.session.get("nickname")
+        if not user and not session_nickname:
             return JsonResponse({
                 'success': False,
                 'message': '로그인이 필요합니다.'
             }, status=401)
         
         # 기존 좋아요 확인
-        existing_like = ProductLike.objects.filter(
-            user=user,
-            product_id=product_id
-        ).first()
+        like_filter = ProductLike.objects.filter(product_id=product_id)
+        if user:
+            like_filter = like_filter.filter(user=user)
+        else:
+            like_filter = like_filter.filter(session_nickname=session_nickname)
+
+        existing_like = like_filter.first()
         
         if existing_like:
             # 좋아요 취소
@@ -107,11 +112,13 @@ def toggle_product_like(request):
             # 좋아요 추가
             ProductLike.objects.create(
                 user=user,
+                session_nickname=session_nickname if not user else None,
                 product_id=product_id,
                 product_name=product_name,
                 product_brand=product_brand,
                 product_price=product_price,
-                product_image=product_image
+                product_image=product_image,
+                product_url=product_url
             )
             is_liked = True
             message = '좋아요에 추가되었습니다! 💖'
@@ -136,6 +143,7 @@ def toggle_product_like(request):
 
 
 @require_http_methods(["GET"])
+@csrf_exempt
 def get_user_likes(request):
     """사용자의 좋아요 목록 조회 API"""
     try:
@@ -144,7 +152,8 @@ def get_user_likes(request):
         if not user:
             return JsonResponse({
                 'success': False,
-                'message': '로그인이 필요합니다.'
+                'message': '로그인이 필요합니다.',
+                'likes': []
             }, status=401)
         
         # 사용자의 좋아요 목록 조회

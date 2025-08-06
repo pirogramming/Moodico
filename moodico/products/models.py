@@ -60,7 +60,8 @@ class ProductShade(models.Model):
 
 class ProductLike(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="좋아요 식별자")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="사용자")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="사용자")  
+    session_nickname = models.CharField(max_length=100, null=True, blank=True)
     product_id = models.CharField(max_length=255, verbose_name="제품 ID")
     product_name = models.CharField(max_length=255, verbose_name="제품명")
     product_brand = models.CharField(max_length=255, verbose_name="브랜드")

@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     product_name: getProductName(productCard),
                     product_brand: getProductBrand(productCard),
                     product_price: getProductPrice(productCard),
-                    product_image: getProductImage(productCard)
+                    product_image: getProductImage(productCard),
+                    product_url: getProductUrl(productCard),
                 };
                 
                 // AJAX로 좋아요 토글 요청
@@ -131,7 +132,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         try {
-            const response = await fetch('/products/get_user_likes/');
+            const response = await fetch('/products/get_user_likes/', {
+                method: 'GET',
+                credentials: 'include' 
+            });
+
             const data = await response.json();
             
             if (data.success) {
