@@ -60,7 +60,7 @@
   // 찜 해제 함수
   async function removeLike(productId) {
     try {
-      const response = await fetch("/api/toggle_like/", {
+      const response = await fetch("/products/toggle_product_like/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

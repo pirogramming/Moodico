@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // 버튼 비활성화 (중복 클릭 방지)
             likeButton.disabled = true;
             
-            const response = await fetch('/api/toggle_like/', {
+            const response = await fetch('/products/toggle_product_like/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         try {
-            const response = await fetch('/api/get_likes/');
+            const response = await fetch('/products/get_user_likes/');
             const data = await response.json();
             
             if (data.success) {
@@ -236,8 +236,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 mutation.addedNodes.forEach((node) => {
                     if (node.nodeType === Node.ELEMENT_NODE) {
                         // 새로 추가된 제품 카드들 찾기
-                        const newCards = node.querySelectorAll ? 
-                            node.querySelectorAll('.product-card, .recommended-product-card') : [];
+                        const newCards = node.querySelectorAll 
+                            ? Array.from(node.querySelectorAll('.product-card, .recommended-product-card')) 
+                            : [];
                         
                         // 노드 자체가 제품 카드인 경우도 포함
                         if (node.classList && 
@@ -304,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // 좋아요 목록 조회 함수 (다른 스크립트에서 사용 가능)
 async function getLikedProducts() {
     try {
-        const response = await fetch('/api/get_likes/');
+        const response = await fetch('/products/get_user_likes/');
         const data = await response.json();
         return data.success ? data.likes : [];
     } catch (error) {
@@ -316,7 +317,7 @@ async function getLikedProducts() {
 // 좋아요 목록 초기화 함수 (관리자용)
 async function clearLikedProducts() {
     try {
-        const response = await fetch('/api/clear_likes/', {
+        const response = await fetch('/products/clear_likes/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

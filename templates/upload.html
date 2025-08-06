@@ -655,7 +655,7 @@
 
           // Send to backend
           const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
-          fetch("/recommend_by_color/", {
+          fetch("/recommend/recommend_by_color/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -691,7 +691,7 @@
       return;
     }
 
-    fetch(`/search_product/?q=${encodeURIComponent(query)}`)
+    fetch(`/products/search_product/?q=${encodeURIComponent(query)}`)
       .then((response) => response.json())
       .then((data) => {
         resultsBox.innerHTML = ""; // 기존 결과 삭제
@@ -719,7 +719,7 @@
                 const context = canvas.getContext('2d');
                 context.clearRect(0, 0, canvas.width, canvas.height);
 
-                const proxyUrl = `/proxy_image/?url=${encodeURIComponent(item.image)}`;
+                const proxyUrl = `/upload/proxy_image/?url=${encodeURIComponent(item.image)}`;
                 drawImageToCanvas(proxyUrl);
 
                 const selectedColorSwatch = document.getElementById('selected-color-swatch');
