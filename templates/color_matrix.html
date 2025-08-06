@@ -46,6 +46,11 @@
   </p>
 </div>
 {% endblock %} {% block extra_js %}
+  <script>
+    const makeupProducts = {{ makeupProducts|safe }};
+    console.log(makeupProducts);  // 확인용
+  </script>
+  <script src="{% static 'js/color_analyzer.js' %}"></script>
   <script src="{% static 'js/color_matrix_script.js' %}"></script>
   {% endblock %}
 </div>
