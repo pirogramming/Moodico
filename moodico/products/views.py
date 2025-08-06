@@ -14,9 +14,14 @@ logger = logging.getLogger(__name__)
 from moodico.users.utils import login_or_kakao_required
 
 # Create your views here.
+
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
-    return render(request, 'recommendation/color_matrix.html')
+    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
+    with open(product_path, 'r', encoding='utf-8') as f:
+        products = json.load(f)
+
+    return render(request, 'recommendation/color_matrix.html', {'makeupProducts': products})
 
 def product_detail(request, product_id):
     """제품 상세 페이지 뷰"""
