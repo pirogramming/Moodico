@@ -54,6 +54,49 @@ main {
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+/* 종류 선택기 스타일 */
+.category-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.category-dropdown {
+    padding: 12px 20px;
+    border: 2px solid #667eea;
+    border-radius: 25px;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    min-width: 150px;
+}
+
+.category-dropdown:hover {
+    border-color: #5a6fd8;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.category-dropdown:focus {
+    border-color: #5a6fd8;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.matrix-selector {
+    display: flex;
+    gap: 30px;
+}
+
 .color-matrix-container {
     position: relative;
     width: 600px; 
@@ -253,8 +296,9 @@ main {
 }
 
 .selected-products-display li:hover {
-    transform: translateX(5px);
+    transform: translateY(-5px);
     background-color: #eef;
+    cursor: pointer;
 }
 
 .selected-products-display li .product-color-swatch {

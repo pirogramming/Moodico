@@ -2,17 +2,27 @@
 <link rel="stylesheet" href="{% static 'css/color_matrix_style.css' %}" />
 {% endblock %} {% block content %}
 <div class="matrix-wrapper">
-  <div class="mood-selector">
-    <select id="mood-dropdown" class="mood-dropdown">
-      <option value="">무드를 선택하세요</option>
-      <option value="러블리">러블리</option>
-      <option value="활기찬">활기찬</option>
-      <option value="고급스러운">고급스러운</option>
-      <option value="내추럴">내추럴</option>
-      <option value="시크">시크</option>
-    </select>
-  </div>
+  <div class="matrix-selector">
+    <div class="mood-selector">
+      <select id="mood-dropdown" class="mood-dropdown">
+        <option value="">무드를 선택하세요</option>
+        <option value="러블리">러블리</option>
+        <option value="활기찬">활기찬</option>
+        <option value="고급스러운">고급스러운</option>
+        <option value="내추럴">내추럴</option>
+        <option value="시크">시크</option>
+      </select>
+    </div>
 
+    <div class="category-selector">
+      <select id="category-dropdown" class="category-dropdown">
+        <option value="">카테고리를 선택하세요</option>
+        <option value="lips">💋립</option>
+        <option value="eyeshadow">👀아이섀도우</option>
+        <option value="blush">🌸블러셔</option>
+      </select>
+    </div>
+  </div>
   <section class="color-matrix-container">
     <div class="quadrant-grid">
       <div class="quadrant top-left"></div>
@@ -35,7 +45,7 @@
       <div class="resizer bottom-left-resizer"></div>
       <div class="resizer bottom-right-resizer"></div>
     </div>
-    </section>
+  </section>
 </div>
 
 <div id="selected-products-display" class="selected-products-display">
@@ -46,11 +56,11 @@
   </p>
 </div>
 {% endblock %} {% block extra_js %}
-  <script>
-    const makeupProducts = {{ makeupProducts|safe }};
-    console.log(makeupProducts);  // 확인용
-  </script>
-  <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
-  <script src="{% static 'js/recommendation/color_matrix_script.js' %}"></script>
-  {% endblock %}
+<script>
+  const makeupProducts = {{ makeupProducts| safe }};
+  console.log(makeupProducts);  // 확인용
+</script>
+<script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
+<script src="{% static 'js/recommendation/color_matrix_script.js' %}"></script>
+{% endblock %}
 </div>

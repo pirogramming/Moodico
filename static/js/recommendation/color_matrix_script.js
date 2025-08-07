@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedProductsList = document.getElementById('selected-products-list');
     const noProductsMessage = document.getElementById('no-products-message');
     const moodDropdown = document.getElementById('mood-dropdown');
-
+    const categoryDropdown = document.getElementById('category-dropdown');
     // 무드별 구역 정의
     const moodZones = {
         '러블리': {
@@ -235,8 +235,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 listItem.innerHTML = `
                     <div class="product-color-swatch" style="background-color: ${product.hex};"></div>
                     <span>${product.name}</span>
-                    <span class="product-mood">${product.mood}</span>
+                    <span class="product-mood">${product.category}</span>
                 `;
+
+                listItem.addEventListener('click', () => {
+                    window.open(product.url, '_blank');
+                });
+
                 selectedProductsList.appendChild(listItem);
 
                 const circle = productsContainer.querySelector(`[data-product-id="${product.id}"]`);
