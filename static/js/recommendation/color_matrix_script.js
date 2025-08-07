@@ -1,3 +1,14 @@
+// warmCool, lightDeep 값을 얻기 위한 함수
+const getCoords = (hex) => {
+  const rgb = hexToRgb(hex);
+  if (!rgb) return null;
+
+  const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
+  if (!hsl) return null;
+
+  return calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const matrixContainer = document.querySelector('.color-matrix-container');
     const productsContainer = document.getElementById('makeup-products-container');
@@ -42,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
+    /*
+    // 우선은 기존의 임시 데이터 형식 남겨두겠습니다 -
     const makeupProducts = [ //쥬시래스팅 제품 데이터 임시로 찾아서 넣음
         { id: 'jr01', name: '쥬시래스팅 틴트 #01 쥬시오', color: '#FF8000', warmCool: 90, lightDeep: 45, mood: '맑은 오렌지 (봄웜 브라이트)' },
     { id: 'jr02', name: '쥬시래스팅 틴트 #02 루비 레드', color: '#E0115F', warmCool: 60, lightDeep: 50, mood: '맑은 레드 (봄웜/겨울쿨)' },
@@ -86,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'jr41', name: '쥬시래스팅 틴트 #41 멜로우 듀', color: '#F0E68C', warmCool: 70, lightDeep: 5, mood: '투명한 베이지 (뉴트럴/봄웜 라이트)' },
     { id: 'jr42', name: '쥬시래스팅 틴트 #42 펀치 키스', color: '#FF7F50', warmCool: 80, lightDeep: 40, mood: '생기 코랄 오렌지 (봄웜)' },
     ];
+    */
 
     // 무드 구역 렌더링
     const renderMoodZones = () => {
@@ -153,13 +167,16 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 먼저 무드 구역 렌더링
         renderMoodZones();
-        
+
         makeupProducts.forEach(product => {
+            const coords = getCoords(product.hex);
+            if (!coords) return false;
+
             const productCircle = document.createElement('a');
             productCircle.classList.add('product-circle');
-            productCircle.style.backgroundColor = product.color;
-            productCircle.style.left = `${product.warmCool}%`;
-            productCircle.style.top = `${product.lightDeep}%`;
+            productCircle.style.backgroundColor = product.hex;
+            productCircle.style.left = `${coords.warmCool}%`;
+            productCircle.style.top = `${coords.lightDeep}%`;
             productCircle.dataset.productId = product.id;
             productCircle.title = `${product.name} (${product.mood})`;
 
@@ -183,8 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoneBottom = zoneTop + zone.area.height;
         
         return makeupProducts.filter(product => {
-            return product.warmCool >= zoneLeft && product.warmCool <= zoneRight &&
-                   product.lightDeep >= zoneTop && product.lightDeep <= zoneBottom;
+            const coords = getCoords(product.hex);
+            if (!coords) return false;
+
+            return coords.warmCool >= zoneLeft && coords.warmCool <= zoneRight &&
+                   coords.lightDeep >= zoneTop && coords.lightDeep <= zoneBottom;
         });
     };
 
@@ -213,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredProducts.forEach(product => {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
-                    <div class="product-color-swatch" style="background-color: ${product.color};"></div>
+                    <div class="product-color-swatch" style="background-color: ${product.hex};"></div>
                     <span>${product.name}</span>
                     <span class="product-mood">${product.mood}</span>
                 `;

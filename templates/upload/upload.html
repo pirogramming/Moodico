@@ -464,6 +464,7 @@
               />
             </label>
           </form>
+          <div id="search-product-image-area"></div>
         </div>
 
         <div id="image-preview-area" class="image-preview-area">
@@ -629,8 +630,8 @@
   </div>
 </div>
 {% endblock %} {% block extra_js %}
-<script src="{% static 'js/upload.js' %}"></script>
-<script src="{% static 'js/color_analyzer.js' %}"></script>
+<script src="{% static 'js/upload/upload.js' %}"></script>
+<script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script>
   // 검색 로직 & search-results-box 관련 부분
   const inputSearch = document.getElementById("product-search-input");
@@ -654,7 +655,7 @@
 
           // Send to backend
           const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
-          fetch("/recommend_by_color/", {
+          fetch("/recommend/recommend_by_color/", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -690,7 +691,7 @@
       return;
     }
 
-    fetch(`/search_product/?q=${encodeURIComponent(query)}`)
+    fetch(`/products/search_product/?q=${encodeURIComponent(query)}`)
       .then((response) => response.json())
       .then((data) => {
         resultsBox.innerHTML = ""; // 기존 결과 삭제
@@ -705,6 +706,27 @@
               resultsBox.style.display = "none";
               selectedProduct = item;
               analyzeSelectedProduct(item);
+
+              // 선택한 제품의 이미지를 추가
+              const searchImageInput = document.getElementById("uploaded-image");
+              const canvas = document.getElementById("image-canvas");
+
+              if (searchImageInput && canvas) {
+                // 기존 입력 초기화
+                searchImageInput.src = "";
+                //searchImageInput.style.display = "none";
+                // 기존 캔버스 초기화
+                const context = canvas.getContext('2d');
+                context.clearRect(0, 0, canvas.width, canvas.height);
+
+                const proxyUrl = `/upload/proxy_image/?url=${encodeURIComponent(item.image)}`;
+                drawImageToCanvas(proxyUrl);
+
+                const selectedColorSwatch = document.getElementById('selected-color-swatch');
+                const hexCodeDisplay = document.getElementById('hex-code-display');
+                selectedColorSwatch.style.backgroundColor = item.hex;
+                hexCodeDisplay.textContent = item.hex;
+              }
             });
             ul.appendChild(li);
           });
