@@ -37,7 +37,7 @@
           >
             찜 해제
           </button>
-          <button class="purchase-btn">구매하기</button>
+          <a href="{{ liked_product.product_url }}" class="purchase-btn" target="_blank">구매하기</a>
         </div>
       </div>
     </div>
@@ -125,6 +125,45 @@
     }
     return cookieValue;
   }
+
+  function showLikeMessage(message) {
+        // 기존 메시지 제거
+        const existingMessage = document.querySelector('.like-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+        
+        // 새 메시지 생성
+        const messageElement = document.createElement('div');
+        messageElement.className = 'like-message';
+        messageElement.textContent = message;
+        messageElement.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: mediumpurple;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        `;
+        
+        document.body.appendChild(messageElement);
+        
+        // 3초 후 자동 제거
+        setTimeout(() => {
+            messageElement.style.animation = 'slideOut 0.3s ease-in';
+            setTimeout(() => {
+                if (messageElement.parentNode) {
+                    messageElement.remove();
+                }
+            }, 300);
+        }, 3000);
+    }
 </script>
 
 <style>

@@ -1869,6 +1869,7 @@ a.model-card {
 
   .browse-btn:hover {
     transform: translateY(-2px);
+    text-decoration: none;
   }
 
   .like-date {

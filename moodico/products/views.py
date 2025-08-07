@@ -77,7 +77,6 @@ def toggle_product_like(request):
         product_brand = data.get('product_brand')
         product_price = data.get('product_price')
         product_image = data.get('product_image', '')
-        product_url = data.get('product_url', '')
         
         if not all([product_id, product_name, product_brand, product_price]):
             return JsonResponse({
@@ -117,8 +116,7 @@ def toggle_product_like(request):
                 product_name=product_name,
                 product_brand=product_brand,
                 product_price=product_price,
-                product_image=product_image,
-                product_url=product_url
+                product_image=product_image
             )
             is_liked = True
             message = '좋아요에 추가되었습니다! 💖'
