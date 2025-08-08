@@ -18,7 +18,7 @@ TARGETS = [
 ]
 
 SCROLL_COUNT = 4
-SAVE_PATH = 'static/data/all_products.json'
+SAVE_PATH = 'static/data/test_products.json'
 
 # Selenium Chrome Driver 설정
 options = webdriver.ChromeOptions()
@@ -75,22 +75,6 @@ def extract_3ce_items():
             print("3CE Error:", e)
             continue
     return results
-
-# def extract_average_color(img_url):
-#     try:
-#         response = requests.get(img_url, timeout=5)
-#         img = Image.open(BytesIO(response.content)).convert('RGB')
-#         img = img.resize((50, 50))
-#         avg_rgb = np.array(img).mean(axis=(0, 1))
-#         r, g, b = map(int, avg_rgb)
-#         hex_code = '#{:02x}{:02x}{:02x}'.format(r, g, b)
-#         rgb_norm = np.array([[avg_rgb]]) / 255.0
-#         lab = color.rgb2lab(rgb_norm)[0][0]
-#         lab_l, lab_a, lab_b = lab.round(2)
-#         return hex_code, lab_l, lab_a, lab_b
-#     except Exception as e:
-#         print(f"[Color Error] {img_url} - {e}")
-#         return "#000000", 0, 0, 0
 
 # 밝은 배경 제거
 def extract_average_color(img_url):
@@ -154,8 +138,13 @@ for target in TARGETS:
 
 # 결과 저장
 os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
-with open(SAVE_PATH, 'w', encoding='utf-8') as f:
-    json.dump(all_products, f, ensure_ascii=False, indent=2)
+# with open(SAVE_PATH, 'w', encoding='utf-8') as f:
+#     json.dump(all_products, f, ensure_ascii=False, indent=2)
 
 driver.quit()
 print(f"\nSaved {len(all_products)} products to {SAVE_PATH}")
+
+test_products = all_products[:5] + all_products[-5:]
+with open(SAVE_PATH,'w',encoding='utf-8') as f:
+    json.dump(test_products,f,ensure_ascii=False,indent=2)
+print("테스트용 JSON 생성 완료")

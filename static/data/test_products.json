@@ -11,10 +11,7 @@
     "hex": "#af7d74",
     "lab_l": 57.21,
     "lab_a": 18.27,
-    "lab_b": 12.55,
-    "warmCool": 57.62,
-    "lightDeep": 42.94,
-    "cluster": 2
+    "lab_b": 12.55
   },
   {
     "id": "0ae569fb-f85a-47c1-a405-e4b6c1731428",
@@ -28,10 +25,7 @@
     "hex": "#e29290",
     "lab_l": 68.63,
     "lab_a": 30.21,
-    "lab_b": 13.33,
-    "warmCool": 61.39,
-    "lightDeep": 27.45,
-    "cluster": 0
+    "lab_b": 13.33
   },
   {
     "id": "85e93e2c-f338-4959-9b75-d4f58eafcbf4",
@@ -45,10 +39,7 @@
     "hex": "#eaadbc",
     "lab_l": 76.76,
     "lab_a": 24.75,
-    "lab_b": 1.09,
-    "warmCool": 55.57,
-    "lightDeep": 20.2,
-    "cluster": 0
+    "lab_b": 1.09
   },
   {
     "id": "2ff5270a-e560-4d36-88e9-055c0acb365c",
@@ -62,10 +53,7 @@
     "hex": "#e9a59d",
     "lab_l": 74.1,
     "lab_a": 23.94,
-    "lab_b": 14.01,
-    "warmCool": 64.0,
-    "lightDeep": 23.53,
-    "cluster": 0
+    "lab_b": 14.01
   },
   {
     "id": "58ae2951-93e6-4087-8e56-5f1112458b65",
@@ -79,10 +67,7 @@
     "hex": "#e4858b",
     "lab_l": 66.01,
     "lab_a": 37.02,
-    "lab_b": 12.83,
-    "warmCool": 60.16,
-    "lightDeep": 29.22,
-    "cluster": 0
+    "lab_b": 12.83
   },
   {
     "id": "93ae3404-a2ce-4fa4-9f63-d57f8befa8d9",
@@ -96,10 +81,7 @@
     "hex": "#594a49",
     "lab_l": 33.3,
     "lab_a": 6.03,
-    "lab_b": 3.23,
-    "warmCool": 52.94,
-    "lightDeep": 68.24,
-    "cluster": 3
+    "lab_b": 3.23
   },
   {
     "id": "af4e47e8-c3f2-42d4-9651-a8227a6e3d3d",
@@ -113,10 +95,7 @@
     "hex": "#4f4745",
     "lab_l": 30.95,
     "lab_a": 3.27,
-    "lab_b": 1.94,
-    "warmCool": 52.7,
-    "lightDeep": 70.98,
-    "cluster": 3
+    "lab_b": 1.94
   },
   {
     "id": "e7c26966-0bc3-40ae-9d01-21883b7c6403",
@@ -130,10 +109,7 @@
     "hex": "#775659",
     "lab_l": 40.12,
     "lab_a": 14.17,
-    "lab_b": 3.68,
-    "warmCool": 53.16,
-    "lightDeep": 59.8,
-    "cluster": 1
+    "lab_b": 3.68
   },
   {
     "id": "2fa34628-8aec-40aa-a9ca-9c6ddf3dd194",
@@ -147,10 +123,7 @@
     "hex": "#4e403f",
     "lab_l": 28.57,
     "lab_a": 5.9,
-    "lab_b": 2.91,
-    "warmCool": 53.15,
-    "lightDeep": 72.35,
-    "cluster": 3
+    "lab_b": 2.91
   },
   {
     "id": "6190b98a-6ff4-496c-90d6-44e1108451a1",
@@ -164,9 +137,6 @@
     "hex": "#685255",
     "lab_l": 37.3,
     "lab_a": 10.05,
-    "lab_b": 1.62,
-    "warmCool": 52.2,
-    "lightDeep": 63.53,
-    "cluster": 1
+    "lab_b": 1.62
   }
 ]

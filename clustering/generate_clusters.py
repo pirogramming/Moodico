@@ -58,7 +58,7 @@ def calculate_coordinates(h, s, l):
     return round(final_warm, 2), round(final_deep, 2)
 
 # 데이터 로드
-with open("static/data/all_products.json", "r", encoding="utf-8") as f:
+with open("static/data/test_products.json", "r", encoding="utf-8") as f:
     products = json.load(f)
 
 coordinates = []
@@ -106,7 +106,8 @@ with open("static/data/cluster_centers.json", "w", encoding="utf-8") as f:
 print(" Clustering complete. Files saved.")
 
 # 실루엣 점수 계산
-for k in range(2, 11):
+max_k = min(len(coords_np) - 1, 10)  # Prevents ValueError when sample count is low
+for k in range(2, max_k+1):
     model = KMeans(n_clusters=k, random_state=42, n_init='auto')
     labels = model.fit_predict(coords_np)
     score = silhouette_score(coords_np, labels)
