@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f+2cp%8dmctmuc-8#8@t)7zkd!=#smii5e+tv&eb-0g$970fkd'
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 
@@ -163,10 +164,14 @@ AWS_DEFAULT_ACL = None
 KAKAO_REDIRECT_URI = "http://localhost:8000/users/kakao/callback/"
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
 KAKAO_API_HOST = "https://kapi.kakao.com"
-from decouple import config
 KAKAO_CLIENT_ID = config("KAKAO_CLIENT_ID")
 KAKAO_CLIENT_SECRET = config("KAKAO_CLIENT_SECRET")
 
 # 로그인 로그아웃 후 리다이렉트 URL 설정
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+# secure settings
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
