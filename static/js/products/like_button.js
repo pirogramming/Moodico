@@ -15,8 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     product_name: getProductName(productCard),
                     product_brand: getProductBrand(productCard),
                     product_price: getProductPrice(productCard),
-                    product_image: getProductImage(productCard),
-                    product_url: getProductUrl(productCard),
+                    product_image: getProductImage(productCard)
                 };
                 
                 // AJAX로 좋아요 토글 요청
