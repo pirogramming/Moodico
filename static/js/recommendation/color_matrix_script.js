@@ -162,13 +162,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    const renderProducts = () => {
+    const renderProducts = (category = '') => {
         productsContainer.innerHTML = ''; 
         
         // 먼저 무드 구역 렌더링
         renderMoodZones();
 
-        makeupProducts.forEach(product => {
+        // 필터링할 제품 목록
+        const productsToRender = category ? makeupProducts.filter(p => p.category === category) : makeupProducts;
+
+        productsToRender.forEach(product => {
             const coords = getCoords(product.hex);
             if (!coords) return false;
 
@@ -210,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateSelectedProducts = () => {
         selectedProductsList.innerHTML = ''; 
+        const selectedCategory = categoryDropdown.value;
         const containerRect = matrixContainer.getBoundingClientRect();
         const moodAreaRect = moodSelectionArea.getBoundingClientRect();
         const relativeLeft = moodAreaRect.left - containerRect.left;
@@ -218,6 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const relativeBottom = relativeTop + moodAreaRect.height;
 
         const filteredProducts = makeupProducts.filter(product => {
+            const isCategoryMatch = !selectedCategory || product.category === selectedCategory;
+
+            if (!isCategoryMatch) {
+                return false;
+            }
+            
             const productCircleElement = productsContainer.querySelector(`[data-product-id="${product.id}"]`);
             if (!productCircleElement) return false; 
             const productCircleRect = productCircleElement.getBoundingClientRect();
@@ -235,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 listItem.innerHTML = `
                     <div class="product-color-swatch" style="background-color: ${product.hex};"></div>
                     <span>${product.name}</span>
-                    <span class="product-mood">${product.category}</span>
+                    <span class="product-category">${product.category}</span>
                 `;
 
                 listItem.addEventListener('click', () => {
@@ -405,6 +415,14 @@ document.addEventListener('DOMContentLoaded', () => {
             moodSelectionArea.style.display = 'block';
             updateSelectedProducts();
         }
+    });
+
+    categoryDropdown.addEventListener('change', (e) => {
+        //드롭다운에서 선택된 카테고리 값을 가져와서
+        const selectedCategory = e.target.value;
+        //제품을 다시 렌더링
+        renderProducts(selectedCategory);
+        updateSelectedProducts();
     });
 
     // 전역 변수로 노출 (다른 스크립트에서 사용 가능)

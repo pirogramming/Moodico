@@ -312,15 +312,18 @@ main {
 .selected-products-display li span {
     font-weight: 500;
     color: #555;
-    flex-grow: 1;
-}
 
-.selected-products-display li .product-mood {
+}
+.selected-products-display li span:first-of-type {
+    flex-grow: 1; 
+}
+.selected-products-display li .product-category {
     font-size: 0.85em;
     color: #888;
     background-color: #eee;
     padding: 3px 8px;
     border-radius: 5px;
+    text-align: right;
 }
 
 .hidden {
