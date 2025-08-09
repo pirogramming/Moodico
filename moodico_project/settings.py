@@ -28,10 +28,15 @@ else:  # production or local dev
     SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', cast=Csv())
+
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+CSRF_TRUSTED_ORIGINS = config(
+    'DJANGO_CSRF_TRUSTED_ORIGINS',
+    default='http://localhost:8000,http://127.0.0.1:8000',
+    cast=Csv()
+)
 
 # Application definition
 
@@ -85,13 +90,18 @@ WSGI_APPLICATION = 'moodico_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if config('DATABASE_URL', default=''):
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.parse(config('DATABASE_URL'), conn_max_age=600, ssl_require=True)
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -145,26 +155,39 @@ MEDIA_URL = '/media/'  # NCP에 저장될 예정 -> 사용되지 않음
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용되지 않음
 
 
-
 ###############
 # NCP Object Storage setting(S3)
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+USE_S3 = config('USE_S3', cast=bool, default=False)
 
+if USE_S3:
+    # Django 5+ preferred style:
+    STORAGES = {
+        "default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"},
+        # keep static locally unless you want static on S3; if yes, swap BACKEND below
+        "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
+    }
 
-AWS_STORAGE_BUCKET_NAME = ''# 추후 버킷 명 기입
-AWS_S3_ENDPOINT_URL = 'https://kr.object.ncloudstorage.com'
-AWS_S3_REGION_NAME = 'kr-standard' # 추후 정확한 region명 확인 후 기입 필요 
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL', default='https://kr.object.ncloudstorage.com')
+    AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='kr-standard')
+    AWS_ACCESS_KEY_ID = config('NCP_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('NCP_SECRET_ACCESS_KEY')
 
-AWS_ACCESS_KEY_ID = os.environ.get('NCP_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.environ.get('NCP_SECRET_ACCESS_KEY', '')
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
+    AWS_DEFAULT_ACL = None
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH = False  # make public URLs clean
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=31536000"}
+else:
+    # Local filesystem in dev
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
+    }
 
 
 # 카카오 로그인 설정
-KAKAO_REDIRECT_URI = "http://localhost:8000/users/kakao/callback/"
+KAKAO_REDIRECT_URI = config("KAKAO_REDIRECT_URI", default="http://localhost:8000/users/kakao/callback/")
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
 KAKAO_API_HOST = "https://kapi.kakao.com"
 KAKAO_CLIENT_ID = config("KAKAO_CLIENT_ID")
@@ -174,3 +197,13 @@ KAKAO_CLIENT_SECRET = config("KAKAO_CLIENT_SECRET")
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
 
+# security toggles for production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', cast=bool, default=True)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', cast=int, default=31536000)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
