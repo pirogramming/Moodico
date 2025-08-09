@@ -16,28 +16,73 @@
 
     <div class="category-selector">
       <select id="category-dropdown" class="category-dropdown">
-        <option value="">카테고리를 선택하세요</option>
+        <option value="">✨모두 보기</option>
         <option value="Lips">💋립</option>
         <option value="eyeshadow">👀아이섀도우</option>
         <option value="blush">🌸블러셔</option>
       </select>
     </div>
   </div>
+
+
   <section class="color-matrix-container">
-    <div class="quadrant-grid">
-      <div class="quadrant top-left"></div>
-      <div class="quadrant top-right"></div>
-      <div class="quadrant bottom-left"></div>
-      <div class="quadrant bottom-right"></div>
+    <div class="matrix-cube show-all">
+      <div id="face-all" class="cube-face face-all">
+        <div class="quadrant-grid">
+          <div class="quadrant top-left"></div>
+          <div class="quadrant top-right"></div>
+          <div class="quadrant bottom-left"></div>
+          <div class="quadrant bottom-right"></div>
+        </div>
+        <div class="axis-label top-label">Light</div>
+        <div class="axis-label bottom-label">Deep</div>
+        <div class="axis-label left-label">Cool</div>
+        <div class="axis-label right-label">Warm</div>
+        <div id="makeup-products-container-all" class="makeup-products-container"></div>
+      </div>
+
+      <div id="face-lips" class="cube-face face-lips">
+        <div class="quadrant-grid">
+          <div class="quadrant top-left"></div>
+          <div class="quadrant top-right"></div>
+          <div class="quadrant bottom-left"></div>
+          <div class="quadrant bottom-right"></div>
+        </div>
+        <div class="axis-label top-label">Light</div>
+        <div class="axis-label bottom-label">Deep</div>
+        <div class="axis-label left-label">Cool</div>
+        <div class="axis-label right-label">Warm</div>
+        <div id="makeup-products-container-lips" class="makeup-products-container"></div>
+      </div>
+
+      <div id="face-eyeshadow" class="cube-face face-eyeshadow">
+        <div class="quadrant-grid">
+          <div class="quadrant top-left"></div>
+          <div class="quadrant top-right"></div>
+          <div class="quadrant bottom-left"></div>
+          <div class="quadrant bottom-right"></div>
+        </div>
+        <div class="axis-label top-label">Light</div>
+        <div class="axis-label bottom-label">Deep</div>
+        <div class="axis-label left-label">Cool</div>
+        <div class="axis-label right-label">Warm</div>
+        <div id="makeup-products-container-eyeshadow" class="makeup-products-container"></div>
+      </div>
+
+      <div id="face-blush" class="cube-face face-blush">
+        <div class="quadrant-grid">
+          <div class="quadrant top-left"></div>
+          <div class="quadrant top-right"></div>
+          <div class="quadrant bottom-left"></div>
+          <div class="quadrant bottom-right"></div>
+        </div>
+        <div class="axis-label top-label">Light</div>
+        <div class="axis-label bottom-label">Deep</div>
+        <div class="axis-label left-label">Cool</div>
+        <div class="axis-label right-label">Warm</div>
+        <div id="makeup-products-container-blush" class="makeup-products-container"></div>
+      </div>
     </div>
-
-    <div class="axis-label top-label">Light</div>
-    <div class="axis-label bottom-label">Deep</div>
-    <div class="axis-label left-label">Cool</div>
-    <div class="axis-label right-label">Warm</div>
-
-    <div id="makeup-products-container" class="makeup-products-container"></div>
-
     <div id="mood-selection-area" class="mood-selection-area">
       <span class="mood-label">선택 무드 영역</span>
       <div class="resizer top-left-resizer"></div>
