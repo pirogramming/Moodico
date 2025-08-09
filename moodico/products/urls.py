@@ -11,4 +11,8 @@ urlpatterns = [
     path('liked_products/', views.liked_products_page, name='liked_products'),
     path('toggle_product_like/', views.toggle_product_like, name='toggle_product_like'),
     path('get_user_likes/', views.get_user_likes, name='get_user_likes'),
+    path('like_count/', views.get_product_like_count, name='get_product_like_count'),
+    path('multiple_like_info/', views.get_multiple_products_like_info, name='get_multiple_products_like_info'),
+    path('ranking/', views.product_ranking_page, name='product_ranking'),
+    path('ranking/api/', views.product_ranking_api, name='product_ranking_api'),
 ]

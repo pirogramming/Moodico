@@ -13,9 +13,10 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 TARGETS = [
-    {"brand": "romand", "url": "https://romand.co.kr/product/maincatedetail.html?cate_code=289", "category": "lips"},
-    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/lips", "category": "lips"},
-    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/cheeks/blush", "category": "blush"}
+    {"brand": "romand", "url": "https://romand.co.kr/product/maincatedetail.html?cate_code=289", "category": "Lips"},
+    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/lips", "category": "Lips"},
+    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/cheeks/blush", "category": "blush"},
+    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow", "category": "eyeshadow"}
 ]
 
 SCROLL_COUNT = 4

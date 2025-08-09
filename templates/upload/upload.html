@@ -549,9 +549,10 @@
       {% if search_results %} {% for product in search_results %}
       <div
         class="product-card"
-        data-product-id="{{ product.id|default:forloop.counter }}"
+        data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-search{{ forloop.counter }}"
       >
         <button class="like-button" title="좋아요"></button>
+        <span class="like-count">0</span>
         <img src="{{ product.image }}" alt="{{ product.name }}" />
         <div class="product-info">
           <div class="brand">
@@ -563,8 +564,12 @@
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
       {% endfor %} {% else %}
-      <div class="product-card" data-product-id="peripera-glow">
+      <div
+        class="product-card"
+        data-product-id="peripera-glow-check-blusher-18000"
+      >
         <button class="like-button" title="좋아요"></button>
+        <span class="like-count">0</span>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="페리페라 글로우 체크 블러셔"
@@ -576,8 +581,12 @@
         </div>
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
-      <div class="product-card" data-product-id="etude-coating">
+      <div
+        class="product-card"
+        data-product-id="etude-house-coating-tint-lip-12000"
+      >
         <button class="like-button" title="좋아요"></button>
+        <span class="like-count">0</span>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="에뛰드하우스 코팅 틴트 립"
@@ -589,7 +598,12 @@
         </div>
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
-      <div class="product-card">
+      <div
+        class="product-card"
+        data-product-id="innisfree-natural-eyeshadow-22000"
+      >
+        <button class="like-button" title="좋아요"></button>
+        <span class="like-count">0</span>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="이니스프리 내추럴 아이쉐도우"
@@ -601,7 +615,9 @@
         </div>
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
-      <div class="product-card">
+      <div class="product-card" data-product-id="clio-earth-on-eyeshadow-32000">
+        <button class="like-button" title="좋아요"></button>
+        <span class="like-count">0</span>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="클리오 어스 온 아이쉐도우"
@@ -613,7 +629,12 @@
         </div>
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
-      <div class="product-card">
+      <div
+        class="product-card"
+        data-product-id="romand-beige-matte-lipstick-15000"
+      >
+        <button class="like-button" title="좋아요"></button>
+        <span class="like-count">0</span>
         <img
           src="{% static 'images/test.jpg' %}"
           alt="롬앤 베이지 매트 립스틱"
@@ -708,7 +729,8 @@
               analyzeSelectedProduct(item);
 
               // 선택한 제품의 이미지를 추가
-              const searchImageInput = document.getElementById("uploaded-image");
+              const searchImageInput =
+                document.getElementById("uploaded-image");
               const canvas = document.getElementById("image-canvas");
 
               if (searchImageInput && canvas) {
@@ -716,14 +738,19 @@
                 searchImageInput.src = "";
                 //searchImageInput.style.display = "none";
                 // 기존 캔버스 초기화
-                const context = canvas.getContext('2d');
+                const context = canvas.getContext("2d");
                 context.clearRect(0, 0, canvas.width, canvas.height);
 
-                const proxyUrl = `/upload/proxy_image/?url=${encodeURIComponent(item.image)}`;
+                const proxyUrl = `/upload/proxy_image/?url=${encodeURIComponent(
+                  item.image
+                )}`;
                 drawImageToCanvas(proxyUrl);
 
-                const selectedColorSwatch = document.getElementById('selected-color-swatch');
-                const hexCodeDisplay = document.getElementById('hex-code-display');
+                const selectedColorSwatch = document.getElementById(
+                  "selected-color-swatch"
+                );
+                const hexCodeDisplay =
+                  document.getElementById("hex-code-display");
                 selectedColorSwatch.style.backgroundColor = item.hex;
                 hexCodeDisplay.textContent = item.hex;
               }
