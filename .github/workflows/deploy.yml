@@ -1,6 +1,7 @@
 name: Django CI/CD
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main"]
   pull_request:
@@ -41,21 +42,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Write SSH key (decode base64 secret)
+      - name: Write SSH key (decode base64 secret) into workspace
         run: |
-          mkdir -p ~/.ssh
-          # decode robustly and create a proper key file
-          printf '%s' "${{ secrets.KEY }}" | base64 --decode --ignore-garbage > ~/.ssh/gha_key
-          chmod 600 ~/.ssh/gha_key
-          # sanity check: should print BEGIN line
-          head -n1 ~/.ssh/gha_key
+          set -e
+          printf '%s' "${{ secrets.KEY }}" | base64 --decode --ignore-garbage > "${GITHUB_WORKSPACE}/gha_key"
+          chmod 600 "${GITHUB_WORKSPACE}/gha_key"
+          head -n1 "${GITHUB_WORKSPACE}/gha_key"   # should print BEGIN line
 
       - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ubuntu
-          key_path: ~/.ssh/gha_key
+          key_path: ${{ github.workspace }}/gha_key   # 🔑 use workspace path
           script: |
             set -e
             cd /home/ubuntu/Moodico
