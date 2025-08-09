@@ -33,18 +33,27 @@ jobs:
       - name: Run tests
         run: |
           python manage.py test
-
+          
   deploy:
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     steps:
+      - uses: actions/checkout@v4
+      # 1) Decode base64 secret into a real private key file
+      - name: Write SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KEY }}" | base64 -d > ~/.ssh/gha_key
+          chmod 600 ~/.ssh/gha_key
+
+      # 2) Deploy over SSH (use key_path, not key)
       - name: Deploy to server
-        uses: appleboy/ssh-action@v0.1.10
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          key_path: ~/.ssh/gha_key
           script: |
             set -e
             cd /home/ubuntu/Moodico
@@ -56,3 +65,6 @@ jobs:
             python manage.py migrate --noinput
             python manage.py collectstatic --noinput
             sudo systemctl restart nginx
+
+
+
