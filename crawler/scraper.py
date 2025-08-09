@@ -11,6 +11,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+import os
+from django.conf import settings
 
 TARGETS = [
     {"brand": "romand", "url": "https://romand.co.kr/product/maincatedetail.html?cate_code=289"},
@@ -18,7 +20,9 @@ TARGETS = [
 ]
 
 SCROLL_COUNT = 4
-SAVE_PATH = 'static/data/test_products.json'
+# SAVE_PATH = 'static/data/test_products.json'
+SAVE_PATH = os.path.join(settings.MEDIA_ROOT, 'data', 'test_products.json')
+os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
 
 # Selenium Chrome Driver 설정
 options = webdriver.ChromeOptions()

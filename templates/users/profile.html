@@ -101,8 +101,11 @@
         {% for liked_product in liked_products %}
         <div class="liked-product-card" data-product-id="{{ liked_product.product_id }}">
             <button class="like-button liked" title="좋아요 취소"></button>
-            <img src="{{ liked_product.product_image|default:'/static/images/test.jpg' }}"
-                alt="{{ liked_product.product_name }}" onerror="this.src='/static/images/test.jpg'" />
+            {% comment %} <img src="{{ liked_product.product_image|default:'/static/images/test.jpg' }}"
+                alt="{{ liked_product.product_name }}" onerror="this.src='/static/images/test.jpg'" /> {% endcomment %}
+            <img src="{{ liked_product.product_image|default:static('images/test.jpg') }}"
+                alt="{{ liked_product.product_name }}"
+                onerror="this.src='{% static 'images/test.jpg' %}'" />
             <div class="product-info">
                 <div class="like-date">
                     찜한 날짜: {{ liked_product.created_at|date:"Y년 m월 d일" }}

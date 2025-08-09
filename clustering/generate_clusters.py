@@ -57,8 +57,11 @@ def calculate_coordinates(h, s, l):
 
     return round(final_warm, 2), round(final_deep, 2)
 
+from django.conf import settings
+import os, json
 # 데이터 로드
-with open("static/data/test_products.json", "r", encoding="utf-8") as f:
+file_path = os.path.join(settings.STATIC_ROOT, "data", "test_products.json")
+with open(file_path, "r", encoding="utf-8") as f:
     products = json.load(f)
 
 coordinates = []
@@ -96,11 +99,25 @@ for i, label in enumerate(labels):
     valid_products[i]["cluster"] = int(label)
 
 # 클러스터링 결과를 JSON 파일로 저장
-with open("static/data/products_clustered.json", "w", encoding="utf-8") as f:
+# with open("static/data/products_clustered.json", "w", encoding="utf-8") as f:
+#     json.dump(valid_products, f, ensure_ascii=False, indent=2)
+
+# Create a data directory in MEDIA_ROOT
+data_dir = os.path.join(settings.MEDIA_ROOT, "data")
+os.makedirs(data_dir, exist_ok=True)
+file_path = os.path.join(data_dir, "products_clustered.json")
+with open(file_path, "w", encoding="utf-8") as f:
     json.dump(valid_products, f, ensure_ascii=False, indent=2)
 
 # 클러스터 중심 좌표 저장
-with open("static/data/cluster_centers.json", "w", encoding="utf-8") as f:
+# with open("static/data/cluster_centers.json", "w", encoding="utf-8") as f:
+#     json.dump(kmeans.cluster_centers_.tolist(), f, ensure_ascii=False, indent=2)
+data_dir = os.path.join(settings.MEDIA_ROOT, "data")
+os.makedirs(data_dir, exist_ok=True)
+
+file_path = os.path.join(data_dir, "cluster_centers.json")
+
+with open(file_path, "w", encoding="utf-8") as f:
     json.dump(kmeans.cluster_centers_.tolist(), f, ensure_ascii=False, indent=2)
 
 print(" Clustering complete. Files saved.")

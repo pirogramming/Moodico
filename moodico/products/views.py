@@ -23,6 +23,7 @@ def color_matrix_explore(request):
 
     return render(request, 'recommendation/color_matrix.html', {'makeupProducts': products})
 
+from django.templatetags.static import static
 def product_detail(request, product_id):
     """제품 상세 페이지 뷰"""
     # 제품 상세 정보 (백엔드에서 받아올 예정)
@@ -31,7 +32,7 @@ def product_detail(request, product_id):
         'name': f'제품 {product_id}',
         'description': '이 제품은 아주 좋은 제품입니다.',
         'price': '30,000원',
-        'image': '/static/images/test.jpg', # 임시 이미지
+        'image': static('images/test.jpg')
     }
     return render(request, 'products/detail.html', {'product': product})
 

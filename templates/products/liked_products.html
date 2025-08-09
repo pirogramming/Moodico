@@ -18,10 +18,15 @@
       data-product-id="{{ liked_product.product_id }}"
     >
       <button class="like-button liked" title="좋아요 취소"></button>
-      <img
+      {% comment %} <img
         src="{{ liked_product.product_image|default:'/static/images/test.jpg' }}"
         alt="{{ liked_product.product_name }}"
         onerror="this.src='/static/images/test.jpg'"
+      /> {% endcomment %}
+      <img
+        src="{{ liked_product.product_image.url|default:static('images/test.jpg') }}"
+        alt="{{ liked_product.product_name }}"
+        onerror="this.src='{% static 'images/test.jpg' %}'"
       />
       <div class="product-info">
         <div class="like-date">
