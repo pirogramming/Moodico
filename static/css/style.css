@@ -1087,12 +1087,7 @@ a.model-card {
 }
 
 /* color_matrix.html */
-.color-matrix-container {
-    padding: 50px 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    text-align: center;
-}
+
 
 .color-matrix-container h1 {
     font-size: 2.2em;

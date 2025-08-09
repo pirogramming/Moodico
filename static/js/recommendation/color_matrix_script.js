@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const noProductsMessage = document.getElementById('no-products-message');
     const moodDropdown = document.getElementById('mood-dropdown');
     const categoryDropdown = document.getElementById('category-dropdown');
+    const matrixCube = document.querySelector('.matrix-cube');
+    const productsContainerAll = document.getElementById('makeup-products-container-all');
+    const productsContainerLips = document.getElementById('makeup-products-container-lips');
+    const productsContainerEyeshadow = document.getElementById('makeup-products-container-eyeshadow');
+    const productsContainerBlush = document.getElementById('makeup-products-container-blush');
     // 무드별 구역 정의
     const moodZones = {
         '러블리': {
@@ -101,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     */
 
+    /*
     // 무드 구역 렌더링
     const renderMoodZones = () => {
         // 기존 무드 구역 제거
@@ -161,16 +167,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     };
-
+    */
     const renderProducts = (category = '') => {
-        productsContainer.innerHTML = ''; 
+        productsContainerAll.innerHTML = '';
+        productsContainerLips.innerHTML = '';
+        productsContainerEyeshadow.innerHTML = '';
+        productsContainerBlush.innerHTML = '';
         
-        // 먼저 무드 구역 렌더링
-        renderMoodZones();
-
         // 필터링할 제품 목록
         const productsToRender = category ? makeupProducts.filter(p => p.category === category) : makeupProducts;
+        const targetContainer = category === 'Lips' ? productsContainerLips
+                              : category === 'eyeshadow' ? productsContainerEyeshadow
+                              : category === 'blush' ? productsContainerBlush
+                              : productsContainerAll;
 
+        
         productsToRender.forEach(product => {
             const coords = getCoords(product.hex);
             if (!coords) return false;
@@ -188,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             productCircle.style.transform = 'translate(-50%, -50%)';
 
-            productsContainer.appendChild(productCircle);
+            targetContainer.appendChild(productCircle);
         });
     };
 
@@ -214,6 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateSelectedProducts = () => {
         selectedProductsList.innerHTML = ''; 
         const selectedCategory = categoryDropdown.value;
+        const currentProductsContainer = selectedCategory === 'Lips' ? productsContainerLips
+                                   : selectedCategory === 'eyeshadow' ? productsContainerEyeshadow
+                                   : selectedCategory === 'blush' ? productsContainerBlush
+                                   : productsContainerAll;
+        const filteredProducts = [];
         const containerRect = matrixContainer.getBoundingClientRect();
         const moodAreaRect = moodSelectionArea.getBoundingClientRect();
         const relativeLeft = moodAreaRect.left - containerRect.left;
@@ -221,21 +237,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const relativeRight = relativeLeft + moodAreaRect.width;
         const relativeBottom = relativeTop + moodAreaRect.height;
 
-        const filteredProducts = makeupProducts.filter(product => {
-            const isCategoryMatch = !selectedCategory || product.category === selectedCategory;
-
-            if (!isCategoryMatch) {
-                return false;
-            }
-            
-            const productCircleElement = productsContainer.querySelector(`[data-product-id="${product.id}"]`);
-            if (!productCircleElement) return false; 
-            const productCircleRect = productCircleElement.getBoundingClientRect();
+        const productCircles = currentProductsContainer.querySelectorAll('.product-circle');
+        productCircles.forEach(circle => {
+            const productCircleRect = circle.getBoundingClientRect();
             const productCenterX = (productCircleRect.left + productCircleRect.right) / 2 - containerRect.left;
             const productCenterY = (productCircleRect.top + productCircleRect.bottom) / 2 - containerRect.top;
 
-            return productCenterX >= relativeLeft && productCenterX <= relativeRight &&
-                   productCenterY >= relativeTop && productCenterY <= relativeBottom;
+            if (productCenterX >= relativeLeft && productCenterX <= relativeRight &&
+                productCenterY >= relativeTop && productCenterY <= relativeBottom) {
+                
+                const productId = circle.dataset.productId;
+                const product = makeupProducts.find(p => p.id === productId);
+                if (product) {
+                    filteredProducts.push(product);
+                }
+            }
         });
 
         if (filteredProducts.length > 0) {
@@ -254,14 +270,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 selectedProductsList.appendChild(listItem);
 
-                const circle = productsContainer.querySelector(`[data-product-id="${product.id}"]`);
+                const circle = currentProductsContainer.querySelector(`[data-product-id="${product.id}"]`);
                 if (circle) circle.classList.add('selected');
             });
         } else {
             noProductsMessage.classList.remove('hidden');
         }
 
-        productsContainer.querySelectorAll('.product-circle').forEach(circle => {
+        currentProductsContainer.querySelectorAll('.product-circle').forEach(circle => {
             const productId = circle.dataset.productId;
             if (!filteredProducts.some(p => p.id === productId)) {
                 circle.classList.remove('selected');
@@ -403,7 +419,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 드롭다운 이벤트 리스너 추가
     moodDropdown.addEventListener('change', (e) => {
         const selectedMood = e.target.value;
-        showSelectedMoodZone(selectedMood);
 
         //선택한 무드에 따라 mood-selection-area의 크기와 위치를 변경
         if (selectedMood && moodZones[selectedMood]) {
@@ -418,12 +433,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     categoryDropdown.addEventListener('change', (e) => {
-        //드롭다운에서 선택된 카테고리 값을 가져와서
         const selectedCategory = e.target.value;
-        //제품을 다시 렌더링
+        
+        matrixCube.classList.remove('show-all', 'show-lips', 'show-eyeshadow', 'show-blush');
+
+        if (selectedCategory === 'Lips') {
+            matrixCube.classList.add('show-lips');
+        } else if (selectedCategory === 'eyeshadow') {
+            matrixCube.classList.add('show-eyeshadow');
+        } else if (selectedCategory === 'blush') {
+            matrixCube.classList.add('show-blush');
+        } else {
+            matrixCube.classList.add('show-all');
+        }
+        
         renderProducts(selectedCategory);
         updateSelectedProducts();
     });
+
+    // 페이지 로드 시 초기 상태 설정
+    renderProducts();
+    updateSelectedProducts();
 
     // 전역 변수로 노출 (다른 스크립트에서 사용 가능)
     window.getProductsByMood = getProductsByMood;
