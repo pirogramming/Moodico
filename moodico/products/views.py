@@ -9,6 +9,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
 from moodico.products.models import ProductLike
+from django.db import models
 import logging
 logger = logging.getLogger(__name__)
 from moodico.users.utils import login_or_kakao_required
@@ -195,3 +196,187 @@ from django.contrib.admin.views.decorators import staff_member_required
 def clear_likes(request):
     ProductLike.objects.all().delete()
     return JsonResponse({'success': True})
+
+
+@require_http_methods(["GET"])
+def get_product_like_count(request):
+    """제품별 찜 개수 조회 API"""
+    try:
+        product_id = request.GET.get('product_id')
+        if not product_id:
+            return JsonResponse({
+                'success': False,
+                'message': '제품 ID가 필요합니다.'
+            }, status=400)
+        
+        # 해당 제품의 총 찜 개수
+        like_count = ProductLike.objects.filter(product_id=product_id).count()
+        
+        # 현재 사용자가 찜했는지 확인
+        user = request.user if request.user.is_authenticated else None
+        session_nickname = request.session.get("nickname")
+        
+        is_liked = False
+        if user:
+            is_liked = ProductLike.objects.filter(user=user, product_id=product_id).exists()
+        elif session_nickname:
+            is_liked = ProductLike.objects.filter(session_nickname=session_nickname, product_id=product_id).exists()
+        
+        return JsonResponse({
+            'success': True,
+            'like_count': like_count,
+            'is_liked': is_liked
+        })
+        
+    except Exception as e:
+        logger.error(f"찜 개수 조회 오류: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'message': '서버 오류가 발생했습니다.'
+        }, status=500)
+
+
+@require_http_methods(["GET"])
+def get_multiple_products_like_info(request):
+    """여러 제품의 찜 정보를 한 번에 조회하는 API"""
+    try:
+        product_ids = request.GET.getlist('product_ids[]')
+        if not product_ids:
+            return JsonResponse({
+                'success': False,
+                'message': '제품 ID 목록이 필요합니다.'
+            }, status=400)
+        
+        # 현재 사용자 정보
+        user = request.user if request.user.is_authenticated else None
+        session_nickname = request.session.get("nickname")
+        
+        result = {}
+        for product_id in product_ids:
+            # 각 제품의 찜 개수
+            like_count = ProductLike.objects.filter(product_id=product_id).count()
+            
+            # 현재 사용자가 찜했는지 확인
+            is_liked = False
+            if user:
+                is_liked = ProductLike.objects.filter(user=user, product_id=product_id).exists()
+            elif session_nickname:
+                is_liked = ProductLike.objects.filter(session_nickname=session_nickname, product_id=product_id).exists()
+            
+            result[product_id] = {
+                'like_count': like_count,
+                'is_liked': is_liked
+            }
+        
+        return JsonResponse({
+            'success': True,
+            'products': result
+        })
+        
+    except Exception as e:
+        logger.error(f"여러 제품 찜 정보 조회 오류: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'message': '서버 오류가 발생했습니다.'
+        }, status=500)
+
+
+def get_top_liked_products(limit=10):
+    """상위 찜 제품 조회 함수 - 전체 제품 데이터 기반"""
+    import json
+    import os
+    from django.db.models import Count
+    from collections import defaultdict
+    
+    # 전체 제품 데이터 로드
+    json_path = os.path.join('static', 'data', 'all_products.json')
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            all_products = json.load(f)
+    except FileNotFoundError:
+        logger.error("all_products.json 파일을 찾을 수 없습니다.")
+        return []
+    
+    # 제품명+브랜드별로 찜 개수 집계 (중복 제거)
+    product_likes_summary = {}
+    for item in ProductLike.objects.all():
+        key = f"{item.product_brand}_{item.product_name}"
+        if key not in product_likes_summary:
+            product_likes_summary[key] = {
+                'product_id': item.product_id,
+                'product_name': item.product_name,
+                'product_brand': item.product_brand,
+                'product_price': item.product_price,
+                'product_image': item.product_image,
+                'like_count': 0
+            }
+        product_likes_summary[key]['like_count'] += 1
+    
+    # 전체 제품 리스트 생성
+    products_with_likes = []
+    
+    # 1. 먼저 찜된 제품들 추가 (찜 개수 > 0)
+    for product_data in product_likes_summary.values():
+        products_with_likes.append(product_data)
+    
+    # 2. 찜되지 않은 제품들도 추가 (찜 개수 = 0)
+    # JSON 파일의 제품들 중 찜되지 않은 것들 찾기
+    existing_product_keys = set(f"{item['product_brand']}_{item['product_name']}" 
+                               for item in product_likes_summary.values())
+    
+    for product in all_products:
+        product_name = product.get('name', '')
+        product_brand = product.get('brand', '')
+        product_key = f"{product_brand}_{product_name}"
+        
+        if product_name and product_key not in existing_product_keys:
+            products_with_likes.append({
+                'product_id': product.get('id', product_name),
+                'product_name': product_name,
+                'product_brand': product_brand,
+                'product_price': product.get('price', ''),
+                'product_image': product.get('image', ''),
+                'like_count': 0
+            })
+    
+    # 찜 개수로 정렬 (찜 개수가 같으면 이름순)
+    products_with_likes.sort(key=lambda x: (-x['like_count'], x['product_name']))
+    
+    return products_with_likes[:limit]
+
+
+@require_http_methods(["GET"])
+def product_ranking_api(request):
+    """제품 랭킹 API"""
+    try:
+        limit = int(request.GET.get('limit', 10))
+        top_products = get_top_liked_products(limit)
+        
+        return JsonResponse({
+            'success': True,
+            'products': top_products
+        })
+        
+    except Exception as e:
+        logger.error(f"제품 랭킹 조회 오류: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'message': '서버 오류가 발생했습니다.'
+        }, status=500)
+
+
+def product_ranking_page(request):
+    """제품 랭킹 페이지 뷰"""
+    try:
+        top_products = get_top_liked_products(10)
+        
+        return render(request, 'products/product_ranking.html', {
+            'top_products': top_products
+        })
+        
+    except Exception as e:
+        logger.error(f"제품 랭킹 페이지 오류: {str(e)}")
+        return render(request, 'products/product_ranking.html', {
+            'top_products': [],
+            'error_message': '랭킹 정보를 불러오는데 실패했습니다.'
+        })

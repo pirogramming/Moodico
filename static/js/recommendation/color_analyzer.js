@@ -181,9 +181,21 @@ function renderRecommendations(products) {
     products.forEach((p, index) => {
         const card = document.createElement("div");
         card.classList.add("product-card");
-        card.dataset.productId = p.id || `dynamic-${index}`;
+        
+        // 제품 정보를 기반으로 고유한 ID 생성
+        const brand = (p.brand || 'unknown').replace(/\s+/g, '-').toLowerCase();
+        const name = (p.color_name || p.name || 'unknown').replace(/\s+/g, '-').toLowerCase();
+        const price = (p.price || '').replace(/[^\d]/g, '');
+        const imgHash = p.image ? p.image.split('/').pop().split('.')[0] : `idx${index}`;
+        
+        const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
+        card.dataset.productId = p.id || uniqueId;
+        
+        console.log(`Color analyzer card ${index}: ID=${card.dataset.productId}, Name=${p.color_name || p.name}`);
+        
         card.innerHTML = `
             <button class="like-button" title="좋아요"></button>
+            <span class="like-count">0</span>
             <img src="${p.image}" alt="${p.name}" />
             <div class="product-info">
                 <div class="brand">${p.brand} <span class="tag">${p.category}</span></div>
