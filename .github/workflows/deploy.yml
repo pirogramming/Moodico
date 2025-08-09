@@ -52,6 +52,7 @@ jobs:
           # passphrase: ${{ secrets.KEY_PASSPHRASE }}   # only if your key has one
           script: |
             set -e
+            git config --global --add safe.directory /home/ubuntu/Moodico
             cd /home/ubuntu/Moodico
             git fetch origin main
             git reset --hard origin/main
