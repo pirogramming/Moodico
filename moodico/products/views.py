@@ -17,7 +17,7 @@ from moodico.users.utils import login_or_kakao_required
 
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
-    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
+    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json') #all_products_hex_update_tempk=4_2_1_1.json
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
 

@@ -10,6 +10,24 @@ from io import BytesIO
 from sklearn.cluster import KMeans
 from skimage.color import rgb2lab
 import matplotlib.pyplot as plt
+from collections import Counter
+
+## 디버깅을 위한 코드
+# k-means -> hex, hsl, swatch 추출
+def hex_hsl_swatch(rgb_colors, i,  ):
+    rgb = rgb_colors[i]
+    hex_code = f"#{int(rgb[0]):02x}{int(rgb[1]):02x}{int(rgb[2]):02x}"
+    lab_values = rgb2lab(np.uint8(rgb).reshape(1, 1, 3) / 255.0).flatten()
+    color_swatch = np.full((100, 100, 3), rgb, dtype=np.uint8)
+
+    return rgb, hex_code, lab_values, color_swatch
+
+# 실제 출력 함수
+def pltshow(img, title):
+    plt.imshow(img)
+    plt.title(title)
+    plt.axis('off')
+    plt.show()
 
 def get_product_color_w_kmeans(image_url):
     try:
@@ -21,10 +39,7 @@ def get_product_color_w_kmeans(image_url):
         pil_img = Image.open(BytesIO(response.content)).convert("RGB")
 
         # [디버깅용 출력] 원본 이미지
-        plt.imshow(pil_img)
-        plt.title("1. Original Image")
-        plt.axis('off')
-        plt.show()
+        # pltshow(pil_img, "1. Original Image")
         
         cv_img = cv2.cvtColor(np.array(pil_img), cv2.COLOR_RGB2BGR)
         
@@ -38,12 +53,9 @@ def get_product_color_w_kmeans(image_url):
         roi_rect = (int(width * 0.1), int(height * 0.1), int(width * 0.8), int(height * 0.8))
 
         # [디버깅용 출력] roi_rect가 그려진 이미지
-        img_with_rect = cv_img.copy()
-        cv2.rectangle(img_with_rect, (roi_rect[0], roi_rect[1]), (roi_rect[0] + roi_rect[2], roi_rect[1] + roi_rect[3]), (0, 255, 0), 3) # 초록색 사각형
-        plt.imshow(cv2.cvtColor(img_with_rect, cv2.COLOR_BGR2RGB))
-        plt.title("3. Image with ROI Rectangle")
-        plt.axis('off')
-        plt.show()
+        # img_with_rect = cv_img.copy()
+        # cv2.rectangle(img_with_rect, (roi_rect[0], roi_rect[1]), (roi_rect[0] + roi_rect[2], roi_rect[1] + roi_rect[3]), (0, 255, 0), 3) # 초록색 사각형
+        # pltshow(cv2.cvtColor(img_with_rect, cv2.COLOR_BGR2RGB), "2. Image with ROI Rectangle")
 
         cv2.grabCut(cv_img, mask, roi_rect, bgdModel, fgdModel, 5, cv2.GC_INIT_WITH_RECT)
         final_mask = np.where((mask == 2) | (mask == 0), 0, 1).astype('uint8')
@@ -51,45 +63,57 @@ def get_product_color_w_kmeans(image_url):
         img_fg_only = cv_img * final_mask[:, :, np.newaxis]
 
         # [디버깅용 출력] 배경이 제거된 이미지
-        plt.imshow(cv2.cvtColor(img_fg_only, cv2.COLOR_BGR2RGB))
-        plt.title("2. Background Removed Image")
-        plt.axis('off')
-        plt.show()
+        # pltshow(cv2.cvtColor(img_fg_only, cv2.COLOR_BGR2RGB), "3. Background Removed Image")
         
         # 이미지를 numpy 배열 형태로 변환
         pixels = cv2.cvtColor(img_fg_only, cv2.COLOR_BGR2RGB).reshape(-1, 3)
         foreground_pixels = pixels[pixels.any(axis=1)]
 
         # k-means 처리 부분
-        # kmeans = KMeans(n_clusters=1)
-        kmeans = KMeans(n_clusters=3)
+        k=4
+        kmeans = KMeans(n_clusters=k)
         kmeans.fit(foreground_pixels)
-        dominant_rgb = kmeans.cluster_centers_[0]
-        hex_code = f"#{int(dominant_rgb[0]):02x}{int(dominant_rgb[1]):02x}{int(dominant_rgb[2]):02x}"
-        lab_values = rgb2lab(np.uint8(dominant_rgb).reshape(1, 1, 3) / 255.0).flatten()
 
-        second_dominant_rgb = kmeans.cluster_centers_[1]
-        second_dominant_hex_code = f"#{int(second_dominant_rgb[0]):02x}{int(second_dominant_rgb[1]):02x}{int(second_dominant_rgb[2]):02x}"
-        color_swatch2 = np.full((100, 100, 3), second_dominant_rgb, dtype=np.uint8)
+        rgb_colors = kmeans.cluster_centers_.astype('uint8')
+        labels = kmeans.labels_
+        hsv_colors = cv2.cvtColor(rgb_colors.reshape(-1, 1, 3), cv2.COLOR_BGR2HSV)
 
-        third_dominant_rgb = kmeans.cluster_centers_[2]
-        third_dominant_hex_code = f"#{int(third_dominant_rgb[0]):02x}{int(third_dominant_rgb[1]):02x}{int(third_dominant_rgb[2]):02x}"
-        color_swatch3 = np.full((100, 100, 3), third_dominant_rgb, dtype=np.uint8)
+        pixel_counts = Counter(labels)
+        clusters = []
+        for i in range(len(rgb_colors)):
+            clusters.append({
+                'index': i,
+                'rgb': rgb_colors[i],
+                'hsv': hsv_colors[i][0], # [H, S, V]
+                'count': pixel_counts.get(i, 0) # 해당 클러스터의 픽셀 수
+            })
+        clusters_sorted_by_value = sorted(clusters, key=lambda x: x['hsv'][2])
+        candidate_clusters = clusters_sorted_by_value[1:-1]  # 명도가 가장 높은 클러스터 제외(글씨 혹은 배경일 가능성), 명도가 가장 낮은 클러스터 제외(어두운 색상의 용기 혹은 그림자진 부분일 가능성)
+        #final_cluster = max(candidate_clusters, key=lambda x: x['count']) # 남은 클러스터들 중 픽셀 수가 더 많은 클러스터 선택
+        final_cluster = max(candidate_clusters, key=lambda x: x['hsv'][1]) # 남은 클러스터들 중 채도가 더 높은 클러스터 선택 - 이걸로 함
 
-        fourth_dominant_rgb = kmeans.cluster_centers_[2]
-        fourth_dominant_hex_code = f"#{int(fourth_dominant_rgb[0]):02x}{int(fourth_dominant_rgb[1]):02x}{int(fourth_dominant_rgb[2]):02x}"
-        color_swatch4 = np.full((100, 100, 3), fourth_dominant_rgb, dtype=np.uint8)
+        best_color_rgb = final_cluster['rgb']
+        
+        final_hex_code = f"#{int(best_color_rgb[0]):02x}{int(best_color_rgb[1]):02x}{int(best_color_rgb[2]):02x}"
+        lab_values = rgb2lab(np.uint8(best_color_rgb).reshape(1, 1, 3) / 255.0).flatten()
+        print(f"{lab_values}, {final_hex_code}")
 
         # [디버깅용 출력] k-means 결과 값에 해당하는 hex 색상 이미지
-        color_swatch = np.full((100, 100, 3), dominant_rgb, dtype=np.uint8)
+        # swatches_list = []
+        # hex_list = []
 
-        combined_swatch = np.concatenate((color_swatch, color_swatch2, color_swatch3, color_swatch4), axis=1)
-        plt.imshow(combined_swatch)
-        plt.title(f"4. K-Means Result: {hex_code}, {second_dominant_hex_code}, {third_dominant_hex_code}, {fourth_dominant_hex_code}")
-        plt.axis('off')
-        plt.show()
+        # resized_pil_img = pil_img.resize((100, 100))
+        # swatches_list.append(np.array(resized_pil_img))
 
-        return hex_code, lab_values
+        # for i in range(k):
+        #     rgb, hex_code, lab_values, color_swatch = hex_hsl_swatch(rgb_colors, i)
+        #     swatches_list.append(color_swatch)
+        #     hex_list.append(hex_code)
+
+        # combined_swatch = np.concatenate(swatches_list, axis=1)
+        # pltshow(combined_swatch, f"4. K-Means Result: {hex_list} - {final_hex_code}")
+
+        return final_hex_code, lab_values
 
     except requests.exceptions.RequestException as e:
         print(f"이미지 다운로드 실패: {image_url}, 오류: {e}")
@@ -100,32 +124,33 @@ def get_product_color_w_kmeans(image_url):
 
 if __name__ == "__main__":
 
-    image_url = "https://romand.io/images/product/902/EJ1VyyBRxhumy6rRRC3oNLbiy8qkqiB6KKPOWG5h.jpg"
-    new_hex, new_lab = get_product_color_w_kmeans(image_url)
-    print(new_hex, new_lab)
+    #image_url = "https://romand.io/images/product/902/EJ1VyyBRxhumy6rRRC3oNLbiy8qkqiB6KKPOWG5h.jpg"
+    # image_url = "https://romand.io/images/product/994/2hVgwjntZmhpGANTN6g0dJii6FWJRdKWcoJIDJVM.jpg"
+    # new_hex, new_lab = get_product_color_w_kmeans(image_url)
+    # print(new_hex, new_lab)
 
-    # with open('../static/data/all_products.json', 'r', encoding='utf-8') as f:
-    #     products = json.load(f)
+    with open('../static/data/all_products.json', 'r', encoding='utf-8') as f:
+        products = json.load(f)
 
-    # new_data = []
-    # process_num = 0
+    new_data = []
+    process_num = 0
     
-    # for product in products:
-    #     process_num+=1
-    #     image_url = product.get("image")
+    for product in products:
+        process_num+=1
+        image_url = product.get("image")
         
-    #     print(f"{process_num}. {product['name']} 처리 중 ..")
-    #     new_hex, new_lab = get_product_color_w_kmeans(image_url)
+        print(f"{process_num}. {product['name']} 처리 중 ..")
+        new_hex, new_lab = get_product_color_w_kmeans(image_url)
 
-    #     new_product_object = product.copy()
-    #     new_product_object['hex'] = new_hex
-    #     new_product_object['lab_l'] = round(new_lab[0], 2)
-    #     new_product_object['lab_a'] = round(new_lab[1], 2)
-    #     new_product_object['lab_b'] = round(new_lab[2], 2)
+        new_product_object = product.copy()
+        new_product_object['hex'] = new_hex
+        new_product_object['lab_l'] = round(new_lab[0], 2)
+        new_product_object['lab_a'] = round(new_lab[1], 2)
+        new_product_object['lab_b'] = round(new_lab[2], 2)
 
-    #     new_data.append(new_product_object)
+        new_data.append(new_product_object)
     
-    # new_file = "all_products_hex_update_temp2.json"
-    # with open(new_file, 'w', encoding='utf-8') as f:
-    #     json.dump(new_data, f, indent = 2, ensure_ascii=False)
-    # print("전 제품 재추출 완료")
+    new_file = "all_products_hex_update_tempk=3_1_1.json"
+    with open(new_file, 'w', encoding='utf-8') as f:
+        json.dump(new_data, f, indent = 2, ensure_ascii=False)
+    print("전 제품 재추출 완료")
