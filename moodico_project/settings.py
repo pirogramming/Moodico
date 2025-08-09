@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from decouple import config, Csv
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -187,11 +188,21 @@ else:
 
 
 # 카카오 로그인 설정
-KAKAO_REDIRECT_URI = config("KAKAO_REDIRECT_URI", default="http://localhost:8000/users/kakao/callback/")
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
 KAKAO_API_HOST = "https://kapi.kakao.com"
-KAKAO_CLIENT_ID = config("KAKAO_CLIENT_ID")
-KAKAO_CLIENT_SECRET = config("KAKAO_CLIENT_SECRET")
+IS_TEST = 'test' in sys.argv
+KAKAO_REDIRECT_URI = config(
+    "KAKAO_REDIRECT_URI",
+    default="http://localhost:8000/users/kakao/callback/"
+)
+KAKAO_CLIENT_ID = config(
+    "KAKAO_CLIENT_ID",
+    default="dummy" if IS_TEST else None  # None => raise if missing
+)
+KAKAO_CLIENT_SECRET = config(
+    "KAKAO_CLIENT_SECRET",
+    default="dummy" if IS_TEST else None
+)
 
 # 로그인 로그아웃 후 리다이렉트 URL 설정
 LOGIN_REDIRECT_URL = "/"
