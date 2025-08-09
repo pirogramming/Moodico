@@ -184,9 +184,71 @@ def liked_products_page(request):
     # 사용자의 좋아요 목록 조회
     liked_products = ProductLike.objects.filter(user=user).order_by('-created_at')
     
+    # 찜한 제품들의 색상 정보 가져오기
+    liked_products_with_colors = get_liked_products_color_info(liked_products)
+    
     return render(request, 'products/liked_products.html', {
-        'liked_products': liked_products
+        'liked_products': liked_products,
+        'liked_products_colors': json.dumps(liked_products_with_colors, ensure_ascii=False)
     })
+
+
+def get_liked_products_color_info(liked_products):
+    """찜한 제품들의 색상 정보를 가져오는 함수"""
+    import json
+    import os
+    
+    # 좌표 정보가 포함된 제품 데이터 로드
+    json_path = os.path.join('static', 'data', 'products_clustered.json')
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            all_products = json.load(f)
+    except FileNotFoundError:
+        logger.error("products_clustered.json 파일을 찾을 수 없습니다.")
+        return []
+    
+    # 제품명으로 매칭하여 색상 정보 추가
+    products_with_colors = []
+    
+    for liked_product in liked_products:
+        # all_products.json에서 매칭되는 제품 찾기
+        matching_product = None
+        for product in all_products:
+            # 제품명으로 매칭 (부분 일치도 허용)
+            if (liked_product.product_name in product.get('name', '') or 
+                product.get('name', '') in liked_product.product_name):
+                matching_product = product
+                break
+        
+        if matching_product:
+            products_with_colors.append({
+                'id': matching_product.get('id', ''),
+                'name': liked_product.product_name,
+                'brand': liked_product.product_brand,
+                'price': liked_product.product_price,
+                'image': liked_product.product_image or matching_product.get('image', ''),
+                'hex': matching_product.get('hex', '#cccccc'),
+                'warmCool': matching_product.get('warmCool', 50),
+                'lightDeep': matching_product.get('lightDeep', 50),
+                'category': matching_product.get('category', 'Unknown'),
+                'url': matching_product.get('url', '#')
+            })
+        else:
+            # 매칭되지 않는 경우 기본값 사용
+            products_with_colors.append({
+                'id': liked_product.product_id,
+                'name': liked_product.product_name,
+                'brand': liked_product.product_brand,
+                'price': liked_product.product_price,
+                'image': liked_product.product_image,
+                'hex': '#cccccc',  # 기본 회색
+                'warmCool': 50,
+                'lightDeep': 50,
+                'category': 'Unknown',
+                'url': '#'
+            })
+    
+    return products_with_colors
 
 from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
