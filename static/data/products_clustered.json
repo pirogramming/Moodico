@@ -12,9 +12,9 @@
     "lab_l": 57.21,
     "lab_a": 18.27,
     "lab_b": 12.55,
-    "warmCool": 57.62,
-    "lightDeep": 42.94,
-    "cluster": 1
+    "warmCool": 56.09,
+    "lightDeep": 44.35,
+    "cluster": 2
   },
   {
     "id": "9a5fe61e-ba9f-4875-9fc5-f502034fc633",
@@ -29,8 +29,8 @@
     "lab_l": 68.63,
     "lab_a": 30.21,
     "lab_b": 13.33,
-    "warmCool": 61.39,
-    "lightDeep": 27.45,
+    "warmCool": 59.12,
+    "lightDeep": 31.96,
     "cluster": 2
   },
   {
@@ -46,9 +46,9 @@
     "lab_l": 76.76,
     "lab_a": 24.75,
     "lab_b": 1.09,
-    "warmCool": 55.57,
-    "lightDeep": 20.2,
-    "cluster": 2
+    "warmCool": 54.46,
+    "lightDeep": 26.16,
+    "cluster": 3
   },
   {
     "id": "1a66c7c0-18da-459a-9e7e-3f3e162a0810",
@@ -63,8 +63,8 @@
     "lab_l": 74.1,
     "lab_a": 23.94,
     "lab_b": 14.01,
-    "warmCool": 64.0,
-    "lightDeep": 23.53,
+    "warmCool": 61.2,
+    "lightDeep": 28.82,
     "cluster": 2
   },
   {
@@ -80,8 +80,8 @@
     "lab_l": 66.01,
     "lab_a": 37.02,
     "lab_b": 12.83,
-    "warmCool": 60.16,
-    "lightDeep": 29.22,
+    "warmCool": 58.13,
+    "lightDeep": 33.37,
     "cluster": 2
   },
   {
@@ -97,9 +97,9 @@
     "lab_l": 54.35,
     "lab_a": 32.96,
     "lab_b": 3.7,
-    "warmCool": 54.03,
-    "lightDeep": 42.94,
-    "cluster": 1
+    "warmCool": 53.23,
+    "lightDeep": 44.35,
+    "cluster": 0
   },
   {
     "id": "36b1325d-1b14-4e4e-8679-6fafac4eb813",
@@ -114,9 +114,9 @@
     "lab_l": 63.26,
     "lab_a": 28.07,
     "lab_b": 3.99,
-    "warmCool": 54.85,
-    "lightDeep": 34.12,
-    "cluster": 1
+    "warmCool": 53.88,
+    "lightDeep": 37.29,
+    "cluster": 2
   },
   {
     "id": "a91d0c50-5e01-451f-b104-0ab2aa6f7ad6",
@@ -131,8 +131,8 @@
     "lab_l": 65.97,
     "lab_a": 24.89,
     "lab_b": 15.31,
-    "warmCool": 60.94,
-    "lightDeep": 32.35,
+    "warmCool": 58.75,
+    "lightDeep": 35.88,
     "cluster": 2
   },
   {
@@ -148,8 +148,8 @@
     "lab_l": 70.05,
     "lab_a": 18.19,
     "lab_b": 18.06,
-    "warmCool": 63.91,
-    "lightDeep": 30.78,
+    "warmCool": 61.12,
+    "lightDeep": 34.63,
     "cluster": 2
   },
   {
@@ -165,9 +165,9 @@
     "lab_l": 54.96,
     "lab_a": 36.01,
     "lab_b": 13.06,
-    "warmCool": 57.42,
-    "lightDeep": 41.37,
-    "cluster": 1
+    "warmCool": 55.93,
+    "lightDeep": 43.1,
+    "cluster": 0
   },
   {
     "id": "0d604060-193d-49fc-8bce-988091301390",
@@ -182,8 +182,8 @@
     "lab_l": 72.77,
     "lab_a": 24.45,
     "lab_b": 28.74,
-    "warmCool": 71.06,
-    "lightDeep": 28.82,
+    "warmCool": 66.85,
+    "lightDeep": 33.06,
     "cluster": 2
   },
   {
@@ -199,8 +199,8 @@
     "lab_l": 73.46,
     "lab_a": 28.71,
     "lab_b": 5.82,
-    "warmCool": 58.49,
-    "lightDeep": 22.75,
+    "warmCool": 56.79,
+    "lightDeep": 28.2,
     "cluster": 2
   },
   {
@@ -216,9 +216,9 @@
     "lab_l": 44.82,
     "lab_a": 36.93,
     "lab_b": 12.54,
-    "warmCool": 56.03,
-    "lightDeep": 52.16,
-    "cluster": 1
+    "warmCool": 54.82,
+    "lightDeep": 51.73,
+    "cluster": 0
   },
   {
     "id": "5873a043-e3e5-49c3-b727-1ef9b1efaa99",
@@ -233,9 +233,9 @@
     "lab_l": 61.66,
     "lab_a": 42.08,
     "lab_b": -4.94,
-    "warmCool": 51.7,
-    "lightDeep": 34.9,
-    "cluster": 1
+    "warmCool": 51.36,
+    "lightDeep": 37.92,
+    "cluster": 0
   },
   {
     "id": "906deddd-6ddf-47be-ae00-fd1bdf0e676f",
@@ -250,9 +250,9 @@
     "lab_l": 64.35,
     "lab_a": 33.49,
     "lab_b": 7.41,
-    "warmCool": 56.9,
-    "lightDeep": 31.96,
-    "cluster": 1
+    "warmCool": 55.52,
+    "lightDeep": 35.57,
+    "cluster": 2
   },
   {
     "id": "2f2cdf81-a944-4f49-b64c-d49ed7875792",
@@ -267,9 +267,9 @@
     "lab_l": 57.15,
     "lab_a": 53.97,
     "lab_b": 22.22,
-    "warmCool": 60.91,
-    "lightDeep": 37.45,
-    "cluster": 1
+    "warmCool": 58.73,
+    "lightDeep": 39.96,
+    "cluster": 0
   },
   {
     "id": "40970f84-0955-4b50-90bb-a82d4561e153",
@@ -284,9 +284,9 @@
     "lab_l": 42.19,
     "lab_a": 22.27,
     "lab_b": 14.13,
-    "warmCool": 57.57,
-    "lightDeep": 57.45,
-    "cluster": 0
+    "warmCool": 56.06,
+    "lightDeep": 55.96,
+    "cluster": 1
   },
   {
     "id": "0d1df210-4905-4986-8dc0-6a844de0bcd9",
@@ -301,8 +301,8 @@
     "lab_l": 39.35,
     "lab_a": 31.61,
     "lab_b": 4.81,
-    "warmCool": 53.83,
-    "lightDeep": 58.63,
+    "warmCool": 53.06,
+    "lightDeep": 56.9,
     "cluster": 0
   },
   {
@@ -318,9 +318,9 @@
     "lab_l": 55.41,
     "lab_a": 32.1,
     "lab_b": 2.4,
-    "warmCool": 53.54,
-    "lightDeep": 42.16,
-    "cluster": 1
+    "warmCool": 52.83,
+    "lightDeep": 43.73,
+    "cluster": 0
   },
   {
     "id": "9f9e3060-c423-4de2-ad29-66cab3a560ff",
@@ -335,9 +335,9 @@
     "lab_l": 56.76,
     "lab_a": 32.0,
     "lab_b": 10.15,
-    "warmCool": 56.7,
-    "lightDeep": 40.0,
-    "cluster": 1
+    "warmCool": 55.36,
+    "lightDeep": 42.0,
+    "cluster": 0
   },
   {
     "id": "a53dc816-28d8-493b-a320-6b099ac9974d",
@@ -352,9 +352,9 @@
     "lab_l": 50.39,
     "lab_a": 29.91,
     "lab_b": 18.65,
-    "warmCool": 58.69,
-    "lightDeep": 48.24,
-    "cluster": 1
+    "warmCool": 56.96,
+    "lightDeep": 48.59,
+    "cluster": 0
   },
   {
     "id": "9ae2ef4f-9e2b-48c2-b605-e443168131aa",
@@ -369,9 +369,9 @@
     "lab_l": 54.14,
     "lab_a": 29.18,
     "lab_b": 22.24,
-    "warmCool": 60.84,
-    "lightDeep": 45.49,
-    "cluster": 1
+    "warmCool": 58.68,
+    "lightDeep": 46.39,
+    "cluster": 0
   },
   {
     "id": "caabd5bb-195f-4225-b83d-b95f586b2578",
@@ -386,9 +386,9 @@
     "lab_l": 63.49,
     "lab_a": 36.33,
     "lab_b": 23.69,
-    "warmCool": 64.42,
-    "lightDeep": 33.92,
-    "cluster": 1
+    "warmCool": 61.54,
+    "lightDeep": 37.14,
+    "cluster": 2
   },
   {
     "id": "06c2254d-8d72-476d-845f-3ef1674071f9",
@@ -403,8 +403,8 @@
     "lab_l": 68.25,
     "lab_a": 34.44,
     "lab_b": 17.27,
-    "warmCool": 63.63,
-    "lightDeep": 27.65,
+    "warmCool": 60.9,
+    "lightDeep": 32.12,
     "cluster": 2
   },
   {
@@ -420,8 +420,8 @@
     "lab_l": 65.73,
     "lab_a": 29.1,
     "lab_b": 13.26,
-    "warmCool": 60.11,
-    "lightDeep": 30.78,
+    "warmCool": 58.09,
+    "lightDeep": 34.63,
     "cluster": 2
   },
   {
@@ -437,9 +437,9 @@
     "lab_l": 59.87,
     "lab_a": 37.62,
     "lab_b": 20.71,
-    "warmCool": 61.9,
-    "lightDeep": 36.67,
-    "cluster": 1
+    "warmCool": 59.52,
+    "lightDeep": 39.33,
+    "cluster": 0
   },
   {
     "id": "be91e7bf-9b23-46cd-8ff9-66f842f0571d",
@@ -454,9 +454,9 @@
     "lab_l": 46.97,
     "lab_a": 41.6,
     "lab_b": 13.65,
-    "warmCool": 56.21,
-    "lightDeep": 49.41,
-    "cluster": 1
+    "warmCool": 54.96,
+    "lightDeep": 49.53,
+    "cluster": 0
   },
   {
     "id": "eb76ec0d-e969-4245-a2ad-61066804a775",
@@ -471,9 +471,9 @@
     "lab_l": 58.67,
     "lab_a": 35.71,
     "lab_b": 15.85,
-    "warmCool": 59.29,
-    "lightDeep": 37.06,
-    "cluster": 1
+    "warmCool": 57.43,
+    "lightDeep": 39.65,
+    "cluster": 0
   },
   {
     "id": "60a49f29-76f9-4912-b405-1cbbfaf8909b",
@@ -488,9 +488,9 @@
     "lab_l": 63.92,
     "lab_a": 23.85,
     "lab_b": 2.83,
-    "warmCool": 54.3,
-    "lightDeep": 34.12,
-    "cluster": 1
+    "warmCool": 53.44,
+    "lightDeep": 37.29,
+    "cluster": 2
   },
   {
     "id": "199e9f32-f575-4281-8903-66bd875228e9",
@@ -505,8 +505,8 @@
     "lab_l": 64.95,
     "lab_a": 21.59,
     "lab_b": 11.85,
-    "warmCool": 58.74,
-    "lightDeep": 33.73,
+    "warmCool": 56.99,
+    "lightDeep": 36.98,
     "cluster": 2
   },
   {
@@ -522,8 +522,8 @@
     "lab_l": 70.84,
     "lab_a": 20.79,
     "lab_b": 14.94,
-    "warmCool": 62.5,
-    "lightDeep": 28.24,
+    "warmCool": 60.0,
+    "lightDeep": 32.59,
     "cluster": 2
   },
   {
@@ -539,8 +539,8 @@
     "lab_l": 69.05,
     "lab_a": 33.11,
     "lab_b": 8.81,
-    "warmCool": 58.91,
-    "lightDeep": 26.67,
+    "warmCool": 57.13,
+    "lightDeep": 31.33,
     "cluster": 2
   },
   {
@@ -556,8 +556,8 @@
     "lab_l": 73.8,
     "lab_a": 26.15,
     "lab_b": 4.43,
-    "warmCool": 57.17,
-    "lightDeep": 22.94,
+    "warmCool": 55.73,
+    "lightDeep": 28.35,
     "cluster": 2
   },
   {
@@ -573,8 +573,8 @@
     "lab_l": 75.27,
     "lab_a": 18.86,
     "lab_b": 16.81,
-    "warmCool": 65.89,
-    "lightDeep": 24.71,
+    "warmCool": 62.71,
+    "lightDeep": 29.76,
     "cluster": 2
   },
   {
@@ -590,8 +590,8 @@
     "lab_l": 72.45,
     "lab_a": 20.16,
     "lab_b": 10.28,
-    "warmCool": 60.53,
-    "lightDeep": 25.69,
+    "warmCool": 58.42,
+    "lightDeep": 30.55,
     "cluster": 2
   },
   {
@@ -607,9 +607,9 @@
     "lab_l": 76.43,
     "lab_a": 12.72,
     "lab_b": 14.57,
-    "warmCool": 64.23,
-    "lightDeep": 24.9,
-    "cluster": 2
+    "warmCool": 61.38,
+    "lightDeep": 29.92,
+    "cluster": 3
   },
   {
     "id": "3651ff14-cd6c-4366-a794-8362961eb0b6",
@@ -624,9 +624,9 @@
     "lab_l": 75.59,
     "lab_a": 15.73,
     "lab_b": 12.87,
-    "warmCool": 63.05,
-    "lightDeep": 24.31,
-    "cluster": 2
+    "warmCool": 60.44,
+    "lightDeep": 29.45,
+    "cluster": 3
   },
   {
     "id": "dd279635-cb31-4111-947d-9562dfc3aa84",
@@ -641,8 +641,8 @@
     "lab_l": 72.26,
     "lab_a": 19.41,
     "lab_b": 6.77,
-    "warmCool": 57.7,
-    "lightDeep": 25.49,
+    "warmCool": 56.16,
+    "lightDeep": 30.39,
     "cluster": 2
   },
   {
@@ -658,8 +658,8 @@
     "lab_l": 69.43,
     "lab_a": 18.03,
     "lab_b": 14.72,
-    "warmCool": 61.96,
-    "lightDeep": 30.78,
+    "warmCool": 59.57,
+    "lightDeep": 34.63,
     "cluster": 2
   },
   {
@@ -675,8 +675,8 @@
     "lab_l": 69.24,
     "lab_a": 26.2,
     "lab_b": 15.39,
-    "warmCool": 62.53,
-    "lightDeep": 28.43,
+    "warmCool": 60.02,
+    "lightDeep": 32.75,
     "cluster": 2
   },
   {
@@ -692,8 +692,8 @@
     "lab_l": 65.99,
     "lab_a": 26.02,
     "lab_b": 21.69,
-    "warmCool": 64.43,
-    "lightDeep": 33.73,
+    "warmCool": 61.55,
+    "lightDeep": 36.98,
     "cluster": 2
   },
   {
@@ -709,9 +709,9 @@
     "lab_l": 55.25,
     "lab_a": 50.09,
     "lab_b": 6.01,
-    "warmCool": 55.23,
-    "lightDeep": 40.39,
-    "cluster": 1
+    "warmCool": 54.18,
+    "lightDeep": 42.31,
+    "cluster": 0
   },
   {
     "id": "43abb70c-37b9-423f-90bf-958bc1ad4e1a",
@@ -726,8 +726,8 @@
     "lab_l": 73.39,
     "lab_a": 22.7,
     "lab_b": 12.73,
-    "warmCool": 62.36,
-    "lightDeep": 24.31,
+    "warmCool": 59.89,
+    "lightDeep": 29.45,
     "cluster": 2
   },
   {
@@ -744,8 +744,8 @@
     "lab_a": 3.68,
     "lab_b": -1.15,
     "warmCool": 50,
-    "lightDeep": 60.78,
-    "cluster": 0
+    "lightDeep": 58.63,
+    "cluster": 1
   },
   {
     "id": "f71e86f6-e2d1-4300-abcc-f0d3313c6e72",
@@ -760,8 +760,8 @@
     "lab_l": 50.72,
     "lab_a": 14.39,
     "lab_b": 5.15,
-    "warmCool": 53.32,
-    "lightDeep": 49.41,
+    "warmCool": 52.65,
+    "lightDeep": 49.53,
     "cluster": 1
   },
   {
@@ -777,9 +777,9 @@
     "lab_l": 49.41,
     "lab_a": 10.06,
     "lab_b": 3.4,
-    "warmCool": 52.45,
-    "lightDeep": 51.57,
-    "cluster": 0
+    "warmCool": 51.96,
+    "lightDeep": 51.25,
+    "cluster": 1
   },
   {
     "id": "acc203c5-1625-46b2-a9d8-bb453d0ac930",
@@ -794,8 +794,8 @@
     "lab_l": 86.76,
     "lab_a": 10.93,
     "lab_b": 0.19,
-    "warmCool": 54.41,
-    "lightDeep": 12.16,
+    "warmCool": 53.53,
+    "lightDeep": 19.73,
     "cluster": 3
   },
   {
@@ -811,8 +811,8 @@
     "lab_l": 86.96,
     "lab_a": 8.45,
     "lab_b": 6.46,
-    "warmCool": 63.84,
-    "lightDeep": 12.94,
+    "warmCool": 61.07,
+    "lightDeep": 20.35,
     "cluster": 3
   },
   {
@@ -828,8 +828,8 @@
     "lab_l": 72.77,
     "lab_a": 38.67,
     "lab_b": 10.95,
-    "warmCool": 62.35,
-    "lightDeep": 21.57,
+    "warmCool": 59.88,
+    "lightDeep": 27.25,
     "cluster": 2
   },
   {
@@ -845,9 +845,9 @@
     "lab_l": 60.49,
     "lab_a": 63.36,
     "lab_b": -5.11,
-    "warmCool": 51.94,
-    "lightDeep": 34.9,
-    "cluster": 1
+    "warmCool": 51.55,
+    "lightDeep": 37.92,
+    "cluster": 0
   },
   {
     "id": "58cfa7d4-9e93-4db2-849e-b640ca8385f6",
@@ -862,8 +862,8 @@
     "lab_l": 83.3,
     "lab_a": 9.94,
     "lab_b": 12.64,
-    "warmCool": 67.07,
-    "lightDeep": 17.84,
+    "warmCool": 63.65,
+    "lightDeep": 24.27,
     "cluster": 3
   },
   {
@@ -879,8 +879,8 @@
     "lab_l": 82.7,
     "lab_a": 10.2,
     "lab_b": 5.47,
-    "warmCool": 59.24,
-    "lightDeep": 16.67,
+    "warmCool": 57.39,
+    "lightDeep": 23.33,
     "cluster": 3
   },
   {
@@ -896,8 +896,8 @@
     "lab_l": 69.84,
     "lab_a": 19.23,
     "lab_b": 6.62,
-    "warmCool": 56.81,
-    "lightDeep": 28.24,
+    "warmCool": 55.45,
+    "lightDeep": 32.59,
     "cluster": 2
   },
   {
@@ -913,8 +913,8 @@
     "lab_l": 80.28,
     "lab_a": 12.35,
     "lab_b": 10.4,
-    "warmCool": 63.16,
-    "lightDeep": 19.8,
+    "warmCool": 60.53,
+    "lightDeep": 25.84,
     "cluster": 3
   },
   {
@@ -930,9 +930,9 @@
     "lab_l": 77.93,
     "lab_a": 23.96,
     "lab_b": 3.68,
-    "warmCool": 57.96,
-    "lightDeep": 18.82,
-    "cluster": 2
+    "warmCool": 56.37,
+    "lightDeep": 25.06,
+    "cluster": 3
   },
   {
     "id": "450cb4de-e40c-4301-bf15-d2cb87b58650",
@@ -947,9 +947,9 @@
     "lab_l": 77.51,
     "lab_a": 17.06,
     "lab_b": 9.63,
-    "warmCool": 61.57,
-    "lightDeep": 20.98,
-    "cluster": 2
+    "warmCool": 59.25,
+    "lightDeep": 26.78,
+    "cluster": 3
   },
   {
     "id": "587eecaa-6532-4644-9bd2-8c8bf1e8a195",
@@ -964,8 +964,8 @@
     "lab_l": 67.18,
     "lab_a": 28.78,
     "lab_b": 7.81,
-    "warmCool": 57.68,
-    "lightDeep": 29.41,
+    "warmCool": 56.14,
+    "lightDeep": 33.53,
     "cluster": 2
   },
   {
@@ -981,8 +981,8 @@
     "lab_l": 75.71,
     "lab_a": 11.34,
     "lab_b": 8.3,
-    "warmCool": 59.23,
-    "lightDeep": 24.71,
+    "warmCool": 57.38,
+    "lightDeep": 29.76,
     "cluster": 3
   },
   {
@@ -998,8 +998,8 @@
     "lab_l": 69.72,
     "lab_a": 17.07,
     "lab_b": 3.23,
-    "warmCool": 54.59,
-    "lightDeep": 29.02,
+    "warmCool": 53.67,
+    "lightDeep": 33.22,
     "cluster": 2
   },
   {
@@ -1015,9 +1015,9 @@
     "lab_l": 46.46,
     "lab_a": 36.84,
     "lab_b": 15.58,
-    "warmCool": 56.78,
-    "lightDeep": 50.2,
-    "cluster": 1
+    "warmCool": 55.43,
+    "lightDeep": 50.16,
+    "cluster": 0
   },
   {
     "id": "1f4fd646-944b-47ab-9924-987e89ad8c93",
@@ -1032,8 +1032,8 @@
     "lab_l": 81.14,
     "lab_a": 8.72,
     "lab_b": -3.65,
-    "warmCool": 46.49,
-    "lightDeep": 19.41,
+    "warmCool": 47.19,
+    "lightDeep": 25.53,
     "cluster": 3
   },
   {
@@ -1049,8 +1049,8 @@
     "lab_l": 83.6,
     "lab_a": 15.29,
     "lab_b": -8.02,
-    "warmCool": 37.28,
-    "lightDeep": 15.88,
+    "warmCool": 39.83,
+    "lightDeep": 22.71,
     "cluster": 3
   },
   {
@@ -1066,8 +1066,8 @@
     "lab_l": 87.33,
     "lab_a": 4.44,
     "lab_b": 22.48,
-    "warmCool": 77.84,
-    "lightDeep": 17.84,
+    "warmCool": 72.28,
+    "lightDeep": 24.27,
     "cluster": 3
   },
   {
@@ -1083,8 +1083,8 @@
     "lab_l": 86.82,
     "lab_a": 9.92,
     "lab_b": 11.53,
-    "warmCool": 69.51,
-    "lightDeep": 13.73,
+    "warmCool": 65.61,
+    "lightDeep": 20.98,
     "cluster": 3
   },
   {
@@ -1101,7 +1101,7 @@
     "lab_a": 0.25,
     "lab_b": -0.61,
     "warmCool": 50,
-    "lightDeep": 13.14,
+    "lightDeep": 20.51,
     "cluster": 3
   },
   {
@@ -1117,9 +1117,9 @@
     "lab_l": 53.29,
     "lab_a": 28.22,
     "lab_b": 22.09,
-    "warmCool": 60.67,
-    "lightDeep": 46.67,
-    "cluster": 1
+    "warmCool": 58.54,
+    "lightDeep": 47.33,
+    "cluster": 0
   },
   {
     "id": "01842932-9555-4609-b422-c1201599afe0",
@@ -1134,9 +1134,9 @@
     "lab_l": 63.76,
     "lab_a": 30.63,
     "lab_b": 12.4,
-    "warmCool": 59.06,
-    "lightDeep": 32.55,
-    "cluster": 1
+    "warmCool": 57.25,
+    "lightDeep": 36.04,
+    "cluster": 2
   },
   {
     "id": "5c2a9cf0-3ef3-4dab-8ce5-4e699b8fbe2b",
@@ -1151,8 +1151,8 @@
     "lab_l": 66.3,
     "lab_a": 26.76,
     "lab_b": 15.73,
-    "warmCool": 61.52,
-    "lightDeep": 31.57,
+    "warmCool": 59.22,
+    "lightDeep": 35.25,
     "cluster": 2
   },
   {
@@ -1168,9 +1168,9 @@
     "lab_l": 56.76,
     "lab_a": 35.85,
     "lab_b": 14.94,
-    "warmCool": 58.6,
-    "lightDeep": 39.22,
-    "cluster": 1
+    "warmCool": 56.88,
+    "lightDeep": 41.37,
+    "cluster": 0
   },
   {
     "id": "5948abf0-990f-48f0-978d-cf4ed09cd219",
@@ -1185,9 +1185,9 @@
     "lab_l": 59.18,
     "lab_a": 26.05,
     "lab_b": 15.04,
-    "warmCool": 59.1,
-    "lightDeep": 39.22,
-    "cluster": 1
+    "warmCool": 57.28,
+    "lightDeep": 41.37,
+    "cluster": 2
   },
   {
     "id": "8580e08a-96ac-48fb-a1c7-e8a14f289a06",
@@ -1202,9 +1202,9 @@
     "lab_l": 53.1,
     "lab_a": 20.82,
     "lab_b": 11.5,
-    "warmCool": 56.26,
-    "lightDeep": 46.08,
-    "cluster": 1
+    "warmCool": 55.01,
+    "lightDeep": 46.86,
+    "cluster": 0
   },
   {
     "id": "ba467c69-d3ed-4c8b-8630-4d5773759841",
@@ -1219,9 +1219,9 @@
     "lab_l": 58.5,
     "lab_a": 28.7,
     "lab_b": 6.7,
-    "warmCool": 55.39,
-    "lightDeep": 38.82,
-    "cluster": 1
+    "warmCool": 54.31,
+    "lightDeep": 41.06,
+    "cluster": 0
   },
   {
     "id": "9ae57ab3-3bc8-47ae-a944-651bba48c6b9",
@@ -1236,9 +1236,9 @@
     "lab_l": 60.61,
     "lab_a": 24.26,
     "lab_b": 8.11,
-    "warmCool": 56.15,
-    "lightDeep": 37.25,
-    "cluster": 1
+    "warmCool": 54.92,
+    "lightDeep": 39.8,
+    "cluster": 2
   },
   {
     "id": "a19ebd66-a30b-47df-a88a-6155d782255b",
@@ -1254,7 +1254,7 @@
     "lab_a": 0.93,
     "lab_b": -0.76,
     "warmCool": 50,
-    "lightDeep": 10.98,
+    "lightDeep": 18.78,
     "cluster": 3
   },
   {
@@ -1270,9 +1270,9 @@
     "lab_l": 80.34,
     "lab_a": 18.81,
     "lab_b": 17.11,
-    "warmCool": 69.68,
-    "lightDeep": 19.22,
-    "cluster": 2
+    "warmCool": 65.75,
+    "lightDeep": 25.37,
+    "cluster": 3
   },
   {
     "id": "9c791fc9-0c76-46aa-a0be-692de6718109",
@@ -1287,9 +1287,9 @@
     "lab_l": 52.15,
     "lab_a": 32.88,
     "lab_b": 17.78,
-    "warmCool": 58.64,
-    "lightDeep": 45.29,
-    "cluster": 1
+    "warmCool": 56.92,
+    "lightDeep": 46.24,
+    "cluster": 0
   },
   {
     "id": "a6a4f541-4e96-4d05-88da-a3a22cedf463",
@@ -1304,9 +1304,9 @@
     "lab_l": 59.34,
     "lab_a": 39.72,
     "lab_b": 1.63,
-    "warmCool": 53.96,
-    "lightDeep": 37.06,
-    "cluster": 1
+    "warmCool": 53.17,
+    "lightDeep": 39.65,
+    "cluster": 0
   },
   {
     "id": "37c155d8-f204-4a50-96e9-0a8161b96c90",
@@ -1321,9 +1321,9 @@
     "lab_l": 54.64,
     "lab_a": 46.86,
     "lab_b": 17.17,
-    "warmCool": 58.65,
-    "lightDeep": 40.78,
-    "cluster": 1
+    "warmCool": 56.92,
+    "lightDeep": 42.63,
+    "cluster": 0
   },
   {
     "id": "550049c9-a8a7-4c9a-a45d-b0b5d7ff5d12",
@@ -1338,9 +1338,9 @@
     "lab_l": 55.61,
     "lab_a": 31.83,
     "lab_b": 12.94,
-    "warmCool": 57.32,
-    "lightDeep": 41.18,
-    "cluster": 1
+    "warmCool": 55.85,
+    "lightDeep": 42.94,
+    "cluster": 0
   },
   {
     "id": "ffe21a6a-3fe2-43fe-a017-c75de910d409",
@@ -1355,9 +1355,9 @@
     "lab_l": 60.51,
     "lab_a": 18.08,
     "lab_b": 6.74,
-    "warmCool": 55.34,
-    "lightDeep": 38.24,
-    "cluster": 1
+    "warmCool": 54.27,
+    "lightDeep": 40.59,
+    "cluster": 2
   },
   {
     "id": "aaee454a-4385-4c6b-80d6-1aa588e76f4b",
@@ -1372,8 +1372,8 @@
     "lab_l": 69.63,
     "lab_a": 17.49,
     "lab_b": 14.97,
-    "warmCool": 62.21,
-    "lightDeep": 30.78,
+    "warmCool": 59.77,
+    "lightDeep": 34.63,
     "cluster": 2
   },
   {
@@ -1389,9 +1389,9 @@
     "lab_l": 63.79,
     "lab_a": 25.92,
     "lab_b": 3.04,
-    "warmCool": 54.36,
-    "lightDeep": 33.92,
-    "cluster": 1
+    "warmCool": 53.49,
+    "lightDeep": 37.14,
+    "cluster": 2
   },
   {
     "id": "9359d1fa-71e7-45cb-b14f-a234204bfbb6",
@@ -1406,9 +1406,9 @@
     "lab_l": 62.96,
     "lab_a": 21.66,
     "lab_b": 6.63,
-    "warmCool": 55.78,
-    "lightDeep": 35.1,
-    "cluster": 1
+    "warmCool": 54.62,
+    "lightDeep": 38.08,
+    "cluster": 2
   },
   {
     "id": "68c057b9-bf64-43eb-bfc6-f68062fcc273",
@@ -1423,9 +1423,9 @@
     "lab_l": 58.16,
     "lab_a": 18.8,
     "lab_b": 11.06,
-    "warmCool": 57.08,
-    "lightDeep": 41.37,
-    "cluster": 1
+    "warmCool": 55.66,
+    "lightDeep": 43.1,
+    "cluster": 2
   },
   {
     "id": "418d0db8-e6d3-42b8-b715-05f8bd67e56b",
@@ -1440,9 +1440,9 @@
     "lab_l": 76.58,
     "lab_a": 20.73,
     "lab_b": 3.92,
-    "warmCool": 57.2,
-    "lightDeep": 20.78,
-    "cluster": 2
+    "warmCool": 55.76,
+    "lightDeep": 26.63,
+    "cluster": 3
   },
   {
     "id": "0df6f4f6-5cca-4991-9a74-75bc52020c24",
@@ -1457,9 +1457,9 @@
     "lab_l": 64.51,
     "lab_a": 29.57,
     "lab_b": 1.81,
-    "warmCool": 54.14,
-    "lightDeep": 32.75,
-    "cluster": 1
+    "warmCool": 53.32,
+    "lightDeep": 36.2,
+    "cluster": 2
   },
   {
     "id": "324d1e09-25af-4704-ab0c-9dd669a3f255",
@@ -1474,8 +1474,8 @@
     "lab_l": 73.03,
     "lab_a": 27.06,
     "lab_b": 11.5,
-    "warmCool": 61.78,
-    "lightDeep": 23.14,
+    "warmCool": 59.43,
+    "lightDeep": 28.51,
     "cluster": 2
   },
   {
@@ -1491,8 +1491,8 @@
     "lab_l": 70.71,
     "lab_a": 28.05,
     "lab_b": 5.54,
-    "warmCool": 57.13,
-    "lightDeep": 25.88,
+    "warmCool": 55.7,
+    "lightDeep": 30.71,
     "cluster": 2
   },
   {
@@ -1508,8 +1508,8 @@
     "lab_l": 69.84,
     "lab_a": 22.65,
     "lab_b": 2.75,
-    "warmCool": 54.9,
-    "lightDeep": 28.04,
+    "warmCool": 53.92,
+    "lightDeep": 32.43,
     "cluster": 2
   },
   {
@@ -1525,8 +1525,8 @@
     "lab_l": 71.1,
     "lab_a": 17.37,
     "lab_b": 13.95,
-    "warmCool": 61.99,
-    "lightDeep": 29.02,
+    "warmCool": 59.59,
+    "lightDeep": 33.22,
     "cluster": 2
   },
   {
@@ -1542,9 +1542,9 @@
     "lab_l": 63.26,
     "lab_a": 23.04,
     "lab_b": 7.21,
-    "warmCool": 55.98,
-    "lightDeep": 34.71,
-    "cluster": 1
+    "warmCool": 54.79,
+    "lightDeep": 37.76,
+    "cluster": 2
   },
   {
     "id": "46816127-8b1a-48e7-be0f-2d079db2dc74",
@@ -1559,9 +1559,9 @@
     "lab_l": 57.67,
     "lab_a": 17.5,
     "lab_b": 7.62,
-    "warmCool": 55.4,
-    "lightDeep": 41.76,
-    "cluster": 1
+    "warmCool": 54.32,
+    "lightDeep": 43.41,
+    "cluster": 2
   },
   {
     "id": "e543bef5-4ca0-44e9-bfca-ee08eced5aa2",
@@ -1576,9 +1576,9 @@
     "lab_l": 41.73,
     "lab_a": 22.43,
     "lab_b": 1.78,
-    "warmCool": 52.67,
-    "lightDeep": 57.25,
-    "cluster": 0
+    "warmCool": 52.13,
+    "lightDeep": 55.8,
+    "cluster": 1
   },
   {
     "id": "22fc5c7d-c8ab-4ec9-825e-37da3eca9940",
@@ -1593,9 +1593,9 @@
     "lab_l": 48.42,
     "lab_a": 51.33,
     "lab_b": -4.95,
-    "warmCool": 51.02,
-    "lightDeep": 48.82,
-    "cluster": 1
+    "warmCool": 50.81,
+    "lightDeep": 49.06,
+    "cluster": 0
   },
   {
     "id": "228f0017-e135-45e7-ab0b-f8bee33fd5a3",
@@ -1610,8 +1610,8 @@
     "lab_l": 65.26,
     "lab_a": 21.92,
     "lab_b": 16.11,
-    "warmCool": 61.4,
-    "lightDeep": 34.31,
+    "warmCool": 59.12,
+    "lightDeep": 37.45,
     "cluster": 2
   },
   {
@@ -1627,8 +1627,8 @@
     "lab_l": 69.1,
     "lab_a": 23.65,
     "lab_b": 7.19,
-    "warmCool": 57.4,
-    "lightDeep": 28.24,
+    "warmCool": 55.92,
+    "lightDeep": 32.59,
     "cluster": 2
   },
   {
@@ -1644,9 +1644,9 @@
     "lab_l": 30.06,
     "lab_a": 6.57,
     "lab_b": -25.5,
-    "warmCool": 42.25,
-    "lightDeep": 67.84,
-    "cluster": 0
+    "warmCool": 43.8,
+    "lightDeep": 64.27,
+    "cluster": 1
   },
   {
     "id": "0cee538b-beb7-49ed-91f8-78afa3f1298d",
@@ -1661,8 +1661,8 @@
     "lab_l": 89.48,
     "lab_a": 1.71,
     "lab_b": 2.14,
-    "warmCool": 56.36,
-    "lightDeep": 11.76,
+    "warmCool": 55.09,
+    "lightDeep": 19.41,
     "cluster": 3
   },
   {
@@ -1678,9 +1678,9 @@
     "lab_l": 77.75,
     "lab_a": 17.91,
     "lab_b": 10.41,
-    "warmCool": 62.42,
-    "lightDeep": 20.78,
-    "cluster": 2
+    "warmCool": 59.93,
+    "lightDeep": 26.63,
+    "cluster": 3
   },
   {
     "id": "5b7ad327-a914-4b87-92a4-bcd6efa1ab8b",
@@ -1695,9 +1695,9 @@
     "lab_l": 31.68,
     "lab_a": 14.08,
     "lab_b": -1.58,
-    "warmCool": 50.89,
-    "lightDeep": 68.63,
-    "cluster": 0
+    "warmCool": 50.71,
+    "lightDeep": 64.9,
+    "cluster": 1
   },
   {
     "id": "cc78bd55-dce5-4b85-bf4f-fe6fe33f080d",
@@ -1712,9 +1712,9 @@
     "lab_l": 27.13,
     "lab_a": 1.25,
     "lab_b": 3.13,
-    "warmCool": 53.79,
-    "lightDeep": 75.1,
-    "cluster": 0
+    "warmCool": 53.03,
+    "lightDeep": 70.08,
+    "cluster": 1
   },
   {
     "id": "481514ee-4c28-4708-ac49-e5f7f8837c96",
@@ -1729,9 +1729,9 @@
     "lab_l": 27.14,
     "lab_a": 12.37,
     "lab_b": 2.02,
-    "warmCool": 53.0,
-    "lightDeep": 72.55,
-    "cluster": 0
+    "warmCool": 52.4,
+    "lightDeep": 68.04,
+    "cluster": 1
   },
   {
     "id": "5bf3fbe4-b850-43fb-9c85-5bd881d07dcc",
@@ -1747,8 +1747,8 @@
     "lab_a": 1.34,
     "lab_b": 0.93,
     "warmCool": 50,
-    "lightDeep": 72.16,
-    "cluster": 0
+    "lightDeep": 67.73,
+    "cluster": 1
   },
   {
     "id": "80c092b1-691a-4dc4-86dd-7c29ab3a6d66",
@@ -1763,9 +1763,9 @@
     "lab_l": 31.33,
     "lab_a": 4.51,
     "lab_b": 2.71,
-    "warmCool": 53.06,
-    "lightDeep": 70.39,
-    "cluster": 0
+    "warmCool": 52.45,
+    "lightDeep": 66.31,
+    "cluster": 1
   },
   {
     "id": "e1f21e7d-9f44-47fc-9ce4-42cc01aa19c9",
@@ -1780,9 +1780,9 @@
     "lab_l": 33.27,
     "lab_a": 13.14,
     "lab_b": 5.38,
-    "warmCool": 54.25,
-    "lightDeep": 66.47,
-    "cluster": 0
+    "warmCool": 53.4,
+    "lightDeep": 63.18,
+    "cluster": 1
   },
   {
     "id": "f4c5e948-f91d-4f35-b8a5-ff2ef9e6ad58",
@@ -1797,9 +1797,9 @@
     "lab_l": 39.05,
     "lab_a": 13.88,
     "lab_b": 2.97,
-    "warmCool": 52.91,
-    "lightDeep": 61.18,
-    "cluster": 0
+    "warmCool": 52.33,
+    "lightDeep": 58.94,
+    "cluster": 1
   },
   {
     "id": "0cffb8b2-7cbb-4f8a-8764-0619419ca36d",
@@ -1815,8 +1815,8 @@
     "lab_a": 2.25,
     "lab_b": 0.0,
     "warmCool": 50,
-    "lightDeep": 71.18,
-    "cluster": 0
+    "lightDeep": 66.94,
+    "cluster": 1
   },
   {
     "id": "ffb477ee-7eb4-44ea-9c48-8a0a78ddfd74",
@@ -1832,8 +1832,8 @@
     "lab_a": 0.67,
     "lab_b": 0.29,
     "warmCool": 50,
-    "lightDeep": 68.24,
-    "cluster": 0
+    "lightDeep": 64.59,
+    "cluster": 1
   },
   {
     "id": "fe0f55cd-80d0-4d28-8efe-5c6da1615fa5",
@@ -1848,9 +1848,9 @@
     "lab_l": 28.96,
     "lab_a": 15.17,
     "lab_b": 5.92,
-    "warmCool": 55.03,
-    "lightDeep": 70.2,
-    "cluster": 0
+    "warmCool": 54.02,
+    "lightDeep": 66.16,
+    "cluster": 1
   },
   {
     "id": "b2cb0318-1669-4f87-84a9-8d6d2d407e2f",
@@ -1865,9 +1865,9 @@
     "lab_l": 32.53,
     "lab_a": 9.31,
     "lab_b": 7.06,
-    "warmCool": 56.04,
-    "lightDeep": 68.82,
-    "cluster": 0
+    "warmCool": 54.83,
+    "lightDeep": 65.06,
+    "cluster": 1
   },
   {
     "id": "d873f0b7-b044-4fe3-8854-c7f23bfddf34",
@@ -1882,9 +1882,9 @@
     "lab_l": 28.17,
     "lab_a": 9.17,
     "lab_b": 3.77,
-    "warmCool": 53.59,
-    "lightDeep": 71.96,
-    "cluster": 0
+    "warmCool": 52.87,
+    "lightDeep": 67.57,
+    "cluster": 1
   },
   {
     "id": "5c60e12a-2285-4e93-b55e-eea6a6db06f7",
@@ -1899,9 +1899,9 @@
     "lab_l": 28.2,
     "lab_a": 3.48,
     "lab_b": 2.12,
-    "warmCool": 52.48,
-    "lightDeep": 73.33,
-    "cluster": 0
+    "warmCool": 51.98,
+    "lightDeep": 68.67,
+    "cluster": 1
   },
   {
     "id": "5652a687-3549-4cfd-9fef-40ab1fb15625",
@@ -1916,9 +1916,9 @@
     "lab_l": 33.3,
     "lab_a": 6.03,
     "lab_b": 3.23,
-    "warmCool": 52.94,
-    "lightDeep": 68.24,
-    "cluster": 0
+    "warmCool": 52.35,
+    "lightDeep": 64.59,
+    "cluster": 1
   },
   {
     "id": "2ccb414b-dd3e-4dd0-b1d9-bffe85903b0d",
@@ -1933,9 +1933,9 @@
     "lab_l": 30.95,
     "lab_a": 3.27,
     "lab_b": 1.94,
-    "warmCool": 52.7,
-    "lightDeep": 70.98,
-    "cluster": 0
+    "warmCool": 52.16,
+    "lightDeep": 66.78,
+    "cluster": 1
   },
   {
     "id": "d7e80c03-3146-4921-8ab5-98b7626c1fe8",
@@ -1950,9 +1950,9 @@
     "lab_l": 40.12,
     "lab_a": 14.17,
     "lab_b": 3.68,
-    "warmCool": 53.16,
-    "lightDeep": 59.8,
-    "cluster": 0
+    "warmCool": 52.53,
+    "lightDeep": 57.84,
+    "cluster": 1
   },
   {
     "id": "e5ada97b-0c73-44c4-95a9-084925ef6ed6",
@@ -1967,9 +1967,9 @@
     "lab_l": 28.57,
     "lab_a": 5.9,
     "lab_b": 2.91,
-    "warmCool": 53.15,
-    "lightDeep": 72.35,
-    "cluster": 0
+    "warmCool": 52.52,
+    "lightDeep": 67.88,
+    "cluster": 1
   },
   {
     "id": "da7bef63-b905-42bf-974d-2a8401cf9b1d",
@@ -1984,8 +1984,280 @@
     "lab_l": 37.3,
     "lab_a": 10.05,
     "lab_b": 1.62,
-    "warmCool": 52.2,
-    "lightDeep": 63.53,
-    "cluster": 0
+    "warmCool": 51.76,
+    "lightDeep": 60.82,
+    "cluster": 1
+  },
+  {
+    "id": "a7d87635-649c-4ca5-bc49-aa824cfc9675",
+    "brand": "3CE",
+    "category": "blush",
+    "name": "[3CE X MUUT] BOUNCY BLUR BALM",
+    "color_name": "[3CE X MUUT] BOUNCY BLUR BALM",
+    "url": "https://www.3cecosmetics.com/all-products/cheeks/blush/3ce-x-muut-bouncy-blur-balm",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/cheeks/blush/bouncy-blur-balm/beige-crush/250527/bouncy-blur-balm_beige-crush_plp_pck_te.png?rev=9e633c04c9d84246961d41e86fe36144&cx=0.47&cy=0.48&cw=480&ch=480&hash=187307319B3E34B27B537909205D8D68",
+    "price": "₩ 21,000",
+    "hex": "#4e413c",
+    "lab_l": 28.98,
+    "lab_a": 4.57,
+    "lab_b": 5.13,
+    "warmCool": 54.07,
+    "lightDeep": 68.35,
+    "cluster": 1
+  },
+  {
+    "id": "e13dc09e-9417-4682-a144-98113be0d2bf",
+    "brand": "3CE",
+    "category": "blush",
+    "name": "3CE LAYER-IT-ALL BLUSH PALETTE",
+    "color_name": "3CE LAYER-IT-ALL BLUSH PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/cheeks/blush/3ce-layer-it-all-blush-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/cheeks/blush/layer-it-all-palette/rosy-tan/layer-it-all-blush-palette_rosy-tan_plp_pck_te.png?rev=d7c34ae2a7ee4421997809591a3033ba&cx=0.45&cy=0.52&cw=480&ch=480&hash=D86F8BE156D1BE9F6434C9B3BB0D13A5",
+    "price": "₩ 26,000",
+    "hex": "#6f5a59",
+    "lab_l": 40.34,
+    "lab_a": 8.48,
+    "lab_b": 3.63,
+    "warmCool": 52.49,
+    "lightDeep": 58.63,
+    "cluster": 1
+  },
+  {
+    "id": "021a18ac-822c-41de-8f13-665ca4649ea6",
+    "brand": "3CE",
+    "category": "blush",
+    "name": "3CE BLUSHLIGHTER",
+    "color_name": "3CE BLUSHLIGHTER",
+    "url": "https://www.3cecosmetics.com/all-products/cheeks/blush/3ce-blushlighter",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/cheeks/blush/blushlighter/middy-hype/low/blushlighter_middy-hype_plp.png?rev=faf42016372840a0aca4807afee03ab0&cx=0.54&cy=0.5&cw=480&ch=480&hash=767346277B16FEDA2DE08D0C33B363A2",
+    "price": "₩ 24,000",
+    "hex": "#605456",
+    "lab_l": 37.01,
+    "lab_a": 5.63,
+    "lab_b": 0.71,
+    "warmCool": 51.02,
+    "lightDeep": 61.76,
+    "cluster": 1
+  },
+  {
+    "id": "ccffdf60-43c9-4cc0-acfd-56d6363f6e74",
+    "brand": "3CE",
+    "category": "blush",
+    "name": "3CE FACE BLUSH",
+    "color_name": "3CE FACE BLUSH",
+    "url": "https://www.3cecosmetics.com/all-products/cheeks/blush/3ce-face-blush",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/cheeks/blush/face-blush/mono-pink/plp-low/face-blush-mood-recipe_mono-pink_plp_pck_1.png?rev=855be95ca954421d819f0751ab623578&cx=0.5&cy=0.52&cw=480&ch=480&hash=EAFBBFA2A954861C2B5F764001D24F7D",
+    "price": "₩ 18,000",
+    "hex": "#221a19",
+    "lab_l": 10.4,
+    "lab_a": 3.85,
+    "lab_b": 2.52,
+    "warmCool": 53.62,
+    "lightDeep": 80.75,
+    "cluster": 1
+  },
+  {
+    "id": "d93d7a10-a055-4443-ab9b-046b590f245f",
+    "brand": "3CE",
+    "category": "blush",
+    "name": "3CE NEW TAKE FACE BLUSHER",
+    "color_name": "3CE NEW TAKE FACE BLUSHER",
+    "url": "https://www.3cecosmetics.com/all-products/cheeks/blush/3ce-new-take-face-blusher",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/cheeks/blush/new-take-face-blusher/haze-beige/plp-low/new-take-face-blusher_haze-beige_plp.png?rev=9b14e825e1ed4824b5e5c03d553d84c8&cx=0.52&cy=0.53&cw=480&ch=480&hash=69314B03B432FA145941980E507D1BAB",
+    "price": "₩ 20,000",
+    "hex": "#5a5149",
+    "lab_l": 35.21,
+    "lab_a": 2.39,
+    "lab_b": 5.7,
+    "warmCool": 54.24,
+    "lightDeep": 64.43,
+    "cluster": 1
+  },
+  {
+    "id": "59ba707d-7c08-4786-84d3-a8ddfe795c83",
+    "brand": "3CE",
+    "category": "blush",
+    "name": "3CE SHEER LIQUID BLUSHER",
+    "color_name": "3CE SHEER LIQUID BLUSHER",
+    "url": "https://www.3cecosmetics.com/all-products/cheeks/blush/3ce-sheer-liquid-blusher",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/cheeks/blush/sheer-liquid-blusher/joyful-affair/plp-low/sheer-liquid-blusher_joyful-affair_plp_pck_1.png?rev=55bc7b22e41a45b58b93f3f6c16446ff&cx=0.52&cy=0.47&cw=480&ch=480&hash=18062A8DADA211865D7E8E6D855F0033",
+    "price": "₩ 17,000",
+    "hex": "#4e4241",
+    "lab_l": 29.33,
+    "lab_a": 4.77,
+    "lab_b": 2.35,
+    "warmCool": 52.26,
+    "lightDeep": 67.57,
+    "cluster": 1
+  },
+  {
+    "id": "9c920444-47ea-48c6-9937-b8160cdb85f2",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE COLOR GRID EYESHADOW",
+    "color_name": "3CE COLOR GRID EYESHADOW",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-color-grid-eyeshadow",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/color-grid-eyeshadow/mint-zest/color-grid-eye-shadow_mint-zest_plp_pck_te.png?rev=b6618874236a4c96b15cf7c0e8ba5e85&cx=0&cy=0&cw=480&ch=480&hash=FAF44709795C5137D9DD38E355B431D0",
+    "price": "₩ 19,000",
+    "hex": "#5d6d69",
+    "lab_l": 44.74,
+    "lab_a": -6.6,
+    "lab_b": 0.11,
+    "warmCool": 50.66,
+    "lightDeep": 58.31,
+    "cluster": 1
+  },
+  {
+    "id": "4b5ec573-af0a-4295-a5b3-40006ca12882",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "[3CE X MUUT] MULTI EYE COLOR PALETTE",
+    "color_name": "[3CE X MUUT] MULTI EYE COLOR PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-x-muut-multi-eye-color-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/multi-eye-color-palette/chill-wave/250527/multi-eye-color-palette_chill-wave_plp_pkg.png?rev=42db89c12f184abd827e6a810d56aa78&cx=0&cy=0&cw=480&ch=480&hash=CAC8B810B2A94C1DC99A3C5D23DA244F",
+    "price": "₩ 38,000",
+    "hex": "#584c5c",
+    "lab_l": 34.11,
+    "lab_a": 8.66,
+    "lab_b": -7.92,
+    "warmCool": 44.67,
+    "lightDeep": 63.65,
+    "cluster": 1
+  },
+  {
+    "id": "70430544-bd86-4d41-ac2e-49827a472aed",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE LAYER-IT-ALL EYESHADOW PALETTE",
+    "color_name": "3CE LAYER-IT-ALL EYESHADOW PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-layer-it-all-eyeshadow-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/layer-it-all-palette/pink-soda/layer-it-all-eyeshadow-palette_pink-soda_plp_pck_te.png?rev=8967395346924339b13ca8eb00699787&cx=0.49&cy=0.51&cw=480&ch=480&hash=0C87180A4BB5240E5A0A7732690C2A0D",
+    "price": "₩ 32,000",
+    "hex": "#6f5c5d",
+    "lab_l": 41.02,
+    "lab_a": 7.9,
+    "lab_b": 2.22,
+    "warmCool": 51.79,
+    "lightDeep": 58.16,
+    "cluster": 1
+  },
+  {
+    "id": "6330673b-9616-40d3-9fec-bed08d75dcc1",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE MULTI EYE COLOR PALETTE",
+    "color_name": "3CE MULTI EYE COLOR PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-multi-eye-color-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/multi-eye-color-palette/auto-focus/plp-low/multi-eye--color-palette_auto-focus_pck_plp_1.png?rev=7f05bbb2c0674c2f811d97f9ad962d39&cx=0&cy=0&cw=480&ch=480&hash=C417AE84128F0FD1F22126DCD93D34D3",
+    "price": "₩ 39,000",
+    "hex": "#584746",
+    "lab_l": 32.2,
+    "lab_a": 6.9,
+    "lab_b": 3.41,
+    "warmCool": 52.61,
+    "lightDeep": 65.22,
+    "cluster": 1
+  },
+  {
+    "id": "a8ed8f6d-a884-46fe-8ba7-a679bc57a72d",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE MINI MULTI EYE COLOR PALETTE",
+    "color_name": "3CE MINI MULTI EYE COLOR PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-mini-multi-eye-color-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/mini-multi-eye-color-palette/almond-fudge/low/mini-multi-eye-color-palette_almond-fudge_plp_pck_1.png?rev=b4c1a7db5ef7442283022be2da94fdb7&cx=0.52&cy=0.51&cw=480&ch=480&hash=788F4A2A9749E6D1B5DEFBD3ED9C2313",
+    "price": "₩ 24,000",
+    "hex": "#4f453e",
+    "lab_l": 30.32,
+    "lab_a": 2.95,
+    "lab_b": 5.93,
+    "warmCool": 54.48,
+    "lightDeep": 67.88,
+    "cluster": 1
+  },
+  {
+    "id": "64105de9-e47f-4387-9ae8-c76493919a47",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE ALL ROUNDER FACE PALETTE",
+    "color_name": "3CE ALL ROUNDER FACE PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-all-rounder-face-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/all-rounder-face-palette/pale-veil/plp-low/all-rounder-face-palette_pale-veil_plp_pck.png?rev=a1469eb4361a40d685106fb91fbafb3c&cx=0.49&cy=0.53&cw=480&ch=480&hash=DA5F70A7805FD4DA1BCE48662DF7017E",
+    "price": "₩ 40,000",
+    "hex": "#635c60",
+    "lab_l": 40.09,
+    "lab_a": 3.23,
+    "lab_b": -1.16,
+    "warmCool": 50,
+    "lightDeep": 60.04,
+    "cluster": 1
+  },
+  {
+    "id": "dead0110-27cb-4189-9e42-27dc0370563a",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE EYE SWITCH",
+    "color_name": "3CE EYE SWITCH",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-eye-switch",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/eye-switch/double-note/eye-switch_double-note_plp_pck_3.png?rev=2926a0332c3c4690a3d23d3b99679d22&cx=0.48&cy=0.54&cw=480&ch=480&hash=B635DEEBA18684321940A8179BFE5826",
+    "price": "₩ 15,000",
+    "hex": "#635570",
+    "lab_l": 38.54,
+    "lab_a": 11.32,
+    "lab_b": -13.34,
+    "warmCool": 43.81,
+    "lightDeep": 59.1,
+    "cluster": 1
+  },
+  {
+    "id": "b6ff218b-0a66-4435-8304-57d44e4698c4",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE LIQUID PRIMER EYE SHADOW",
+    "color_name": "3CE LIQUID PRIMER EYE SHADOW",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-liquid-primer-eye-shadow",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/liquid-primer-eye-shadow/common-place/plp-low/liquid-primer-eye-shadow_common-place_plp_pck_2.png?rev=234ccf970243495c8e2f94b080e01f45&cx=0.52&cy=0.53&cw=480&ch=480&hash=544D2D6C53117089DE3EE7A36EED5A94",
+    "price": "₩ 15,000",
+    "hex": "#675c56",
+    "lab_l": 40.09,
+    "lab_a": 3.19,
+    "lab_b": 5.0,
+    "warmCool": 53.31,
+    "lightDeep": 60.35,
+    "cluster": 1
+  },
+  {
+    "id": "e19d7eb9-bfab-40e4-839d-e7ff11df8c21",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE NEW TAKE EYESHADOW PALETTE",
+    "color_name": "3CE NEW TAKE EYESHADOW PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-new-take-eyeshadow-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/new-take-eye-shadow-palette/pink-journey/plp-low/new-take--eyeshadow-palette_pink-journey_plp_pck_1.png?rev=3ab2f2fedd4b46fa91abd1055ac76b78&cx=0.46&cy=0.48&cw=480&ch=480&hash=A0FCDFD8BC009C89E5FBBA3221BB1D82",
+    "price": "₩ 49,000",
+    "hex": "#342b2a",
+    "lab_l": 18.69,
+    "lab_a": 4.01,
+    "lab_b": 2.23,
+    "warmCool": 52.66,
+    "lightDeep": 75.25,
+    "cluster": 1
+  },
+  {
+    "id": "bc5856bb-7e4f-45b3-8be8-babc01c2acb7",
+    "brand": "3CE",
+    "category": "eyeshadow",
+    "name": "3CE XL EYESHADOW PALETTE",
+    "color_name": "3CE XL EYESHADOW PALETTE",
+    "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-xl-eyeshadow-palette",
+    "image": "https://www.3cecosmetics.com/-/media/project/loreal/brand-sites/tce/apac/int/en-image-assets/all-prouducts/eyes/eyeshadow/xl-eyeshadow-palette/plp-low/xl-palette_plp_pck_1.png?rev=22150147353342268e77a901d7b39a3d&cx=0.51&cy=0.52&cw=480&ch=480&hash=91CE1BAD332BCBE2201F4C6D9A21390E",
+    "price": "₩ 80,000",
+    "hex": "#786a6d",
+    "lab_l": 46.35,
+    "lab_a": 5.9,
+    "lab_b": 0.51,
+    "warmCool": 50.82,
+    "lightDeep": 54.55,
+    "cluster": 1
   }
 ]
