@@ -94,7 +94,7 @@ WSGI_APPLICATION = 'moodico_project.wsgi.application'
 if config('DATABASE_URL', default=''):
     import dj_database_url
     DATABASES = {
-        'default': dj_database_url.parse(config('DATABASE_URL'), conn_max_age=600, ssl_require=True)
+        'default': dj_database_url.parse(config('DATABASE_URL'), conn_max_age=600)
     }
 else:
     DATABASES = {
@@ -207,14 +207,3 @@ KAKAO_CLIENT_SECRET = config(
 # 로그인 로그아웃 후 리다이렉트 URL 설정
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
-
-# security toggles for production
-if not DEBUG:
-    SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', cast=bool, default=True)
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = config('SECURE_HSTS_SECONDS', cast=int, default=31536000)
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
-    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
