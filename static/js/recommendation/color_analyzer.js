@@ -170,6 +170,9 @@ function calculateCoordinatesFromHsl(h, s, l) {
 function sigmoid(x){
     return 1/(1+Math.exp(-x));
 }
+function enhanceContrast(value) {
+    return (1 - Math.cos(value * Math.PI)) / 2;
+}
 
 function calculateCoordinatesFromLAB(l, a, b){
     const l_star = l;
@@ -186,13 +189,14 @@ function calculateCoordinatesFromLAB(l, a, b){
     // warmCool = Math.max(0, Math.min(100, warmCool));
 
     // 비선형 매핑 - sigmoid 함수 사용
-    const spreadWCFactor = 25;
-    const scaledWCScore = (warmCoolScore - 30) / spreadWCFactor;
-    const sigmoidWCValue = sigmoid(scaledWCScore);
+    const spreadWCFactor = 40;
+    const scaledWCScore = (warmCoolScore - 35) / spreadWCFactor;
+    const sigmoidWCmiddleValue = sigmoid(scaledWCScore);
+    const sigmoidWCValue = enhanceContrast(sigmoidWCmiddleValue);
 
     // lightDeep에 선형 매핑 간격 넓히기 적용 ..
-    const scale = 1.1;
-    const offset = -5;
+    const scale = 1.2;
+    const offset = -12;
     let lightScore = (l_star * scale) + offset;
     lightScore = Math.max(0, Math.min(100, lightScore));
 
