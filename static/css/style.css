@@ -1842,6 +1842,7 @@ a.model-card {
     font-size: 0.9em;
     transition: background-color 0.3s ease;
     flex: 1;
+    text-align: center;
   }
 
   .purchase-btn:hover {
