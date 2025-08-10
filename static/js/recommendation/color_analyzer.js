@@ -122,8 +122,8 @@ function displayColorOnMatrix(hex, warmCool, lightDeep) {
     productsContainer.appendChild(colorPoint);
 }
 
-
-// HSL로부터 waemCool, lightDeep 수치를 계산하는 함수
+// HSL로부터 warmCool, lightDeep 수치를 계산하는 함수
+/*
 function calculateCoordinatesFromHsl(h, s, l) {
     if (h === null || s === null || l === null) {
         return null;
@@ -141,6 +141,7 @@ function calculateCoordinatesFromHsl(h, s, l) {
         warmCoolScore = -1 + ((h - 300) / 30);
     }
 
+    
     if (s < 0.05) {
         warmCoolScore = 0;
     } else {
@@ -150,13 +151,35 @@ function calculateCoordinatesFromHsl(h, s, l) {
     if (l < 0.1 || l > 0.9) {
         warmCoolScore *= (1 - Math.pow(Math.abs(0.5 - l) * 2, 2));
     }
+    
 
     let finalWarmCool = (warmCoolScore + 1) * 50;
+    //let baseWarmCool = (warmCoolScore + 1) * 50;
+    //const scale = 1.8;
+    //const offset = -50;
+    //let finalWarmCool = (baseWarmCool * scale) + offset;
     finalWarmCool = Math.max(0, Math.min(100, finalWarmCool));
 
     const finalLightDeep = (1 - l) * 100;
 
     return { warmCool: finalWarmCool, lightDeep: finalLightDeep };
+}
+*/
+function calculateCoordinatesFromLAB(l, a, b){
+    const l_star = l;
+    const a_star = a;
+    const b_star = b;
+
+    const lightDeep = 100 - l_star;
+    const warmCoolScore = (a_star * 0.5) + (b_star * 1.0);
+
+    const normalizedWarmCool = (warmCoolScore + 200) / 400 * 100;
+    const scale = 2.8;
+    const offset = -110;
+    let warmCool = (normalizedWarmCool * scale) + offset;
+    warmCool = Math.max(0, Math.min(100, warmCool));
+
+    return { warmCool: warmCool, lightDeep: lightDeep };
 }
 
 
