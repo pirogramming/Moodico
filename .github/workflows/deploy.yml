@@ -38,7 +38,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    # run on push to main or main-test, or when manually triggered
     if: (github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/main-test')) || github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4
@@ -47,25 +46,25 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}          # raw multi-line private key (BEGIN/END + newlines)
-          # passphrase: ${{ secrets.KEY_PASSPHRASE }}   # only if your key has one
+          username: ubuntu
+          key: ${{ secrets.KEY }}
           script: |
             set -e
-            sudo chown -R ubuntu:ubuntu /home/ubuntu/Moodico 
-            sudo git config --system --add safe.directory /home/ubuntu/Moodico
+            BRANCH="${{ github.ref_name }}"
+            echo "Deploying branch: $BRANCH"
 
-            sudo chown -R ubuntu:ubuntu /home/ubuntu/Moodico 
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/Moodico
             sudo git config --system --add safe.directory /home/ubuntu/Moodico
 
             cd /home/ubuntu/Moodico
-            git fetch origin main
-            git reset --hard origin/main
-            
-            
+            git fetch origin "$BRANCH"
+            git reset --hard "origin/$BRANCH"
+
             source venv/bin/activate
             pip install --upgrade pip
             pip install -r requirements.txt
             python manage.py migrate --noinput
             python manage.py collectstatic --noinput
-            sudo systemctl restart nginx
+
+            sudo systemctl restart gunicorn
+            sudo systemctl reload nginx
