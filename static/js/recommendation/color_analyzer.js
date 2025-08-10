@@ -214,6 +214,9 @@ function renderRecommendations(products) {
         const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
         card.dataset.productId = p.id || uniqueId;
         
+        // 디버깅: 실제 제품 ID와 생성된 ID 출력
+        console.log(`제품 ${index}: 원본 ID=${p.id}, 생성된 ID=${card.dataset.productId}`);
+        
         console.log(`Color analyzer card ${index}: ID=${card.dataset.productId}, Name=${p.color_name || p.name}`);
         
         card.innerHTML = `
@@ -225,8 +228,10 @@ function renderRecommendations(products) {
                 <div class="name">${p.color_name}</div>
                 <div class="price">${p.price}</div>
             </div>
-            <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
-            <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
+            <div class="button-container">
+                <a class="recommendation-button view-detail-btn" href="/products/detail/${p.id}/" target="_blank">보러가기</a>
+                <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
+            </div>
         `;
         box.appendChild(card);
         
@@ -234,6 +239,17 @@ function renderRecommendations(products) {
         if (window.restoreLikeStateForCard) {
             window.restoreLikeStateForCard(card);
         }
+        
+        // 보러가기 버튼에 이벤트 리스너 추가
+        const viewDetailBtn = card.querySelector('.view-detail-btn');
+        if (viewDetailBtn) {
+            viewDetailBtn.addEventListener('click', function(e) {
+                console.log('보러가기 클릭:', p.id, p.name);
+            });
+        }
+        
+        // 디버깅: 카드 정보 출력
+        console.log(`추천 제품 카드 생성: ID=${p.id}, 이름=${p.name}, 브랜드=${p.brand}`);
     });
 }
 

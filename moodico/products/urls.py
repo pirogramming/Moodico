@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('color_matrix_explore/', views.color_matrix_explore, name='color_matrix_explore'), #색상 매트릭스
     path('<int:product_id>/', views.product_detail, name='product_detail'), #제품 상세 페이지
+    path('detail/<str:crawled_id>/', views.crawled_product_detail, name='crawled_product_detail'), #크롤링된 제품 상세 페이지
     path('', views.product_list, name='product_list'),
     path('products_list/', views.product_list, name='products_list'),
     path('search_product/', views.search_product, name='search_product'), # 제품 검색

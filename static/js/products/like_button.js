@@ -458,6 +458,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 전역 함수로 노출 (다른 스크립트에서 사용 가능)
     window.restoreLikeStateForCard = restoreLikeStateForCard;
+    window.restoreLikeStates = restoreLikeStates;
+    window.setupMutationObserver = setupMutationObserver;
 });
 
 // 좋아요 목록 조회 함수 (다른 스크립트에서 사용 가능)
@@ -505,5 +507,5 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     restoreLikeStates();
-    setupMutationObserver();
+    // setupMutationObserver는 이미 위에서 호출되었으므로 여기서는 호출하지 않음
 }); 

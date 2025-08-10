@@ -1,0 +1,75 @@
+{% extends 'base.html' %} {% load static %} {% block title %}{{ product.name }}
+- {{ product.brand }}{% endblock %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/products/crawled_detail.css' %}" />
+
+<div class="crawled-product-detail-container">
+  <div class="product-detail-header">
+    <h1>{{ product.name }}</h1>
+    <p class="brand-name">{{ product.brand }}</p>
+  </div>
+
+  <div class="product-detail-content">
+    <div class="product-image-section">
+      {% if product.image %}
+      <img
+        src="{{ product.image }}"
+        alt="{{ product.name }}"
+        class="product-main-image"
+      />
+      {% else %}
+      <div class="no-image-placeholder">
+        <span>이미지 없음</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <div class="product-info-section">
+      <div class="product-basic-info">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-brand">{{ product.brand }}</p>
+        {% if product.category %}
+        <span class="product-category">{{ product.category }}</span>
+        {% endif %}
+        <p class="product-price">{{ product.price }}</p>
+      </div>
+
+      {% if product.hex %}
+      <div class="product-color-info">
+        <h3>제품 색상</h3>
+        <div
+          class="color-swatch"
+          style="background-color: {{ product.hex }};"
+        ></div>
+        <p class="color-hex">{{ product.hex }}</p>
+        {% if product.warmCool is not None and product.lightDeep is not None %}
+        <p class="color-coordinates">
+          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep }}%
+        </p>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <div class="product-actions">
+        {% if product.url %}
+        <a href="{{ product.url }}" target="_blank" class="purchase-button">
+          구매하기
+        </a>
+        {% else %}
+        <button class="purchase-button disabled" disabled>
+          구매 링크 없음
+        </button>
+        {% endif %}
+
+        <a
+          href="{% url 'color_matrix_explore' %}"
+          class="back-to-matrix-button"
+        >
+          매트릭스로 돌아가기
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
