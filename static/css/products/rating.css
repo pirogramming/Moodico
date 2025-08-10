@@ -1,0 +1,205 @@
+/* 별점 섹션 스타일 */
+.rating-section {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.average-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rating-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff6b35;
+}
+
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+.stars .star {
+  font-size: 1.5rem;
+  color: #ffd700;
+  cursor: default;
+}
+
+.rating-count {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.user-rating h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.rating-input {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stars-input {
+  display: flex;
+  gap: 5px;
+}
+
+.stars-input .star {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stars-input .star:hover,
+.stars-input .star.active {
+  color: #ffd700;
+}
+
+.stars-input .star.filled {
+  color: #ffd700;
+}
+
+#rating-comment {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+#rating-comment:focus {
+  outline: none;
+  border-color: #44009c;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.submit-rating-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+}
+
+.submit-rating-btn:hover {
+  background-color: #0056b3;
+}
+
+.submit-rating-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+/* 별점 목록 섹션 */
+.ratings-list-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.ratings-list-section h3 {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.ratings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rating-item {
+  padding: 15px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+}
+
+.rating-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rating-item-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.rating-item-stars .star {
+  font-size: 1rem;
+  color: #ffd700;
+}
+
+.rating-item-date {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.rating-item-user {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.rating-item-comment {
+  color: #555;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.no-ratings {
+  text-align: center;
+  color: #6c757d;
+  padding: 40px 20px;
+  font-style: italic;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .rating-section {
+    padding: 15px;
+  }
+  
+  .rating-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .stars-input .star {
+    font-size: 1.8rem;
+  }
+  
+  .rating-number {
+    font-size: 1.5rem;
+  }
+}

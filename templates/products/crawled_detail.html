@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% load static %} {% block title %}{{ product.name }}
-- {{ product.brand }}{% endblock %} {% block content %}
+- {{ product.brand }}{% endblock %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/products/crawled_detail.css' %}" />
+<link rel="stylesheet" href="{% static 'css/products/rating.css' %}" />
+{% endblock %} {% block content %}
 
 <div class="crawled-product-detail-container">
   <div class="product-detail-header">
@@ -43,7 +45,8 @@
         <p class="color-hex">{{ product.hex }}</p>
         {% if product.warmCool is not None and product.lightDeep is not None %}
         <p class="color-coordinates">
-          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep }}%
+          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep
+          }}%
         </p>
         {% endif %}
       </div>
@@ -71,5 +74,55 @@
   </div>
 </div>
 
+<script>
+  // 제품 정보 가져오기
+  const productId = "{{ product.id }}";
+  const productName = "{{ product.name }}";
+  const productBrand = "{{ product.brand }}";
+</script>
+<script src="{% static 'js/products/rating.js' %}"></script>
+
+<!-- 별점 섹션 추가 -->
+<div class="rating-section">
+  <div class="rating-summary">
+    <div class="average-rating">
+      <span class="rating-number" id="average-rating">0.0</span>
+      <div class="stars" id="average-stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+      </div>
+    </div>
+    <span class="rating-count" id="rating-count">(0개 평가)</span>
+  </div>
+
+  <div class="user-rating">
+    <h3>내 리뷰</h3>
+    <div class="rating-input">
+      <div class="stars-input" id="stars-input">
+        <span class="star" data-rating="1">☆</span>
+        <span class="star" data-rating="2">☆</span>
+        <span class="star" data-rating="3">☆</span>
+        <span class="star" data-rating="4">☆</span>
+        <span class="star" data-rating="5">☆</span>
+      </div>
+      <textarea
+        id="rating-comment"
+        placeholder="리뷰를 남겨주세요 (선택사항)"
+      ></textarea>
+      <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 별점 목록 섹션 -->
+<div class="ratings-list-section">
+  <h3>사용자 리뷰</h3>
+  <div id="ratings-list" class="ratings-list">
+    <!-- 별점 목록이 여기에 동적으로 로드됩니다 -->
+  </div>
+</div>
 
 {% endblock %}
