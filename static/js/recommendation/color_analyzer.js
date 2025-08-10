@@ -176,7 +176,6 @@ function calculateCoordinatesFromLAB(l, a, b){
     const a_star = a;
     const b_star = b;
 
-    const lightDeepScore = 100 - l_star;
     const warmCoolScore = (a_star * 0.5) + (b_star * 1.0);
 
     // 선형 매핑
@@ -191,13 +190,14 @@ function calculateCoordinatesFromLAB(l, a, b){
     const scaledWCScore = (warmCoolScore - 30) / spreadWCFactor;
     const sigmoidWCValue = sigmoid(scaledWCScore);
 
-    // lightDeep에도 비성형 적용해보기 .. - 인지적으로 옳은가 .?
-    const spreadLDFactor = 20;
-    const scaledLDScore = (lightDeepScore - 50) / spreadLDFactor;
-    const sigmoidLDValue = sigmoid(scaledLDScore);
+    // lightDeep에 선형 매핑 간격 넓히기 적용 ..
+    const scale = 1.2;
+    const offset = -12;
+    let lightScore = (l_star * scale) + offset;
+    lightScore = Math.max(0, Math.min(100, lightScore));
 
     const warmCool = sigmoidWCValue * 100;
-    const lightDeep = 100 - sigmoidLDValue;
+    const lightDeep = 100 - lightScore;
 
     return { warmCool: warmCool, lightDeep: lightDeep };
 }
