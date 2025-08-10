@@ -559,12 +559,12 @@ def get_top_liked_products(limit=10):
     from collections import defaultdict
     
     # 전체 제품 데이터 로드
-    json_path = os.path.join('static', 'data', 'all_products.json')
+    json_path = os.path.join('static', 'data', 'all_products_hex_update_tempk=4_2_1_1.json')
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("all_products.json 파일을 찾을 수 없습니다.")
+        logger.error("all_products_hex_update_tempk=4_2_1_1.json 파일을 찾을 수 없습니다.")
         return []
     
     # 제품명+브랜드별로 찜 개수 집계 (중복 제거)
