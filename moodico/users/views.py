@@ -8,6 +8,7 @@ from django.views.decorators.http import require_http_methods
 from moodico.products.models import ProductLike
 from .utils import login_or_kakao_required
 from moodico.users.models import UserProfile
+from moodico.products.views import get_liked_products_color_info
 
 # Create your views here.
 def signup_view(request):
@@ -146,10 +147,14 @@ def profile(request):
         user_mood = "정보 없음"
     liked_products = ProductLike.objects.filter(user=request.user).order_by('-created_at')
 
+    # 찜한 제품들의 색상 및 URL 정보 가져오기
+    liked_products_colors = get_liked_products_color_info(liked_products)
+
     context = {
         'user_name': user_name,
         'user_mood': user_mood,
         'liked_products': liked_products,
+        'liked_products_colors': liked_products_colors,
     }
 
     return render(request, 'users/profile.html', context)
