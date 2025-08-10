@@ -123,7 +123,7 @@ function displayColorOnMatrix(hex, warmCool, lightDeep) {
 }
 
 // HSL로부터 warmCool, lightDeep 수치를 계산하는 함수
-/*
+
 function calculateCoordinatesFromHsl(h, s, l) {
     if (h === null || s === null || l === null) {
         return null;
@@ -164,7 +164,7 @@ function calculateCoordinatesFromHsl(h, s, l) {
 
     return { warmCool: finalWarmCool, lightDeep: finalLightDeep };
 }
-*/
+
 function calculateCoordinatesFromLAB(l, a, b){
     const l_star = l;
     const a_star = a;
@@ -226,6 +226,7 @@ function renderRecommendations(products) {
                 <div class="price">${p.price}</div>
             </div>
             <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
+            <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
         `;
         box.appendChild(card);
         

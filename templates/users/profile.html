@@ -1,224 +1,179 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
-<style>
-    .profile-container {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-info p {
-        font-size: 1.2em;
-        color: #555;
-        margin-bottom: 10px;
-    }
-
-    .liked-products {
-        margin-top: 30px;
-    }
-
-    .profile-info h2 {
-        font-size: 1.3em;
-        color: #333;
-        margin-bottom: 15px;
-        justify-self: center;
-    }
-
-    .product-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .product-card {
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        overflow: hidden;
-        width: 180px;
-        text-align: center;
-        transition: transform 0.3s ease;
-    }
-
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .product-card img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-    }
-
-    .product-card h3 {
-        font-size: 1.1em;
-        margin: 10px 0 5px;
-        color: #333;
-    }
-
-    .product-card p {
-        font-size: 0.9em;
-        color: #777;
-    }
-
-    .profile-products-grid {
-        padding-top: 20px;
-        display: flex;
-        flex-wrap: nowrap;
-        gap: 20px;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 20px;
-    }
-
-    .profile-container .liked-product-card {
-        min-width: 240px;
-        flex-shrink: 0;
-    }
-
-</style>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<link rel="stylesheet" href="{% static 'css/users/profile.css' %}" />
 
 <div class="profile-container">
-    <div class="profile-info">
-        <h2><span style="color: mediumpurple;">{{ user_name }}</span>님의 프로필</h2>
-        <p><strong>무드 테스트 결과:</strong> {{ user_mood }}</p>
-    </div>
+  <div class="profile-info">
+    <h2><span style="color: mediumpurple">{{ user_name }}</span>님의 프로필</h2>
+    <p><strong>무드 테스트 결과:</strong> {{ user_mood }}</p>
+  </div>
 
-    <div class="liked-products" style="display: flex; justify-content: center;">
-        <div class="liked-count">
-            총 {{ liked_products.count }}개의 제품을 찜하셨습니다
-        </div>
+  <div class="liked-products" style="display: flex; justify-content: center">
+    <div class="liked-count">
+      총 {{ liked_products.count }}개의 제품을 찜하셨습니다
     </div>
+  </div>
 
-    {% if liked_products %}
-    <div class="profile-products-grid">
-        {% for liked_product in liked_products %}
-        <div class="liked-product-card" data-product-id="{{ liked_product.product_id }}">
-            <button class="like-button liked" title="좋아요 취소"></button>
-            {% comment %} <img src="{{ liked_product.product_image|default:'/static/images/test.jpg' }}"
-                alt="{{ liked_product.product_name }}" onerror="this.src='/static/images/test.jpg'" /> {% endcomment %}
-            <img src="{{ liked_product.product_image|default:static('images/test.jpg') }}"
-                alt="{{ liked_product.product_name }}"
-                onerror="this.src='{% static 'images/test.jpg' %}'" />
-            <div class="product-info">
-                <div class="like-date">
-                    찜한 날짜: {{ liked_product.created_at|date:"Y년 m월 d일" }}
-                </div>
-                <div class="product-brand">{{ liked_product.product_brand }}</div>
-                <div class="product-name">{{ liked_product.product_name }}</div>
-                <div class="product-price">{{ liked_product.product_price }}</div>
-                <div class="product-actions">
-                    <button class="remove-like-btn" onclick="removeLike('{{ liked_product.product_id }}')">
-                        찜 해제
-                    </button>
-                    <button class="purchase-btn">구매하기</button>
-                </div>
-            </div>
+  {% if liked_products %}
+  <div class="profile-products-grid">
+    {% for liked_product in liked_products %}
+    <div
+      class="liked-product-card"
+      data-product-id="{{ liked_product.product_id }}"
+    >
+      <button class="like-button liked" title="좋아요 취소"></button>
+      <img
+        src="{{ liked_product.product_image|default:'/static/images/test.jpg' }}"
+        alt="{{ liked_product.product_name }}"
+        onerror="this.src='/static/images/test.jpg'"
+      />
+      <div class="product-info">
+        <div class="like-date">
+          찜한 날짜: {{ liked_product.created_at|date:"Y년 m월 d일" }}
         </div>
-        {% endfor %}
+        <div class="product-brand">{{ liked_product.product_brand }}</div>
+        <div class="product-name">{{ liked_product.product_name }}</div>
+        <div class="product-price">{{ liked_product.product_price }}</div>
+        <div class="product-actions">
+          <button
+            class="remove-like-btn"
+            onclick="removeLike('{{ liked_product.product_id }}')"
+          >
+            찜 해제
+          </button>
+          <a
+            class="purchase-btn"
+            href="#"
+            onclick="return purchaseProduct('{{ liked_product.product_id }}')"
+            >구매하기</a
+          >
+        </div>
+      </div>
     </div>
-    {% else %}
-    <div class="empty-state">
-        <div class="heart-icon">💔</div>
-        <h2>아직 찜한 제품이 없어요</h2>
-        <p>마음에 드는 제품을 찾아서 찜해보세요!</p>
-        <a href="{% url 'my_item_recommendation' %}" class="browse-btn">
-            제품 둘러보기
-        </a>
-    </div>
-    {% endif %}
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <div class="heart-icon">💔</div>
+    <h2>아직 찜한 제품이 없어요</h2>
+    <p>마음에 드는 제품을 찾아서 찜해보세요!</p>
+    <a href="{% url 'my_item_recommendation' %}" class="browse-btn">
+      제품 둘러보기
+    </a>
+  </div>
+  {% endif %}
 </div>
 
 {% endblock %} {% block extra_js %}
 <script src="{% static 'js/products/like_button.js' %}"></script>
 <script>
-    // 찜 해제 함수
-    async function removeLike(productId) {
-        try {
-            const response = await fetch("/products/toggle_product_like/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken"),
-                },
-                body: JSON.stringify({
-                    product_id: productId,
-                    product_name: "temp",
-                    product_brand: "temp",
-                    product_price: "temp",
-                }),
-            });
+  // 찜한 제품들의 색상 매트릭스 표시
+  const likedProductsColors = {{ liked_products_colors|safe }};
+  console.log('프로필 페이지에서 받은 likedProductsColors:', likedProductsColors);
 
-            const data = await response.json();
+  // 구매하기 함수 - 찜 페이지와 동일한 방식
+  function purchaseProduct(productId) {
+      console.log('구매하기 버튼 클릭됨, 제품 ID:', productId);
+      console.log('likedProductsColors 데이터:', likedProductsColors);
 
-            if (data.success) {
-                // 카드 제거
-                const card = document.querySelector(`[data-product-id="${productId}"]`);
-                if (card) {
-                    card.style.animation = "fadeOut 0.3s ease-out";
-                    setTimeout(() => {
-                        card.remove();
-                        updateLikeCount();
-                    }, 300);
-                }
+      // likedProductsColors에서 해당 제품의 URL 찾기
+      const product = likedProductsColors.find(p => p.id === productId);
+      console.log('찾은 제품:', product);
 
-                // 메시지 표시
-                showLikeMessage("찜이 해제되었습니다.");
-            }
-        } catch (error) {
-            console.error("찜 해제 오류:", error);
-            showLikeMessage("오류가 발생했습니다.");
+      if (product && product.url && product.url !== '#') {
+          console.log('URL 열기:', product.url);
+          // 새 탭에서 제품 URL 열기
+          window.open(product.url, '_blank');
+          return false; // 기본 링크 동작 방지
+      } else {
+          console.log('URL을 찾을 수 없음. 제품 ID:', productId);
+          console.log('제품 데이터:', product);
+          // URL이 없는 경우 메시지 표시
+          alert('해당 제품의 구매 링크를 찾을 수 없습니다.');
+          return false; // 기본 링크 동작 방지
+      }
+  }
+
+  // 찜 해제 함수
+  async function removeLike(productId) {
+    try {
+      const response = await fetch("/products/toggle_product_like/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken"),
+        },
+        body: JSON.stringify({
+          product_id: productId,
+          product_name: "temp",
+          product_brand: "temp",
+          product_price: "temp",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // 카드 제거
+        const card = document.querySelector(`[data-product-id="${productId}"]`);
+        if (card) {
+          card.style.animation = "fadeOut 0.3s ease-out";
+          setTimeout(() => {
+            card.remove();
+            updateLikeCount();
+          }, 300);
         }
+
+        // 메시지 표시
+        showLikeMessage("찜이 해제되었습니다.");
+      }
+    } catch (error) {
+      console.error("찜 해제 오류:", error);
+      showLikeMessage("오류가 발생했습니다.");
+    }
+  }
+
+  // 좋아요 개수 업데이트
+  function updateLikeCount() {
+    const cards = document.querySelectorAll(".liked-product-card");
+    const countElement = document.querySelector(".liked-count");
+    if (countElement) {
+      countElement.textContent = `총 ${cards.length}개의 제품을 찜하셨습니다`;
     }
 
-    // 좋아요 개수 업데이트
-    function updateLikeCount() {
-        const cards = document.querySelectorAll(".liked-product-card");
-        const countElement = document.querySelector(".liked-count");
-        if (countElement) {
-            countElement.textContent = `총 ${cards.length}개의 제품을 찜하셨습니다`;
-        }
-
-        // 모든 카드가 제거되면 빈 상태 표시
-        if (cards.length === 0) {
-            location.reload();
-        }
+    // 모든 카드가 제거되면 빈 상태 표시
+    if (cards.length === 0) {
+      location.reload();
     }
+  }
 
-    // CSRF 토큰 가져오기
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== "") {
-            const cookies = document.cookie.split(";");
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === name + "=") {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
+  // CSRF 토큰 가져오기
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
-        return cookieValue;
+      }
     }
+    return cookieValue;
+  }
 </script>
 
 <style>
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        to {
-            opacity: 0;
-            transform: scale(0.9);
-        }
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: scale(1);
     }
+
+    to {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
 </style>
 {% endblock %}

@@ -67,6 +67,7 @@ class ProductLike(models.Model):
     product_brand = models.CharField(max_length=255, verbose_name="브랜드")
     product_price = models.CharField(max_length=100, verbose_name="가격")
     product_image = models.URLField(null=True, blank=True, verbose_name="제품 이미지")
+    product_url = models.URLField(null=True, blank=True, verbose_name="제품 URL")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="좋아요 날짜")
 
     class Meta:

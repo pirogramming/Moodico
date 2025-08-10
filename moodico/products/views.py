@@ -211,6 +211,7 @@ def get_liked_products_color_info(liked_products):
     products_with_colors = []
     
     for liked_product in liked_products:
+        logger.info(f"찜한 제품 처리 중: {liked_product.product_name} (브랜드: {liked_product.product_brand})")
         # all_products.json에서 매칭되는 제품 찾기
         matching_product = None
         for product in all_products:
@@ -220,9 +221,21 @@ def get_liked_products_color_info(liked_products):
                 matching_product = product
                 break
         
+        # 제품명으로 매칭이 안 되면 브랜드명으로도 시도
+        if not matching_product:
+            for product in all_products:
+                if (liked_product.product_brand.lower() in product.get('brand', '').lower() or 
+                    product.get('brand', '').lower() in liked_product.product_brand.lower()):
+                    # 브랜드가 일치하면 제품명도 부분적으로 일치하는지 확인
+                    if (liked_product.product_name.lower() in product.get('name', '').lower() or 
+                        product.get('name', '').lower() in liked_product.product_name.lower()):
+                        matching_product = product
+                        break
+        
         if matching_product:
+            logger.info(f"제품 매칭 성공: {matching_product.get('name')} -> URL: {matching_product.get('url')}")
             products_with_colors.append({
-                'id': matching_product.get('id', ''),
+                'id': liked_product.product_id,  # ProductLike의 product_id 사용
                 'name': liked_product.product_name,
                 'brand': liked_product.product_brand,
                 'price': liked_product.product_price,
@@ -234,6 +247,7 @@ def get_liked_products_color_info(liked_products):
                 'url': matching_product.get('url', '#')
             })
         else:
+            logger.warning(f"제품 매칭 실패: {liked_product.product_name} (브랜드: {liked_product.product_brand})")
             # 매칭되지 않는 경우 기본값 사용
             products_with_colors.append({
                 'id': liked_product.product_id,
