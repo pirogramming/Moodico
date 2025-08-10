@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block extra_head %} {% endblock%}
+{% extends 'base.html' %} {% load static %} 
+{% block extra_head %} 
+<link rel="stylesheet" href="{% static 'css/products/liked_products.css' %}" />
+{% endblock%}
 {% block content %}
 <div class="liked-products-container">
   <div class="page-header">
