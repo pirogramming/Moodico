@@ -58,7 +58,9 @@ def calculate_coordinates(h, s, l):
     return round(final_warm, 2), round(final_deep, 2)
 
 # 데이터 로드
-with open("static/data/all_products.json", "r", encoding="utf-8") as f:
+# with open("static/data/all_products.json", "r", encoding="utf-8") as f:
+#     products = json.load(f)
+with open("../static/data/all_products_hex_update_tempk=4_2_1_1.json", "r", encoding="utf-8") as f:
     products = json.load(f)
 
 coordinates = []
@@ -96,11 +98,15 @@ for i, label in enumerate(labels):
     valid_products[i]["cluster"] = int(label)
 
 # 클러스터링 결과를 JSON 파일로 저장
-with open("static/data/products_clustered.json", "w", encoding="utf-8") as f:
+# with open("static/data/products_clustered.json", "w", encoding="utf-8") as f:
+#     json.dump(valid_products, f, ensure_ascii=False, indent=2)
+with open("products_clustered_new.json", "w", encoding="utf-8") as f:
     json.dump(valid_products, f, ensure_ascii=False, indent=2)
 
 # 클러스터 중심 좌표 저장
-with open("static/data/cluster_centers.json", "w", encoding="utf-8") as f:
+# with open("static/data/cluster_centers.json", "w", encoding="utf-8") as f:
+#     json.dump(kmeans.cluster_centers_.tolist(), f, ensure_ascii=False, indent=2)
+with open("cluster_centers_new.json", "w", encoding="utf-8") as f:
     json.dump(kmeans.cluster_centers_.tolist(), f, ensure_ascii=False, indent=2)
 
 print(" Clustering complete. Files saved.")

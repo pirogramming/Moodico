@@ -43,7 +43,7 @@ def crawled_product_detail(request, crawled_id):
         logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
         
         # products_clustered.json에서 제품 정보 찾기
-        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
+        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered_new.json')
         logger.info(f"제품 데이터 파일 경로: {product_path}")
         
         with open(product_path, 'r', encoding='utf-8') as f:
@@ -263,12 +263,12 @@ def get_liked_products_color_info(liked_products):
     import os
     
     # 좌표 정보가 포함된 제품 데이터 로드
-    json_path = os.path.join('static', 'data', 'products_clustered.json')
+    json_path = os.path.join('static', 'data', 'products_clustered_new.json')
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("products_clustered.json 파일을 찾을 수 없습니다.")
+        logger.error("products_clustered_new.json 파일을 찾을 수 없습니다.")
         return []
     
     # 제품명으로 매칭하여 색상 정보 추가
