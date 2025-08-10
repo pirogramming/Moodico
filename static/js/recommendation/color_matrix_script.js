@@ -1,4 +1,5 @@
-// warmCool, lightDeep 값을 얻기 위한 함수
+// hsl로부터 warmCool, lightDeep 값을 얻기 위한 함수
+/*
 const getCoords = (hex) => {
   const rgb = hexToRgb(hex);
   if (!rgb) return null;
@@ -8,6 +9,7 @@ const getCoords = (hex) => {
 
   return calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
 };
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
     const matrixContainer = document.querySelector('.color-matrix-container');
@@ -183,7 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
         productsToRender.forEach(product => {
-            //const coords = getCoords(product.hex);
             const coords = calculateCoordinatesFromLAB(product.lab_l, product.lab_a, product.lab_b);
             if (!coords) return false;
 
@@ -215,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoneBottom = zoneTop + zone.area.height;
         
         return makeupProducts.filter(product => {
-            //const coords = getCoords(product.hex);
             const coords = calculateCoordinatesFromLAB(product.lab_l, product.lab_a, product.lab_b);
             if (!coords) return false;
 

@@ -9,6 +9,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
 from moodico.products.models import ProductLike
+from moodico.products.models import ProductLike, ProductRating
 from django.db import models
 import logging
 logger = logging.getLogger(__name__)
@@ -36,6 +37,69 @@ def product_detail(request, product_id):
         'image': static('images/test.jpg')
     }
     return render(request, 'products/detail.html', {'product': product})
+
+def crawled_product_detail(request, crawled_id):
+    """크롤링된 제품 상세 페이지 뷰"""
+    try:
+        logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
+        
+        # products_clustered.json에서 제품 정보 찾기
+        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered_new.json')
+        logger.info(f"제품 데이터 파일 경로: {product_path}")
+        
+        with open(product_path, 'r', encoding='utf-8') as f:
+            products = json.load(f)
+        
+        logger.info(f"로드된 제품 수: {len(products)}")
+        
+        # crawled_id로 제품 찾기
+        product = None
+        logger.info(f"찾고 있는 제품 ID: {crawled_id}")
+        logger.info(f"제품 ID 타입: {type(crawled_id)}")
+        
+        # 처음 몇 개 제품의 ID 출력 (디버깅용)
+        for i, p in enumerate(products[:5]):
+            logger.info(f"제품 {i}: ID={p.get('id')} (타입: {type(p.get('id'))}), 이름={p.get('name', 'Unknown')}")
+        
+        for p in products:
+            if p.get('id') == crawled_id:
+                product = p
+                logger.info(f"제품 찾음: {p.get('name', 'Unknown')}")
+                break
+        
+        if not product:
+            logger.warning(f"제품을 찾을 수 없음: crawled_id = {crawled_id}")
+            return render(request, 'products/detail.html', {
+                'error': '제품을 찾을 수 없습니다.',
+                'product': None
+            })
+        
+        logger.info(f"제품 정보: {product}")
+        
+        # 간단한 테스트를 위해 기본 HTML 응답도 시도
+        if request.GET.get('debug') == '1':
+            return HttpResponse(f"""
+            <html>
+            <body>
+                <h1>디버그 모드</h1>
+                <p>제품 ID: {crawled_id}</p>
+                <p>제품명: {product.get('name', 'N/A')}</p>
+                <p>브랜드: {product.get('brand', 'N/A')}</p>
+                <p>가격: {product.get('price', 'N/A')}</p>
+                <p>URL: {product.get('url', 'N/A')}</p>
+                <a href="/products/detail/{crawled_id}/">상세 페이지로</a>
+            </body>
+            </html>
+            """)
+        
+        return render(request, 'products/crawled_detail.html', {'product': product})
+        
+    except Exception as e:
+        logger.error(f"크롤링된 제품 상세 정보 로드 실패: {e}")
+        return render(request, 'products/detail.html', {
+            'error': '제품 정보를 불러오는 중 오류가 발생했습니다.',
+            'product': None
+        })
 
 def product_list(request):
     json_path = os.path.join('static', 'data', 'products.json')
@@ -199,12 +263,12 @@ def get_liked_products_color_info(liked_products):
     import os
     
     # 좌표 정보가 포함된 제품 데이터 로드
-    json_path = os.path.join('static', 'data', 'products_clustered.json')
+    json_path = os.path.join('static', 'data', 'products_clustered_new.json')
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("products_clustered.json 파일을 찾을 수 없습니다.")
+        logger.error("products_clustered_new.json 파일을 찾을 수 없습니다.")
         return []
     
     # 제품명으로 매칭하여 색상 정보 추가
@@ -276,40 +340,170 @@ def clear_likes(request):
 
 @require_http_methods(["GET"])
 def get_product_like_count(request):
-    """제품별 찜 개수 조회 API"""
+    """제품별 좋아요 수 조회 API"""
     try:
         product_id = request.GET.get('product_id')
         if not product_id:
-            return JsonResponse({
-                'success': False,
-                'message': '제품 ID가 필요합니다.'
-            }, status=400)
+            return JsonResponse({'error': '제품 ID가 필요합니다.'}, status=400)
         
-        # 해당 제품의 총 찜 개수
         like_count = ProductLike.objects.filter(product_id=product_id).count()
         
-        # 현재 사용자가 찜했는지 확인
-        user = request.user if request.user.is_authenticated else None
-        session_nickname = request.session.get("nickname")
-        
-        is_liked = False
-        if user:
-            is_liked = ProductLike.objects.filter(user=user, product_id=product_id).exists()
-        elif session_nickname:
-            is_liked = ProductLike.objects.filter(session_nickname=session_nickname, product_id=product_id).exists()
-        
         return JsonResponse({
-            'success': True,
-            'like_count': like_count,
-            'is_liked': is_liked
+            'product_id': product_id,
+            'like_count': like_count
         })
         
     except Exception as e:
-        logger.error(f"찜 개수 조회 오류: {str(e)}")
+        logger.error(f"제품 좋아요 수 조회 실패: {e}")
+        return JsonResponse({'error': '좋아요 수를 가져오는 중 오류가 발생했습니다.'}, status=500)
+
+# ------------------------------
+# 별점 기능
+# ------------------------------
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def submit_product_rating(request):
+    """제품 별점 제출 API"""
+    try:
+        data = json.loads(request.body)
+        product_id = data.get('product_id')
+        rating = data.get('rating')
+        comment = data.get('comment', '')
+        
+        if not product_id or not rating:
+            return JsonResponse({'error': '제품 ID와 별점이 필요합니다.'}, status=400)
+        
+        if rating not in [1, 2, 3, 4, 5]:
+            return JsonResponse({'error': '별점은 1~5점 사이여야 합니다.'}, status=400)
+        
+        # 사용자 정보 가져오기
+        user = request.user if request.user.is_authenticated else None
+        session_nickname = None
+        
+        if not user:
+            # 세션 사용자 처리
+            session_nickname = request.session.get('nickname')
+            if not session_nickname:
+                return JsonResponse({'error': '로그인이 필요합니다.'}, status=401)
+        
+        # 제품 정보 가져오기 (실제로는 데이터베이스에서 조회해야 함)
+        product_name = data.get('product_name', f'제품 {product_id}')
+        product_brand = data.get('product_brand', '브랜드')
+        
+        # 기존 별점이 있는지 확인
+        existing_rating = None
+        if user:
+            existing_rating = ProductRating.objects.filter(user=user, product_id=product_id).first()
+        else:
+            existing_rating = ProductRating.objects.filter(session_nickname=session_nickname, product_id=product_id).first()
+        
+        if existing_rating:
+            # 기존 별점 업데이트
+            existing_rating.rating = rating
+            existing_rating.comment = comment
+            existing_rating.save()
+            message = '별점이 수정되었습니다.'
+        else:
+            # 새 별점 생성
+            ProductRating.objects.create(
+                user=user,
+                session_nickname=session_nickname,
+                product_id=product_id,
+                product_name=product_name,
+                product_brand=product_brand,
+                rating=rating,
+                comment=comment
+            )
+            message = '별점이 등록되었습니다.'
+        
         return JsonResponse({
-            'success': False,
-            'message': '서버 오류가 발생했습니다.'
-        }, status=500)
+            'success': True,
+            'message': message,
+            'rating': rating
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': '잘못된 JSON 형식입니다.'}, status=400)
+    except Exception as e:
+        logger.error(f"제품 별점 제출 실패: {e}")
+        return JsonResponse({'error': '별점을 저장하는 중 오류가 발생했습니다.'}, status=500)
+
+@require_http_methods(["GET"])
+def get_product_rating(request):
+    """제품 별점 조회 API"""
+    try:
+        product_id = request.GET.get('product_id')
+        if not product_id:
+            return JsonResponse({'error': '제품 ID가 필요합니다.'}, status=400)
+        
+        # 제품의 모든 별점 조회
+        ratings = ProductRating.objects.filter(product_id=product_id)
+        
+        # 평균 별점 계산
+        if ratings.exists():
+            avg_rating = sum(r.rating for r in ratings) / ratings.count()
+            total_ratings = ratings.count()
+        else:
+            avg_rating = 0
+            total_ratings = 0
+        
+        # 사용자의 별점 조회
+        user_rating = None
+        if request.user.is_authenticated:
+            user_rating = ratings.filter(user=request.user).first()
+        else:
+            session_nickname = request.session.get('nickname')
+            if session_nickname:
+                user_rating = ratings.filter(session_nickname=session_nickname).first()
+        
+        # 별점 분포 계산
+        rating_distribution = {}
+        for i in range(1, 6):
+            rating_distribution[i] = ratings.filter(rating=i).count()
+        
+        return JsonResponse({
+            'product_id': product_id,
+            'average_rating': round(avg_rating, 1),
+            'total_ratings': total_ratings,
+            'user_rating': user_rating.rating if user_rating else None,
+            'user_comment': user_rating.comment if user_rating else None,
+            'rating_distribution': rating_distribution
+        })
+        
+    except Exception as e:
+        logger.error(f"제품 별점 조회 실패: {e}")
+        return JsonResponse({'error': '별점을 가져오는 중 오류가 발생했습니다.'}, status=500)
+
+@require_http_methods(["GET"])
+def get_product_ratings_list(request):
+    """제품 별점 목록 조회 API"""
+    try:
+        product_id = request.GET.get('product_id')
+        if not product_id:
+            return JsonResponse({'error': '제품 ID가 필요합니다.'}, status=400)
+        
+        # 제품의 모든 별점 조회 (최신순)
+        ratings = ProductRating.objects.filter(product_id=product_id).order_by('-created_at')
+        
+        ratings_data = []
+        for rating in ratings:
+            ratings_data.append({
+                'id': str(rating.id),
+                'rating': rating.rating,
+                'comment': rating.comment,
+                'created_at': rating.created_at.strftime('%Y-%m-%d'),
+                'user_name': rating.user.username if rating.user else rating.session_nickname
+            })
+        
+        return JsonResponse({
+            'product_id': product_id,
+            'ratings': ratings_data
+        })
+        
+    except Exception as e:
+        logger.error(f"제품 별점 목록 조회 실패: {e}")
+        return JsonResponse({'error': '별점 목록을 가져오는 중 오류가 발생했습니다.'}, status=500)
 
 
 @require_http_methods(["GET"])
@@ -365,12 +559,12 @@ def get_top_liked_products(limit=10):
     from collections import defaultdict
     
     # 전체 제품 데이터 로드
-    json_path = os.path.join('static', 'data', 'all_products.json')
+    json_path = os.path.join('static', 'data', 'all_products_hex_update_tempk=4_2_1_1.json')
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("all_products.json 파일을 찾을 수 없습니다.")
+        logger.error("all_products_hex_update_tempk=4_2_1_1.json 파일을 찾을 수 없습니다.")
         return []
     
     # 제품명+브랜드별로 찜 개수 집계 (중복 제거)

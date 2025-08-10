@@ -123,7 +123,7 @@ function displayColorOnMatrix(hex, warmCool, lightDeep) {
 }
 
 // HSL로부터 warmCool, lightDeep 수치를 계산하는 함수
-
+/*
 function calculateCoordinatesFromHsl(h, s, l) {
     if (h === null || s === null || l === null) {
         return null;
@@ -164,20 +164,37 @@ function calculateCoordinatesFromHsl(h, s, l) {
 
     return { warmCool: finalWarmCool, lightDeep: finalLightDeep };
 }
+*/
+
+// sigmoid 함수를 통한 비선형 매핑 시도
+function sigmoid(x){
+    return 1/(1+Math.exp(-x));
+}
+function enhanceContrast(value) {
+    return (1 - Math.cos(value * Math.PI)) / 2;
+}
 
 function calculateCoordinatesFromLAB(l, a, b){
     const l_star = l;
     const a_star = a;
     const b_star = b;
 
-    const lightDeep = 100 - l_star;
     const warmCoolScore = (a_star * 0.5) + (b_star * 1.0);
 
-    const normalizedWarmCool = (warmCoolScore + 200) / 400 * 100;
-    const scale = 2.8;
-    const offset = -110;
-    let warmCool = (normalizedWarmCool * scale) + offset;
-    warmCool = Math.max(0, Math.min(100, warmCool));
+    // 비선형 매핑 - sigmoid 함수 사용
+    const spreadWCFactor = 35;
+    const scaledWCScore = (warmCoolScore - 35) / spreadWCFactor;
+    const sigmoidWCmiddleValue = sigmoid(scaledWCScore);
+    const sigmoidWCValue = enhanceContrast(sigmoidWCmiddleValue) + 0.03;
+
+    // lightDeep에 선형 매핑 간격 넓히기 적용 ..
+    const scale = 1.1;
+    const offset = -7;
+    let lightScore = (l_star * scale) + offset;
+    lightScore = Math.max(0, Math.min(100, lightScore));
+
+    const warmCool = sigmoidWCValue * 100;
+    const lightDeep = 100 - lightScore;
 
     return { warmCool: warmCool, lightDeep: lightDeep };
 }
@@ -214,6 +231,9 @@ function renderRecommendations(products) {
         const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
         card.dataset.productId = p.id || uniqueId;
         
+        // 디버깅: 실제 제품 ID와 생성된 ID 출력
+        console.log(`제품 ${index}: 원본 ID=${p.id}, 생성된 ID=${card.dataset.productId}`);
+        
         console.log(`Color analyzer card ${index}: ID=${card.dataset.productId}, Name=${p.color_name || p.name}`);
         
         card.innerHTML = `
@@ -225,8 +245,10 @@ function renderRecommendations(products) {
                 <div class="name">${p.color_name}</div>
                 <div class="price">${p.price}</div>
             </div>
-            <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
-            <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
+            <div class="button-container">
+                <a class="recommendation-button view-detail-btn" href="/products/detail/${p.id}/" target="_blank">보러가기</a>
+                <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
+            </div>
         `;
         box.appendChild(card);
         
@@ -234,6 +256,17 @@ function renderRecommendations(products) {
         if (window.restoreLikeStateForCard) {
             window.restoreLikeStateForCard(card);
         }
+        
+        // 보러가기 버튼에 이벤트 리스너 추가
+        const viewDetailBtn = card.querySelector('.view-detail-btn');
+        if (viewDetailBtn) {
+            viewDetailBtn.addEventListener('click', function(e) {
+                console.log('보러가기 클릭:', p.id, p.name);
+            });
+        }
+        
+        // 디버깅: 카드 정보 출력
+        console.log(`추천 제품 카드 생성: ID=${p.id}, 이름=${p.name}, 브랜드=${p.brand}`);
     });
 }
 
@@ -290,51 +323,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const hexCodeDisplay = document.getElementById('hex-code-display');
     const analyzeColorButton = document.getElementById('analyze-color-button'); 
 
-
     function analyzeSelectedColor() {
       const hex = hexCodeDisplay.textContent.trim(); // #FFFFFF 형태
       if (hex && hex !== '#FFFFFF') {
-          const rgb = hexToRgb(hex);
-          if (rgb) {
-              const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-              if (hsl) {
-                  const coords = calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
-                  if (coords) {
-                      console.log(`Analyzed Color: ${hex}`);
-                      console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
-                      console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
+            const rgb = hexToRgb(hex);
+            if (rgb) {
+                const lab = rgbToLab(rgb[0], rgb[1], rgb[2]);
+                if (lab) {
+                    const coords = calculateCoordinatesFromLAB(lab[0], lab[1], lab[2]);
+                    if (coords) {
+                        console.log(`Analyzed Color: ${hex}`);
+                        console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
+                        console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
                     
-                      // 색상을 매트릭스에 표시
-                      displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
+                        // 색상을 매트릭스에 표시
+                        displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
 
-                      // Send to backend
-                      const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
-                    fetch("/recommend/recommend_by_color/", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": getCookie("csrftoken"),
-                        },
-                        body: JSON.stringify({
-                            warmCool: coords.warmCool,
-                            lightDeep: coords.lightDeep,
-                            lab_l: lab_l,
-                            lab_a: lab_a,
-                            lab_b: lab_b
-                        }),
-                    })
+                        // Send to backend
+                        fetch("/recommend/recommend_by_color/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": getCookie("csrftoken"),
+                            },
+                            body: JSON.stringify({
+                                warmCool: coords.warmCool,
+                                lightDeep: coords.lightDeep,
+                                lab_l: lab[0],
+                                lab_a: lab[1],
+                                lab_b: lab[2]
+                            }),
+                        })
 
-                      .then(res => res.json())
-                      .then(data => {
-                          if (data.recommended) {
-                              renderRecommendations(data.recommended);
-                              displayRecommendationsOnMatrix(data.recommended);
-                          } else {
-                              console.warn("No recommended field in response", data);
-                          }
-                    console.log(data.recommended);
-                      }
-                    )
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.recommended) {
+                                renderRecommendations(data.recommended);
+                                displayRecommendationsOnMatrix(data.recommended);
+                            } else {
+                                console.warn("No recommended field in response", data);
+                            }
+                            console.log(data.recommended);
+                        })
                       .catch(err => console.error("추천 실패:", err));
                     }
                 }

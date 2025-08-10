@@ -1,3 +1,106 @@
+/*
+이전 css인데 혹시몰라서 남겨둠
+.product-detail-container {
+    padding: 50px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+}
+
+.product-image-area {
+    flex: 1 1 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.product-image-area img {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    display: block;
+}
+
+.product-info-area {
+    flex: 1 1 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-info-area h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.product-info-area .brand-name {
+    font-size: 1.2em;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.product-info-area .price {
+    font-size: 2em;
+    color: #ff6699;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.product-info-area .description {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.purchase-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.purchase-links button,
+.purchase-links a {
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.purchase-links .color-matrix-explore {
+    background-color: #eee;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.purchase-links .color-matrix-explore:hover {
+    background-color: #e5e5e5;
+}
+
+.purchase-links .buy-now {
+    background-color: darkslategray;
+    color: white;
+    border: none;
+}
+
+.purchase-links .buy-now:hover {
+    background-color: darkgray;
+}
+*/
+
 .product-detail-container {
     max-width: 1200px;
     margin: 0 auto;

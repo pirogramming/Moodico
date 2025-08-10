@@ -76,3 +76,34 @@ class ProductLike(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.product_name}"
+
+# ------------------------------
+# 별점 기능
+# ------------------------------
+
+class ProductRating(models.Model):
+    RATING_CHOICES = [
+        (1, '1점'),
+        (2, '2점'),
+        (3, '3점'),
+        (4, '4점'),
+        (5, '5점'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="별점 식별자")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, verbose_name="사용자")
+    session_nickname = models.CharField(max_length=100, null=True, blank=True, verbose_name="세션 닉네임")
+    product_id = models.CharField(max_length=255, verbose_name="제품 ID")
+    product_name = models.CharField(max_length=255, verbose_name="제품명")
+    product_brand = models.CharField(max_length=255, verbose_name="브랜드")
+    rating = models.IntegerField(choices=RATING_CHOICES, verbose_name="별점")
+    comment = models.TextField(blank=True, null=True, verbose_name="리뷰 코멘트")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="별점 작성일")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="별점 수정일")
+
+    class Meta:
+        unique_together = ['user', 'product_id']  # 같은 사용자가 같은 제품에 중복 별점 방지
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.username if self.user else self.session_nickname} - {self.product_name} ({self.rating}점)"
