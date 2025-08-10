@@ -15,8 +15,10 @@ import os
 from django.conf import settings
 
 TARGETS = [
-    {"brand": "romand", "url": "https://romand.co.kr/product/maincatedetail.html?cate_code=289"},
-    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/lips"}
+    {"brand": "romand", "url": "https://romand.co.kr/product/maincatedetail.html?cate_code=289", "category": "Lips"},
+    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/lips", "category": "Lips"},
+    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/cheeks/blush", "category": "blush"},
+    {"brand": "3ce", "url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow", "category": "eyeshadow"}
 ]
 
 SCROLL_COUNT = 4
@@ -33,7 +35,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 all_products = []
 
-def extract_romand_items():
+def extract_romand_items(category):
     items = driver.find_elements(By.CSS_SELECTOR, 'li.list_prd_item')
     results = []
     for item in items:
@@ -44,7 +46,7 @@ def extract_romand_items():
             url = item.find_element(By.CSS_SELECTOR, 'a').get_attribute('href')
             results.append({
                 "brand": "romand",
-                "category": "Lips",
+                "category": category,
                 "name": name,
                 "color_name": name.split('/')[-1].strip(),
                 "image": image,
@@ -56,7 +58,7 @@ def extract_romand_items():
             continue
     return results
 
-def extract_3ce_items():
+def extract_3ce_items(category):
     items = driver.find_elements(By.CSS_SELECTOR, 'li.tce-grid__item')
     results = []
     for item in items:
@@ -68,7 +70,7 @@ def extract_3ce_items():
 
             results.append({
                 "brand": "3CE",
-                "category": "Lips",
+                "category": category,
                 "name": name,
                 "color_name": name.split('/')[-1].strip() if '/' in name else name,
                 "url": f"https://www.3cecosmetics.com{url}" if url.startswith('/') else url,
@@ -109,6 +111,7 @@ def extract_average_color(img_url):
 for target in TARGETS:
     brand = target["brand"]
     url = target["url"]
+    category = target["category"]
     print(f"Scraping {brand}...")
 
     driver.get(url)
@@ -119,14 +122,14 @@ for target in TARGETS:
         time.sleep(2)
 
     if brand == "romand":
-        raw_items = extract_romand_items()
+        raw_items = extract_romand_items(category)
     elif brand == "3ce":
-        raw_items = extract_3ce_items()
+        raw_items = extract_3ce_items(category)
     else:
         print(f"No extractor defined for {brand}")
         continue
 
-    print(f"  → {len(raw_items)} items found for {brand}")
+    print(f"  → {len(raw_items)} items found for {brand} ({category})")
 
     for item in raw_items:
         hex_color, lab_l, lab_a, lab_b = extract_average_color(item["image"])

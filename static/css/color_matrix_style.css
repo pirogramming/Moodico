@@ -14,6 +14,7 @@ main {
     align-items: center;
     gap: 20px;
     margin-right: 30px;
+    perspective: 1000px;
 }
 
 /* 무드 선택기 스타일 */
@@ -54,17 +55,113 @@ main {
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
+/* 종류 선택기 스타일 */
+.category-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.category-dropdown {
+    padding: 12px 20px;
+    border: 2px solid #667eea;
+    border-radius: 25px;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    min-width: 150px;
+}
+
+.category-dropdown:hover {
+    border-color: #5a6fd8;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.category-dropdown:focus {
+    border-color: #5a6fd8;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.matrix-selector {
+    display: flex;
+    gap: 30px;
+}
+
 .color-matrix-container {
     position: relative;
     width: 600px; 
     height: 600px; 
-    background: linear-gradient(to bottom right, #f8f0ff, #e0efff, #ffe0f0, #fff8e0); 
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     overflow: hidden; 
     border: 1px solid #ddd;
     margin-right: 30px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+    transform: rotateX(0deg) rotateY(0deg);
 }
+
+/*정육면체의 면 역할들 */
+.matrix-cube {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+}
+
+.cube-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backface-visibility: hidden;
+}
+
+.face-all {
+    transform: rotateY(0deg) translateZ(300px);
+}
+
+.face-lips {
+    transform: rotateY(90deg) translateZ(300px);
+}
+
+.face-eyeshadow {
+    transform: rotateX(90deg) translateZ(300px);
+}
+
+.face-blush {
+    transform: rotateX(-90deg) translateZ(300px);
+}
+
+/*.matrix-cube에 적용하여 정육면체 자체를 회전*/
+.matrix-cube.show-all {
+  transform: rotateY(0deg);
+}
+.matrix-cube.show-lips {
+  transform: rotateY(-90deg);
+}
+.matrix-cube.show-eyeshadow {
+  transform: rotateX(-90deg);
+}
+.matrix-cube.show-blush {
+  transform: rotateX(90deg);
+}
+
+.axis-label.all-label.top-label { transform: translate(-50%, -50%); }
 
 .quadrant-grid {
     position: absolute;
@@ -99,11 +196,11 @@ main {
 
 .makeup-products-container {
     position: absolute;
+    background: linear-gradient(to bottom right, #f8f0ff, #e0efff, #ffe0f0, #fff8e0); 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 2; 
 }
 
 .product-circle {
@@ -172,7 +269,7 @@ main {
     border: 2px dashed #8a2be2; 
     background-color: rgba(138, 43, 226, 0.1); 
     cursor: grab;
-    z-index: 3; 
+    z-index: 10; 
     min-width: 50px;
     min-height: 50px;
     box-sizing: border-box;
@@ -253,8 +350,9 @@ main {
 }
 
 .selected-products-display li:hover {
-    transform: translateX(5px);
+    transform: translateY(-5px);
     background-color: #eef;
+    cursor: pointer;
 }
 
 .selected-products-display li .product-color-swatch {
@@ -268,15 +366,18 @@ main {
 .selected-products-display li span {
     font-weight: 500;
     color: #555;
-    flex-grow: 1;
-}
 
-.selected-products-display li .product-mood {
+}
+.selected-products-display li span:first-of-type {
+    flex-grow: 1; 
+}
+.selected-products-display li .product-category {
     font-size: 0.85em;
     color: #888;
     background-color: #eee;
     padding: 3px 8px;
     border-radius: 5px;
+    text-align: right;
 }
 
 .hidden {

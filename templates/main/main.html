@@ -1,41 +1,73 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block extra_head %}
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block extra_head %} {% endblock%} {% block content %}
 <div class="main-container">
-    <h3>Moodico</h3>
-    <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
+  <h3>Moodico</h3>
+  <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
 
-    <div class="exploration-models">
-        <a href="{% url 'my_item_recommendation' %}" class="model-card item-based">
-            <div class="icon-circle">🔍</div>
-            <div class="model-card-content">
-                <h3>내 아이템 기반 추천</h3>
-                <p>가진 제품으로 완벽한 조합 찾기</p>
-            </div>
-            <span class="arrow-icon">→</span>
-        </a>
+  <div class="exploration-models">
+    <a href="{% url 'my_item_recommendation' %}" class="model-card item-based">
+      <div class="icon-circle">🔍</div>
+      <div class="model-card-content">
+        <h3>내 아이템 기반 추천</h3>
+        <p>가진 제품으로 완벽한 조합 찾기</p>
+      </div>
+      <span class="arrow-icon">→</span>
+    </a>
 
-        <a href="{% url 'mood_test' %}" class="model-card mood-test">
-            <div class="icon-circle">✏️</div>
-            <div class="model-card-content">
-                <h3>무드 테스트</h3>
-                <p>10가지 추구미 중 나만의 스타일 발견</p>
-            </div>
-            <span class="arrow-icon">→</span>
-        </a>
+    <a href="{% url 'mood_test' %}" class="model-card mood-test">
+      <div class="icon-circle">✏️</div>
+      <div class="model-card-content">
+        <h3>무드 테스트</h3>
+        <p>10가지 추구미 중 나만의 스타일 발견</p>
+      </div>
+      <span class="arrow-icon">→</span>
+    </a>
 
-        <a href="{% url 'color_matrix_explore' %}" class="model-card color-matrix">
-            <div class="icon-circle">📈</div>
-            <div class="model-card-content">
-                <h3>색상 매트릭스 탐색</h3>
-                <p>시각적 색상 맵에서 완벽한 조합 발견</p>
-            </div>
-            <span class="arrow-icon">→</span>
-        </a>
+    <a href="{% url 'color_matrix_explore' %}" class="model-card color-matrix">
+      <div class="icon-circle">📈</div>
+      <div class="model-card-content">
+        <h3>색상 매트릭스 탐색</h3>
+        <p>시각적 색상 맵에서 완벽한 조합 발견</p>
+      </div>
+      <span class="arrow-icon">→</span>
+    </a>
+  </div>
+
+  <!-- 현재 아이템 랭킹 섹션 -->
+  <div class="ranking-section">
+    <div class="section-header">
+      <h2>🏆 현재 인기 아이템</h2>
+      <p>사용자들이 가장 많이 찜한 인기 제품들을 확인해보세요</p>
     </div>
+
+    <div class="ranking-preview">
+      {% for product in top_liked_products %}
+      <div class="ranking-item">
+        <div class="ranking-badge">{{ forloop.counter }}</div>
+        <img
+          src="{{ product.product_image|default:'/static/images/test.jpg' }}"
+          alt="{{ product.product_name }}"
+          onerror="this.src='/static/images/test.jpg'"
+        />
+        <div class="ranking-info">
+          <div class="product-brand">{{ product.product_brand }}</div>
+          <div class="product-name">{{ product.product_name }}</div>
+          <div class="like-count-display">
+            💜 {{ product.like_count }}명이 찜함
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="no-ranking">
+        <p>아직 찜한 제품이 없어요. 첫 번째로 찜해보세요! 💖</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="ranking-actions">
+      <a href="{% url 'product_ranking' %}" class="ranking-detail-btn">
+        자세히 보기 →
+      </a>
+    </div>
+  </div>
 </div>
 {% endblock %}
