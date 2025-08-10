@@ -51,7 +51,6 @@ def product_list(request):
 def search_product(request):
     query = request.GET.get('q', '').lower().strip()
     query_words = query.split()
-
     product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'test_products.json')
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)

@@ -183,7 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
         productsToRender.forEach(product => {
-            const coords = getCoords(product.hex);
+            //const coords = getCoords(product.hex);
+            const coords = calculateCoordinatesFromLAB(product.lab_l, product.lab_a, product.lab_b);
             if (!coords) return false;
 
             const productCircle = document.createElement('a');
@@ -214,7 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const zoneBottom = zoneTop + zone.area.height;
         
         return makeupProducts.filter(product => {
-            const coords = getCoords(product.hex);
+            //const coords = getCoords(product.hex);
+            const coords = calculateCoordinatesFromLAB(product.lab_l, product.lab_a, product.lab_b);
             if (!coords) return false;
 
             return coords.warmCool >= zoneLeft && coords.warmCool <= zoneRight &&
