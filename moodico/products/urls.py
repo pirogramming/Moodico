@@ -16,4 +16,9 @@ urlpatterns = [
     path('multiple_like_info/', views.get_multiple_products_like_info, name='get_multiple_products_like_info'),
     path('ranking/', views.product_ranking_page, name='product_ranking'),
     path('ranking/api/', views.product_ranking_api, name='product_ranking_api'),
+    
+    # 별점 관련 URL
+    path('submit_rating/', views.submit_product_rating, name='submit_product_rating'),
+    path('get_rating/', views.get_product_rating, name='get_product_rating'),
+    path('get_ratings_list/', views.get_product_ratings_list, name='get_product_ratings_list'),
 ]
