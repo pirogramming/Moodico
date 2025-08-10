@@ -1,6 +1,6 @@
 .image-preview-area img.color-picker-active,
 .image-preview-area canvas.color-picker-active {
-    cursor: url("{% static 'images/eyedropper.svg' %}") 12 12,
+    cursor: url("../images/eyedropper.svg") 12 12, auto,
     crosshair;
 }
 
