@@ -1,5 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/upload/upload.css' %}" />
+<style>
+  .image-preview-area img.color-picker-active,
+  .image-preview-area canvas.color-picker-active {
+    cursor: url("{% static 'images/eyedropper.svg' %}") 12 12,
+    crosshair;
+  }
+</style>
 {% endblock%} {% block content %}
 <div class="my-item-recommendation-container">
   <!-- 메인 콘텐츠 영역: 업로드 창과 매트릭스를 나란히 배치 -->
