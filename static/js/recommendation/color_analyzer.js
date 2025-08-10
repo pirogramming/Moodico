@@ -165,19 +165,39 @@ function calculateCoordinatesFromHsl(h, s, l) {
     return { warmCool: finalWarmCool, lightDeep: finalLightDeep };
 }
 */
+
+// sigmoid 함수를 통한 비선형 매핑 시도
+function sigmoid(x){
+    return 1/(1+Math.exp(-x));
+}
+
 function calculateCoordinatesFromLAB(l, a, b){
     const l_star = l;
     const a_star = a;
     const b_star = b;
 
-    const lightDeep = 100 - l_star;
+    const lightDeepScore = 100 - l_star;
     const warmCoolScore = (a_star * 0.5) + (b_star * 1.0);
 
-    const normalizedWarmCool = (warmCoolScore + 200) / 400 * 100;
-    const scale = 2.8;
-    const offset = -110;
-    let warmCool = (normalizedWarmCool * scale) + offset;
-    warmCool = Math.max(0, Math.min(100, warmCool));
+    // 선형 매핑
+    // const normalizedWarmCool = (warmCoolScore + 200) / 400 * 100;
+    // const scale = 2.8;
+    // const offset = -110;
+    // let warmCool = (normalizedWarmCool * scale) + offset;
+    // warmCool = Math.max(0, Math.min(100, warmCool));
+
+    // 비선형 매핑 - sigmoid 함수 사용
+    const spreadWCFactor = 20;
+    const scaledWCScore = (warmCoolScore - 30) / spreadWCFactor;
+    const sigmoidWCValue = sigmoid(scaledWCScore);
+
+    // lightDeep에도 비성형 적용해보기 .. - 인지적으로 옳은가 .?
+    const spreadLDFactor = 20;
+    const scaledLDScore = (lightDeepScore - 50) / spreadLDFactor;
+    const sigmoidLDValue = sigmoid(scaledLDScore);
+
+    const warmCool = sigmoidWCValue * 100;
+    const lightDeep = 100 - sigmoidLDValue;
 
     return { warmCool: warmCool, lightDeep: lightDeep };
 }
