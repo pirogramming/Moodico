@@ -39,7 +39,12 @@
           >
             찜 해제
           </button>
-          <button class="purchase-btn">구매하기</button>
+          <a
+            class="purchase-btn"
+            href="#"
+            onclick="return purchaseProduct('{{ liked_product.product_id }}')"
+            >구매하기</a
+          >
         </div>
       </div>
     </div>
@@ -212,6 +217,30 @@
 
     // 찜한 제품들의 색상 매트릭스 표시
     const likedProductsColors = {{ liked_products_colors|safe }};
+    console.log('템플릿에서 받은 likedProductsColors:', likedProductsColors);
+
+    // 구매하기 함수 - 매트릭스 검색 페이지와 동일한 방식
+    function purchaseProduct(productId) {
+        console.log('구매하기 버튼 클릭됨, 제품 ID:', productId);
+        console.log('likedProductsColors 데이터:', likedProductsColors);
+
+        // likedProductsColors에서 해당 제품의 URL 찾기
+        const product = likedProductsColors.find(p => p.id === productId);
+        console.log('찾은 제품:', product);
+
+        if (product && product.url && product.url !== '#') {
+            console.log('URL 열기:', product.url);
+            // 새 탭에서 제품 URL 열기
+            window.open(product.url, '_blank');
+            return false; // 기본 링크 동작 방지
+        } else {
+            console.log('URL을 찾을 수 없음. 제품 ID:', productId);
+            console.log('제품 데이터:', product);
+            // URL이 없는 경우 메시지 표시
+            showLikeMessage('해당 제품의 구매 링크를 찾을 수 없습니다.');
+            return false; // 기본 링크 동작 방지
+        }
+    }
 
     function renderLikedProductsMatrix() {
         const container = document.getElementById('liked-products-container');
@@ -523,6 +552,13 @@
       height: 400px;
       max-width: 400px;
     }
+  }
+
+  /* 구매하기 버튼 스타일 - <a> 태그용 */
+  .purchase-btn {
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
   }
 </style>
 {% endblock %}
