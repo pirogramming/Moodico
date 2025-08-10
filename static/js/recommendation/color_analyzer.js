@@ -181,22 +181,15 @@ function calculateCoordinatesFromLAB(l, a, b){
 
     const warmCoolScore = (a_star * 0.5) + (b_star * 1.0);
 
-    // 선형 매핑
-    // const normalizedWarmCool = (warmCoolScore + 200) / 400 * 100;
-    // const scale = 2.8;
-    // const offset = -110;
-    // let warmCool = (normalizedWarmCool * scale) + offset;
-    // warmCool = Math.max(0, Math.min(100, warmCool));
-
     // 비선형 매핑 - sigmoid 함수 사용
-    const spreadWCFactor = 40;
+    const spreadWCFactor = 35;
     const scaledWCScore = (warmCoolScore - 35) / spreadWCFactor;
     const sigmoidWCmiddleValue = sigmoid(scaledWCScore);
-    const sigmoidWCValue = enhanceContrast(sigmoidWCmiddleValue);
+    const sigmoidWCValue = enhanceContrast(sigmoidWCmiddleValue) + 0.03;
 
     // lightDeep에 선형 매핑 간격 넓히기 적용 ..
-    const scale = 1.2;
-    const offset = -12;
+    const scale = 1.1;
+    const offset = -7;
     let lightScore = (l_star * scale) + offset;
     lightScore = Math.max(0, Math.min(100, lightScore));
 
