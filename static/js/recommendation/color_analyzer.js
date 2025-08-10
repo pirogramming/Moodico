@@ -203,6 +203,7 @@ function renderRecommendations(products) {
                 <div class="price">${p.price}</div>
             </div>
             <a class="recommendation-button" href="${p.url}" target="_blank">보러가기</a>
+            <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
         `;
         box.appendChild(card);
         
