@@ -36,6 +36,69 @@ def product_detail(request, product_id):
     }
     return render(request, 'products/detail.html', {'product': product})
 
+def crawled_product_detail(request, crawled_id):
+    """크롤링된 제품 상세 페이지 뷰"""
+    try:
+        logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
+        
+        # products_clustered.json에서 제품 정보 찾기
+        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
+        logger.info(f"제품 데이터 파일 경로: {product_path}")
+        
+        with open(product_path, 'r', encoding='utf-8') as f:
+            products = json.load(f)
+        
+        logger.info(f"로드된 제품 수: {len(products)}")
+        
+        # crawled_id로 제품 찾기
+        product = None
+        logger.info(f"찾고 있는 제품 ID: {crawled_id}")
+        logger.info(f"제품 ID 타입: {type(crawled_id)}")
+        
+        # 처음 몇 개 제품의 ID 출력 (디버깅용)
+        for i, p in enumerate(products[:5]):
+            logger.info(f"제품 {i}: ID={p.get('id')} (타입: {type(p.get('id'))}), 이름={p.get('name', 'Unknown')}")
+        
+        for p in products:
+            if p.get('id') == crawled_id:
+                product = p
+                logger.info(f"제품 찾음: {p.get('name', 'Unknown')}")
+                break
+        
+        if not product:
+            logger.warning(f"제품을 찾을 수 없음: crawled_id = {crawled_id}")
+            return render(request, 'products/detail.html', {
+                'error': '제품을 찾을 수 없습니다.',
+                'product': None
+            })
+        
+        logger.info(f"제품 정보: {product}")
+        
+        # 간단한 테스트를 위해 기본 HTML 응답도 시도
+        if request.GET.get('debug') == '1':
+            return HttpResponse(f"""
+            <html>
+            <body>
+                <h1>디버그 모드</h1>
+                <p>제품 ID: {crawled_id}</p>
+                <p>제품명: {product.get('name', 'N/A')}</p>
+                <p>브랜드: {product.get('brand', 'N/A')}</p>
+                <p>가격: {product.get('price', 'N/A')}</p>
+                <p>URL: {product.get('url', 'N/A')}</p>
+                <a href="/products/detail/{crawled_id}/">상세 페이지로</a>
+            </body>
+            </html>
+            """)
+        
+        return render(request, 'products/crawled_detail.html', {'product': product})
+        
+    except Exception as e:
+        logger.error(f"크롤링된 제품 상세 정보 로드 실패: {e}")
+        return render(request, 'products/detail.html', {
+            'error': '제품 정보를 불러오는 중 오류가 발생했습니다.',
+            'product': None
+        })
+
 def product_list(request):
     json_path = os.path.join('static', 'data', 'products.json')
     

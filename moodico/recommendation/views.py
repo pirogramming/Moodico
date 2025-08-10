@@ -85,6 +85,7 @@ def recommend_by_color(request):
         response = []
         for product, sim in top_matches:
             response.append({
+                "id": product.get("id"),  # 제품 ID 추가
                 "name": product.get("name"),
                 "color_name": product.get("color_name"),
                 "hex": product.get("hex"),
