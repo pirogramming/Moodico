@@ -287,9 +287,10 @@
         {% for product in recommended_products %}
         <div
           class="product-card"
-          data-product-id="{{ product.id|default:forloop.counter }}"
+          data-product-id="{{ product.brand|slugify }}-{{ product.product_name|slugify }}-{{ product.price|slugify }}-mood{{ forloop.counter }}"
         >
           <button class="like-button" title="좋아요"></button>
+          <span class="like-count">0</span>
           <img
             src="{{ product.image }}"
             alt="{{ product.product_name }}"
