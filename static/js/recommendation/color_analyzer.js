@@ -306,51 +306,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const hexCodeDisplay = document.getElementById('hex-code-display');
     const analyzeColorButton = document.getElementById('analyze-color-button'); 
 
-
     function analyzeSelectedColor() {
       const hex = hexCodeDisplay.textContent.trim(); // #FFFFFF 형태
       if (hex && hex !== '#FFFFFF') {
-          const rgb = hexToRgb(hex);
-          if (rgb) {
-              const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-              if (hsl) {
-                  const coords = calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
-                  if (coords) {
-                      console.log(`Analyzed Color: ${hex}`);
-                      console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
-                      console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
+            const rgb = hexToRgb(hex);
+            if (rgb) {
+                const lab = rgbToLab(rgb[0], rgb[1], rgb[2]);
+                if (lab) {
+                    const coords = calculateCoordinatesFromLAB(lab[0], lab[1], lab[2]);
+                    if (coords) {
+                        console.log(`Analyzed Color: ${hex}`);
+                        console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
+                        console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
                     
-                      // 색상을 매트릭스에 표시
-                      displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
+                        // 색상을 매트릭스에 표시
+                        displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
 
-                      // Send to backend
-                      const [lab_l, lab_a, lab_b] = rgbToLab(rgb[0], rgb[1], rgb[2]);
-                    fetch("/recommend/recommend_by_color/", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": getCookie("csrftoken"),
-                        },
-                        body: JSON.stringify({
-                            warmCool: coords.warmCool,
-                            lightDeep: coords.lightDeep,
-                            lab_l: lab_l,
-                            lab_a: lab_a,
-                            lab_b: lab_b
-                        }),
-                    })
+                        // Send to backend
+                        fetch("/recommend/recommend_by_color/", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "X-CSRFToken": getCookie("csrftoken"),
+                            },
+                            body: JSON.stringify({
+                                warmCool: coords.warmCool,
+                                lightDeep: coords.lightDeep,
+                                lab_l: lab[0],
+                                lab_a: lab[1],
+                                lab_b: lab[2]
+                            }),
+                        })
 
-                      .then(res => res.json())
-                      .then(data => {
-                          if (data.recommended) {
-                              renderRecommendations(data.recommended);
-                              displayRecommendationsOnMatrix(data.recommended);
-                          } else {
-                              console.warn("No recommended field in response", data);
-                          }
-                    console.log(data.recommended);
-                      }
-                    )
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.recommended) {
+                                renderRecommendations(data.recommended);
+                                displayRecommendationsOnMatrix(data.recommended);
+                            } else {
+                                console.warn("No recommended field in response", data);
+                            }
+                            console.log(data.recommended);
+                        })
                       .catch(err => console.error("추천 실패:", err));
                     }
                 }
