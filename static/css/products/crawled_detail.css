@@ -24,7 +24,7 @@
 
   .product-detail-content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     gap: 60px;
     align-items: start;
   }
@@ -97,12 +97,30 @@
     background-color: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+    align-items: start;
   }
+
+.product-color-info > div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
   .product-color-info h3 {
     font-size: 1.2em;
     color: #333;
     margin-bottom: 15px;
+  }
+
+  .color-matrix-container{
+    grid-column: 2;
+    grid-row: 1 / -1; 
   }
 
   .color-swatch {

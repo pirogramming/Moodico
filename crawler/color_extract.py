@@ -1,5 +1,5 @@
 ## 기존 크롤링한 데이터(all_products.json)를 불러와서 image 필드로부터 hex 값과 lab 값을 뽑는 로직을 시험적으로 구현
-# 립 발색 부분이 이난 부분의 색상이 같이 섞이는 문제 때문에..
+# 립 발색 부분이 아닌 부분의 색상이 같이 섞이는 문제 때문에..
 
 import json
 import requests
