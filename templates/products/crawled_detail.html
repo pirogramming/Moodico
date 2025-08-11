@@ -2,6 +2,7 @@
 - {{ product.brand }}{% endblock %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/products/crawled_detail.css' %}" />
 <link rel="stylesheet" href="{% static 'css/products/rating.css' %}" />
+<link rel="stylesheet" href="{% static 'css/recommendation/matrix.css' %}" />
 {% endblock %} {% block content %}
 
 <div class="crawled-product-detail-container">
@@ -42,6 +43,29 @@
           class="color-swatch"
           style="background-color: {{ product.hex }};"
         ></div>
+        
+        <div class="color-matrix-container">
+          <div class="matrix-cube">
+            <div class="cube-face">
+              <div class="quadrant-grid">
+                <div class="quadrant top-left"></div>
+                <div class="quadrant top-right"></div>
+                <div class="quadrant bottom-left"></div>
+                <div class="quadrant bottom-right"></div>
+              </div>
+              <div class="axis-label top-label">Light</div>
+              <div class="axis-label bottom-label">Deep</div>
+              <div class="axis-label left-label">Cool</div>
+              <div class="axis-label right-label">Warm</div>
+              <div
+                id="liked-products-container"
+                class="makeup-products-container"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+
         <p class="color-hex">{{ product.hex }}</p>
         {% if product.warmCool is not None and product.lightDeep is not None %}
         <p class="color-coordinates">
