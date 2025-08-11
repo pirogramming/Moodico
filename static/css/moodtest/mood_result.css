@@ -422,6 +422,7 @@
     background: #f8f9fa;
     border-color: #ddd;
     transform: translateY(-2px);
+    text-decoration: none;
 }
 
 .action-btn.primary {
@@ -432,6 +433,7 @@
 
 .action-btn.primary:hover {
     background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {

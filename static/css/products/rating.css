@@ -1,6 +1,7 @@
 /* 별점 섹션 스타일 */
 .rating-section {
-  margin: 20px 0;
+  max-width: 1300px;
+  margin: 0 auto;
   padding: 20px;
   background-color: #f8f9fa;
   border-radius: 8px;
@@ -23,7 +24,7 @@
 .rating-number {
   font-size: 2rem;
   font-weight: bold;
-  color: #ff6b35;
+  color: mediumpurple;
 }
 
 .stars {
@@ -33,7 +34,7 @@
 
 .stars .star {
   font-size: 1.5rem;
-  color: #ffd700;
+  color: mediumpurple;
   cursor: default;
 }
 
@@ -76,7 +77,8 @@
 }
 
 #rating-comment {
-  width: 100%;
+  margin: 0 auto;
+  width: 95%;
   min-height: 80px;
   padding: 12px;
   border: 1px solid #ddd;
@@ -93,7 +95,7 @@
 }
 
 .submit-rating-btn {
-  background-color: #007bff;
+  background-color: #7252ff;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -106,7 +108,7 @@
 }
 
 .submit-rating-btn:hover {
-  background-color: #0056b3;
+  background-color: #5c16ff;
 }
 
 .submit-rating-btn:disabled {
@@ -116,11 +118,13 @@
 
 /* 별점 목록 섹션 */
 .ratings-list-section {
+  max-width: 1300px;
   margin-top: 30px;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #e9ecef;
+  margin: 0 auto;
 }
 
 .ratings-list-section h3 {

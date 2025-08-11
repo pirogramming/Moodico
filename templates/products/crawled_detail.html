@@ -8,17 +8,13 @@
 <div class="crawled-product-detail-container">
   <div class="product-detail-header">
     <h1>{{ product.name }}</h1>
-    <p class="brand-name">{{ product.brand }}</p>
+    <p class="brand-name">{{ product.brand }} <span class="product-category"> {{ product.category }}</span></p>
   </div>
 
   <div class="product-detail-content">
     <div class="product-image-section">
       {% if product.image %}
-      <img
-        src="{{ product.image }}"
-        alt="{{ product.name }}"
-        class="product-main-image"
-      />
+      <img src="{{ product.image }}" alt="{{ product.name }}" class="product-main-image" />
       {% else %}
       <div class="no-image-placeholder">
         <span>이미지 없음</span>
@@ -27,14 +23,6 @@
     </div>
 
     <div class="product-info-section">
-      <div class="product-basic-info">
-        <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-brand">{{ product.brand }}</p>
-        {% if product.category %}
-        <span class="product-category">{{ product.category }}</span>
-        {% endif %}
-        <p class="product-price">{{ product.price }}</p>
-      </div>
 
       {% if product.hex %}
       <div class="product-color-info">
@@ -66,13 +54,17 @@
         </div>
 
 
+        <div class="color-swatch" style="background-color: {{ product.hex }};"></div>
         <p class="color-hex">{{ product.hex }}</p>
         {% if product.warmCool is not None and product.lightDeep is not None %}
         <p class="color-coordinates">
-          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep
-          }}%
+          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep }}%
         </p>
         {% endif %}
+        <div class="product-basic-info">
+
+          <p class="product-price">{{ product.price }}</p>
+        </div>
       </div>
       {% endif %}
       {{ product|json_script:"productData" }}
@@ -88,10 +80,7 @@
         </button>
         {% endif %}
 
-        <a
-          href="{% url 'color_matrix_explore' %}"
-          class="back-to-matrix-button"
-        >
+        <a href="{% url 'color_matrix_explore' %}" class="back-to-matrix-button">
           매트릭스로 돌아가기
         </a>
       </div>
@@ -133,10 +122,7 @@
         <span class="star" data-rating="4">☆</span>
         <span class="star" data-rating="5">☆</span>
       </div>
-      <textarea
-        id="rating-comment"
-        placeholder="리뷰를 남겨주세요 (선택사항)"
-      ></textarea>
+      <textarea id="rating-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
       <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
     </div>
   </div>

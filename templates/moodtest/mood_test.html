@@ -11,7 +11,7 @@
     <div class="progress-fill" id="progress-fill"></div>
   </div>
 
-  <div class="question-counter"><span id="current-question">1</span> / 8</div>
+  <div class="question-counter"><span id="current-question">1</span> / 7</div>
 
   <form id="mood-form" method="POST" action="{% url 'mood_result' %}">
     {% csrf_token %}
@@ -19,18 +19,10 @@
     <div class="question-container active" data-index="0">
       <div class="question-text">Q1. 오늘 하루 나는?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('러블리', 0)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('러블리', 0)">
           상큼하고 기분 좋은 하루
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('시크', 0)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('시크', 0)">
           무심하고 차분한 하루
         </button>
       </div>
@@ -39,18 +31,10 @@
     <div class="question-container" data-index="1">
       <div class="question-text">Q2. 내가 선호하는 메이크업 스타일은?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('내추럴', 1)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('내추럴', 1)">
           자연스러움
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('고급스러운', 1)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 1)">
           포인트 있는 강렬함
         </button>
       </div>
@@ -59,18 +43,10 @@
     <div class="question-container" data-index="2">
       <div class="question-text">Q3. 옷 스타일을 고르자면?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('내추럴', 2)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('내추럴', 2)">
           편안한 캐주얼
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('시크', 2)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('시크', 2)">
           스타일리시한 연출
         </button>
       </div>
@@ -79,18 +55,10 @@
     <div class="question-container" data-index="3">
       <div class="question-text">Q4. 내가 끌리는 컬러는?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('러블리', 3)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('러블리', 3)">
           코랄/핑크 계열
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('고급스러운', 3)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 3)">
           딥한 브라운/버건디
         </button>
       </div>
@@ -99,18 +67,10 @@
     <div class="question-container" data-index="4">
       <div class="question-text">Q5. 약속 있는 날, 나는?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('활기찬', 4)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('활기찬', 4)">
           밝고 친근한 인상
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('시크', 4)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('시크', 4)">
           시크한 인상
         </button>
       </div>
@@ -119,18 +79,10 @@
     <div class="question-container" data-index="5">
       <div class="question-text">Q6. 파우치 안 필수템은?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('러블리', 5)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('러블리', 5)">
           촉촉한 틴트
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('고급스러운', 5)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 5)">
           음영 섀도우
         </button>
       </div>
@@ -139,18 +91,10 @@
     <div class="question-container" data-index="6">
       <div class="question-text">Q7. 사람들이 나에게 자주 하는 말은?</div>
       <div class="answer-buttons">
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('활기찬', 6)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('활기찬', 6)">
           귀엽다/밝다
         </button>
-        <button
-          type="button"
-          class="answer-btn"
-          onclick="selectMood('시크', 6)"
-        >
+        <button type="button" class="answer-btn" onclick="selectMood('시크', 6)">
           분위기 있다/도도하다
         </button>
       </div>
@@ -221,13 +165,18 @@
     } else {
       // 마지막 질문이면 결과 제출 버튼 보여주기
       document.getElementById("submit-container").style.display = "block";
+      document.getElementById("current-question").textContent = totalQuestions;
     }
   }
 
   function updateProgress() {
     const progress = (answered.size / totalQuestions) * 100;
     document.getElementById("progress-fill").style.width = progress + "%";
-    document.getElementById("current-question").textContent = answered.size + 1;
+    if (answered.size === totalQuestions) {
+      document.getElementById("current-question").textContent = totalQuestions;
+    } else {
+      document.getElementById("current-question").textContent = answered.size + 1;
+    }
   }
 
   document.getElementById("mood-form").addEventListener("submit", function (e) {
