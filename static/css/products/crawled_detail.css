@@ -53,12 +53,11 @@
     font-size: 1.1em;
   }
 
-  .product-info-section {
-    padding: 20px;
-  }
 
   .product-basic-info {
-    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
   }
 
   .product-name {
@@ -76,12 +75,13 @@
 
   .product-category {
     display: inline-block;
-    background-color: #667eea;
+    background-color: #af66ea;
     color: white;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.9em;
-    margin-bottom: 15px;
+    margin-left: 15px;
+    
   }
 
   .product-price {
@@ -96,6 +96,7 @@
     padding: 20px;
     background-color: #f8f9fa;
     border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
   .product-color-info h3 {
@@ -115,6 +116,7 @@
 
   .color-hex {
     font-family: monospace;
+    font-weight: bold;
     font-size: 1.1em;
     color: #666;
     margin-bottom: 10px;
@@ -122,7 +124,7 @@
 
   .color-coordinates {
     font-size: 0.9em;
-    color: #777;
+    color: mediumpurple;
   }
 
   .product-actions {
@@ -132,7 +134,7 @@
   }
 
   .purchase-button {
-    background-color: #667eea;
+    background-color: #7252ff;
     color: white;
     text-decoration: none;
     padding: 15px 30px;
@@ -146,9 +148,10 @@
   }
 
   .purchase-button:hover {
-    background-color: #5a6fd8;
+    background-color: #6f16ff;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+    text-decoration: none;
   }
 
   .purchase-button.disabled {
@@ -171,12 +174,13 @@
     font-size: 1em;
     font-weight: 500;
     transition: all 0.3s ease;
-    border: 2px solid #667eea;
+    border: 2px solid #7252ff;
   }
 
   .back-to-matrix-button:hover {
-    background-color: #667eea;
+    background-color: #7252ff;
     color: white;
+    text-decoration: none;
   }
 
   @media (max-width: 768px) {

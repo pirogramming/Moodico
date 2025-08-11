@@ -1,35 +1,35 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 좋아요 버튼 이벤트 리스너 추가
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (e.target.classList.contains('like-button')) {
             e.preventDefault();
             e.stopPropagation();
-            
+
             const likeButton = e.target;
             const productCard = likeButton.closest('.product-card, .recommended-product-card');
-            
+
             if (productCard) {
                 // 제품 정보 가져오기
-                        const productInfo = {
-            product_id: productCard.dataset.productId || generateUniqueProductId(productCard),
-            product_name: getProductName(productCard),
+                const productInfo = {
+                    product_id: productCard.dataset.productId || generateUniqueProductId(productCard),
+                    product_name: getProductName(productCard),
                     product_brand: getProductBrand(productCard),
                     product_price: getProductPrice(productCard),
                     product_image: getProductImage(productCard)
                 };
-                
+
                 // AJAX로 좋아요 토글 요청
                 toggleLike(likeButton, productInfo);
             }
         }
     });
-    
+
     // AJAX 좋아요 토글 함수
     async function toggleLike(likeButton, productInfo) {
         try {
             // 버튼 비활성화 (중복 클릭 방지)
             likeButton.disabled = true;
-            
+
             const response = await fetch('/products/toggle_product_like/', {
                 method: 'POST',
                 headers: {
@@ -38,15 +38,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify(productInfo)
             });
-            
+
             const data = await response.json();
-            
+
             if (data.success) {
                 console.log(`❤️ Like toggled for ${productInfo.product_id}: ${data.is_liked ? 'LIKED' : 'UNLIKED'}`); // 디버깅용
-                
+
                 // 캐시 무효화
                 invalidateLikesCache();
-                
+
                 // 좋아요 상태 업데이트 - 같은 product_id를 가진 모든 버튼 업데이트
                 const allSameProductButtons = document.querySelectorAll(`[data-product-id="${productInfo.product_id}"] .like-button`);
                 allSameProductButtons.forEach(btn => {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         btn.classList.remove('liked');
                     }
                 });
-                
+
                 // 현재 버튼에 애니메이션 효과
                 if (data.is_liked) {
                     likeButton.style.transform = 'scale(1.2)';
@@ -64,10 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         likeButton.style.transform = 'scale(1)';
                     }, 200);
                 }
-                
+
                 // 찜 개수 업데이트
                 updateLikeCount(productInfo.product_id);
-                
+
                 // 메시지 표시
                 showLikeMessage(data.message);
             } else {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             likeButton.disabled = false;
         }
     }
-    
+
     // CSRF 토큰 가져오기
     function getCookie(name) {
         let cookieValue = null;
@@ -106,76 +106,76 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return cookieValue;
     }
-    
+
     // 제품 정보 추출 함수들
     function getProductName(card) {
         const nameElement = card.querySelector('.product-name, .name');
         return nameElement ? nameElement.textContent.trim() : 'Unknown Product';
     }
-    
+
     // 더 고유한 제품 ID 생성 함수
     function generateUniqueProductId(card) {
         const brand = getProductBrand(card).replace(/\s+/g, '-').toLowerCase();
         const name = getProductName(card).replace(/\s+/g, '-').toLowerCase();
         const price = getProductPrice(card).replace(/[^\d]/g, '');
-        
+
         // 카드의 DOM 위치나 이미지 URL도 고유성에 추가
         const imgSrc = getProductImage(card);
         const imgHash = imgSrc ? imgSrc.split('/').pop().split('.')[0] : '';
-        
+
         // 브랜드 + 제품명 + 가격 + 이미지해시로 고유 ID 생성
         const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
-        
+
         console.log(`🔧 Generated unique ID: ${uniqueId} (for: ${name})`); // 디버깅용
         return uniqueId;
     }
-    
+
     function getProductBrand(card) {
         const brandElement = card.querySelector('.brand-name, .brand, .product-brand');
         let brand = brandElement ? brandElement.textContent.trim() : '';
-        
+
         // 브랜드 텍스트에서 태그 부분 제거 (예: "ROMAND glossy" -> "ROMAND")
         if (brand && brand.includes(' ')) {
             const parts = brand.split(' ');
             // 첫 번째 부분이 브랜드명인 경우가 많음
             brand = parts[0];
         }
-        
+
         return brand || 'Unknown Brand';
     }
-    
+
     function getProductPrice(card) {
         const priceElement = card.querySelector('.price, .product-price');
         return priceElement ? priceElement.textContent.trim() : 'Unknown Price';
     }
-    
+
     function getProductImage(card) {
         const imgElement = card.querySelector('img');
         return imgElement ? imgElement.src : '';
     }
-    
+
     // 좋아요 목록 캐시
     let likesCache = null;
     let cacheTimestamp = 0;
     const CACHE_DURATION = 30000; // 30초 캐시
-    
+
     // 서버에서 좋아요 상태 가져오기 (캐싱 적용)
     async function loadUserLikes() {
         const now = Date.now();
-        
+
         // 캐시가 유효한 경우 캐시된 데이터 반환
         if (likesCache && (now - cacheTimestamp) < CACHE_DURATION) {
             return likesCache;
         }
-        
+
         try {
             const response = await fetch('/products/get_user_likes/', {
                 method: 'GET',
-                credentials: 'include' 
+                credentials: 'include'
             });
 
             const data = await response.json();
-            
+
             if (data.success) {
                 // 캐시 업데이트
                 likesCache = data.likes;
@@ -190,25 +190,25 @@ document.addEventListener('DOMContentLoaded', function() {
             return [];
         }
     }
-    
+
     // 캐시 무효화 (좋아요 상태 변경 시)
     function invalidateLikesCache() {
         likesCache = null;
         cacheTimestamp = 0;
     }
-    
+
     // 찜 개수 업데이트 함수
     async function updateLikeCount(productId) {
         try {
             const response = await fetch(`/products/like_count/?product_id=${encodeURIComponent(productId)}`);
             const data = await response.json();
-            
+
             if (data.success) {
                 // 해당 제품의 모든 좋아요 카운터 업데이트
                 const likeCountElements = document.querySelectorAll(`[data-product-id="${productId}"] .like-count`);
                 likeCountElements.forEach(element => {
                     element.textContent = data.like_count;
-                    
+
                     // 개수가 0이면 숨김, 1 이상이면 표시
                     if (data.like_count > 0) {
                         element.style.display = 'inline-block';
@@ -221,35 +221,35 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('찜 개수 업데이트 오류:', error);
         }
     }
-    
+
     // 여러 제품의 찜 정보를 한 번에 로드
     async function loadMultipleProductsLikeInfo() {
         try {
             const productCards = document.querySelectorAll('.product-card, .recommended-product-card');
-            const productIds = Array.from(productCards).map(card => 
+            const productIds = Array.from(productCards).map(card =>
                 card.dataset.productId || generateUniqueProductId(card)
             ).filter(Boolean);
-            
+
             if (productIds.length === 0) return;
-            
+
             const params = new URLSearchParams();
             productIds.forEach(id => params.append('product_ids[]', id));
-            
+
             const response = await fetch(`/products/multiple_like_info/?${params}`);
             const data = await response.json();
-            
+
             if (data.success) {
                 // 각 제품 카드에 찜 정보 적용
                 Object.entries(data.products).forEach(([productId, info]) => {
                     console.log(`Restoring like state for ${productId}: liked=${info.is_liked}, count=${info.like_count}`); // 디버깅용
-                    
+
                     const cards = document.querySelectorAll(`[data-product-id="${productId}"]`);
                     console.log(`Found ${cards.length} cards with ID ${productId}`); // 디버깅용
-                    
+
                     cards.forEach(card => {
                         const likeButton = card.querySelector('.like-button');
                         const likeCountElement = card.querySelector('.like-count');
-                        
+
                         if (likeButton) {
                             if (info.is_liked) {
                                 likeButton.classList.add('liked');
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 likeButton.classList.remove('liked');
                             }
                         }
-                        
+
                         if (likeCountElement) {
                             likeCountElement.textContent = info.like_count;
                             if (info.like_count > 0) {
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('여러 제품 찜 정보 로드 오류:', error);
         }
     }
-    
+
     // 좋아요 메시지 표시
     function showLikeMessage(message) {
         // 기존 메시지 제거
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (existingMessage) {
             existingMessage.remove();
         }
-        
+
         // 새 메시지 생성
         const messageElement = document.createElement('div');
         messageElement.className = 'like-message';
@@ -300,9 +300,9 @@ document.addEventListener('DOMContentLoaded', function() {
             animation: slideIn 0.3s ease-out;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         `;
-        
+
         document.body.appendChild(messageElement);
-        
+
         // 3초 후 자동 제거
         setTimeout(() => {
             messageElement.style.animation = 'slideOut 0.3s ease-in';
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         }, 3000);
     }
-    
+
     // 페이지 로드 시 기존 좋아요 상태 복원 (개선된 버전)
     async function restoreLikeStates() {
         try {
@@ -325,11 +325,11 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const likes = await loadUserLikes();
                 const productCards = document.querySelectorAll('.product-card, .recommended-product-card');
-                
+
                 productCards.forEach(card => {
                     const productId = card.dataset.productId || generateUniqueProductId(card);
                     const likeButton = card.querySelector('.like-button');
-                    
+
                     if (likeButton && likes.some(item => item.product_id === productId)) {
                         likeButton.classList.add('liked');
                     }
@@ -339,20 +339,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
+
     // 동적으로 추가되는 제품 카드들의 좋아요 상태 복원
     async function restoreLikeStateForCard(card) {
         try {
             const productId = card.dataset.productId || generateUniqueProductId(card);
             if (!productId) return;
-            
+
             const response = await fetch(`/products/like_count/?product_id=${encodeURIComponent(productId)}`);
             const data = await response.json();
-            
+
             if (data.success) {
                 const likeButton = card.querySelector('.like-button');
                 const likeCountElement = card.querySelector('.like-count');
-                
+
                 if (likeButton) {
                     if (data.is_liked) {
                         likeButton.classList.add('liked');
@@ -360,7 +360,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         likeButton.classList.remove('liked');
                     }
                 }
-                
+
                 if (likeCountElement) {
                     likeCountElement.textContent = data.like_count;
                     if (data.like_count > 0) {
@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const likes = await loadUserLikes();
                 const productId = card.dataset.productId || generateUniqueProductId(card);
                 const likeButton = card.querySelector('.like-button');
-                
+
                 if (likeButton && likes.some(item => item.product_id === productId)) {
                     likeButton.classList.add('liked');
                 }
@@ -386,7 +386,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
+
     // MutationObserver로 동적 콘텐츠 감지
     function setupMutationObserver() {
         const observer = new MutationObserver((mutations) => {
@@ -394,17 +394,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 mutation.addedNodes.forEach((node) => {
                     if (node.nodeType === Node.ELEMENT_NODE) {
                         // 새로 추가된 제품 카드들 찾기
-                        const newCards = node.querySelectorAll 
-                            ? Array.from(node.querySelectorAll('.product-card, .recommended-product-card')) 
+                        const newCards = node.querySelectorAll
+                            ? Array.from(node.querySelectorAll('.product-card, .recommended-product-card'))
                             : [];
-                        
+
                         // 노드 자체가 제품 카드인 경우도 포함
-                        if (node.classList && 
-                            (node.classList.contains('product-card') || 
-                             node.classList.contains('recommended-product-card'))) {
+                        if (node.classList &&
+                            (node.classList.contains('product-card') ||
+                                node.classList.contains('recommended-product-card'))) {
                             newCards.push(node);
                         }
-                        
+
                         // 각 새 카드에 대해 좋아요 상태 복원
                         newCards.forEach(card => {
                             if (card.querySelector('.like-button')) {
@@ -415,16 +415,30 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         });
-        
+
         // 전체 문서 감시
         observer.observe(document.body, {
             childList: true,
             subtree: true
         });
-        
+
         return observer;
     }
-    
+    // 랭킹페이지에서 제품 디테일 페이지로 이동하는거
+    const rankingGrid = document.querySelector('.ranking-grid');
+    if (rankingGrid) {
+        rankingGrid.addEventListener('click', function (e) {
+            const rankingCard = e.target.closest('.ranking-card');
+
+            if (rankingCard) {
+                const productId = rankingCard.dataset.productId;
+                if (productId) {
+                    window.open(`/products/detail/${productId}/`, '_blank');
+                }
+            }
+        });
+    }
+
     // CSS 애니메이션 추가
     const style = document.createElement('style');
     style.textContent = `
@@ -451,11 +465,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     `;
     document.head.appendChild(style);
-    
+
     // 초기화
     restoreLikeStates();
     setupMutationObserver();
-    
+
     // 전역 함수로 노출 (다른 스크립트에서 사용 가능)
     window.restoreLikeStateForCard = restoreLikeStateForCard;
     window.restoreLikeStates = restoreLikeStates;
@@ -493,19 +507,19 @@ async function clearLikedProducts() {
 }
 
 // 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('좋아요 시스템 초기화 중...');
-    
+
     // 현재 페이지의 모든 제품 카드 정보 출력 (디버깅용)
     const allCards = document.querySelectorAll('.product-card, .recommended-product-card');
     console.log(`페이지에서 발견된 제품 카드 수: ${allCards.length}`);
-    
+
     allCards.forEach((card, index) => {
         const productId = card.dataset.productId || generateUniqueProductId(card);
         const productName = getProductName(card);
         console.log(`Card ${index + 1}: ID=${productId}, Name=${productName}`);
     });
-    
+
     restoreLikeStates();
     // setupMutationObserver는 이미 위에서 호출되었으므로 여기서는 호출하지 않음
 }); 

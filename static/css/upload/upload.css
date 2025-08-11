@@ -465,6 +465,7 @@
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     overflow: visible;
     border: 1px solid #ddd;
+    min-width: 600px;
 }
 
 .search-input-group {
@@ -646,9 +647,6 @@
         min-width: auto;
     }
 
-    .color-matrix-container {
-        height: 500px;
-    }
 }
 
 @media (max-width: 768px) {
@@ -733,6 +731,7 @@
     width: 100%;
     height: 100%;
     z-index: 2;
+    min-width: 600px;
 }
 
 .product-circle {
