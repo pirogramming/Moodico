@@ -58,7 +58,7 @@
               <div class="axis-label left-label">Cool</div>
               <div class="axis-label right-label">Warm</div>
               <div
-                id="liked-products-container"
+                id="products-color-container"
                 class="makeup-products-container"
               ></div>
             </div>
@@ -159,7 +159,7 @@
   const coords = calculateCoordinatesFromLAB(productData.lab_l, productData.lab_a, productData.lab_b);
 
   function colorPointOnMatrix(hex, warmCool, lightDeep){
-    const productsContainer = document.getElementById('liked-products-container');
+    const productsContainer = document.getElementById('products-color-container');
     if (!productsContainer) return;
 
     const colorPoint = document.createElement('div');
