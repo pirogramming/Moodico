@@ -26,12 +26,21 @@
 
       {% if product.hex %}
       <div class="product-color-info">
-        <h3>제품 색상</h3>
-        <div
-          class="color-swatch"
-          style="background-color: {{ product.hex }};"
-        ></div>
-        
+        <div>
+          <h3>제품 색상</h3>
+          <div class="color-swatch" style="background-color: {{ product.hex }};"></div>
+          <!--
+          <p class="color-hex">{{ product.hex }}</p>
+          {% if product.warmCool is not None and product.lightDeep is not None %}
+          <p class="color-coordinates">
+            Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep }}%
+          </p>
+          {% endif %}
+          -->
+          <div class="product-basic-info">
+            <p class="product-price">{{ product.price }}</p>
+          </div>
+        </div>
         <div class="color-matrix-container">
           <div class="matrix-cube">
             <div class="cube-face">
@@ -51,19 +60,6 @@
               ></div>
             </div>
           </div>
-        </div>
-
-
-        <div class="color-swatch" style="background-color: {{ product.hex }};"></div>
-        <p class="color-hex">{{ product.hex }}</p>
-        {% if product.warmCool is not None and product.lightDeep is not None %}
-        <p class="color-coordinates">
-          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep }}%
-        </p>
-        {% endif %}
-        <div class="product-basic-info">
-
-          <p class="product-price">{{ product.price }}</p>
         </div>
       </div>
       {% endif %}

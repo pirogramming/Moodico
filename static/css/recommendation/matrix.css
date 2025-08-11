@@ -1,12 +1,12 @@
 .color-matrix-container {
     position: relative;
-    width: 600px;
-    height: 600px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 15px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     overflow: hidden;
     border: 1px solid #ddd;
-    margin: 0 auto;
+    margin: 0;
     transform-style: preserve-3d;
     transition: transform 0.8s ease-in-out;
     transform: rotateX(0deg) rotateY(0deg);
