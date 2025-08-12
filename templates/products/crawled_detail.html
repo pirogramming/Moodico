@@ -3,6 +3,58 @@
 <link rel="stylesheet" href="{% static 'css/products/crawled_detail.css' %}" />
 <link rel="stylesheet" href="{% static 'css/products/rating.css' %}" />
 <link rel="stylesheet" href="{% static 'css/recommendation/matrix.css' %}" />
+<style>
+  .image-upload-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .image-box {
+    width: 80px;
+    height: 80px;
+    border: 2px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .add-image .plus-icon {
+    font-size: 28px;
+    color: #aaa;
+  }
+
+  .delete-image-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 18px;
+    padding: 0;
+  }
+
+  .delete-image-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+</style>
 {% endblock %} {% block content %}
 
 <div class="crawled-product-detail-container">
@@ -119,6 +171,14 @@
         <span class="star" data-rating="5">☆</span>
       </div>
       <textarea id="rating-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
+
+        <div class="image-upload-container" id="image-upload-container">
+          <div class="image-box add-image" id="add-image-box">
+            <span class="plus-icon">＋</span>
+            <input type="file" id="image-input" accept="image/*" style="display:none" multiple>
+          </div>
+        </div>
+
       <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
     </div>
   </div>
@@ -134,6 +194,7 @@
 {% endblock %}
 {% block extra_js %}
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
+<script src="{% static 'js/products/rating_images.js' %}"></script>
 <script>
   const productDataElement = document.getElementById('productData');
   const productData = JSON.parse(productDataElement.textContent);

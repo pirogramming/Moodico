@@ -220,18 +220,32 @@ class ProductRating {
             return;
         }
 
-        const ratingsHTML = ratings.map(rating => `
-            <div class="rating-item">
-                <div class="rating-item-header">
-                    <div class="rating-item-stars">
-                        ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
+        const ratingsHTML = ratings.map(rating => {
+            let imagesHTML = '';
+            if (rating.images && rating.images.length > 0){
+                const imagesToShow = rating.images.slice(0, 4);
+                imagesHTML=`
+                    <div class="rating-item-images">
+                        ${imagesToShow.map(imgUrl => `
+                            <img src="${imgUrl}" alt="리뷰 이미지" class="rating-image">
+                        `).join('')}
                     </div>
-                    <span class="rating-item-date">${rating.created_at}</span>
-                </div>
-                <div class="rating-item-user">${rating.user_name}</div>
-                ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : ''}
+                `;
+            }
+        
+            return `
+                <div class="rating-item">
+                    <div class="rating-item-header">
+                        <div class="rating-item-stars">
+                            ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
+                        </div>
+                        <span class="rating-item-date">${rating.created_at}</span>
+                    </div>
+                    <div class="rating-item-user">${rating.user_name}</div>
+                    ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : ''}
+                    ${imagesHTML}
             </div>
-        `).join('');
+        `}).join('');
 
         ratingsList.innerHTML = ratingsHTML;
     }

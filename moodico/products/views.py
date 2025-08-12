@@ -9,7 +9,7 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
 from moodico.products.models import ProductLike
-from moodico.products.models import ProductLike, ProductRating
+from moodico.products.models import ProductLike, ProductRating, ProductRatingImage
 from django.db import models
 import logging
 logger = logging.getLogger(__name__)
@@ -429,6 +429,45 @@ def submit_product_rating(request):
         logger.error(f"제품 별점 제출 실패: {e}")
         return JsonResponse({'error': '별점을 저장하는 중 오류가 발생했습니다.'}, status=500)
 
+# 제품 리뷰에서 이미지를 업로드하는 뷰 함수 - 리뷰 이미지 업로드 API
+@csrf_exempt
+@require_http_methods(["POST"])
+def upload_review_image(request, review_id):
+    try:
+        review = get_object_or_404(ProductRating, id=review_id)
+
+        # 이미지는 최대 4개
+        if review.images.count() >= 4:
+            return JsonResponse({'error': '이미지는 최대 4개까지 등록 가능합니다.'}, status=400)
+        
+        files = request.FILES.getlist('images')
+        if not files:
+            return JsonResponse({'error':'이미지가 아닙니다.'}, status=400)
+        
+        for file in files:
+            if review.images.count() >= 4:
+                break
+            ProductRatingImage.objects.create(review=review, image=file)
+        
+        return JsonResponse({'success':True, 'message':'이미지 업로드 완료'})
+    
+    except Exception as e:
+        logger.error(f"리뷰 이미지 업로드 실패: {e}")
+        return JsonResponse({'error':'이미지 업로드 중 오류가 발생했습니다.'})
+
+# 리뷰 이미지 삭제 API
+@csrf_exempt
+@require_http_methods(["DELETE"])
+def delete_review_image(request, image_id):
+    try:
+        image = get_object_or_404(ProductRatingImage, id=image_id)
+        image.delete()
+        return JsonResponse({'success': True, 'message': '이미지가 삭제되었습니다.'})
+    
+    except Exception as e:
+        logger.error(f"리뷰 이미지 삭제 실패: {e}")
+        return JsonResponse({'error': '이미지 삭제 중 오류가 발생했습니다.'}, status=500)
+    
 @require_http_methods(["GET"])
 def get_product_rating(request):
     """제품 별점 조회 API"""

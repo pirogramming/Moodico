@@ -107,3 +107,13 @@ class ProductRating(models.Model):
 
     def __str__(self):
         return f"{self.user.username if self.user else self.session_nickname} - {self.product_name} ({self.rating}점)"
+
+# 리뷰 이미지 별점 리뷰와 1:N 관계로..
+class ProductRatingImage(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    review = models.ForeignKey(ProductRating, on_delete=models.CASCADE, related_name="images")
+    image = models.ImageField(upload_to='review_images/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Image for {self.review.product_name}"
