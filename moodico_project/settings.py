@@ -156,9 +156,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용
 
 
 # NCP Object Storage setting(S3)
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
+# dummy key is for github actions
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="dummy-key")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="dummy-key")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME",default="dummy-key")
 
 AWS_S3_REGION_NAME = "kr-standard"
 AWS_S3_ENDPOINT_URL = "https://kr.object.ncloudstorage.com"
