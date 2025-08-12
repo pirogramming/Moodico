@@ -54,7 +54,6 @@ INSTALLED_APPS = [
     'moodico.products', # 제품 관련 앱
     'moodico.moodtest', # 무드 테스트 앱
     'moodico.users', # 유저 앱
-    'storages'
 ]
 
 MIDDLEWARE = [
@@ -156,35 +155,32 @@ MEDIA_URL = '/media/'  # NCP에 저장될 예정 -> 사용되지 않음
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용되지 않음
 
 
-###############
 # NCP Object Storage setting(S3)
+AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 
-USE_S3 = config('USE_S3', cast=bool, default=False)
+AWS_S3_REGION_NAME = "kr-standard"
+AWS_S3_ENDPOINT_URL = "https://kr.object.ncloudstorage.com"
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+AWS_S3_ADDRESSING_STYLE = "virtual"
+AWS_DEFAULT_ACL = None
+AWS_QUERYSTRING_AUTH = False
 
-if USE_S3:
-    # Django 5+ preferred style:
-    STORAGES = {
-        "default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"},
-        # keep static locally unless you want static on S3; if yes, swap BACKEND below
-        "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
+INSTALLED_APPS += ["storages"]
+
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "bucket_name": AWS_STORAGE_BUCKET_NAME,
+            "region_name": AWS_S3_REGION_NAME,
+            "endpoint_url": AWS_S3_ENDPOINT_URL,
+            "signature_version": AWS_S3_SIGNATURE_VERSION,
+            "addressing_style": AWS_S3_ADDRESSING_STYLE,
+        },
     }
-
-    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_ENDPOINT_URL = config('AWS_S3_ENDPOINT_URL', default='https://kr.object.ncloudstorage.com')
-    AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='kr-standard')
-    AWS_ACCESS_KEY_ID = config('NCP_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = config('NCP_SECRET_ACCESS_KEY')
-
-    AWS_DEFAULT_ACL = None
-    AWS_S3_FILE_OVERWRITE = False
-    AWS_QUERYSTRING_AUTH = False  # make public URLs clean
-    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=31536000"}
-else:
-    # Local filesystem in dev
-    STORAGES = {
-        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-        "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
-    }
+}
 
 
 # 카카오 로그인 설정

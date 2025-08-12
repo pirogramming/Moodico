@@ -40,14 +40,11 @@ def recommend_by_color(request):
         #     centers = json.load(f)
         path = os.path.join(settings.MEDIA_ROOT, 'data', 'cluster_centers.json')
         with open(path, "r", encoding="utf-8") as f:
-
-        with open("static/data/cluster_centers_new.json", "r") as f:
             centers = json.load(f)
         # with open("static/data/products_clustered.json", "r", encoding="utf-8") as f:
         #     products = json.load(f)
         path = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
         with open(path, "r", encoding="utf-8") as f:
-        with open("static/data/products_clustered_new.json", "r", encoding="utf-8") as f:
             products = json.load(f)
 
         # Step 1: Find closest cluster
