@@ -146,6 +146,24 @@
     color: #bbb;
     text-decoration: none;
   }
+
+  .rating-actions {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 요소를 밀어냄 */
+    align-items: center; /* 수직 가운데 정렬 */
+  }
+  .delete-rating-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .delete-rating-btn:hover {
+    background-color: #c0392b;
+  }
 </style>
 {% endblock %} {% block content %}
 
@@ -273,7 +291,10 @@
         </div>
       </div>
 
-      <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+      <div class="rating-actions">
+        <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+        <button id="delete-rating" class="delete-rating-btn" style="display: none;">삭제</button>
+      </div>
     </div>
   </div>
 </div>

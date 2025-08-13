@@ -21,5 +21,6 @@ urlpatterns = [
     path('submit_rating/', views.submit_product_rating, name='submit_product_rating'),
     path('get_rating/', views.get_product_rating, name='get_product_rating'),
     path('get_ratings_list/', views.get_product_ratings_list, name='get_product_ratings_list'),
-    path('delete_review_image/<uuid:image_id>/', views.delete_review_image, name='delete_review_image'),
+    path('delete_review_image/<uuid:image_id>/', views.delete_review_image, name='delete_review_image'), # 리뷰 이미지 삭제
+    path('delete_rating/<str:product_id>/', views.delete_product_rating, name='delete_product_rating'), # 리뷰 별점 글 삭제
 ]

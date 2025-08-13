@@ -4,6 +4,7 @@ class ProductRating {
         this.currentRating = 0;
         this.isSubmitted = false;
         this.imageFiles = window.reviewImageFiles;
+        this.deleteBtn = document.getElementById('delete-rating');
         this.init();
     }
 
@@ -41,6 +42,13 @@ class ProductRating {
         if (submitBtn) {
             submitBtn.addEventListener('click', () => {
                 this.submitRating();
+            });
+        }
+
+        // 별점 및 리뷰 삭제 버튼
+        if (this.deleteBtn) {
+            this.deleteBtn.addEventListener('click', () => {
+                this.deleteRating();
             });
         }
     }
@@ -104,6 +112,7 @@ class ProductRating {
     }
 
     updateRatingDisplay(data) {
+        const deleteBtn = document.getElementById('delete-rating');
         // 평균 별점 표시
         const avgRating = document.getElementById('average-rating');
         if (avgRating) {
@@ -140,6 +149,11 @@ class ProductRating {
                     window.createImagePreviewBox(image.id, image.url, true);
                 });
             }
+
+            // 삭제 버튼 보이도록
+            if (deleteBtn) deleteBtn.style.display = 'inline-block';
+        }else{
+            if (deleteBtn) deleteBtn.style.display = 'none';
         }
     }
 
@@ -242,6 +256,35 @@ class ProductRating {
             }
         } catch (error) {
             console.error('별점 목록 로드 실패:', error);
+        }
+    }
+
+    async deleteRating(){
+        if (!confirm('정말로 리뷰를 삭제하시겠습니까?\n삭제된 내용은 복구할 수 없습니다.')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/products/delete_rating/${productId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCSRFToken() // 공용 함수 사용
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert(data.message);
+                
+                // 삭제 성공 후 페이지를 새로고침하여 전체 상태를 초기화
+                window.location.reload(); 
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || '리뷰 삭제에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('리뷰 삭제 실패:', error);
+            alert('리뷰 삭제 중 오류가 발생했습니다.');
         }
     }
 

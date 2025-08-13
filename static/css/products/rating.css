@@ -104,7 +104,6 @@
   font-size: 0.9rem;
   font-weight: 500;
   transition: background-color 0.2s ease;
-  align-self: flex-start;
 }
 
 .submit-rating-btn:hover {

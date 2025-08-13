@@ -700,3 +700,27 @@ def product_ranking_page(request):
             'top_products': [],
             'error_message': '랭킹 정보를 불러오는데 실패했습니다.'
         })
+
+# 별점 리뷰 삭제 부분
+@csrf_exempt
+@require_http_methods(["DELETE"])
+def delete_product_rating(request, product_id):
+    try:
+        # 사용자 - 작성자 본인 여부 확인
+        if request.user.is_authenticated:
+            user = request.user
+            review_to_delete = get_object_or_404(ProductRating, user=user, product_id=product_id)
+        else:
+            session_nickname = request.session.get('nickname')
+            if not session_nickname:
+                return JsonResponse({'error': '인증 정보가 없습니다.'}, status=401)
+            review_to_delete = get_object_or_404(ProductRating, session_nickname=session_nickname, product_id=product_id)
+
+        review_to_delete.delete()
+        
+        return JsonResponse({'success': True, 'message': '리뷰가 성공적으로 삭제되었습니다.'})
+
+    except ProductRating.DoesNotExist:
+        return JsonResponse({'error': '삭제할 리뷰를 찾을 수 없습니다.'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': f'리뷰 삭제 중 오류가 발생했습니다: {e}'}, status=500)
