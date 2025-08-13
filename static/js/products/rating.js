@@ -3,6 +3,8 @@ class ProductRating {
     constructor() {
         this.currentRating = 0;
         this.isSubmitted = false;
+        this.imageFiles = window.reviewImageFiles;
+        this.deleteBtn = document.getElementById('delete-rating');
         this.init();
     }
 
@@ -40,6 +42,13 @@ class ProductRating {
         if (submitBtn) {
             submitBtn.addEventListener('click', () => {
                 this.submitRating();
+            });
+        }
+
+        // 별점 및 리뷰 삭제 버튼
+        if (this.deleteBtn) {
+            this.deleteBtn.addEventListener('click', () => {
+                this.deleteRating();
             });
         }
     }
@@ -103,6 +112,7 @@ class ProductRating {
     }
 
     updateRatingDisplay(data) {
+        const deleteBtn = document.getElementById('delete-rating');
         // 평균 별점 표시
         const avgRating = document.getElementById('average-rating');
         if (avgRating) {
@@ -130,6 +140,21 @@ class ProductRating {
             if (commentArea && data.user_comment) {
                 commentArea.value = data.user_comment;
             }
+
+            document.querySelectorAll('#image-upload-container .image-preview').forEach(box => box.remove());
+            this.imageFiles.clear();
+            
+            if (data.user_images && data.user_images.length > 0) {
+                data.user_images.forEach(image => {
+                    window.createImagePreviewBox(image.id, image.url, true);
+                });
+            }
+
+            // 삭제 버튼 보이도록
+            if (deleteBtn) deleteBtn.style.display = 'inline-block';
+            updateAddImageLayout();
+        }else{
+            if (deleteBtn) deleteBtn.style.display = 'none';
         }
     }
 
@@ -159,6 +184,35 @@ class ProductRating {
         const comment = document.getElementById('rating-comment').value;
         const submitBtn = document.getElementById('submit-rating');
 
+        // const response = await fetch('/products/submit_rating/', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'X-CSRFToken': this.getCSRFToken()
+        //     },
+        //     body: JSON.stringify({
+        //         product_id: productId,
+        //         product_name: productName,
+        //         product_brand: productBrand,
+        //         rating: this.currentRating,
+        //         comment: comment
+        //     })
+        // });
+
+        // 기존의 json 전달 방식에서 formData 전송방식으로 변경
+        const formData = new FormData();
+        formData.append('product_id', productId);
+        formData.append('product_name', productName);
+        formData.append('product_brand', productBrand);
+        formData.append('rating', this.currentRating);
+        formData.append('comment', comment);
+
+        if (this.imageFiles && this.imageFiles.size > 0) {
+            for (const file of this.imageFiles.values()) {
+                formData.append('images', file);
+            }
+        }
+
         try {
             submitBtn.disabled = true;
             submitBtn.textContent = '저장 중...';
@@ -166,16 +220,9 @@ class ProductRating {
             const response = await fetch('/products/submit_rating/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': this.getCSRFToken()
+                    'X-CSRFToken': this.getCSRFToken() // CSRF 토큰 추가
                 },
-                body: JSON.stringify({
-                    product_id: productId,
-                    product_name: productName,
-                    product_brand: productBrand,
-                    rating: this.currentRating,
-                    comment: comment
-                })
+                body: formData
             });
 
             if (response.ok) {
@@ -184,8 +231,10 @@ class ProductRating {
                 this.updateSubmitButton();
                 alert(data.message);
                 
-                // 별점 데이터 새로고침
+                // 데이터 새로고침
                 this.loadRatingData();
+                //document.getElementById('image-upload-container').innerHTML = '';
+                //this.imageFiles.clear();
             } else {
                 const errorData = await response.json();
                 alert(errorData.error || '별점 저장에 실패했습니다.');
@@ -211,6 +260,35 @@ class ProductRating {
         }
     }
 
+    async deleteRating(){
+        if (!confirm('정말로 리뷰를 삭제하시겠습니까?\n삭제된 내용은 복구할 수 없습니다.')) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`/products/delete_rating/${productId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCSRFToken() // 공용 함수 사용
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                alert(data.message);
+                
+                // 삭제 성공 후 페이지를 새로고침하여 전체 상태를 초기화
+                window.location.reload(); 
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || '리뷰 삭제에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('리뷰 삭제 실패:', error);
+            alert('리뷰 삭제 중 오류가 발생했습니다.');
+        }
+    }
+
     displayRatingsList(ratings) {
         const ratingsList = document.getElementById('ratings-list');
         if (!ratingsList) return;
@@ -220,18 +298,34 @@ class ProductRating {
             return;
         }
 
-        const ratingsHTML = ratings.map(rating => `
-            <div class="rating-item">
-                <div class="rating-item-header">
-                    <div class="rating-item-stars">
-                        ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
+        const ratingsHTML = ratings.map(rating => {
+            let imagesHTML = '';
+            if (rating.images && rating.images.length > 0){
+                const imagesToShow = rating.images.slice(0, 4);
+                imagesHTML=`
+                    <div class="rating-item-images">
+                        ${imagesToShow.map(imgUrl => `
+                            <img src="${imgUrl}" alt="리뷰 이미지" class="rating-image">
+                        `).join('')}
                     </div>
-                    <span class="rating-item-date">${rating.created_at}</span>
-                </div>
-                <div class="rating-item-user">${rating.user_name}</div>
-                ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : ''}
+                `;
+            }
+        
+            return `
+                <div class="rating-item">
+                    <div class="rating-item-header">
+                        <div class="rating-item-stars">
+                            ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
+                        </div>
+                        <span class="rating-item-date">${rating.created_at}</span>
+                    </div>
+                    <div class="rating-item-user">${rating.user_name}</div>
+                    <div class="rating-item-body">
+                        ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : '<div></div>' /* 댓글이 없을 때도 그리드 구조 유지를 위해 빈 div 추가 */}
+                        ${imagesHTML}
+                    </div>
             </div>
-        `).join('');
+        `}).join('');
 
         ratingsList.innerHTML = ratingsHTML;
     }
@@ -252,5 +346,30 @@ class ProductRating {
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof productId !== 'undefined') {
         new ProductRating();
+    }
+
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const closeBtn = document.querySelector('.modal-close-btn');
+    const ratingsList = document.getElementById('ratings-list');
+
+    if (ratingsList && modal && modalImage && closeBtn) {
+        ratingsList.addEventListener('click', (event) => {
+            if (event.target.classList.contains('rating-image')) {
+            event.preventDefault();
+            modal.classList.add('show');
+            modalImage.src = event.target.src;
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+            modal.classList.remove('show');
+            }
+        });
     }
 });

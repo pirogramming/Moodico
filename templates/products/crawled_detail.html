@@ -2,22 +2,19 @@
 - {{ product.brand }}{% endblock %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/products/crawled_detail.css' %}" />
 <link rel="stylesheet" href="{% static 'css/products/rating.css' %}" />
+<link rel="stylesheet" href="{% static 'css/recommendation/matrix.css' %}" />
 {% endblock %} {% block content %}
 
 <div class="crawled-product-detail-container">
   <div class="product-detail-header">
     <h1>{{ product.name }}</h1>
-    <p class="brand-name">{{ product.brand }}</p>
+    <p class="brand-name">{{ product.brand }} <span class="product-category"> {{ product.category }}</span></p>
   </div>
 
   <div class="product-detail-content">
     <div class="product-image-section">
       {% if product.image %}
-      <img
-        src="{{ product.image }}"
-        alt="{{ product.name }}"
-        class="product-main-image"
-      />
+      <img src="{{ product.image }}" alt="{{ product.name }}" class="product-main-image" />
       {% else %}
       <div class="no-image-placeholder">
         <span>이미지 없음</span>
@@ -26,31 +23,47 @@
     </div>
 
     <div class="product-info-section">
-      <div class="product-basic-info">
-        <h2 class="product-name">{{ product.name }}</h2>
-        <p class="product-brand">{{ product.brand }}</p>
-        {% if product.category %}
-        <span class="product-category">{{ product.category }}</span>
-        {% endif %}
-        <p class="product-price">{{ product.price }}</p>
-      </div>
 
       {% if product.hex %}
       <div class="product-color-info">
-        <h3>제품 색상</h3>
-        <div
-          class="color-swatch"
-          style="background-color: {{ product.hex }};"
-        ></div>
-        <p class="color-hex">{{ product.hex }}</p>
-        {% if product.warmCool is not None and product.lightDeep is not None %}
-        <p class="color-coordinates">
-          Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep
-          }}%
-        </p>
-        {% endif %}
+        <div>
+          <h3>제품 색상</h3>
+          <div class="color-swatch" style="background-color: {{ product.hex }};"></div>
+          <!--
+          <p class="color-hex">{{ product.hex }}</p>
+          {% if product.warmCool is not None and product.lightDeep is not None %}
+          <p class="color-coordinates">
+            Warm-Cool: {{ product.warmCool }}%, Light-Deep: {{ product.lightDeep }}%
+          </p>
+          {% endif %}
+          -->
+          <div class="product-basic-info">
+            <p class="product-price">{{ product.price }}</p>
+          </div>
+        </div>
+        <div class="color-matrix-container">
+          <div class="matrix-cube">
+            <div class="cube-face">
+              <div class="quadrant-grid">
+                <div class="quadrant top-left"></div>
+                <div class="quadrant top-right"></div>
+                <div class="quadrant bottom-left"></div>
+                <div class="quadrant bottom-right"></div>
+              </div>
+              <div class="axis-label top-label">Light</div>
+              <div class="axis-label bottom-label">Deep</div>
+              <div class="axis-label left-label">Cool</div>
+              <div class="axis-label right-label">Warm</div>
+              <div
+                id="products-color-container"
+                class="makeup-products-container"
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
       {% endif %}
+      {{ product|json_script:"productData" }}
 
       <div class="product-actions">
         {% if product.url %}
@@ -63,10 +76,7 @@
         </button>
         {% endif %}
 
-        <a
-          href="{% url 'color_matrix_explore' %}"
-          class="back-to-matrix-button"
-        >
+        <a href="{% url 'color_matrix_explore' %}" class="back-to-matrix-button">
           매트릭스로 돌아가기
         </a>
       </div>
@@ -74,13 +84,14 @@
   </div>
 </div>
 
+
 <script>
   // 제품 정보 가져오기
   const productId = "{{ product.id }}";
   const productName = "{{ product.name }}";
   const productBrand = "{{ product.brand }}";
 </script>
-<script src="{% static 'js/products/rating.js' %}"></script>
+
 
 <!-- 별점 섹션 추가 -->
 <div class="rating-section">
@@ -108,11 +119,20 @@
         <span class="star" data-rating="4">☆</span>
         <span class="star" data-rating="5">☆</span>
       </div>
-      <textarea
-        id="rating-comment"
-        placeholder="리뷰를 남겨주세요 (선택사항)"
-      ></textarea>
-      <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+      <textarea id="rating-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
+
+      <input type="file" id="image-input" multiple hidden accept="image/*" />
+
+      <div class="image-upload-container" id="image-upload-container">
+        <div class="image-box add-image" id="add-image-box">
+          <span class="plus-icon">＋</span>
+        </div>
+      </div>
+
+      <div class="rating-actions">
+        <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+        <button id="delete-rating" class="delete-rating-btn" style="display: none;">삭제</button>
+      </div>
     </div>
   </div>
 </div>
@@ -125,4 +145,43 @@
   </div>
 </div>
 
+<!--리뷰 이미지 상세보기 부분-->
+</div> <div id="image-modal" class="image-modal">
+  <span class="modal-close-btn">&times;</span>
+  <img class="modal-content" id="modal-image">
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
+<script src="{% static 'js/products/rating_images.js' %}"></script>
+<script src="{% static 'js/products/rating.js' %}"></script>
+<script>
+  const productDataElement = document.getElementById('productData');
+  const productData = JSON.parse(productDataElement.textContent);
+  
+  const coords = calculateCoordinatesFromLAB(productData.lab_l, productData.lab_a, productData.lab_b);
+
+  function colorPointOnMatrix(hex, warmCool, lightDeep){
+    const productsContainer = document.getElementById('products-color-container');
+    if (!productsContainer) return;
+
+    const colorPoint = document.createElement('div');
+    colorPoint.classList.add('product-circle', 'user-color-point');
+    colorPoint.style.backgroundColor = hex;
+    colorPoint.style.left = `${warmCool}%`;
+    colorPoint.style.top = `${lightDeep}%`;
+    colorPoint.title = `선택된 색상: ${hex}`;
+
+    colorPoint.style.transform = 'translate(-50%, -50%)';
+
+    colorPoint.style.border = '3px solid #8A2BE2';
+    colorPoint.style.boxShadow = '0 0 10px rgba(138, 43, 226, 0.6)';
+    colorPoint.style.zIndex = '20'; 
+    colorPoint.style.opacity = '0.8';
+
+    productsContainer.appendChild(colorPoint);
+  }
+
+  colorPointOnMatrix(productData.hex, coords.warmCool, coords.lightDeep);
+</script>
 {% endblock %}
