@@ -102,6 +102,50 @@
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
   }
+
+  .image-modal {
+    display: none; /* 평소에는 숨김 */
+    position: fixed; /* 화면에 고정 */
+    z-index: 1000; /* 다른 요소들보다 위에 표시 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* 내용이 많으면 스크롤 */
+    background-color: rgba(0, 0, 0, 0.85); /* 반투명 검은 배경 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+  }
+
+  .image-modal.show {
+    display: flex; /* 보일 때는 flex로 설정 */
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain; /* 이미지 비율 유지 */
+    border-radius: 8px;
+  }
+
+  .modal-close-btn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+
+  .modal-close-btn:hover,
+  .modal-close-btn:focus {
+    color: #bbb;
+    text-decoration: none;
+  }
 </style>
 {% endblock %} {% block content %}
 
@@ -240,6 +284,12 @@
   <div id="ratings-list" class="ratings-list">
     <!-- 별점 목록이 여기에 동적으로 로드됩니다 -->
   </div>
+</div>
+
+<!--리뷰 이미지 상세보기 부분-->
+</div> <div id="image-modal" class="image-modal">
+  <span class="modal-close-btn">&times;</span>
+  <img class="modal-content" id="modal-image">
 </div>
 {% endblock %}
 {% block extra_js %}

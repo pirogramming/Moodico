@@ -1,5 +1,20 @@
 window.reviewImageFiles = new Map();
 
+function getCSRFToken() {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'csrftoken') {
+      return value;
+    }
+  }
+  const csrfInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
+  if (csrfInput) {
+    return csrfInput.value;
+  }
+  return '';
+}
+
 window.createImagePreviewBox = (id, url, isExisting = false) => {
     const imageUploadContainer = document.getElementById('image-upload-container');
     const addImageBox = document.getElementById('add-image-box');
@@ -31,7 +46,7 @@ window.createImagePreviewBox = (id, url, isExisting = false) => {
             try {
                 const response = await fetch(`/products/delete_review_image/${imageId}/`, {
                     method: 'DELETE',
-                    headers: { 'X-CSRFToken': new ProductRating().getCSRFToken() }
+                    headers: { 'X-CSRFToken': getCSRFToken() }
                 });
 
                 if (response.ok) {

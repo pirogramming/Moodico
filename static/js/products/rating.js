@@ -303,4 +303,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof productId !== 'undefined') {
         new ProductRating();
     }
+
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const closeBtn = document.querySelector('.modal-close-btn');
+    const ratingsList = document.getElementById('ratings-list');
+
+    if (ratingsList && modal && modalImage && closeBtn) {
+        ratingsList.addEventListener('click', (event) => {
+            if (event.target.classList.contains('rating-image')) {
+            event.preventDefault();
+            modal.classList.add('show');
+            modalImage.src = event.target.src;
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('show');
+        });
+
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+            modal.classList.remove('show');
+            }
+        });
+    }
 });
