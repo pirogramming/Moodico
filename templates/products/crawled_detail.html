@@ -84,13 +84,14 @@
   </div>
 </div>
 
+
 <script>
   // 제품 정보 가져오기
   const productId = "{{ product.id }}";
   const productName = "{{ product.name }}";
   const productBrand = "{{ product.brand }}";
 </script>
-<script src="{% static 'js/products/rating.js' %}"></script>
+
 
 <!-- 별점 섹션 추가 -->
 <div class="rating-section">
@@ -119,7 +120,19 @@
         <span class="star" data-rating="5">☆</span>
       </div>
       <textarea id="rating-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
-      <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+
+      <input type="file" id="image-input" multiple hidden accept="image/*" />
+
+      <div class="image-upload-container" id="image-upload-container">
+        <div class="image-box add-image" id="add-image-box">
+          <span class="plus-icon">＋</span>
+        </div>
+      </div>
+
+      <div class="rating-actions">
+        <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
+        <button id="delete-rating" class="delete-rating-btn" style="display: none;">삭제</button>
+      </div>
     </div>
   </div>
 </div>
@@ -131,9 +144,17 @@
     <!-- 별점 목록이 여기에 동적으로 로드됩니다 -->
   </div>
 </div>
+
+<!--리뷰 이미지 상세보기 부분-->
+</div> <div id="image-modal" class="image-modal">
+  <span class="modal-close-btn">&times;</span>
+  <img class="modal-content" id="modal-image">
+</div>
 {% endblock %}
 {% block extra_js %}
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
+<script src="{% static 'js/products/rating_images.js' %}"></script>
+<script src="{% static 'js/products/rating.js' %}"></script>
 <script>
   const productDataElement = document.getElementById('productData');
   const productData = JSON.parse(productDataElement.textContent);
