@@ -131,6 +131,15 @@ class ProductRating {
             if (commentArea && data.user_comment) {
                 commentArea.value = data.user_comment;
             }
+
+            document.querySelectorAll('#image-upload-container .image-preview').forEach(box => box.remove());
+            this.imageFiles.clear();
+            
+            if (data.user_images && data.user_images.length > 0) {
+                data.user_images.forEach(image => {
+                    window.createImagePreviewBox(image.id, image.url, true);
+                });
+            }
         }
     }
 
@@ -209,8 +218,8 @@ class ProductRating {
                 
                 // 데이터 새로고침
                 this.loadRatingData();
-                document.getElementById('image-upload-container').innerHTML = '';
-                this.imageFiles.clear();
+                //document.getElementById('image-upload-container').innerHTML = '';
+                //this.imageFiles.clear();
             } else {
                 const errorData = await response.json();
                 alert(errorData.error || '별점 저장에 실패했습니다.');

@@ -3,7 +3,7 @@ import json
 import os
 import numpy as np
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
@@ -440,10 +440,9 @@ def submit_product_rating(request):
         # 이미지 생성/수정/삭제 부분
         files = request.FILES.getlist('images')
         if files:
-            if not created:
-                rating_product.images.all().delete()
+            current_image_count = rating_product.images.count()
 
-            if len(files) >= 10:
+            if current_image_count + len(files) >= 10:
                 return JsonResponse({'error': '이미지는 최대 10개까지 등록 가능합니다.'}, status=400)
             for file in files:
                 ProductRatingImage.objects.create(review=rating_product, image=file)
@@ -479,17 +478,23 @@ def get_product_rating(request):
         
         # 사용자의 별점 조회
         user_rating = None
+        user_images = []
         if request.user.is_authenticated:
             user_rating = ratings.filter(user=request.user).first()
         else:
             session_nickname = request.session.get('nickname')
             if session_nickname:
                 user_rating = ratings.filter(session_nickname=session_nickname).first()
-        
+
         # 별점 분포 계산
         rating_distribution = {}
         for i in range(1, 6):
             rating_distribution[i] = ratings.filter(rating=i).count()
+        
+        # 사용자가 업로드한 기존 리뷰 이미지 불러오기
+        if user_rating:
+            for img in user_rating.images.all():
+                user_images.append({'id': img.id, 'url': request.build_absolute_uri(img.image.url)})
         
         return JsonResponse({
             'product_id': product_id,
@@ -498,6 +503,7 @@ def get_product_rating(request):
             'rating_distribution': rating_distribution,
             'user_rating': user_rating.rating if user_rating else None,
             'user_comment': user_rating.comment if user_rating else None,
+            'user_images': user_images,
         })
         
     except Exception as e:
@@ -535,6 +541,19 @@ def get_product_ratings_list(request):
     except Exception as e:
         logger.error(f"제품 별점 목록 조회 실패: {e}")
         return JsonResponse({'error': '별점 목록을 가져오는 중 오류가 발생했습니다.'}, status=500)
+
+# 리뷰 이미지 삭제 부분
+@csrf_exempt
+@require_http_methods(["DELETE"])
+def delete_review_image(request, image_id):
+    try:
+        image = get_object_or_404(ProductRatingImage, id=image_id)
+
+        image.delete()
+        return JsonResponse({'success': True, 'message': '이미지가 삭제되었습니다.'})
+    
+    except Exception as e:
+        return JsonResponse({'error': f'이미지 삭제 중 오류가 발생했습니다: {e}'}, status=500)
 
 
 @require_http_methods(["GET"])
