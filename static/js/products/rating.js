@@ -152,6 +152,7 @@ class ProductRating {
 
             // 삭제 버튼 보이도록
             if (deleteBtn) deleteBtn.style.display = 'inline-block';
+            updateAddImageLayout();
         }else{
             if (deleteBtn) deleteBtn.style.display = 'none';
         }

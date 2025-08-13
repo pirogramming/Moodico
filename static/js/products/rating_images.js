@@ -1,18 +1,33 @@
 window.reviewImageFiles = new Map();
 
 function getCSRFToken() {
-  const cookies = document.cookie.split(';');
-  for (let cookie of cookies) {
-    const [name, value] = cookie.trim().split('=');
-    if (name === 'csrftoken') {
-      return value;
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [name, value] = cookie.trim().split('=');
+        if (name === 'csrftoken') {
+            return value;
+        }
     }
-  }
-  const csrfInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
-  if (csrfInput) {
-    return csrfInput.value;
-  }
-  return '';
+    const csrfInput = document.querySelector('input[name="csrfmiddlewaretoken"]');
+    if (csrfInput) {
+        return csrfInput.value;
+    }
+    return '';
+}
+
+function updateAddImageLayout() {
+    const imageUploadContainer = document.getElementById('image-upload-container');
+    const addImageBox = document.getElementById('add-image-box');
+    
+    const currentImageCount = imageUploadContainer.querySelectorAll('.image-preview').length;
+
+    if (currentImageCount >= 4) {
+        // 4개 이상이면 disabled
+        addImageBox.classList.add('disabled');
+    } else {
+        // 4개 미만이면 disabled 클래스 제거
+        addImageBox.classList.remove('disabled');
+    }
 }
 
 window.createImagePreviewBox = (id, url, isExisting = false) => {
@@ -62,6 +77,7 @@ window.createImagePreviewBox = (id, url, isExisting = false) => {
         } else {
             window.reviewImageFiles.delete(imageId);
             boxToRemove.remove();
+            updateAddImageLayout(); 
         }
     });
 };
@@ -72,6 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (addImageBox){
         addImageBox.addEventListener('click', () => {
+            if (addImageBox.classList.contains('disabled')) {
+                alert('이미지는 최대 4개까지만 추가할 수 있습니다.');
+                return;
+            }
             if (imageInput) {
                 imageInput.click();
             }
@@ -82,19 +102,19 @@ document.addEventListener('DOMContentLoaded', () => {
         imageInput.addEventListener('change', (event) => {
             const files = event.target.files;
 
+            const currentImageCount = document.querySelectorAll('#image-upload-container .image-preview').length;
+            if (currentImageCount + files.length > 4) {
+                alert('이미지는 최대 4개까지만 추가할 수 있습니다.');
+                return;
+            }
             for (const file of files) {
-                if (window.reviewImageFiles.size >= 10) {
-                    alert('리뷰 이미지는 최대 10개까지 추가 가능합니다.');
-                    break;
-                }
-
                 const reader = new FileReader();
 
                 reader.onload = (e) => {
                     const fileId = `${Date.now()}-${file.name}`;
                     window.reviewImageFiles.set(fileId, file);
-
                     window.createImagePreviewBox(fileId, e.target.result);
+                    updateAddImageLayout();
                 };
                 reader.readAsDataURL(file);
             }
@@ -102,4 +122,4 @@ document.addEventListener('DOMContentLoaded', () => {
             imageInput.value = '';
         });
     }
-})
+});
