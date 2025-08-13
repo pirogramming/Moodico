@@ -3,6 +3,7 @@ class ProductRating {
     constructor() {
         this.currentRating = 0;
         this.isSubmitted = false;
+        this.imageFiles = window.reviewImageFiles;
         this.init();
     }
 
@@ -159,6 +160,35 @@ class ProductRating {
         const comment = document.getElementById('rating-comment').value;
         const submitBtn = document.getElementById('submit-rating');
 
+        // const response = await fetch('/products/submit_rating/', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'X-CSRFToken': this.getCSRFToken()
+        //     },
+        //     body: JSON.stringify({
+        //         product_id: productId,
+        //         product_name: productName,
+        //         product_brand: productBrand,
+        //         rating: this.currentRating,
+        //         comment: comment
+        //     })
+        // });
+
+        // 기존의 json 전달 방식에서 formData 전송방식으로 변경
+        const formData = new FormData();
+        formData.append('product_id', productId);
+        formData.append('product_name', productName);
+        formData.append('product_brand', productBrand);
+        formData.append('rating', this.currentRating);
+        formData.append('comment', comment);
+
+        if (this.imageFiles && this.imageFiles.size > 0) {
+            for (const file of this.imageFiles.values()) {
+                formData.append('images', file);
+            }
+        }
+
         try {
             submitBtn.disabled = true;
             submitBtn.textContent = '저장 중...';
@@ -166,16 +196,9 @@ class ProductRating {
             const response = await fetch('/products/submit_rating/', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': this.getCSRFToken()
+                    'X-CSRFToken': this.getCSRFToken() // CSRF 토큰 추가
                 },
-                body: JSON.stringify({
-                    product_id: productId,
-                    product_name: productName,
-                    product_brand: productBrand,
-                    rating: this.currentRating,
-                    comment: comment
-                })
+                body: formData
             });
 
             if (response.ok) {
@@ -184,8 +207,10 @@ class ProductRating {
                 this.updateSubmitButton();
                 alert(data.message);
                 
-                // 별점 데이터 새로고침
+                // 데이터 새로고침
                 this.loadRatingData();
+                document.getElementById('image-upload-container').innerHTML = '';
+                this.imageFiles.clear();
             } else {
                 const errorData = await response.json();
                 alert(errorData.error || '별점 저장에 실패했습니다.');

@@ -364,12 +364,12 @@ def get_product_like_count(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def submit_product_rating(request):
-    """제품 별점 제출 API"""
+    """제품 별점 제출 및 수정 API"""
     try:
-        data = json.loads(request.body)
-        product_id = data.get('product_id')
-        rating = data.get('rating')
-        comment = data.get('comment', '')
+        #data = json.loads(request.body)
+        product_id = request.POST.get('product_id')
+        rating = int(request.POST.get('rating'))
+        comment = request.POST.get('comment', '')
         
         if not product_id or not rating:
             return JsonResponse({'error': '제품 ID와 별점이 필요합니다.'}, status=400)
@@ -388,86 +388,76 @@ def submit_product_rating(request):
                 return JsonResponse({'error': '로그인이 필요합니다.'}, status=401)
         
         # 제품 정보 가져오기 (실제로는 데이터베이스에서 조회해야 함)
-        product_name = data.get('product_name', f'제품 {product_id}')
-        product_brand = data.get('product_brand', '브랜드')
+        product_name = request.POST.get('product_name', f'제품 {product_id}')
+        product_brand = request.POST.get('product_brand', '브랜드')
         
-        # 기존 별점이 있는지 확인
-        existing_rating = None
+        # # 기존 별점이 있는지 확인
+        # existing_rating = None
+        # if user:
+        #     existing_rating = ProductRating.objects.filter(user=user, product_id=product_id).first()
+        # else:
+        #     existing_rating = ProductRating.objects.filter(session_nickname=session_nickname, product_id=product_id).first()
+        
+        # if existing_rating:
+        #     # 기존 별점 업데이트
+        #     existing_rating.rating = rating
+        #     existing_rating.comment = comment
+        #     existing_rating.save()
+        #     message = '별점이 수정되었습니다.'
+        # else:
+        #     # 새 별점 생성
+        #     existing_rating = ProductRating.objects.create(
+        #         user=user,
+        #         session_nickname=session_nickname,
+        #         product_id=product_id,
+        #         product_name=product_name,
+        #         product_brand=product_brand,
+        #         rating=rating,
+        #         comment=comment
+        #     )
+        #     message = '별점이 등록되었습니다.'
+
+        # -> update_or_create 함수 사용 - 사용자가 작성한 리뷰를 찾고, 없으면 새로 생성
         if user:
-            existing_rating = ProductRating.objects.filter(user=user, product_id=product_id).first()
-        else:
-            existing_rating = ProductRating.objects.filter(session_nickname=session_nickname, product_id=product_id).first()
-        
-        if existing_rating:
-            # 기존 별점 업데이트
-            existing_rating.rating = rating
-            existing_rating.comment = comment
-            existing_rating.save()
-            message = '별점이 수정되었습니다.'
-        else:
-            # 새 별점 생성
-            ProductRating.objects.create(
-                user=user,
-                session_nickname=session_nickname,
-                product_id=product_id,
-                product_name=product_name,
-                product_brand=product_brand,
-                rating=rating,
-                comment=comment
+            rating_product, created = ProductRating.objects.update_or_create(
+                user=user, product_id = product_id,
+                defaults={
+                    'rating':rating, 'comment':comment,
+                    'product_name': product_name, 'product_brand': product_brand
+                }
             )
-            message = '별점이 등록되었습니다.'
+        else:
+            rating_product, created = ProductRating.objects.update_or_create(
+                session_nickname=session_nickname, product_id=product_id,
+                defaults={
+                    'rating': rating, 'comment': comment,
+                    'product_name': product_name, 'product_brand': product_brand
+                }
+            )
         
+        message = '별점이 등록되었습니다.' if created else '별점이 수정되었습니다.'
+
+        # 이미지 생성/수정/삭제 부분
+        files = request.FILES.getlist('images')
+        if files:
+            if not created:
+                rating_product.images.all().delete()
+
+            if len(files) >= 10:
+                return JsonResponse({'error': '이미지는 최대 10개까지 등록 가능합니다.'}, status=400)
+            for file in files:
+                ProductRatingImage.objects.create(review=rating_product, image=file)
+          
         return JsonResponse({
             'success': True,
             'message': message,
             'rating': rating
         })
-        
-    except json.JSONDecodeError:
-        return JsonResponse({'error': '잘못된 JSON 형식입니다.'}, status=400)
+
     except Exception as e:
         logger.error(f"제품 별점 제출 실패: {e}")
         return JsonResponse({'error': '별점을 저장하는 중 오류가 발생했습니다.'}, status=500)
 
-# 제품 리뷰에서 이미지를 업로드하는 뷰 함수 - 리뷰 이미지 업로드 API
-@csrf_exempt
-@require_http_methods(["POST"])
-def upload_review_image(request, review_id):
-    try:
-        review = get_object_or_404(ProductRating, id=review_id)
-
-        # 이미지는 최대 4개
-        if review.images.count() >= 4:
-            return JsonResponse({'error': '이미지는 최대 4개까지 등록 가능합니다.'}, status=400)
-        
-        files = request.FILES.getlist('images')
-        if not files:
-            return JsonResponse({'error':'이미지가 아닙니다.'}, status=400)
-        
-        for file in files:
-            if review.images.count() >= 4:
-                break
-            ProductRatingImage.objects.create(review=review, image=file)
-        
-        return JsonResponse({'success':True, 'message':'이미지 업로드 완료'})
-    
-    except Exception as e:
-        logger.error(f"리뷰 이미지 업로드 실패: {e}")
-        return JsonResponse({'error':'이미지 업로드 중 오류가 발생했습니다.'})
-
-# 리뷰 이미지 삭제 API
-@csrf_exempt
-@require_http_methods(["DELETE"])
-def delete_review_image(request, image_id):
-    try:
-        image = get_object_or_404(ProductRatingImage, id=image_id)
-        image.delete()
-        return JsonResponse({'success': True, 'message': '이미지가 삭제되었습니다.'})
-    
-    except Exception as e:
-        logger.error(f"리뷰 이미지 삭제 실패: {e}")
-        return JsonResponse({'error': '이미지 삭제 중 오류가 발생했습니다.'}, status=500)
-    
 @require_http_methods(["GET"])
 def get_product_rating(request):
     """제품 별점 조회 API"""
@@ -505,9 +495,9 @@ def get_product_rating(request):
             'product_id': product_id,
             'average_rating': round(avg_rating, 1),
             'total_ratings': total_ratings,
+            'rating_distribution': rating_distribution,
             'user_rating': user_rating.rating if user_rating else None,
             'user_comment': user_rating.comment if user_rating else None,
-            'rating_distribution': rating_distribution
         })
         
     except Exception as e:
@@ -527,12 +517,14 @@ def get_product_ratings_list(request):
         
         ratings_data = []
         for rating in ratings:
+            images = [request.build_absolute_uri(img.image.url) for img in rating.images.all()]
             ratings_data.append({
                 'id': str(rating.id),
                 'rating': rating.rating,
                 'comment': rating.comment,
                 'created_at': rating.created_at.strftime('%Y-%m-%d'),
-                'user_name': rating.user.username if rating.user else rating.session_nickname
+                'user_name': rating.user.username if rating.user else rating.session_nickname,
+                'images': images
             })
         
         return JsonResponse({

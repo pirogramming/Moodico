@@ -136,13 +136,14 @@
   </div>
 </div>
 
+
 <script>
   // 제품 정보 가져오기
   const productId = "{{ product.id }}";
   const productName = "{{ product.name }}";
   const productBrand = "{{ product.brand }}";
 </script>
-<script src="{% static 'js/products/rating.js' %}"></script>
+
 
 <!-- 별점 섹션 추가 -->
 <div class="rating-section">
@@ -195,6 +196,7 @@
 {% block extra_js %}
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script src="{% static 'js/products/rating_images.js' %}"></script>
+<script src="{% static 'js/products/rating.js' %}"></script>
 <script>
   const productDataElement = document.getElementById('productData');
   const productData = JSON.parse(productDataElement.textContent);
