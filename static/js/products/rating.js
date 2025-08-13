@@ -267,8 +267,10 @@ class ProductRating {
                         <span class="rating-item-date">${rating.created_at}</span>
                     </div>
                     <div class="rating-item-user">${rating.user_name}</div>
-                    ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : ''}
-                    ${imagesHTML}
+                    <div class="rating-item-body">
+                        ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : '<div></div>' /* 댓글이 없을 때도 그리드 구조 유지를 위해 빈 div 추가 */}
+                        ${imagesHTML}
+                    </div>
             </div>
         `}).join('');
 

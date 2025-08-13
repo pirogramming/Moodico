@@ -54,6 +54,54 @@
   .delete-image-btn:hover {
     background: rgba(0, 0, 0, 0.8);
   }
+
+  /*리뷰 이미지 부분*/
+  .rating-item-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+
+  /* 리뷰 댓글 */
+  .rating-item-comment {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    white-space: pre-wrap; 
+  }
+
+  .rating-item-images {
+    display: grid;
+    gap: 5px; /* 이미지 사이 간격 */
+
+    /* 기본적으로 2열 그리드로 설정 (4개 이상일 때 적용) */
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 이미지가 1개일 때: 1열 */
+  .rating-item-images:has(img:first-child:last-child) {
+    grid-template-columns: 1fr;
+  }
+
+  /* 이미지가 2개일 때: 2열 */
+  .rating-item-images:has(img:nth-child(2):last-child) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 이미지가 3개일 때: 3열 */
+  .rating-item-images:has(img:nth-child(3):last-child) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .rating-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
 </style>
 {% endblock %} {% block content %}
 
