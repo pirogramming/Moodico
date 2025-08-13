@@ -16,14 +16,26 @@ logger = logging.getLogger(__name__)
 from moodico.users.utils import login_or_kakao_required
 
 # Create your views here.
-
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
-    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'test_products.json')
+    # 1) prefer clustered for coordinates, else all_products.json
+    media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
+    media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+    static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
+
+    product_path = None
+    if os.path.exists(media_cluster):
+        product_path = media_cluster
+    elif os.path.exists(media_all):
+        product_path = media_all
+    else:
+        product_path = static_all  # last resort
+
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
 
     return render(request, 'recommendation/color_matrix.html', {'makeupProducts': products})
+
 
 from django.templatetags.static import static
 def product_detail(request, product_id):
@@ -44,7 +56,9 @@ def crawled_product_detail(request, crawled_id):
         logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
         
         # products_clustered.json에서 제품 정보 찾기
-        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered_new.json')
+        media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
+        static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
+        product_path = media_path if os.path.exists(media_path) else static_path
         logger.info(f"제품 데이터 파일 경로: {product_path}")
         
         with open(product_path, 'r', encoding='utf-8') as f:
@@ -102,12 +116,16 @@ def crawled_product_detail(request, crawled_id):
         })
 
 def product_list(request):
-    json_path = os.path.join('static', 'data', 'products.json')
-    
+    # MEDIA_ROOT 우선, 없으면 static 사용
+    media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'products.json')
+    static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products.json')
+    json_path   = media_path if os.path.exists(media_path) else static_path
+
     with open(json_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
-    
+
     return render(request, 'products/product_list.html', {'products': products})
+
 
 # DB 구현 이후 검색 로직 수정 필요 - 현재는 검색시마다 json 파일을 매번 불러오고 있음
 ## 현재는 단어 단위의 검색만 가능.. (제품 데이터를 밑에 표시함으로써 이 문제 완화 가능) 
@@ -115,21 +133,26 @@ def product_list(request):
 def search_product(request):
     query = request.GET.get('q', '').lower().strip()
     query_words = query.split()
-    product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'test_products.json')
+
+    media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
+    media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+    static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
+
+    product_path = media_cluster if os.path.exists(media_cluster) else (media_all if os.path.exists(media_all) else static_all)
+
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
 
-    def normalize(text):
-        text = text.lower()
-        return text
-    
+    def normalize(text): return text.lower()
+
     filtered = []
     for p in products:
-        search_for = normalize(p['brand'] + ' - ' + p['name'])
+        search_for = normalize(p.get('brand','') + ' - ' + p.get('name',''))
         if all(word in search_for for word in query_words):
             filtered.append(p)
 
-    return JsonResponse({'results':filtered})
+    return JsonResponse({'results': filtered})
+
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -259,47 +282,57 @@ def liked_products_page(request):
 
 def get_liked_products_color_info(liked_products):
     """찜한 제품들의 색상 정보를 가져오는 함수"""
-    import json
-    import os
-    
-    # 좌표 정보가 포함된 제품 데이터 로드
-    json_path = os.path.join('static', 'data', 'products_clustered_new.json')
+    # 1) prefer MEDIA_ROOT/data/products_clustered.json
+    media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
+    media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+    static_cluster = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
+    static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
+
+    json_path = None
+    if os.path.exists(media_cluster):
+        json_path = media_cluster
+    elif os.path.exists(media_all):
+        json_path = media_all
+    elif os.path.exists(static_cluster):
+        json_path = static_cluster
+    else:
+        json_path = static_all  # final fallback
+
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("products_clustered_new.json 파일을 찾을 수 없습니다.")
+        logger.error("products JSON 파일을 찾을 수 없습니다: %s", json_path)
         return []
-    
-    # 제품명으로 매칭하여 색상 정보 추가
+
     products_with_colors = []
-    
+
     for liked_product in liked_products:
-        logger.info(f"찜한 제품 처리 중: {liked_product.product_name} (브랜드: {liked_product.product_brand})")
-        # all_products.json에서 매칭되는 제품 찾기
+        logger.info("찜한 제품 처리 중: %s (브랜드: %s)", liked_product.product_name, liked_product.product_brand)
+
         matching_product = None
+        # 기존의 이름/브랜드 부분일치 매칭 유지
         for product in all_products:
-            # 제품명으로 매칭 (부분 일치도 허용)
-            if (liked_product.product_name in product.get('name', '') or 
-                product.get('name', '') in liked_product.product_name):
+            name = product.get('name', '')
+            brand = product.get('brand', '')
+
+            if (liked_product.product_name and (liked_product.product_name in name or name in liked_product.product_name)) \
+               and (liked_product.product_brand and (liked_product.product_brand.lower() in brand.lower() or brand.lower() in liked_product.product_brand.lower())):
                 matching_product = product
                 break
-        
-        # 제품명으로 매칭이 안 되면 브랜드명으로도 시도
+
+        # 매칭 실패 시 이름만으로도 시도 (현재 로직 유지)
         if not matching_product:
             for product in all_products:
-                if (liked_product.product_brand.lower() in product.get('brand', '').lower() or 
-                    product.get('brand', '').lower() in liked_product.product_brand.lower()):
-                    # 브랜드가 일치하면 제품명도 부분적으로 일치하는지 확인
-                    if (liked_product.product_name.lower() in product.get('name', '').lower() or 
-                        product.get('name', '').lower() in liked_product.product_name.lower()):
-                        matching_product = product
-                        break
-        
+                name = product.get('name', '')
+                if liked_product.product_name and (liked_product.product_name in name or name in liked_product.product_name):
+                    matching_product = product
+                    break
+
         if matching_product:
-            logger.info(f"제품 매칭 성공: {matching_product.get('name')} -> URL: {matching_product.get('url')}")
+            logger.info("제품 매칭 성공: %s -> URL: %s", matching_product.get('name'), matching_product.get('url'))
             products_with_colors.append({
-                'id': liked_product.product_id,  # ProductLike의 product_id 사용
+                'id': liked_product.product_id,  # 기존과 동일: Like의 product_id 유지
                 'name': liked_product.product_name,
                 'brand': liked_product.product_brand,
                 'price': liked_product.product_price,
@@ -311,22 +344,22 @@ def get_liked_products_color_info(liked_products):
                 'url': matching_product.get('url', '#')
             })
         else:
-            logger.warning(f"제품 매칭 실패: {liked_product.product_name} (브랜드: {liked_product.product_brand})")
-            # 매칭되지 않는 경우 기본값 사용
+            logger.warning("제품 매칭 실패: %s (브랜드: %s)", liked_product.product_name, liked_product.product_brand)
             products_with_colors.append({
                 'id': liked_product.product_id,
                 'name': liked_product.product_name,
                 'brand': liked_product.product_brand,
                 'price': liked_product.product_price,
                 'image': liked_product.product_image,
-                'hex': '#cccccc',  # 기본 회색
+                'hex': '#cccccc',
                 'warmCool': 50,
                 'lightDeep': 50,
                 'category': 'Unknown',
                 'url': '#'
             })
-    
+
     return products_with_colors
+
 
 from django.views.decorators.http import require_POST
 from django.contrib.admin.views.decorators import staff_member_required
@@ -559,12 +592,14 @@ def get_top_liked_products(limit=10):
     from collections import defaultdict
     
     # 전체 제품 데이터 로드
-    json_path = os.path.join('static', 'data', 'all_products_hex_update_tempk=4_2_1_1.json')
+    media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+    static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
+    json_path   = media_path if os.path.exists(media_path) else static_path
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("all_products_hex_update_tempk=4_2_1_1.json 파일을 찾을 수 없습니다.")
+        logger.error("all_products.json 파일을 찾을 수 없습니다.")
         return []
     
     # 제품명+브랜드별로 찜 개수 집계 (중복 제거)
