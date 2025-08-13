@@ -155,34 +155,39 @@ MEDIA_URL = '/media/'  # NCP에 저장될 예정 -> 사용되지 않음
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용되지 않음
 
 
-# NCP Object Storage setting(S3)
-# dummy key is for github actions
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="dummy-key")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="dummy-key")
-AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME",default="dummy-key")
+# # NCP Object Storage setting(S3)
+# # dummy key is for github actions
+# # AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="dummy-key")
+# # AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="dummy-key")
+# # AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME",default="dummy-key")
+# AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 
-AWS_S3_REGION_NAME = "kr-standard"
-AWS_S3_ENDPOINT_URL = "https://kr.object.ncloudstorage.com"
-AWS_S3_SIGNATURE_VERSION = "s3v4"
-AWS_S3_ADDRESSING_STYLE = "virtual"
-AWS_DEFAULT_ACL = None
-AWS_QUERYSTRING_AUTH = False
+# AWS_S3_REGION_NAME = "kr-standard"
+# AWS_S3_ENDPOINT_URL = "https://kr.object.ncloudstorage.com"
+# AWS_S3_SIGNATURE_VERSION = "s3v4"
+# AWS_S3_ADDRESSING_STYLE = "virtual"
+# AWS_DEFAULT_ACL = None
+# AWS_QUERYSTRING_AUTH = False
 
-INSTALLED_APPS += ["storages"]
+# INSTALLED_APPS += ["storages"]
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS": {
-            "bucket_name": AWS_STORAGE_BUCKET_NAME,
-            "region_name": AWS_S3_REGION_NAME,
-            "endpoint_url": AWS_S3_ENDPOINT_URL,
-            "signature_version": AWS_S3_SIGNATURE_VERSION,
-            "addressing_style": AWS_S3_ADDRESSING_STYLE,
-        },
-    }
-}
-
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#         "OPTIONS": {
+#             "bucket_name": AWS_STORAGE_BUCKET_NAME,
+#             "region_name": AWS_S3_REGION_NAME,
+#             "endpoint_url": AWS_S3_ENDPOINT_URL,
+#             "signature_version": AWS_S3_SIGNATURE_VERSION,
+#             "addressing_style": AWS_S3_ADDRESSING_STYLE,
+#         },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+#     },
+# }
 
 # 카카오 로그인 설정
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
