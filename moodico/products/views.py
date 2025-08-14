@@ -634,16 +634,12 @@ def get_multiple_products_like_info(request):
             'success': False,
             'message': '서버 오류가 발생했습니다.'
         }, status=500)
-
-
-def get_top_liked_products(limit=10):
-    """상위 찜 제품 조회 함수 - 전체 제품 데이터 기반"""
-    import json
-    import os
-    from django.db.models import Count
-    from collections import defaultdict
-    
-    # 전체 제품 데이터 로드
+def get_top_liked_products(limit=10, category=None):
+    """
+    상위 찜 제품 조회 함수 - 전체 제품 데이터 기반
+    category 파라미터가 있으면 해당 카테고리 제품만 반환
+    """
+    # 전체 제품 데이터 로드 (JSON 크롤링 데이터)
     json_path = os.path.join('static', 'data', 'all_products_hex_update_tempk=4_2_1_1.json')
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
@@ -651,8 +647,8 @@ def get_top_liked_products(limit=10):
     except FileNotFoundError:
         logger.error("all_products_hex_update_tempk=4_2_1_1.json 파일을 찾을 수 없습니다.")
         return []
-    
-    # 제품명+브랜드별로 찜 개수 집계 (중복 제거)
+
+    # 제품명+브랜드별로 찜 개수 집계
     product_likes_summary = {}
     for item in ProductLike.objects.all():
         key = f"{item.product_brand}_{item.product_name}"
@@ -663,27 +659,21 @@ def get_top_liked_products(limit=10):
                 'product_brand': item.product_brand,
                 'product_price': item.product_price,
                 'product_image': item.product_image,
+                'product_category': getattr(item, 'product_category', ''),  # DB category 포함
                 'like_count': 0
             }
         product_likes_summary[key]['like_count'] += 1
-    
-    # 전체 제품 리스트 생성
-    products_with_likes = []
-    
-    # 1. 먼저 찜된 제품들 추가 (찜 개수 > 0)
-    for product_data in product_likes_summary.values():
-        products_with_likes.append(product_data)
-    
-    # 2. 찜되지 않은 제품들도 추가 (찜 개수 = 0)
-    # JSON 파일의 제품들 중 찜되지 않은 것들 찾기
+
+    # 전체 제품 리스트 생성 (찜된 제품 + JSON에서 찜되지 않은 제품)
+    products_with_likes = list(product_likes_summary.values())
     existing_product_keys = set(f"{item['product_brand']}_{item['product_name']}" 
                                for item in product_likes_summary.values())
-    
+
     for product in all_products:
         product_name = product.get('name', '')
         product_brand = product.get('brand', '')
         product_key = f"{product_brand}_{product_name}"
-        
+
         if product_name and product_key not in existing_product_keys:
             products_with_likes.append({
                 'product_id': product.get('id', product_name),
@@ -691,12 +681,21 @@ def get_top_liked_products(limit=10):
                 'product_brand': product_brand,
                 'product_price': product.get('price', ''),
                 'product_image': product.get('image', ''),
+                'product_category': product.get('category', ''),
                 'like_count': 0
             })
-    
-    # 찜 개수로 정렬 (찜 개수가 같으면 이름순)
+
+    # 카테고리 필터링
+    if category:
+        category = category.strip().lower()  # 공백 제거 + 소문자 변환
+        products_with_likes = [
+            p for p in products_with_likes
+            if p.get('product_category', '').strip().lower() == category
+        ]
+
+    # 찜 개수로 정렬 (찜 많음 -> 이름순)
     products_with_likes.sort(key=lambda x: (-x['like_count'], x['product_name']))
-    
+
     return products_with_likes[:limit]
 
 
@@ -720,15 +719,21 @@ def product_ranking_api(request):
         }, status=500)
 
 
+@require_http_methods(["GET"])
 def product_ranking_page(request):
-    """제품 랭킹 페이지 뷰"""
+    """
+    제품 랭킹 페이지 뷰
+    ?category=립 처럼 URL 파라미터로 카테고리 필터 가능
+    """
     try:
-        top_products = get_top_liked_products(10)
-        
+        category = request.GET.get('category')  # URL에서 category 받기
+        top_products = get_top_liked_products(limit=10, category=category)
+
         return render(request, 'products/product_ranking.html', {
-            'top_products': top_products
+            'top_products': top_products,
+            'selected_category': category,  # 템플릿에서 선택 카테고리 표시용
         })
-        
+
     except Exception as e:
         logger.error(f"제품 랭킹 페이지 오류: {str(e)}")
         return render(request, 'products/product_ranking.html', {
@@ -759,3 +764,33 @@ def delete_product_rating(request, product_id):
         return JsonResponse({'error': '삭제할 리뷰를 찾을 수 없습니다.'}, status=404)
     except Exception as e:
         return JsonResponse({'error': f'리뷰 삭제 중 오류가 발생했습니다: {e}'}, status=500)
+
+        # views.py
+
+
+def product_ranking(request):
+    """제품 랭킹 페이지 뷰 - 카테고리 필터링 가능"""
+    
+    try:
+        category = request.GET.get('category')  # URL에서 category 파라미터
+        top_products = get_top_liked_products(1000)  # 충분히 많은 제품을 가져옴
+        
+        # 카테고리 필터링
+        if category:
+            top_products = [p for p in top_products if p.get('product_category') == category]
+        
+        # 최대 10개만 표시
+        top_products = top_products[:10]
+        
+        return render(request, 'products/product_ranking.html', {
+            'top_products': top_products,
+            'selected_category': category,  # 선택된 카테고리 표시용
+        })
+    except Exception as e:
+        logger.error(f"제품 랭킹 페이지 오류: {str(e)}")
+        return render(request, 'products/product_ranking.html', {
+            'top_products': [],
+            'error_message': '랭킹 정보를 불러오는데 실패했습니다.'
+        })
+
+    

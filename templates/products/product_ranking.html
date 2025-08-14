@@ -1,67 +1,82 @@
-{% extends 'base.html' %} {% load static %} {% block extra_head %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/products/product_ranking.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="ranking-container">
-  <div class="ranking-header">
-    <h1>🏆 제품 인기 랭킹</h1>
-    <p>사용자들이 가장 많이 찜한 인기 제품 TOP 10</p>
-    {% if top_products %}
-    <div class="ranking-stats">총 {{ top_products|length }}개의 인기 제품</div>
-    {% endif %}
-  </div>
+    <div class="ranking-header">
+        <h1>🏆 제품 인기 랭킹</h1>
+        <p>사용자들이 가장 많이 찜한 인기 제품 TOP 10</p>
 
-  {% if error_message %}
-  <div class="empty-state">
-    <div class="icon">⚠️</div>
-    <h2>오류가 발생했습니다</h2>
-    <p>{{ error_message }}</p>
-    <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
-  </div>
-  {% elif top_products %}
-  <div class="ranking-grid">
-    {% for product in top_products %}
-    <div
-      class="ranking-card {% if forloop.counter <= 3 %}top-3 rank-{{ forloop.counter }}{% endif %}"
-      data-product-id="{{ product.product_id }}"
-    >
-      {% if forloop.counter == 1 %}
-      <div class="crown-icon">👑</div>
-      {% endif %}
+        {% if top_products %}
+        <div class="category-filter">
+            <a href="{% url 'product_ranking' %}?category=립"
+               class="{% if selected_category == '립' %}active{% endif %}">립</a>
+            <a href="{% url 'product_ranking' %}?category=아이섀도우"
+               class="{% if selected_category == '아이섀도우' %}active{% endif %}">아이섀도우</a>
+            <a href="{% url 'product_ranking' %}?category=블러셔"
+               class="{% if selected_category == '블러셔' %}active{% endif %}">블러셔</a>
+            <a href="{% url 'product_ranking' %}" class="{% if not selected_category %}active{% endif %}">전체</a>
+        </div>
 
-      <div class="ranking-number {% if forloop.counter > 3 %}other{% endif %}">
-        {{ forloop.counter }}
-      </div>
-
-      <img
-        src="{{ product.product_image|default:'/static/images/test.jpg' }}"
-        alt="{{ product.product_name }}"
-        class="product-image"
-        onerror="this.src='/static/images/test.jpg'"
-      />
-
-      <div class="product-details">
-        <div class="product-brand">{{ product.product_brand }}</div>
-        <div class="product-name">{{ product.product_name }}</div>
-        <div class="product-price">{{ product.product_price }}</div>
-        <div class="like-info">💜 {{ product.like_count }}명이 찜함</div>
-      </div>
+        <div class="ranking-stats">총 {{ top_products|length }}개의 인기 제품</div>
+        {% endif %}
     </div>
-    {% endfor %}
-  </div>
 
-  <div style="text-align: center">
-    <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
-  </div>
-  {% else %}
-  <div class="empty-state">
-    <div class="icon">📊</div>
-    <h2>아직 랭킹이 없어요</h2>
-    <p>사용자들이 제품을 찜하면 인기 랭킹이 생성됩니다.</p>
-    <p>첫 번째로 제품을 찜해보세요! 💖</p>
-    <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
-  </div>
-  {% endif %}
+    {% if error_message %}
+    <div class="empty-state">
+        <div class="icon">⚠️</div>
+        <h2>오류가 발생했습니다</h2>
+        <p>{{ error_message }}</p>
+        <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
+    </div>
+    {% elif top_products %}
+    <div class="ranking-grid">
+        {% for product in top_products %}
+        <div class="ranking-card {% if forloop.counter <= 3 %}top-3 rank-{{ forloop.counter }}{% endif %}" 
+             data-product-id="{{ product.product_id }}">
+            
+            {% if forloop.counter == 1 %}
+            <div class="crown-icon">👑</div>
+            {% endif %}
+
+            <div class="ranking-number {% if forloop.counter > 3 %}other{% endif %}">
+                {{ forloop.counter }}
+            </div>
+
+            <img src="{{ product.product_image|default:'/static/images/test.jpg' }}"
+                 alt="{{ product.product_name }}"
+                 class="product-image"
+                 onerror="this.src='/static/images/test.jpg'"/>
+
+            <div class="product-details">
+                <div class="product-brand">{{ product.product_brand }}</div>
+                <div class="product-name">{{ product.product_name }}</div>
+                <div class="product-price">{{ product.product_price }}</div>
+                <div class="like-info">💜 {{ product.like_count }}명이 찜함</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="text-align: center">
+        <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <div class="icon">📊</div>
+        <h2>아직 랭킹이 없어요</h2>
+        <p>사용자들이 제품을 찜하면 인기 랭킹이 생성됩니다.</p>
+        <p>첫 번째로 제품을 찜해보세요! 💖</p>
+        <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
+    </div>
+    {% endif %}
 </div>
-{% endblock %} {% block extra_js %}
+{% endblock %}
+
+{% block extra_js %}
 <script src="{% static 'js/products/like_button.js' %}"></script>
 {% endblock %}

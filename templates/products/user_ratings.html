@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/products/user_ratings.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="user-ratings-container">
+    <div class="page-header">
+        <h1>내가 쓴 리뷰</h1>
+        <p class="subtitle">내가 평가한 제품들의 리뷰를 확인해보세요</p>
+    </div>
+
+    <div class="ratings-summary">
+        <div class="summary-card">
+            <div class="summary-number">{{ user_ratings.count }}</div>
+            <div class="summary-label">총 리뷰 수</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-number">{{ average_rating|floatformat:1 }}</div>
+            <div class="summary-label">평균 별점</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-number">{{ recent_ratings_count }}</div>
+            <div class="summary-label">최근 30일</div>
+        </div>
+    </div>
+
+    <div class="ratings-filter">
+        <button class="filter-btn active" data-filter="all">전체</button>
+        <button class="filter-btn" data-filter="5">5점</button>
+        <button class="filter-btn" data-filter="4">4점</button>
+        <button class="filter-btn" data-filter="3">3점</button>
+        <button class="filter-btn" data-filter="2">2점</button>
+        <button class="filter-btn" data-filter="1">1점</button>
+    </div>
+
+    <div class="ratings-list" id="ratings-list">
+        {% if user_ratings %}
+            {% for rating in user_ratings %}
+            <div class="rating-item" data-rating="{{ rating.rating }}">
+                <div class="rating-header">
+                    <div class="product-info">
+                        <h3 class="product-name">{{ rating.product_name }}</h3>
+                        <p class="product-brand">{{ rating.product_brand }}</p>
+                    </div>
+                    <div class="rating-info">
+                        <div class="stars">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= rating.rating %}
+                                    <span class="star filled">★</span>
+                                {% else %}
+                                    <span class="star">☆</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <span class="rating-date">{{ rating.created_at|date:"Y.m.d" }}</span>
+                    </div>
+                </div>
+                
+                {% if rating.comment %}
+                <div class="rating-comment">
+                    <p>{{ rating.comment }}</p>
+                </div>
+                {% endif %}
+                
+                <div class="rating-actions">
+                    <button class="edit-btn" onclick="editRating('{{ rating.id }}', '{{ rating.product_id }}')">
+                        수정하기
+                    </button>
+                    <button class="view-product-btn" onclick="viewProduct('{{ rating.product_id }}')">
+                        제품 보기
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-ratings">
+                <div class="no-ratings-icon">⭐</div>
+                <h3>아직 작성한 리뷰가 없습니다</h3>
+                <p>제품을 평가하고 리뷰를 남겨보세요!</p>
+                <a href="{% url 'product_list' %}" class="browse-products-btn">제품 둘러보기</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 리뷰 수정 모달 -->
+<div id="edit-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>리뷰 수정</h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="product-info-modal">
+                <h4 id="modal-product-name"></h4>
+                <p id="modal-product-brand"></p>
+            </div>
+            <div class="rating-input-modal">
+                <label>별점</label>
+                <div class="stars-input-modal" id="stars-input-modal">
+                    <span class="star" data-rating="1">☆</span>
+                    <span class="star" data-rating="2">☆</span>
+                    <span class="star" data-rating="3">☆</span>
+                    <span class="star" data-rating="4">☆</span>
+                    <span class="star" data-rating="5">☆</span>
+                </div>
+            </div>
+            <div class="comment-input-modal">
+                <label>리뷰 코멘트</label>
+                <textarea id="modal-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button id="save-rating-btn" class="save-btn">저장하기</button>
+            <button id="delete-rating-btn" class="delete-btn">삭제하기</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentRatingId = null;
+let currentProductId = null;
+let currentRating = 0;
+
+// 필터 기능
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const filter = this.dataset.filter;
+        
+        // 활성 버튼 변경
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // 리뷰 아이템 필터링
+        const ratingItems = document.querySelectorAll('.rating-item');
+        ratingItems.forEach(item => {
+            if (filter === 'all' || item.dataset.rating === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+
+// 모달 관련 함수들
+function editRating(ratingId, productId) {
+    currentRatingId = ratingId;
+    currentProductId = productId;
+    
+    // 기존 리뷰 데이터 가져오기
+    fetch(`/products/get_rating/?product_id=${productId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.user_rating) {
+                currentRating = data.user_rating;
+                document.getElementById('modal-comment').value = data.user_comment || '';
+                showStars(currentRating);
+            }
+        });
+    
+    // 제품 정보 표시
+    const ratingItem = document.querySelector(`[data-rating-id="${ratingId}"]`);
+    if (ratingItem) {
+        const productName = ratingItem.querySelector('.product-name').textContent;
+        const productBrand = ratingItem.querySelector('.product-brand').textContent;
+        document.getElementById('modal-product-name').textContent = productName;
+        document.getElementById('modal-product-brand').textContent = productBrand;
+    }
+    
+    document.getElementById('edit-modal').style.display = 'block';
+}
+
+function showStars(rating) {
+    const stars = document.querySelectorAll('#stars-input-modal .star');
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.textContent = '★';
+            star.classList.add('filled');
+        } else {
+            star.textContent = '☆';
+            star.classList.remove('filled');
+        }
+    });
+}
+
+// 별점 입력 이벤트
+document.querySelectorAll('#stars-input-modal .star').forEach(star => {
+    star.addEventListener('click', function() {
+        const rating = parseInt(this.dataset.rating);
+        currentRating = rating;
+        showStars(rating);
+    });
+});
+
+// 저장 버튼
+document.getElementById('save-rating-btn').addEventListener('click', function() {
+    if (currentRating === 0) {
+        alert('별점을 선택해주세요.');
+        return;
+    }
+    
+    const comment = document.getElementById('modal-comment').value;
+    
+    fetch('/products/submit_rating/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            product_id: currentProductId,
+            rating: currentRating,
+            comment: comment
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('리뷰가 수정되었습니다.');
+            location.reload(); // 페이지 새로고침
+        } else {
+            alert(data.error || '리뷰 수정에 실패했습니다.');
+        }
+    });
+});
+
+// 삭제 버튼 (추후 구현)
+document.getElementById('delete-rating-btn').addEventListener('click', function() {
+    if (confirm('정말로 이 리뷰를 삭제하시겠습니까?')) {
+        // 삭제 API 구현 필요
+        alert('삭제 기능은 추후 구현 예정입니다.');
+    }
+});
+
+// 모달 닫기
+document.querySelector('.close').addEventListener('click', function() {
+    document.getElementById('edit-modal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('edit-modal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+function viewProduct(productId) {
+    window.open(`/products/detail/${productId}/`, '_blank');
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.trim().split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return '';
+}
+</script>
+{% endblock %} 
