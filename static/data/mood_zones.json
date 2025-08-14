@@ -1,0 +1,32 @@
+{
+    "러블리": {
+        "name": "러블리",
+        "area": { "left": 60, "top": 10, "width": 30, "height": 40 },
+        "color": "#FFE5E5",
+        "description": "상큼하고 기분 좋은 무드"
+    },
+    "활기찬": {
+        "name": "활기찬", 
+        "area": { "left": 70, "top": 30, "width": 25, "height": 30 },
+        "color": "#FFF2E5",
+        "description": "밝고 친근한 무드"
+    },
+    "고급스러운": {
+        "name": "고급스러운",
+        "area": { "left": 65, "top": 60, "width": 30, "height": 35 },
+        "color": "#E5D4C8",
+        "description": "포인트 있는 강렬한 무드"
+    },
+    "내추럴": {
+        "name": "내추럴",
+        "area": { "left": 20, "top": 10, "width": 35, "height": 40 },
+        "color": "#E5F0FF",
+        "description": "자연스러운 무드"
+    },
+    "시크": {
+        "name": "시크",
+        "area": { "left": 15, "top": 60, "width": 35, "height": 35 },
+        "color": "#E5E5F0",
+        "description": "스타일리시한 무드"
+    }
+}
