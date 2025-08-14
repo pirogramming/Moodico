@@ -100,11 +100,31 @@ class ProductRating {
 
     async loadRatingData() {
         try {
+            // 기존 리뷰 정보가 있는 경우 먼저 표시
+            if (existingReview) {
+                this.currentRating = existingReview.rating;
+                this.isSubmitted = true;
+                this.showCurrentRating();
+                this.updateSubmitButton();
+                
+                // 코멘트 표시
+                const commentArea = document.getElementById('rating-comment');
+                if (commentArea && existingReview.comment) {
+                    commentArea.value = existingReview.comment;
+                }
+                
+                // 삭제 버튼 표시
+                if (this.deleteBtn) {
+                    this.deleteBtn.style.display = 'inline-block';
+                }
+            }
+            
             const response = await fetch(`/products/get_rating/?product_id=${productId}`);
             if (response.ok) {
                 const data = await response.json();
                 this.updateRatingDisplay(data);
-                this.loadRatingsList();
+                // Django에서 이미 리뷰 목록을 표시하고 있으므로 loadRatingsList 호출 제거
+                // this.loadRatingsList();
             }
         } catch (error) {
             console.error('별점 데이터 로드 실패:', error);
