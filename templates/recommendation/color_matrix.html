@@ -106,7 +106,7 @@
 {% endblock %} {% block extra_js %}
 <script>
   const makeupProducts = {{ makeupProducts| safe }};
-  console.log(makeupProducts);  // 확인용
+  //console.log(makeupProducts);  // 확인용
 </script>
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script src="{% static 'js/recommendation/color_matrix_script.js' %}"></script>

@@ -1,0 +1,50 @@
+{
+    "러블리": {
+        "name": "러블리",
+        "area": { "left": 60, "top": 10, "width": 30, "height": 40 },
+        "color": "#FFE5E5",
+        "description": "사랑스럽고 생기 넘치는 무드"
+    },
+    "캐주얼": {
+        "name": "캐주얼",
+        "area": { "left": 55, "top": 35, "width": 25, "height": 25 },
+        "color": "#FFECB3",
+        "description": "활동적이고 친근한 무드"
+    },
+    "고급스러운": {
+        "name": "고급스러운",
+        "area": { "left": 65, "top": 60, "width": 30, "height": 35 },
+        "color": "#E5D4C8",
+        "description": "우아하고 품격 있는 무드"
+    },
+    "내추럴": {
+        "name": "내추럴",
+        "area": { "left": 15, "top": 35, "width": 35, "height": 20 },
+        "color": "#E5F0FF",
+        "description": "자연스럽고 편안한 무드"
+    },
+    "시크": {
+        "name": "시크",
+        "area": { "left": 15, "top": 60, "width": 35, "height": 35 },
+        "color": "#E5E5F0",
+        "description": "세련되고 도회적인 무드"
+},
+    "모던": {
+        "name": "모던",
+        "area": { "left": 0, "top": 50, "width": 30, "height": 25 },
+        "color": "#78909C",
+        "description": "깔끔하고 세련된 무드"
+    },
+    "청순": {
+        "name": "청순",
+        "area": { "left": 20, "top": 10, "width": 25, "height": 25 },
+        "color": "#E1F5FE",
+        "description": "맑고 순수한 분위기의 무드"
+    },
+    "힙": {
+        "name": "힙",
+        "area": { "left": 55, "top": 65, "width": 20, "height": 30 },
+        "color": "#B39DDB",
+        "description": "개성 있고 트렌디한 무드"
+    }
+}

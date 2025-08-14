@@ -11,7 +11,7 @@ const getCoords = (hex) => {
 };
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const matrixContainer = document.querySelector('.color-matrix-container');
     const productsContainer = document.getElementById('makeup-products-container');
     const moodSelectionArea = document.getElementById('mood-selection-area');
@@ -25,49 +25,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const productsContainerLips = document.getElementById('makeup-products-container-lips');
     const productsContainerEyeshadow = document.getElementById('makeup-products-container-eyeshadow');
     const productsContainerBlush = document.getElementById('makeup-products-container-blush');
-    // 무드별 구역 정의
+    /*
+    // 무드별 구역 정의 -> mood_zones.json로 이동
     const moodZones = {
         '러블리': {
-            area: { left: 50, top: 0, width: 50, height: 25 },
-            warmCool: 'Warm',
-            lightDeep: 'Light'
+            name: '러블리',
+            area: { left: 60, top: 10, width: 30, height: 40 }, // 웜 라이트 영역
+            color: '#FFE5E5',
+            description: '상큼하고 기분 좋은 무드'
         },
-        '캐주얼': {
-            area: { left: 50, top: 25, width: 50, height: 25 },
-            warmCool: 'Warm',
-            lightDeep: 'All'
-        },
-        '힙': {
-            area: { left: 50, top: 50, width: 50, height: 25 },
-            warmCool: 'Warm',
-            lightDeep: 'Deep'
+        '활기찬': {
+            name: '활기찬', 
+            area: { left: 70, top: 30, width: 25, height: 30 }, // 웜 브라이트 영역
+            color: '#FFF2E5',
+            description: '밝고 친근한 무드'
         },
         '고급스러운': {
-            area: { left: 50, top: 75, width: 50, height: 25 },
-            warmCool: 'Warm',
-            lightDeep: 'Deep'
-        },
-        '청순': {
-            area: { left: 0, top: 0, width: 50, height: 25 },
-            warmCool: 'Cool',
-            lightDeep: 'Light'
+            name: '고급스러운',
+            area: { left: 65, top: 60, width: 30, height: 35 }, // 웜 딥 영역
+            color: '#E5D4C8',
+            description: '포인트 있는 강렬한 무드'
         },
         '내추럴': {
-            area: { left: 0, top: 25, width: 50, height: 25 },
-            warmCool: 'Cool',
-            lightDeep: 'Light'
-        },
-        '모던': {
-            area: { left: 0, top: 50, width: 50, height: 25 },
-            warmCool: 'Cool',
-            lightDeep: 'Deep'
+            name: '내추럴',
+            area: { left: 20, top: 10, width: 35, height: 40 }, // 쿨 라이트 영역
+            color: '#E5F0FF',
+            description: '자연스러운 무드'
         },
         '시크': {
-            area: { left: 0, top: 75, width: 50, height: 25 },
-            warmCool: 'Cool',
-            lightDeep: 'Deep'
-        },
+            name: '시크',
+            area: { left: 15, top: 60, width: 35, height: 35 }, // 쿨 딥 영역
+            color: '#E5E5F0',
+            description: '스타일리시한 무드'
+        }
     };
+    */
+
+    let moodZones;
+    try{
+        const response = await fetch('/static/data/mood_zones.json');
+        if (!response.ok){
+            throw new Error(`error: ${response.status}`)
+        }
+        moodZones = await response.json();
+    } catch (error){
+        console.error("moodZones.json 파일을 불러오는 데 실패했습니다:", error);
+        return;
+    }
+
 
     /*
     // 우선은 기존의 임시 데이터 형식 남겨두겠습니다 -

@@ -90,6 +90,17 @@
   const productId = "{{ product.id }}";
   const productName = "{{ product.name }}";
   const productBrand = "{{ product.brand }}";
+  
+  // 기존 리뷰 정보 (Django 템플릿에서 전달)
+  {% if user_review %}
+  const existingReview = {
+    rating: {{ user_review.rating }},
+    comment: "{{ user_review.comment|escapejs }}",
+    createdAt: "{{ user_review.created_at|date:'Y년 m월 d일' }}"
+  };
+  {% else %}
+  const existingReview = null;
+  {% endif %}
 </script>
 
 
@@ -97,20 +108,49 @@
 <div class="rating-section">
   <div class="rating-summary">
     <div class="average-rating">
-      <span class="rating-number" id="average-rating">0.0</span>
+      <span class="rating-number" id="average-rating">{{ average_rating }}</span>
       <div class="stars" id="average-stars">
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
-        <span class="star">★</span>
+        {% for i in "12345" %}
+          {% if forloop.counter <= average_rating %}
+            <span class="star">★</span>
+          {% else %}
+            <span class="star">☆</span>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
-    <span class="rating-count" id="rating-count">(0개 평가)</span>
+    <span class="rating-count" id="rating-count">({{ total_ratings }}개 평가)</span>
   </div>
 
   <div class="user-rating">
     <h3>내 리뷰</h3>
+    {% if user_review %}
+    <!-- 기존 리뷰가 있는 경우 -->
+    <div class="existing-review">
+      <div class="current-rating">
+        <span>현재 별점: </span>
+        <div class="stars-display">
+          {% for i in "12345" %}
+            {% if forloop.counter <= user_review.rating %}
+              <span class="star filled">★</span>
+            {% else %}
+              <span class="star">☆</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% if user_review.comment %}
+      <div class="current-comment">
+        <span>현재 리뷰:</span>
+        <p>{{ user_review.comment }}</p>
+      </div>
+      {% endif %}
+      <div class="review-date">
+        작성일: {{ user_review.created_at|date:"Y년 m월 d일" }}
+      </div>
+    </div>
+    {% endif %}
+    
     <div class="rating-input">
       <div class="stars-input" id="stars-input">
         <span class="star" data-rating="1">☆</span>
@@ -119,7 +159,7 @@
         <span class="star" data-rating="4">☆</span>
         <span class="star" data-rating="5">☆</span>
       </div>
-      <textarea id="rating-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
+      <textarea id="rating-comment" placeholder="{% if user_review %}리뷰를 수정해주세요{% else %}리뷰를 남겨주세요 (선택사항){% endif %}">{% if user_review %}{{ user_review.comment }}{% endif %}</textarea>
 
       <input type="file" id="image-input" multiple hidden accept="image/*" />
 
@@ -130,8 +170,12 @@
       </div>
 
       <div class="rating-actions">
-        <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
-        <button id="delete-rating" class="delete-rating-btn" style="display: none;">삭제</button>
+        <button id="submit-rating" class="submit-rating-btn">
+          {% if user_review %}리뷰 수정하기{% else %}리뷰 남기기{% endif %}
+        </button>
+        {% if user_review %}
+        <button id="delete-rating" class="delete-rating-btn">삭제</button>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -140,9 +184,44 @@
 <!-- 별점 목록 섹션 -->
 <div class="ratings-list-section">
   <h3>사용자 리뷰</h3>
-  <div id="ratings-list" class="ratings-list">
-    <!-- 별점 목록이 여기에 동적으로 로드됩니다 -->
+  {% if all_reviews %}
+  <div class="ratings-list">
+    {% for review in all_reviews %}
+    <div class="rating-item">
+      <div class="rating-header">
+        <div class="rating-stars">
+          {% for i in "12345" %}
+            {% if forloop.counter <= review.rating %}
+              <span class="star filled">★</span>
+            {% else %}
+              <span class="star">☆</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div class="rating-info">
+          <span class="reviewer-name">
+            {% if review.user %}
+              {{ review.user.username }}
+            {% else %}
+              {{ review.session_nickname|default:"익명 사용자" }}
+            {% endif %}
+          </span>
+          <span class="rating-date">{{ review.created_at|date:"Y년 m월 d일" }}</span>
+        </div>
+      </div>
+      {% if review.comment %}
+      <div class="rating-comment">
+        {{ review.comment }}
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
+  {% else %}
+  <div class="no-reviews">
+    <p>아직 리뷰가 없습니다. 첫 번째 리뷰를 남겨보세요!</p>
+  </div>
+  {% endif %}
 </div>
 
 <!--리뷰 이미지 상세보기 부분-->
@@ -155,6 +234,180 @@
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script src="{% static 'js/products/rating_images.js' %}"></script>
 <script src="{% static 'js/products/rating.js' %}"></script>
+
+<style>
+  /* 기존 리뷰 표시 스타일 */
+  .existing-review {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .current-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .current-rating span {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .stars-display {
+    display: flex;
+    gap: 2px;
+  }
+
+  .stars-display .star {
+    color: #ddd;
+    font-size: 16px;
+  }
+
+  .stars-display .star.filled {
+    color: #ffd700;
+  }
+
+  .current-comment {
+    margin-bottom: 10px;
+  }
+
+  .current-comment span {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .current-comment p {
+    margin: 0;
+    color: #555;
+    font-style: italic;
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    border-left: 3px solid #007bff;
+  }
+
+  .review-date {
+    color: #888;
+    font-size: 0.9em;
+    text-align: right;
+  }
+
+  /* 리뷰 목록 스타일 */
+  .ratings-list-section {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+  }
+
+  .ratings-list-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+  }
+
+  .ratings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .rating-item {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+  }
+
+  .rating-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .rating-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .rating-stars .star {
+    color: #ddd;
+    font-size: 16px;
+  }
+
+  .rating-stars .star.filled {
+    color: #ffd700;
+  }
+
+  .rating-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .reviewer-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9em;
+  }
+
+  .rating-date {
+    color: #888;
+    font-size: 0.8em;
+  }
+
+  .rating-comment {
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.4;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid mediumpurple;
+  }
+
+  .no-reviews {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+  }
+
+  .no-reviews p {
+    margin: 0;
+    font-size: 1.1em;
+  }
+
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .rating-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    
+    .rating-info {
+      align-items: flex-start;
+    }
+    
+    .rating-item {
+      padding: 12px;
+    }
+    
+    .ratings-list-section {
+      padding: 15px;
+    }
+  }
+</style>
+
 <script>
   const productDataElement = document.getElementById('productData');
   const productData = JSON.parse(productDataElement.textContent);
