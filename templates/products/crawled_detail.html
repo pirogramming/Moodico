@@ -90,6 +90,17 @@
   const productId = "{{ product.id }}";
   const productName = "{{ product.name }}";
   const productBrand = "{{ product.brand }}";
+  
+  // 기존 리뷰 정보 (Django 템플릿에서 전달)
+  {% if user_review %}
+  const existingReview = {
+    rating: {{ user_review.rating }},
+    comment: "{{ user_review.comment|escapejs }}",
+    createdAt: "{{ user_review.created_at|date:'Y년 m월 d일' }}"
+  };
+  {% else %}
+  const existingReview = null;
+  {% endif %}
 </script>
 
 
@@ -111,6 +122,33 @@
 
   <div class="user-rating">
     <h3>내 리뷰</h3>
+    {% if user_review %}
+    <!-- 기존 리뷰가 있는 경우 -->
+    <div class="existing-review">
+      <div class="current-rating">
+        <span>현재 별점: </span>
+        <div class="stars-display">
+          {% for i in "12345" %}
+            {% if forloop.counter <= user_review.rating %}
+              <span class="star filled">★</span>
+            {% else %}
+              <span class="star">☆</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% if user_review.comment %}
+      <div class="current-comment">
+        <span>현재 리뷰:</span>
+        <p>{{ user_review.comment }}</p>
+      </div>
+      {% endif %}
+      <div class="review-date">
+        작성일: {{ user_review.created_at|date:"Y년 m월 d일" }}
+      </div>
+    </div>
+    {% endif %}
+    
     <div class="rating-input">
       <div class="stars-input" id="stars-input">
         <span class="star" data-rating="1">☆</span>
@@ -119,7 +157,7 @@
         <span class="star" data-rating="4">☆</span>
         <span class="star" data-rating="5">☆</span>
       </div>
-      <textarea id="rating-comment" placeholder="리뷰를 남겨주세요 (선택사항)"></textarea>
+      <textarea id="rating-comment" placeholder="{% if user_review %}리뷰를 수정해주세요{% else %}리뷰를 남겨주세요 (선택사항){% endif %}">{% if user_review %}{{ user_review.comment }}{% endif %}</textarea>
 
       <input type="file" id="image-input" multiple hidden accept="image/*" />
 
@@ -130,8 +168,12 @@
       </div>
 
       <div class="rating-actions">
-        <button id="submit-rating" class="submit-rating-btn">리뷰 남기기</button>
-        <button id="delete-rating" class="delete-rating-btn" style="display: none;">삭제</button>
+        <button id="submit-rating" class="submit-rating-btn">
+          {% if user_review %}리뷰 수정하기{% else %}리뷰 남기기{% endif %}
+        </button>
+        {% if user_review %}
+        <button id="delete-rating" class="delete-rating-btn">삭제</button>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -155,6 +197,71 @@
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script src="{% static 'js/products/rating_images.js' %}"></script>
 <script src="{% static 'js/products/rating.js' %}"></script>
+
+<style>
+  /* 기존 리뷰 표시 스타일 */
+  .existing-review {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .current-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .current-rating span {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .stars-display {
+    display: flex;
+    gap: 2px;
+  }
+
+  .stars-display .star {
+    color: #ddd;
+    font-size: 16px;
+  }
+
+  .stars-display .star.filled {
+    color: #ffd700;
+  }
+
+  .current-comment {
+    margin-bottom: 10px;
+  }
+
+  .current-comment span {
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .current-comment p {
+    margin: 0;
+    color: #555;
+    font-style: italic;
+    background: white;
+    padding: 8px;
+    border-radius: 4px;
+    border-left: 3px solid #007bff;
+  }
+
+  .review-date {
+    color: #888;
+    font-size: 0.9em;
+    text-align: right;
+  }
+</style>
+
 <script>
   const productDataElement = document.getElementById('productData');
   const productData = JSON.parse(productDataElement.textContent);
