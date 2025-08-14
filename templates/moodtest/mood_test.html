@@ -16,7 +16,7 @@
   <form id="mood-form" method="POST" action="{% url 'mood_result' %}">
     {% csrf_token %}
 
-    <div class="question-container active" data-index="0">
+<div class="question-container active" data-index="0">
       <div class="question-text">Q1. 평소에 자주 입는 옷 스타일은?</div>
       <div class="answer-buttons">
         <button type="button" class="answer-btn" onclick="selectMood('러블리', 0)">
@@ -25,7 +25,7 @@
         <button type="button" class="answer-btn" onclick="selectMood('시크', 0)">
           모노톤의 시크한 정장, 가죽 재킷
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('힙한', 0)">
+        <button type="button" class="answer-btn" onclick="selectMood('힙', 0)">
           개성 있는 스트릿 패션
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 0)">
@@ -52,7 +52,7 @@
         <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 2)">
           액티브하게! 당일치기 여행, 활동적인 놀이
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('청순한', 2)">
+        <button type="button" class="answer-btn" onclick="selectMood('청순', 2)">
           편안하게! 조용한 카페에서 대화
         </button>
       </div>
@@ -61,10 +61,10 @@
     <div class="question-container" data-index="3">
       <div class="question-text">Q4. 나의 휴대전화 배경화면은 주로 어떤 스타일인가요?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('모던한', 3)">
+        <button type="button" class="answer-btn" onclick="selectMood('모던', 3)">
           심플하고 깔끔한 무채색 배경
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('힙한', 3)">
+        <button type="button" class="answer-btn" onclick="selectMood('힙', 3)">
           개성 있는 아티스트 작품이나 감각적인 이미지
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('내추럴', 3)">
@@ -85,7 +85,7 @@
         <button type="button" class="answer-btn" onclick="selectMood('시크', 4)">
           차분하고 분위기 있는 브라운
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('청순한', 4)">
+        <button type="button" class="answer-btn" onclick="selectMood('청순', 4)">
           은은한 광채가 나는 피치
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('내추럴', 4)">
@@ -103,7 +103,7 @@
         <button type="button" class="answer-btn" onclick="selectMood('시크', 5)">
           선명한 라인의 매트 립
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('모던한', 5)">
+        <button type="button" class="answer-btn" onclick="selectMood('모던', 5)">
           차분한 누드톤 립
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 5)">
@@ -115,10 +115,10 @@
     <div class="question-container" data-index="6">
       <div class="question-text">Q7. 사람들이 나에게 자주 하는 말은?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('청순한', 6)">
+        <button type="button" class="answer-btn" onclick="selectMood('청순', 6)">
           단아하다/청순하다
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('힙한', 6)">
+        <button type="button" class="answer-btn" onclick="selectMood('힙', 6)">
           개성 있다/힙하다
         </button>
       </div>
@@ -127,7 +127,7 @@
     <div class="question-container" data-index="7">
       <div class="question-text">Q8. 기분 좋은 날 마시고 싶은 술은?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('모던한', 7)">
+        <button type="button" class="answer-btn" onclick="selectMood('모던', 7)">
           깔끔한 소주, 시원한 맥주
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 7)">
@@ -142,10 +142,10 @@
         <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 8)">
           신나는 K-POP, 팝송
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('모던한', 8)">
+        <button type="button" class="answer-btn" onclick="selectMood('모던', 8)">
           감각적인 재즈, 시티팝
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('힙한', 8)">
+        <button type="button" class="answer-btn" onclick="selectMood('힙', 8)">
           에너지 넘치는 힙합, 밴드 음악
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('내추럴', 8)">
@@ -163,7 +163,7 @@
         <button type="button" class="answer-btn" onclick="selectMood('시크', 9)">
           시원하고 중성적인 우디, 머스크 향
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('청순한', 9)">
+        <button type="button" class="answer-btn" onclick="selectMood('청순', 9)">
           깨끗한 비누, 코튼 향
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 9)">
@@ -186,9 +186,9 @@
     내추럴: 0,
     캐주얼: 0,
     고급스러운: 0,
-    모던한: 0,
-    청순한: 0,
-    힙한: 0,
+    모던: 0,
+    청순: 0,
+    힙: 0,
   };
 
   const answered = new Set();
