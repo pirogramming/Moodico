@@ -123,7 +123,8 @@ class ProductRating {
             if (response.ok) {
                 const data = await response.json();
                 this.updateRatingDisplay(data);
-                this.loadRatingsList();
+                // Django에서 이미 리뷰 목록을 표시하고 있으므로 loadRatingsList 호출 제거
+                // this.loadRatingsList();
             }
         } catch (error) {
             console.error('별점 데이터 로드 실패:', error);

@@ -109,11 +109,21 @@ def crawled_product_detail(request, crawled_id):
         # 제품의 모든 리뷰 가져오기
         all_reviews = ProductRating.objects.filter(product_id=crawled_id).order_by('-created_at')
         
+        # 평균 별점과 평가 개수 계산
+        total_ratings = all_reviews.count()
+        if total_ratings > 0:
+            total_score = sum(review.rating for review in all_reviews)
+            average_rating = round(total_score / total_ratings, 1)
+        else:
+            average_rating = 0.0
+        
         context = {
             'product': product,
             'user_review': user_review,
             'all_reviews': all_reviews,
             'user': user,
+            'total_ratings': total_ratings,
+            'average_rating': average_rating,
         }
         
         return render(request, 'products/crawled_detail.html', context)
