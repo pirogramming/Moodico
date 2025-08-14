@@ -24,12 +24,7 @@
         src="{{ liked_product.product_image|default:'/static/images/test.jpg' }}"
         alt="{{ liked_product.product_name }}"
         onerror="this.src='/static/images/test.jpg'"
-      />
-      {% comment %} <img
-        src="{{ liked_product.product_image.url|default:static('images/test.jpg') }}"
-        alt="{{ liked_product.product_name }}"
-        onerror="this.src='{% static 'images/test.jpg' %}'"
-      /> {% endcomment %}
+      /> 
       <div class="product-info">
         <div class="like-date">
           찜한 날짜: {{ liked_product.created_at|date:"Y년 m월 d일" }}

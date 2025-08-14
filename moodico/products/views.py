@@ -35,8 +35,6 @@ def color_matrix_explore(request):
         products = json.load(f)
 
     return render(request, 'recommendation/color_matrix.html', {'makeupProducts': products})
-
-
 from django.templatetags.static import static
 def product_detail(request, product_id):
     """제품 상세 페이지 뷰"""
@@ -116,7 +114,6 @@ def crawled_product_detail(request, crawled_id):
         })
 
 def product_list(request):
-    # MEDIA_ROOT 우선, 없으면 static 사용
     media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'products.json')
     static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products.json')
     json_path   = media_path if os.path.exists(media_path) else static_path
@@ -125,7 +122,6 @@ def product_list(request):
         products = json.load(f)
 
     return render(request, 'products/product_list.html', {'products': products})
-
 
 # DB 구현 이후 검색 로직 수정 필요 - 현재는 검색시마다 json 파일을 매번 불러오고 있음
 ## 현재는 단어 단위의 검색만 가능.. (제품 데이터를 밑에 표시함으로써 이 문제 완화 가능) 
@@ -152,7 +148,6 @@ def search_product(request):
             filtered.append(p)
 
     return JsonResponse({'results': filtered})
-
 
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -282,7 +277,10 @@ def liked_products_page(request):
 
 def get_liked_products_color_info(liked_products):
     """찜한 제품들의 색상 정보를 가져오는 함수"""
-    # 1) prefer MEDIA_ROOT/data/products_clustered.json
+    import json
+    import os
+    
+    # 좌표 정보가 포함된 제품 데이터 로드
     media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
     media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
     static_cluster = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
@@ -304,31 +302,31 @@ def get_liked_products_color_info(liked_products):
     except FileNotFoundError:
         logger.error("products JSON 파일을 찾을 수 없습니다: %s", json_path)
         return []
-
+    # 제품명으로 매칭하여 색상 정보 추가
     products_with_colors = []
-
+    
     for liked_product in liked_products:
-        logger.info("찜한 제품 처리 중: %s (브랜드: %s)", liked_product.product_name, liked_product.product_brand)
-
+        logger.info(f"찜한 제품 처리 중: {liked_product.product_name} (브랜드: {liked_product.product_brand})")
+        # all_products.json에서 매칭되는 제품 찾기
         matching_product = None
-        # 기존의 이름/브랜드 부분일치 매칭 유지
         for product in all_products:
-            name = product.get('name', '')
-            brand = product.get('brand', '')
-
-            if (liked_product.product_name and (liked_product.product_name in name or name in liked_product.product_name)) \
-               and (liked_product.product_brand and (liked_product.product_brand.lower() in brand.lower() or brand.lower() in liked_product.product_brand.lower())):
+            # 제품명으로 매칭 (부분 일치도 허용)
+            if (liked_product.product_name in product.get('name', '') or 
+                product.get('name', '') in liked_product.product_name):
                 matching_product = product
                 break
-
-        # 매칭 실패 시 이름만으로도 시도 (현재 로직 유지)
+        
+        # 제품명으로 매칭이 안 되면 브랜드명으로도 시도
         if not matching_product:
             for product in all_products:
-                name = product.get('name', '')
-                if liked_product.product_name and (liked_product.product_name in name or name in liked_product.product_name):
-                    matching_product = product
-                    break
-
+                if (liked_product.product_brand.lower() in product.get('brand', '').lower() or 
+                    product.get('brand', '').lower() in liked_product.product_brand.lower()):
+                    # 브랜드가 일치하면 제품명도 부분적으로 일치하는지 확인
+                    if (liked_product.product_name.lower() in product.get('name', '').lower() or 
+                        product.get('name', '').lower() in liked_product.product_name.lower()):
+                        matching_product = product
+                        break
+        
         if matching_product:
             logger.info("제품 매칭 성공: %s -> URL: %s", matching_product.get('name'), matching_product.get('url'))
             products_with_colors.append({
@@ -344,20 +342,21 @@ def get_liked_products_color_info(liked_products):
                 'url': matching_product.get('url', '#')
             })
         else:
-            logger.warning("제품 매칭 실패: %s (브랜드: %s)", liked_product.product_name, liked_product.product_brand)
+            logger.warning(f"제품 매칭 실패: {liked_product.product_name} (브랜드: {liked_product.product_brand})")
+            # 매칭되지 않는 경우 기본값 사용
             products_with_colors.append({
                 'id': liked_product.product_id,
                 'name': liked_product.product_name,
                 'brand': liked_product.product_brand,
                 'price': liked_product.product_price,
                 'image': liked_product.product_image,
-                'hex': '#cccccc',
+                'hex': '#cccccc',  # 기본 회색
                 'warmCool': 50,
                 'lightDeep': 50,
                 'category': 'Unknown',
                 'url': '#'
             })
-
+    
     return products_with_colors
 
 
@@ -369,7 +368,6 @@ from django.contrib.admin.views.decorators import staff_member_required
 def clear_likes(request):
     ProductLike.objects.all().delete()
     return JsonResponse({'success': True})
-
 
 @require_http_methods(["GET"])
 def get_product_like_count(request):
@@ -634,31 +632,42 @@ def get_multiple_products_like_info(request):
         }, status=500)
 
 
-def get_top_liked_products(limit=10):
-    """상위 찜 제품 조회 함수 - 전체 제품 데이터 기반"""
+def get_top_liked_products(limit=10, include_unliked=True, exclude_brands=None):
+    """
+    상위 찜 제품 조회 함수
+    - include_unliked: True면 좋아요 없는 제품도 포함
+    - exclude_brands: set/list로 제외할 브랜드명 지정
+    """
     import json
     import os
+    from django.conf import settings
     from django.db.models import Count
     from collections import defaultdict
-    
+
+    exclude_brands = set(exclude_brands or [])
+
     # 전체 제품 데이터 로드
     media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
     static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
     json_path   = media_path if os.path.exists(media_path) else static_path
+
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
         logger.error("all_products.json 파일을 찾을 수 없습니다.")
         return []
-    
-    # 제품명+브랜드별로 찜 개수 집계 (중복 제거)
+
+    # 1) 찜 개수 집계
     product_likes_summary = {}
     for item in ProductLike.objects.all():
         key = f"{item.product_brand}_{item.product_name}"
+        if item.product_brand in exclude_brands:
+            continue  # 지정한 브랜드 제외
+
         if key not in product_likes_summary:
             product_likes_summary[key] = {
-                'product_id': item.product_id,
+                'product_id': str(item.product_id),  # 항상 문자열로
                 'product_name': item.product_name,
                 'product_brand': item.product_brand,
                 'product_price': item.product_price,
@@ -666,38 +675,42 @@ def get_top_liked_products(limit=10):
                 'like_count': 0
             }
         product_likes_summary[key]['like_count'] += 1
-    
-    # 전체 제품 리스트 생성
-    products_with_likes = []
-    
-    # 1. 먼저 찜된 제품들 추가 (찜 개수 > 0)
-    for product_data in product_likes_summary.values():
-        products_with_likes.append(product_data)
-    
-    # 2. 찜되지 않은 제품들도 추가 (찜 개수 = 0)
-    # JSON 파일의 제품들 중 찜되지 않은 것들 찾기
-    existing_product_keys = set(f"{item['product_brand']}_{item['product_name']}" 
-                               for item in product_likes_summary.values())
-    
-    for product in all_products:
-        product_name = product.get('name', '')
-        product_brand = product.get('brand', '')
-        product_key = f"{product_brand}_{product_name}"
-        
-        if product_name and product_key not in existing_product_keys:
-            products_with_likes.append({
-                'product_id': product.get('id', product_name),
-                'product_name': product_name,
-                'product_brand': product_brand,
-                'product_price': product.get('price', ''),
-                'product_image': product.get('image', ''),
-                'like_count': 0
-            })
-    
-    # 찜 개수로 정렬 (찜 개수가 같으면 이름순)
+
+    products_with_likes = list(product_likes_summary.values())
+
+    # 2) 좋아요 없는 제품 추가 (옵션)
+    if include_unliked:
+        existing_product_keys = set(f"{p['product_brand']}_{p['product_name']}" 
+                                    for p in product_likes_summary.values())
+
+        for product in all_products:
+            product_brand = product.get('brand', '')
+            product_name = product.get('name', '')
+            if product_brand in exclude_brands or not product_name:
+                continue
+
+            product_key = f"{product_brand}_{product_name}"
+            if product_key not in existing_product_keys:
+                # id 필드 없으면 고유 UUID 생성 or 건너뛰기
+                pid = product.get('id')
+                if not pid:
+                    import uuid
+                    pid = str(uuid.uuid4())
+
+                products_with_likes.append({
+                    'product_id': str(pid),
+                    'product_name': product_name,
+                    'product_brand': product_brand,
+                    'product_price': product.get('price', ''),
+                    'product_image': product.get('image', ''),
+                    'like_count': 0
+                })
+
+    # 3) 정렬
     products_with_likes.sort(key=lambda x: (-x['like_count'], x['product_name']))
-    
+
     return products_with_likes[:limit]
+
 
 
 @require_http_methods(["GET"])
