@@ -45,7 +45,7 @@
           <div class="product-brand">{{ product.brand }}</div>
           <div class="product-name">{{ product.name }}</div>
           <div class="product-price">{{ product.price }}</div>
-          <button class="purchase-btn">구매하기</button>
+          <a class="purchase-btn" href="{{ product.url }}">구매하기</a>
         </div>
         {% empty %}
         <p>추천 제품을 준비 중입니다.</p>
