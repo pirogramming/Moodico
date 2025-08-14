@@ -11,19 +11,25 @@
     <div class="progress-fill" id="progress-fill"></div>
   </div>
 
-  <div class="question-counter"><span id="current-question">1</span> / 7</div>
+  <div class="question-counter"><span id="current-question">1</span> / 10</div>
 
   <form id="mood-form" method="POST" action="{% url 'mood_result' %}">
     {% csrf_token %}
 
     <div class="question-container active" data-index="0">
-      <div class="question-text">Q1. 오늘 하루 나는?</div>
+      <div class="question-text">Q1. 평소에 자주 입는 옷 스타일은?</div>
       <div class="answer-buttons">
         <button type="button" class="answer-btn" onclick="selectMood('러블리', 0)">
-          상큼하고 기분 좋은 하루
+          사랑스러운 블라우스, 원피스
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('시크', 0)">
-          무심하고 차분한 하루
+          모노톤의 시크한 정장, 가죽 재킷
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('힙한', 0)">
+          개성 있는 스트릿 패션
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 0)">
+          편안한 느낌의 꾸안꾸
         </button>
       </div>
     </div>
@@ -41,49 +47,67 @@
     </div>
 
     <div class="question-container" data-index="2">
-      <div class="question-text">Q3. 옷 스타일을 고르자면?</div>
+      <div class="question-text">Q3. 편한 친구들과 놀 때는 주로?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('내추럴', 2)">
-          편안한 캐주얼
+        <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 2)">
+          액티브하게! 당일치기 여행, 활동적인 놀이
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('시크', 2)">
-          스타일리시한 연출
+        <button type="button" class="answer-btn" onclick="selectMood('청순한', 2)">
+          편안하게! 조용한 카페에서 대화
         </button>
       </div>
     </div>
 
     <div class="question-container" data-index="3">
-      <div class="question-text">Q4. 내가 끌리는 컬러는?</div>
+      <div class="question-text">Q4. 나의 휴대전화 배경화면은 주로 어떤 스타일인가요?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('러블리', 3)">
-          코랄/핑크 계열
+        <button type="button" class="answer-btn" onclick="selectMood('모던한', 3)">
+          심플하고 깔끔한 무채색 배경
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 3)">
-          딥한 브라운/버건디
+        <button type="button" class="answer-btn" onclick="selectMood('힙한', 3)">
+          개성 있는 아티스트 작품이나 감각적인 이미지
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('내추럴', 3)">
+          자연 풍경이나 잔잔한 사진
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('러블리', 3)">
+          귀여운 캐릭터나 핑크/파스텔톤 이미지
         </button>
       </div>
     </div>
 
     <div class="question-container" data-index="4">
-      <div class="question-text">Q5. 약속 있는 날, 나는?</div>
+      <div class="question-text">Q5. 블러셔를 바른다면 어떤 느낌을 선호하나요?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('활기찬', 4)">
-          밝고 친근한 인상
+        <button type="button" class="answer-btn" onclick="selectMood('러블리', 4)">
+          맑고 생기 있는 핑크/코랄
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('시크', 4)">
-          시크한 인상
+          차분하고 분위기 있는 브라운
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('청순한', 4)">
+          은은한 광채가 나는 피치
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('내추럴', 4)">
+          햇살에 살짝 그을린 듯한 건강한 느낌
         </button>
       </div>
     </div>
 
     <div class="question-container" data-index="5">
-      <div class="question-text">Q6. 파우치 안 필수템은?</div>
+      <div class="question-text">Q6. 당신의 립 포인트는?</div>
       <div class="answer-buttons">
         <button type="button" class="answer-btn" onclick="selectMood('러블리', 5)">
-          촉촉한 틴트
+          탱글탱글 글로시 립
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('시크', 5)">
+          선명한 라인의 매트 립
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('모던한', 5)">
+          차분한 누드톤 립
         </button>
         <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 5)">
-          음영 섀도우
+          고급스러운 벨벳 립
         </button>
       </div>
     </div>
@@ -91,11 +115,59 @@
     <div class="question-container" data-index="6">
       <div class="question-text">Q7. 사람들이 나에게 자주 하는 말은?</div>
       <div class="answer-buttons">
-        <button type="button" class="answer-btn" onclick="selectMood('활기찬', 6)">
-          귀엽다/밝다
+        <button type="button" class="answer-btn" onclick="selectMood('청순한', 6)">
+          단아하다/청순하다
         </button>
-        <button type="button" class="answer-btn" onclick="selectMood('시크', 6)">
-          분위기 있다/도도하다
+        <button type="button" class="answer-btn" onclick="selectMood('힙한', 6)">
+          개성 있다/힙하다
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="7">
+      <div class="question-text">Q8. 기분 좋은 날 마시고 싶은 술은?</div>
+      <div class="answer-buttons">
+        <button type="button" class="answer-btn" onclick="selectMood('모던한', 7)">
+          깔끔한 소주, 시원한 맥주
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 7)">
+          향이 풍부한 와인, 칵테일
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="8">
+      <div class="question-text">Q9. 가장 좋아하는 노래 장르는?</div>
+      <div class="answer-buttons">
+        <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 8)">
+          신나는 K-POP, 팝송
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('모던한', 8)">
+          감각적인 재즈, 시티팝
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('힙한', 8)">
+          에너지 넘치는 힙합, 밴드 음악
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('내추럴', 8)">
+          차분한 발라드, 어쿠스틱
+        </button>
+      </div>
+    </div>
+
+    <div class="question-container" data-index="9">
+      <div class="question-text">Q10. 당신이 선호하는 향기는?</div>
+      <div class="answer-buttons">
+        <button type="button" class="answer-btn" onclick="selectMood('캐주얼', 9)">
+          향긋한 생화 향, 과일 향
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('시크', 9)">
+          시원하고 중성적인 우디, 머스크 향
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('청순한', 9)">
+          깨끗한 비누, 코튼 향
+        </button>
+        <button type="button" class="answer-btn" onclick="selectMood('고급스러운', 9)">
+          묵직하고 우아한 장미, 앰버 향
         </button>
       </div>
     </div>
@@ -112,12 +184,15 @@
     러블리: 0,
     시크: 0,
     내추럴: 0,
-    활기찬: 0,
+    캐주얼: 0,
     고급스러운: 0,
+    모던한: 0,
+    청순한: 0,
+    힙한: 0,
   };
 
   const answered = new Set();
-  const totalQuestions = 7;
+  const totalQuestions = 10;
 
   function selectMood(mood, questionIndex) {
     // 중복 선택 방지
