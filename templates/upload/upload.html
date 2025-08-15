@@ -125,26 +125,31 @@
   <div class="recommendations-section">
     <h3>추천 제품</h3>
     <div class="product-list">
-      {% if search_results %} {% for product in search_results %}
-      {% comment %} <div
-        class="product-card"
-        data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-search{{ forloop.counter }}"
-      > {% endcomment %}
-      <div class="product-card"
-     data-product-id="{{ product.id }}">
-        <button class="like-button" title="좋아요"></button>
-        <span class="like-count">0</span>
-        <img src="{{ product.image }}" alt="{{ product.name }}" />
-        <div class="product-info">
-          <div class="brand">
-            {{ product.brand }} <span class="tag">{{ product.tag }}</span>
+      {% if search_results %} 
+        {% for product in search_results %}
+        {% comment %} <div
+          class="product-card"
+          data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-search{{ forloop.counter }}"
+        >  {% endcomment %}
+        <div class="product-card">
+          {% comment %} <button class="like-button" title="좋아요"></button>
+          <span class="like-count">0</span> {% endcomment %}
+          <img src="{{ product.image }}" alt="{{ product.name }}" />
+          <div class="product-info">
+            <div class="brand">
+              {{ product.brand }} <span class="tag">{{ product.tag }}</span>
+            </div>
+            <div class="name">{{ product.name }}</div>
+            <div class="price">{{ product.price }}</div>
           </div>
-          <div class="name">{{ product.name }}</div>
-          <div class="price">{{ product.price }}</div>
+          <button 
+            class="recommendation-button" 
+            onclick="window.open('{{ product.url }}', '_blank')"
+          >
+            ✨ 추천받기
+          </button>
         </div>
-        <button class="recommendation-button">✨ 추천받기</button>
-      </div>
-      {% endfor %} 
+        {% endfor %} 
       {% else %}
       <div
         class="product-card"
@@ -153,7 +158,7 @@
         <button class="like-button" title="좋아요"></button>
         <span class="like-count">0</span>
         <img
-          src="{% static 'images/test.jpg' %}"
+          src="/static/images/test.jpg"
           alt="페리페라 글로우 체크 블러셔"
         />
         <div class="product-info">

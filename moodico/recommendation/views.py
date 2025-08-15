@@ -9,19 +9,51 @@ from sklearn.metrics.pairwise import cosine_similarity
 from moodico.products.views import get_top_liked_products
 
 # Create your views here.
-def my_item_recommendation(request):
-    # Get recommended or default products
-    search_results = get_top_liked_products(limit=10)
-    recommended_items = []  # Set this if you want a separate recommended section
+# def my_item_recommendation(request):
+#     # Get recommended or default products
+#     search_results = get_top_liked_products(limit=10)
+#     recommended_items = []  # Set this if you want a separate recommended section
+#     print("....",search_results)
 
-    return render(
-        request,
-        'upload/upload.html',
+#     return render(
+#         request,
+#         'upload/upload.html',
+#         {
+#             'search_results': search_results,
+#             'recommended_items': recommended_items
+#         }
+#     )
+
+
+def my_item_recommendation(request):
+    # JSON 데이터를 파싱 (실제로는 DB나 API에서 받아올 수 있음)
+    products_path = 'static/data/advertise_products.json'
+    with open(products_path, 'r', encoding='utf-8') as f:
+        raw_data = json.load(f)
+
+    # 태그 추출 규칙 예시 (첫번째 flag 사용 or None)
+    def get_tag(flags):
+        for tag in ['글로시', 'matte', 'glossy', '증정', '세일', '쿠폰', '오늘드림']:
+            if tag in flags:
+                return tag
+        return flags[0] if flags else '-'
+
+    search_results = [
         {
-            'search_results': search_results,
-            'recommended_items': recommended_items
+            "brand": item["brand_name"],
+            "name": item["product_name"],
+            "image": item["image_src"],
+            "price": item["price_original"].replace("~", ""),
+            "tag": get_tag(item.get("flags", [])),
+            "url": item["product_url"],
         }
-    )
+        for item in raw_data
+    ]
+
+    return render(request, 'upload/upload.html', {
+        "search_results": search_results
+    })
+
 
 @csrf_exempt
 def recommend_by_color(request):

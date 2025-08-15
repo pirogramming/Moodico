@@ -17,12 +17,12 @@ from moodico.users.utils import login_or_kakao_required
 # Create your views here.
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
-    media_cluster = os.path.join(settings.BASE_DIR, 'static','data', 'products_clustered.json')
+    static_cluster = os.path.join(settings.BASE_DIR, 'static','data', 'products_clustered.json')
     static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
 
     product_path = None
-    if os.path.exists(media_cluster):
-        product_path = media_cluster
+    if os.path.exists(static_cluster):
+        product_path = static_cluster
     else:
         product_path = static_all  
 
@@ -725,7 +725,6 @@ def get_top_liked_products(limit=10, include_unliked=True, exclude_brands=None):
 
     # 3) 정렬
     products_with_likes.sort(key=lambda x: (-x['like_count'], x['product_name']))
-
     return products_with_likes[:limit]
 
 
