@@ -1,4 +1,4 @@
-name: Django CI/CD
+name: Moodico Server
 
 on:
   workflow_dispatch:
