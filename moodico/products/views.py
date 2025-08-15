@@ -8,7 +8,6 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
-from moodico.products.models import ProductLike
 from moodico.products.models import ProductLike, ProductRating, ProductRatingImage
 from django.db import models
 import logging
