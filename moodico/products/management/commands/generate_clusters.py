@@ -66,12 +66,12 @@ def calculate_coordinates(h, s, l):
 
 
 class Command(BaseCommand):
-    help = "Cluster products from MEDIA_ROOT/data/all_products.json and write clustered results."
+    help = "Cluster products from STATIC_ROOT/data/all_products.json and write clustered results."
 
     def handle(self, *args, **options):
         # paths (match your scraper’s MEDIA_ROOT usage)
-        in_path = os.path.join(settings.MEDIA_ROOT, "data", "all_products.json")
-        out_dir = os.path.join(settings.MEDIA_ROOT, "data")
+        in_path = os.path.join(settings.BASE_DIR, "static", "data", "all_products.json")
+        out_dir = os.path.join(settings.BASE_DIR, "static", "data")
         products_out = os.path.join(out_dir, "products_clustered.json")
         centers_out = os.path.join(out_dir, "cluster_centers.json")
 

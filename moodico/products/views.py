@@ -17,18 +17,14 @@ from moodico.users.utils import login_or_kakao_required
 # Create your views here.
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
-    # 1) prefer clustered for coordinates, else all_products.json
-    media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
-    media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+    media_cluster = os.path.join(settings.BASE_DIR, 'static','data', 'products_clustered.json')
     static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
 
     product_path = None
     if os.path.exists(media_cluster):
         product_path = media_cluster
-    elif os.path.exists(media_all):
-        product_path = media_all
     else:
-        product_path = static_all  # last resort
+        product_path = static_all  
 
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
@@ -53,9 +49,7 @@ def crawled_product_detail(request, crawled_id):
         logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
         
         # products_clustered.json에서 제품 정보 찾기
-        media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
-        static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
-        product_path = media_path if os.path.exists(media_path) else static_path
+        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
         logger.info(f"제품 데이터 파일 경로: {product_path}")
         
         with open(product_path, 'r', encoding='utf-8') as f:
@@ -164,11 +158,10 @@ def search_product(request):
     query = request.GET.get('q', '').lower().strip()
     query_words = query.split()
 
-    media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
-    media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+    static_cluster = os.path.join(settings.BASE_DIR, 'static','data', 'products_clustered.json')
     static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
 
-    product_path = media_cluster if os.path.exists(media_cluster) else (media_all if os.path.exists(media_all) else static_all)
+    product_path = static_cluster if os.path.exists(static_cluster) else static_all
 
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
@@ -315,21 +308,14 @@ def get_liked_products_color_info(liked_products):
     import os
     
     # 좌표 정보가 포함된 제품 데이터 로드
-    media_cluster = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
-    media_all = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
     static_cluster = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
     static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
 
     json_path = None
-    if os.path.exists(media_cluster):
-        json_path = media_cluster
-    elif os.path.exists(media_all):
-        json_path = media_all
-    elif os.path.exists(static_cluster):
+    if os.path.exists(static_cluster):
         json_path = static_cluster
     else:
-        json_path = static_all  # final fallback
-
+        json_path = static_all  
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
@@ -681,10 +667,7 @@ def get_top_liked_products(limit=10, include_unliked=True, exclude_brands=None):
     exclude_brands = set(exclude_brands or [])
 
     # 전체 제품 데이터 로드
-    media_path  = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
-    static_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
-    json_path   = media_path if os.path.exists(media_path) else static_path
-
+    json_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
     try:
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)

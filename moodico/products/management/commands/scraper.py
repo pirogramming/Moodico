@@ -31,7 +31,7 @@ TARGETS = [
 ]
 
 SCROLL_COUNT = 4
-SAVE_PATH = os.path.join(settings.MEDIA_ROOT, 'data', 'all_products.json')
+SAVE_PATH = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
 os.makedirs(os.path.dirname(SAVE_PATH), exist_ok=True)
 
 def extract_romand_items(driver, category):
@@ -164,7 +164,7 @@ def get_product_color_w_kmeans(image_url):
         return None, None
 
 class Command(BaseCommand):
-    help = "Scrape products and save JSON under MEDIA_ROOT/data/all_products.json"
+    help = "Scrape products and save JSON under STATIC_ROOT/data/all_products.json"
 
     def handle(self, *args, **options):
         # Selenium Chrome Driver 설정
