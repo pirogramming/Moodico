@@ -2,9 +2,11 @@ body {
     font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', sans-serif;
     margin: 0;
     padding: 0;
+    color: mediumpurple;
     background-color: #f4f7f6;
     color: #333;
     line-height: 1.6;
+    cursor: url("{% static 'images/purple_cursor.svg' %}"), auto;
 }
 
 header {

@@ -1,6 +1,6 @@
 /* 별점 섹션 스타일 */
 .rating-section {
-  max-width: 1300px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f8f9fa;
@@ -117,7 +117,7 @@
 
 /* 별점 목록 섹션 */
 .ratings-list-section {
-  max-width: 1300px;
+  max-width: 860px;
   margin-top: 30px;
   padding: 20px;
   background-color: #fff;
@@ -216,7 +216,7 @@
   }
 
   .image-box {
-    width: 80px;
+    width: 95%;
     height: 80px;
     border: 2px dashed #ccc;
     display: flex;
@@ -226,6 +226,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
+    margin: 0 auto;
   }
 
   .image-box img {
@@ -235,8 +236,16 @@
   }
 
   .add-image .plus-icon {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    border-radius: 50%;
+    margin: 0 auto;
+    width: 45px;
+    height: 45px;
     font-size: 28px;
-    color: #aaa;
+    justify-content: center;
+    align-items: center;
+    color: mediumpurple;
   }
 
   /* 이미지 4개 이상 -> 업로드 불가(disabled) 상태 버튼 */
@@ -262,8 +271,11 @@
     height: 20px;
     font-size: 14px;
     cursor: pointer;
-    line-height: 18px;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .delete-image-btn:hover {
@@ -362,15 +374,16 @@
 
   .rating-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
+    gap: 10px;
   }
   .delete-rating-btn {
     background-color: #e74c3c;
     color: white;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
   }
 
