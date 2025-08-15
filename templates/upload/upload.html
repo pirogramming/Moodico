@@ -3,8 +3,7 @@
 <style>
   .image-preview-area img.color-picker-active,
   .image-preview-area canvas.color-picker-active {
-    cursor: url("{% static 'images/eyedropper.svg' %}") 12 12,
-    crosshair;
+    cursor: url("{% static 'images/eyedropper.svg' %}") 12 12, crosshair;
   }
 </style>
 {% endblock%} {% block content %}
@@ -245,7 +244,11 @@
 
   function analyzeSelectedProduct(product) {
     const rgb = hexToRgb(product.hex);
-    const coords = calculateCoordinatesFromLAB(product.lab_l, product.lab_a, product.lab_b);
+    const coords = calculateCoordinatesFromLAB(
+      product.lab_l,
+      product.lab_a,
+      product.lab_b
+    );
     if (coords) {
       console.log(`Analyzed Color: ${product.hex}`);
       console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);

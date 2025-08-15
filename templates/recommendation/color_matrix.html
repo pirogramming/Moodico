@@ -7,10 +7,13 @@
       <select id="mood-dropdown" class="mood-dropdown">
         <option value="">무드를 선택하세요</option>
         <option value="러블리">러블리</option>
-        <option value="활기찬">활기찬</option>
+        <option value="캐주얼">캐주얼</option>
         <option value="고급스러운">고급스러운</option>
         <option value="내추럴">내추럴</option>
         <option value="시크">시크</option>
+        <option value="모던">모던</option>
+        <option value="청순">청순</option>
+        <option value="힙">힙</option>
       </select>
     </div>
 
@@ -103,7 +106,7 @@
 {% endblock %} {% block extra_js %}
 <script>
   const makeupProducts = {{ makeupProducts| safe }};
-  console.log(makeupProducts);  // 확인용
+  //console.log(makeupProducts);  // 확인용
 </script>
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script src="{% static 'js/recommendation/color_matrix_script.js' %}"></script>

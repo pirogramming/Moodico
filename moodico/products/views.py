@@ -8,7 +8,6 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 
-from moodico.products.models import ProductLike
 from moodico.products.models import ProductLike, ProductRating, ProductRatingImage
 from django.db import models
 import logging
@@ -104,7 +103,42 @@ def crawled_product_detail(request, crawled_id):
             </html>
             """)
         
-        return render(request, 'products/crawled_detail.html', {'product': product})
+        # 해당 제품의 리뷰 정보 가져오기
+        from moodico.users.utils import get_user_from_request
+        user = get_user_from_request(request)
+        
+        # 제품 ID로 리뷰 찾기 (crawled_id 사용)
+        user_review = None
+        if user:
+            try:
+                user_review = ProductRating.objects.get(
+                    user=user,
+                    product_id=crawled_id
+                )
+            except ProductRating.DoesNotExist:
+                pass
+        
+        # 제품의 모든 리뷰 가져오기
+        all_reviews = ProductRating.objects.filter(product_id=crawled_id).order_by('-created_at')
+        
+        # 평균 별점과 평가 개수 계산
+        total_ratings = all_reviews.count()
+        if total_ratings > 0:
+            total_score = sum(review.rating for review in all_reviews)
+            average_rating = round(total_score / total_ratings, 1)
+        else:
+            average_rating = 0.0
+        
+        context = {
+            'product': product,
+            'user_review': user_review,
+            'all_reviews': all_reviews,
+            'user': user,
+            'total_ratings': total_ratings,
+            'average_rating': average_rating,
+        }
+        
+        return render(request, 'products/crawled_detail.html', context)
         
     except Exception as e:
         logger.error(f"크롤링된 제품 상세 정보 로드 실패: {e}")

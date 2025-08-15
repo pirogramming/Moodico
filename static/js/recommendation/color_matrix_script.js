@@ -11,7 +11,7 @@ const getCoords = (hex) => {
 };
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const matrixContainer = document.querySelector('.color-matrix-container');
     const productsContainer = document.getElementById('makeup-products-container');
     const moodSelectionArea = document.getElementById('mood-selection-area');
@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const productsContainerLips = document.getElementById('makeup-products-container-lips');
     const productsContainerEyeshadow = document.getElementById('makeup-products-container-eyeshadow');
     const productsContainerBlush = document.getElementById('makeup-products-container-blush');
-    // 무드별 구역 정의
+    /*
+    // 무드별 구역 정의 -> mood_zones.json로 이동
     const moodZones = {
         '러블리': {
             name: '러블리',
@@ -58,6 +59,19 @@ document.addEventListener('DOMContentLoaded', () => {
             description: '스타일리시한 무드'
         }
     };
+    */
+
+    let moodZones;
+    try{
+        const response = await fetch('/static/data/mood_zones.json');
+        if (!response.ok){
+            throw new Error(`error: ${response.status}`)
+        }
+        moodZones = await response.json();
+    } catch (error){
+        console.error("moodZones.json 파일을 불러오는 데 실패했습니다:", error);
+        return;
+    }
 
 
     /*

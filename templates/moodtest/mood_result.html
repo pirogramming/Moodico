@@ -33,19 +33,19 @@
         {% for product in recommended_products %}
         <div
           class="product-card"
-          data-product-id="{{ product.brand|slugify }}-{{ product.product_name|slugify }}-{{ product.price|slugify }}-mood{{ forloop.counter }}"
+          data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-mood{{ forloop.counter }}"
         >
           <button class="like-button" title="좋아요"></button>
           <span class="like-count">0</span>
           <img
             src="{{ product.image }}"
-            alt="{{ product.product_name }}"
+            alt="{{ product.name }}"
             class="product-image"
           />
           <div class="product-brand">{{ product.brand }}</div>
-          <div class="product-name">{{ product.product_name }}</div>
+          <div class="product-name">{{ product.name }}</div>
           <div class="product-price">{{ product.price }}</div>
-          <button class="purchase-btn">구매하기</button>
+          <a class="purchase-btn" href="{{ product.url }}">구매하기</a>
         </div>
         {% empty %}
         <p>추천 제품을 준비 중입니다.</p>
