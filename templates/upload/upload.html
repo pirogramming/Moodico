@@ -126,10 +126,12 @@
     <h3>추천 제품</h3>
     <div class="product-list">
       {% if search_results %} {% for product in search_results %}
-      <div
+      {% comment %} <div
         class="product-card"
         data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-search{{ forloop.counter }}"
-      >
+      > {% endcomment %}
+      <div class="product-card"
+     data-product-id="{{ product.id }}">
         <button class="like-button" title="좋아요"></button>
         <span class="like-count">0</span>
         <img src="{{ product.image }}" alt="{{ product.name }}" />
@@ -142,7 +144,8 @@
         </div>
         <button class="recommendation-button">✨ 추천받기</button>
       </div>
-      {% endfor %} {% else %}
+      {% endfor %} 
+      {% else %}
       <div
         class="product-card"
         data-product-id="peripera-glow-check-blusher-18000"
@@ -227,7 +230,7 @@
       </div>
       {% endif %}
     </div>
-  </div>
+  </div> 
 </div>
 {% endblock %} {% block extra_js %}
 <script src="{% static 'js/upload/upload.js' %}"></script>

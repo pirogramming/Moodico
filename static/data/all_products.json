@@ -1,6 +1,6 @@
 [
   {
-    "id": "21bea116-0f90-48a1-8372-4b546978c423",
+    "id": "ee358e4c-86d7-4035-9dda-bb7cd46a8244",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 더 쥬시 래스팅 틴트 #레어시리즈 / 30 보늬 밤",
@@ -14,7 +14,7 @@
     "lab_b": 12.55
   },
   {
-    "id": "9a5fe61e-ba9f-4875-9fc5-f502034fc633",
+    "id": "2f96791d-40c2-4f04-9411-c660a73fe0a1",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 더 쥬시 래스팅 틴트 #레어시리즈 / 29 조선 무화과",
@@ -28,7 +28,7 @@
     "lab_b": 13.33
   },
   {
-    "id": "8f45796f-298e-46c0-aa7a-145eb9dea9d4",
+    "id": "08587a89-b98f-4e4a-9333-d7ae268ce577",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 더 쥬시 래스팅 틴트 #레어시리즈 / 28 설화 딸기",
@@ -42,7 +42,7 @@
     "lab_b": 1.09
   },
   {
-    "id": "1a66c7c0-18da-459a-9e7e-3f3e162a0810",
+    "id": "5c9d25d4-8a56-4697-b9ff-2efe73a96e16",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 더 쥬시 래스팅 틴트 #레어시리즈 / 27 허니 듀 멜론",
@@ -56,7 +56,7 @@
     "lab_b": 14.01
   },
   {
-    "id": "b4a597d4-7a85-493d-b00a-6964a897c1e7",
+    "id": "3435f36f-d90e-4dde-94ec-d02af0b09449",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 더 쥬시 래스팅 틴트 #레어시리즈 / 26 신비 복숭아",
@@ -70,413 +70,7 @@
     "lab_b": 12.83
   },
   {
-    "id": "66ffbc21-3859-426b-8b4a-81acfe32056a",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 04 피그 피그",
-    "color_name": "04 피그 피그",
-    "image": "https://romand.io/images/product/958/hVrWzeIAuVwXIUXGqSPfedtnS9ON0FiAC859PKgD.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000D&option_name=04%20%ED%94%BC%EA%B7%B8%20%ED%94%BC%EA%B7%B8",
-    "hex": "#b86b7c",
-    "lab_l": 54.35,
-    "lab_a": 32.96,
-    "lab_b": 3.7
-  },
-  {
-    "id": "36b1325d-1b14-4e4e-8679-6fafac4eb813",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 03 베어 그레이프",
-    "color_name": "03 베어 그레이프",
-    "image": "https://romand.io/images/product/958/Ax5b75vAi528eIiYmonRqylpfzrKROrVZVxnUa5w.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000C&option_name=03%20%EB%B2%A0%EC%96%B4%20%EA%B7%B8%EB%A0%88%EC%9D%B4%ED%94%84",
-    "hex": "#ca8693",
-    "lab_l": 63.26,
-    "lab_a": 28.07,
-    "lab_b": 3.99
-  },
-  {
-    "id": "a91d0c50-5e01-451f-b104-0ab2aa6f7ad6",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 02 누카다미아",
-    "color_name": "02 누카다미아",
-    "image": "https://romand.io/images/product/958/nO3CrysMVL9U55KfxZurkmyIcryGpKjNZrYmDMr0.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000B&option_name=02%20%EB%88%84%EC%B9%B4%EB%8B%A4%EB%AF%B8%EC%95%84",
-    "hex": "#d38e86",
-    "lab_l": 65.97,
-    "lab_a": 24.89,
-    "lab_b": 15.31
-  },
-  {
-    "id": "4f9e71e6-d66a-487e-b1b5-95a2da49c9e3",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 01 포멜로 스킨",
-    "color_name": "01 포멜로 스킨",
-    "image": "https://romand.io/images/product/958/KrjjrJXJNXjcmUKPkXrWAyobbvyVZxEaaiGAsDaS.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000A&option_name=01%20%ED%8F%AC%EB%A9%9C%EB%A1%9C%20%EC%8A%A4%ED%82%A8",
-    "hex": "#d69e8b",
-    "lab_l": 70.05,
-    "lab_a": 18.19,
-    "lab_b": 18.06
-  },
-  {
-    "id": "b79901fb-6dac-4511-9767-4bd21704e294",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 06 필링 앵두",
-    "color_name": "06 필링 앵두",
-    "image": "https://romand.io/images/product/958/OA70z7jUdDOWeoUQEhsm61uHilEXmHkEMSpnkIJ3.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000F&option_name=06%20%ED%95%84%EB%A7%81%20%EC%95%B5%EB%91%90",
-    "hex": "#c2696e",
-    "lab_l": 54.96,
-    "lab_a": 36.01,
-    "lab_b": 13.06
-  },
-  {
-    "id": "0d604060-193d-49fc-8bce-988091301390",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 24 베어 쥬시 오",
-    "color_name": "24 베어 쥬시 오",
-    "image": "https://romand.io/images/product/958/HVs9RVIp3xylieHLYevVIjGWwe6mlre889pPsnoQ.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000X&option_name=24%20%EB%B2%A0%EC%96%B4%20%EC%A5%AC%EC%8B%9C%20%EC%98%A4",
-    "hex": "#eca07f",
-    "lab_l": 72.77,
-    "lab_a": 24.45,
-    "lab_b": 28.74
-  },
-  {
-    "id": "a5ffebb0-1d7b-4a46-adaa-4d56f6edad19",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 23 피치 피치 미",
-    "color_name": "23 피치 피치 미",
-    "image": "https://romand.io/images/product/958/kOY2uHHIYeeicQZh8S162C63jtojxgS0EAq9ZR8H.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000W&option_name=23%20%ED%94%BC%EC%B9%98%20%ED%94%BC%EC%B9%98%20%EB%AF%B8",
-    "hex": "#eaa0aa",
-    "lab_l": 73.46,
-    "lab_a": 28.71,
-    "lab_b": 5.82
-  },
-  {
-    "id": "2614d23d-96ed-4d9b-b1f4-21533aa7268a",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 22 도토리 밤",
-    "color_name": "22 도토리 밤",
-    "image": "https://romand.io/images/product/958/yMaewlQ2iW42hrhNZw2kLlG40dD9JY5ZRgWIqIdi.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000V&option_name=22%20%EB%8F%84%ED%86%A0%EB%A6%AC%20%EB%B0%A4",
-    "hex": "#a64e56",
-    "lab_l": 44.82,
-    "lab_a": 36.93,
-    "lab_b": 12.54
-  },
-  {
-    "id": "5873a043-e3e5-49c3-b727-1ef9b1efaa99",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 21 그레이프 밤",
-    "color_name": "21 그레이프 밤",
-    "image": "https://romand.io/images/product/958/inczn5S3hX1dOAt7UCkPINdupgH6qbJZ1xVQpPET.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000U&option_name=21%20%EA%B7%B8%EB%A0%88%EC%9D%B4%ED%94%84%20%EB%B0%A4",
-    "hex": "#d6769e",
-    "lab_l": 61.66,
-    "lab_a": 42.08,
-    "lab_b": -4.94
-  },
-  {
-    "id": "906deddd-6ddf-47be-ae00-fd1bdf0e676f",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 20 쥬쥬 피그",
-    "color_name": "20 쥬쥬 피그",
-    "image": "https://romand.io/images/product/958/1I9OyW4j0wijPOsEbaoljzreN4aGXUTRlcAK7L04.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000T&option_name=20%20%EC%A5%AC%EC%A5%AC%20%ED%94%BC%EA%B7%B8",
-    "hex": "#d78490",
-    "lab_l": 64.35,
-    "lab_a": 33.49,
-    "lab_b": 7.41
-  },
-  {
-    "id": "2f2cdf81-a944-4f49-b64c-d49ed7875792",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 19 썸머 센트",
-    "color_name": "19 썸머 센트",
-    "image": "https://romand.io/images/product/958/2OBJbPaANmkScXjLtjRX48shuuCgsYE9p1j9Nbz1.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000S&option_name=19%20%EC%8D%B8%EB%A8%B8%20%EC%84%BC%ED%8A%B8",
-    "hex": "#e45b65",
-    "lab_l": 57.15,
-    "lab_a": 53.97,
-    "lab_b": 22.22
-  },
-  {
-    "id": "40970f84-0955-4b50-90bb-a82d4561e153",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 17 다크 코코넛",
-    "color_name": "17 다크 코코넛",
-    "image": "https://romand.io/images/product/958/XP3eLtN4ZcjUmvyvmgyXiaeDZnwxYJ2HaDjeffdb.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000Q&option_name=17%20%EB%8B%A4%ED%81%AC%20%EC%BD%94%EC%BD%94%EB%84%9B",
-    "hex": "#8c544d",
-    "lab_l": 42.19,
-    "lab_a": 22.27,
-    "lab_b": 14.13
-  },
-  {
-    "id": "0d1df210-4905-4986-8dc0-6a844de0bcd9",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 16 플럼 콕",
-    "color_name": "16 플럼 콕",
-    "image": "https://romand.io/images/product/958/MeHqAPbIXbv1DYd4ttfVFpdODslPH4cKYzG8Amsb.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000P&option_name=16%20%ED%94%8C%EB%9F%BC%20%EC%BD%95",
-    "hex": "#8d4656",
-    "lab_l": 39.35,
-    "lab_a": 31.61,
-    "lab_b": 4.81
-  },
-  {
-    "id": "9f89ea8e-c5d3-40a9-a9ff-f81d7f163445",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 15 베어 피그",
-    "color_name": "15 베어 피그",
-    "image": "https://romand.io/images/product/958/EfEL2EDNWkUFzS741F9hN9M7fFYUvjTIQ4X9GX6Y.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000O&option_name=15%20%EB%B2%A0%EC%96%B4%20%ED%94%BC%EA%B7%B8",
-    "hex": "#b96e81",
-    "lab_l": 55.41,
-    "lab_a": 32.1,
-    "lab_b": 2.4
-  },
-  {
-    "id": "9f9e3060-c423-4de2-ad29-66cab3a560ff",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 14 아몬드 로즈",
-    "color_name": "14 아몬드 로즈",
-    "image": "https://romand.io/images/product/958/oxJxwHns1GrJk0WAn9QXxQiil0CalGNZceDsluQg.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000N&option_name=14%20%EC%95%84%EB%AA%AC%EB%93%9C%20%EB%A1%9C%EC%A6%88",
-    "hex": "#c17177",
-    "lab_l": 56.76,
-    "lab_a": 32.0,
-    "lab_b": 10.15
-  },
-  {
-    "id": "a53dc816-28d8-493b-a320-6b099ac9974d",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 13 잇 도토리",
-    "color_name": "13 잇 도토리",
-    "image": "https://romand.io/images/product/958/QK4geWmsw4P0tJNFQEOeHgdrC8PD89ABuP6xCIBx.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000M&option_name=13%20%EC%9E%87%20%EB%8F%84%ED%86%A0%EB%A6%AC",
-    "hex": "#af6259",
-    "lab_l": 50.39,
-    "lab_a": 29.91,
-    "lab_b": 18.65
-  },
-  {
-    "id": "9ae2ef4f-9e2b-48c2-b605-e443168131aa",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 12 애플 브라운",
-    "color_name": "12 애플 브라운",
-    "image": "https://romand.io/images/product/958/B06iurpARo7agGql1klQnt9XEO2blsvJFgd73Yf3.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000L&option_name=12%20%EC%95%A0%ED%94%8C%20%EB%B8%8C%EB%9D%BC%EC%9A%B4",
-    "hex": "#ba6c5c",
-    "lab_l": 54.14,
-    "lab_a": 29.18,
-    "lab_b": 22.24
-  },
-  {
-    "id": "caabd5bb-195f-4225-b83d-b95f586b2578",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 11 파파야 잼",
-    "color_name": "11 파파야 잼",
-    "image": "https://romand.io/images/product/958/oJgHkcoeViDMvaiM7ZDEAGAOHG3BJ2L3F4rv9ZuD.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000K&option_name=11%20%ED%8C%8C%ED%8C%8C%EC%95%BC%20%EC%9E%BC",
-    "hex": "#e07e71",
-    "lab_l": 63.49,
-    "lab_a": 36.33,
-    "lab_b": 23.69
-  },
-  {
-    "id": "06c2254d-8d72-476d-845f-3ef1674071f9",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 10 베어 애프리콧",
-    "color_name": "10 베어 애프리콧",
-    "image": "https://romand.io/images/product/958/QD52KlGsKzWl5QtwmgroiiSn0y0abm7cotPUWU1v.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000J&option_name=10%20%EB%B2%A0%EC%96%B4%20%EC%95%A0%ED%94%84%EB%A6%AC%EC%BD%A7",
-    "hex": "#e98d88",
-    "lab_l": 68.25,
-    "lab_a": 34.44,
-    "lab_b": 17.27
-  },
-  {
-    "id": "11f11c8e-f3fe-4fc1-937e-f2067a768e73",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 09 멀드 피치",
-    "color_name": "09 멀드 피치",
-    "image": "https://romand.io/images/product/958/ACQYJFhs3MqIqGnIugCft1mZKSBLmVRVlFNkEOxP.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000I&option_name=09%20%EB%A9%80%EB%93%9C%20%ED%94%BC%EC%B9%98",
-    "hex": "#d88b89",
-    "lab_l": 65.73,
-    "lab_a": 29.1,
-    "lab_b": 13.26
-  },
-  {
-    "id": "2535ace4-3ebe-4397-b1ab-3f7ec2c4bdd9",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 08 핑크 펌킨",
-    "color_name": "08 핑크 펌킨",
-    "image": "https://romand.io/images/product/958/JP0abekdVUyFdheuHWBOEEl1PBELsV6QoZkL2YPK.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000H&option_name=08%20%ED%95%91%ED%81%AC%20%ED%8E%8C%ED%82%A8",
-    "hex": "#d6746d",
-    "lab_l": 59.87,
-    "lab_a": 37.62,
-    "lab_b": 20.71
-  },
-  {
-    "id": "be91e7bf-9b23-46cd-8ff9-66f842f0571d",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 07 체리 밤",
-    "color_name": "07 체리 밤",
-    "image": "https://romand.io/images/product/958/iKTjBrzXDwqWW3QimfKxKU8vCSSjeICGlsmvTT3M.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000G&option_name=07%20%EC%B2%B4%EB%A6%AC%20%EB%B0%A4",
-    "hex": "#b34f5a",
-    "lab_l": 46.97,
-    "lab_a": 41.6,
-    "lab_b": 13.65
-  },
-  {
-    "id": "eb76ec0d-e969-4245-a2ad-61066804a775",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 더 쥬시 래스팅 틴트 / 05 쥬쥬브",
-    "color_name": "05 쥬쥬브",
-    "image": "https://romand.io/images/product/958/UQiAZpL8zY2zzpHxnCgDfRvLa6Yb38ymNoFFJx4M.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000E&option_name=05%20%EC%A5%AC%EC%A5%AC%EB%B8%8C",
-    "hex": "#ce7373",
-    "lab_l": 58.67,
-    "lab_a": 35.71,
-    "lab_b": 15.85
-  },
-  {
-    "id": "60a49f29-76f9-4912-b405-1cbbfaf8909b",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 쉬어 틴티드 스틱 / 06 인 바이너리",
-    "color_name": "06 인 바이너리",
-    "image": "https://romand.io/images/product/914/Cjtc5nbhltfSrWLXajdjhctz8ASkDmegf645golu.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000F&option_name=06%20%EC%9D%B8%20%EB%B0%94%EC%9D%B4%EB%84%88%EB%A6%AC",
-    "hex": "#c58b96",
-    "lab_l": 63.92,
-    "lab_a": 23.85,
-    "lab_b": 2.83
-  },
-  {
-    "id": "199e9f32-f575-4281-8903-66bd875228e9",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 쉬어 틴티드 스틱 / 05 더치 코코아",
-    "color_name": "05 더치 코코아",
-    "image": "https://romand.io/images/product/914/KKrisSZpk7w26Ij8VuG9ojCVsCW1Z2cxtk6AB5sx.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000E&option_name=05%20%EB%8D%94%EC%B9%98%20%EC%BD%94%EC%BD%94%EC%95%84",
-    "hex": "#c98e89",
-    "lab_l": 64.95,
-    "lab_a": 21.59,
-    "lab_b": 11.85
-  },
-  {
-    "id": "6e1126de-2ef5-413a-84a5-3cb6642e03d9",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 쉬어 틴티드 스틱 / 04 카멜 너츠",
-    "color_name": "04 카멜 너츠",
-    "image": "https://romand.io/images/product/914/b1pgYnsvoPZ45J8dfa0IQYaqQLy32JZXWKtYCvQd.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000D&option_name=04%20%EC%B9%B4%EB%A9%9C%20%EB%84%88%EC%B8%A0",
-    "hex": "#db9e93",
-    "lab_l": 70.84,
-    "lab_a": 20.79,
-    "lab_b": 14.94
-  },
-  {
-    "id": "71ce99ca-c86e-427e-bd19-f59622ad7cb1",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 쉬어 틴티드 스틱 / 03 태피 베리",
-    "color_name": "03 태피 베리",
-    "image": "https://romand.io/images/product/914/cFCNTbYdLWOeruOVbsmVg4CJoaJ0kYP3OJT9XZjk.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000C&option_name=03%20%ED%83%9C%ED%94%BC%20%EB%B2%A0%EB%A6%AC",
-    "hex": "#e5919a",
-    "lab_l": 69.05,
-    "lab_a": 33.11,
-    "lab_b": 8.81
-  },
-  {
-    "id": "6a3f15be-f9f4-4151-8088-b81618bdc4f9",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 쉬어 틴티드 스틱 / 02 버니 홉",
-    "color_name": "02 버니 홉",
-    "image": "https://romand.io/images/product/914/Nci2yDfFBmGjlmAdAT5fPXDHcsq9SudDp4MF8s6v.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000B&option_name=02%20%EB%B2%84%EB%8B%88%20%ED%99%89",
-    "hex": "#e6a3ae",
-    "lab_l": 73.8,
-    "lab_a": 26.15,
-    "lab_b": 4.43
-  },
-  {
-    "id": "ddcb78a1-8b88-4d01-afd9-42c81209b3ba",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 쉬어 틴티드 스틱 / 01 베어 펌킨",
-    "color_name": "01 베어 펌킨",
-    "image": "https://romand.io/images/product/914/srpBdGR1vhZ7n9VMmX7iafFN7zgOLu1oxu3ZkTk9.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000A&option_name=01%20%EB%B2%A0%EC%96%B4%20%ED%8E%8C%ED%82%A8",
-    "hex": "#e5ac9b",
-    "lab_l": 75.27,
-    "lab_a": 18.86,
-    "lab_b": 16.81
-  },
-  {
-    "id": "89f24b19-9513-4389-85a5-c8acabcbec9e",
+    "id": "141411dd-a978-43b8-89c3-6624efda4543",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 MINI / 30 캐슈넛 로즈",
@@ -490,7 +84,7 @@
     "lab_b": 10.28
   },
   {
-    "id": "8bb4c2be-c633-40ea-8b90-51fb34270472",
+    "id": "9be4e244-3420-4a6f-bfe7-84a03ee6e804",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #더스티온더누드 / 10 누 베이지",
@@ -504,7 +98,7 @@
     "lab_b": 14.57
   },
   {
-    "id": "3651ff14-cd6c-4366-a794-8362961eb0b6",
+    "id": "2033ce30-09c9-4e40-913f-41e5802fc801",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #더스티온더누드 / 11 버피 코랄",
@@ -518,7 +112,7 @@
     "lab_b": 12.87
   },
   {
-    "id": "dd279635-cb31-4111-947d-9562dfc3aa84",
+    "id": "7fb0a536-63a4-451a-83fe-f34bd9b2c59a",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #더스티온더누드 / 12 베일드 로즈",
@@ -532,7 +126,7 @@
     "lab_b": 6.77
   },
   {
-    "id": "0ed05f59-e439-4367-8951-99bb0e6e99ad",
+    "id": "e8445791-6397-4f73-b142-5bc647df59e2",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #더스티온더누드 / 13 스카치 누드",
@@ -546,7 +140,7 @@
     "lab_b": 14.72
   },
   {
-    "id": "21890fc3-32e9-4c93-8208-f37f41f4b379",
+    "id": "93eb7e29-6a96-4d16-8de8-fa228e2c4586",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #더스티온더누드 / 14 디어 애플",
@@ -560,7 +154,7 @@
     "lab_b": 15.39
   },
   {
-    "id": "660a7198-216d-4bff-aa76-e1f332be81ff",
+    "id": "8365038a-9020-413a-929a-3fd420a5f706",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #더스티온더누드 / 15 피칸 브루",
@@ -574,7 +168,7 @@
     "lab_b": 21.69
   },
   {
-    "id": "030b8f73-d685-4bcc-81ce-3e4cff60badf",
+    "id": "a4b3caf5-2dd4-4626-8d0f-323382949eab",
     "brand": "romand",
     "category": "Lips",
     "name": "[COHA] 쥬시 래스팅 틴트 펑키 멜론 / 펑키 멜론",
@@ -588,7 +182,7 @@
     "lab_b": 6.01
   },
   {
-    "id": "43abb70c-37b9-423f-90bf-958bc1ad4e1a",
+    "id": "0f643e72-0e38-4687-b544-0334248dc10b",
     "brand": "romand",
     "category": "Lips",
     "name": "[COHA] 롬앤 쥬시 래스팅 틴트 NO.36 / 36 피치 허니 비",
@@ -602,49 +196,413 @@
     "lab_b": 12.73
   },
   {
-    "id": "d78da058-47ff-4fcb-b0c5-dfc3f73bc9fa",
+    "id": "63fd3703-eb4d-480b-a5b7-9ac7654188e5",
     "brand": "romand",
     "category": "Lips",
-    "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 17 베리 인 블랙",
-    "color_name": "17 베리 인 블랙",
-    "image": "https://romand.io/images/product/902/UZg74Q1zeFIsVQugzASd3XuZp9Qz0hrSfBTTv1Cb.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/902/?variant_code=P0000BIS000E&option_name=17%20%EB%B2%A0%EB%A6%AC%20%EC%9D%B8%20%EB%B8%94%EB%9E%99",
-    "hex": "#686064",
-    "lab_l": 41.84,
-    "lab_a": 3.68,
-    "lab_b": -1.15
+    "name": "롬앤 쉬어 틴티드 스틱 / 06 인 바이너리",
+    "color_name": "06 인 바이너리",
+    "image": "https://romand.io/images/product/914/Cjtc5nbhltfSrWLXajdjhctz8ASkDmegf645golu.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000F&option_name=06%20%EC%9D%B8%20%EB%B0%94%EC%9D%B4%EB%84%88%EB%A6%AC",
+    "hex": "#c58b96",
+    "lab_l": 63.92,
+    "lab_a": 23.85,
+    "lab_b": 2.83
   },
   {
-    "id": "f71e86f6-e2d1-4300-abcc-f0d3313c6e72",
+    "id": "947445cf-dbb9-4c75-aa3c-3bbdabe381be",
     "brand": "romand",
     "category": "Lips",
-    "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 16 키튼 피치",
-    "color_name": "16 키튼 피치",
-    "image": "https://romand.io/images/product/902/EJ1VyyBRxhumy6rRRC3oNLbiy8qkqiB6KKPOWG5h.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/902/?variant_code=P0000BIS000D&option_name=16%20%ED%82%A4%ED%8A%BC%20%ED%94%BC%EC%B9%98",
-    "hex": "#936f70",
-    "lab_l": 50.72,
-    "lab_a": 14.39,
-    "lab_b": 5.15
+    "name": "롬앤 쉬어 틴티드 스틱 / 05 더치 코코아",
+    "color_name": "05 더치 코코아",
+    "image": "https://romand.io/images/product/914/KKrisSZpk7w26Ij8VuG9ojCVsCW1Z2cxtk6AB5sx.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000E&option_name=05%20%EB%8D%94%EC%B9%98%20%EC%BD%94%EC%BD%94%EC%95%84",
+    "hex": "#c98e89",
+    "lab_l": 64.95,
+    "lab_a": 21.59,
+    "lab_b": 11.85
   },
   {
-    "id": "129d267f-2f89-45bb-98b9-fc9c144287a0",
+    "id": "e69472e2-4c82-4573-b7f7-ad6e68cf4148",
     "brand": "romand",
     "category": "Lips",
-    "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 06 카야 피그",
-    "color_name": "06 카야 피그",
-    "image": "https://romand.io/images/product/902/3hQ1EehF0vNo65GAUh92JlD4ofo9PxcpILWHhFqb.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/902/?variant_code=P0000BIS000C&option_name=06%20%EC%B9%B4%EC%95%BC%20%ED%94%BC%EA%B7%B8",
-    "hex": "#886f70",
-    "lab_l": 49.41,
-    "lab_a": 10.06,
-    "lab_b": 3.4
+    "name": "롬앤 쉬어 틴티드 스틱 / 04 카멜 너츠",
+    "color_name": "04 카멜 너츠",
+    "image": "https://romand.io/images/product/914/b1pgYnsvoPZ45J8dfa0IQYaqQLy32JZXWKtYCvQd.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000D&option_name=04%20%EC%B9%B4%EB%A9%9C%20%EB%84%88%EC%B8%A0",
+    "hex": "#db9e93",
+    "lab_l": 70.84,
+    "lab_a": 20.79,
+    "lab_b": 14.94
   },
   {
-    "id": "acc203c5-1625-46b2-a9d8-bb453d0ac930",
+    "id": "39641962-6b2c-4339-975b-3c7dac4d39fe",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 쉬어 틴티드 스틱 / 03 태피 베리",
+    "color_name": "03 태피 베리",
+    "image": "https://romand.io/images/product/914/cFCNTbYdLWOeruOVbsmVg4CJoaJ0kYP3OJT9XZjk.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000C&option_name=03%20%ED%83%9C%ED%94%BC%20%EB%B2%A0%EB%A6%AC",
+    "hex": "#e5919a",
+    "lab_l": 69.05,
+    "lab_a": 33.11,
+    "lab_b": 8.81
+  },
+  {
+    "id": "5d0f9d52-ad32-4ecb-91e9-1416cbdf7c87",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 쉬어 틴티드 스틱 / 02 버니 홉",
+    "color_name": "02 버니 홉",
+    "image": "https://romand.io/images/product/914/Nci2yDfFBmGjlmAdAT5fPXDHcsq9SudDp4MF8s6v.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000B&option_name=02%20%EB%B2%84%EB%8B%88%20%ED%99%89",
+    "hex": "#e6a3ae",
+    "lab_l": 73.8,
+    "lab_a": 26.15,
+    "lab_b": 4.43
+  },
+  {
+    "id": "08081a9b-063e-410a-83a7-60b3c11d2538",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 쉬어 틴티드 스틱 / 01 베어 펌킨",
+    "color_name": "01 베어 펌킨",
+    "image": "https://romand.io/images/product/914/srpBdGR1vhZ7n9VMmX7iafFN7zgOLu1oxu3ZkTk9.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/914/?variant_code=P0000BJE000A&option_name=01%20%EB%B2%A0%EC%96%B4%20%ED%8E%8C%ED%82%A8",
+    "hex": "#e5ac9b",
+    "lab_l": 75.27,
+    "lab_a": 18.86,
+    "lab_b": 16.81
+  },
+  {
+    "id": "e9097c94-d792-4e87-80d9-a5e1a55fadad",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 04 피그 피그",
+    "color_name": "04 피그 피그",
+    "image": "https://romand.io/images/product/958/hVrWzeIAuVwXIUXGqSPfedtnS9ON0FiAC859PKgD.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000D&option_name=04%20%ED%94%BC%EA%B7%B8%20%ED%94%BC%EA%B7%B8",
+    "hex": "#b86b7c",
+    "lab_l": 54.35,
+    "lab_a": 32.96,
+    "lab_b": 3.7
+  },
+  {
+    "id": "31264bd7-3de1-434d-b231-0e8c1b2a6944",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 03 베어 그레이프",
+    "color_name": "03 베어 그레이프",
+    "image": "https://romand.io/images/product/958/Ax5b75vAi528eIiYmonRqylpfzrKROrVZVxnUa5w.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000C&option_name=03%20%EB%B2%A0%EC%96%B4%20%EA%B7%B8%EB%A0%88%EC%9D%B4%ED%94%84",
+    "hex": "#ca8693",
+    "lab_l": 63.26,
+    "lab_a": 28.07,
+    "lab_b": 3.99
+  },
+  {
+    "id": "27589d28-3793-4ebe-bb02-76f625ede783",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 02 누카다미아",
+    "color_name": "02 누카다미아",
+    "image": "https://romand.io/images/product/958/nO3CrysMVL9U55KfxZurkmyIcryGpKjNZrYmDMr0.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000B&option_name=02%20%EB%88%84%EC%B9%B4%EB%8B%A4%EB%AF%B8%EC%95%84",
+    "hex": "#d38e86",
+    "lab_l": 65.97,
+    "lab_a": 24.89,
+    "lab_b": 15.31
+  },
+  {
+    "id": "b33617ea-2fd4-4c34-8aae-429c7ff5aee1",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 01 포멜로 스킨",
+    "color_name": "01 포멜로 스킨",
+    "image": "https://romand.io/images/product/958/KrjjrJXJNXjcmUKPkXrWAyobbvyVZxEaaiGAsDaS.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000A&option_name=01%20%ED%8F%AC%EB%A9%9C%EB%A1%9C%20%EC%8A%A4%ED%82%A8",
+    "hex": "#d69e8b",
+    "lab_l": 70.05,
+    "lab_a": 18.19,
+    "lab_b": 18.06
+  },
+  {
+    "id": "72879336-93e7-4ee0-ab6a-4eb5f9cc1347",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 06 필링 앵두",
+    "color_name": "06 필링 앵두",
+    "image": "https://romand.io/images/product/958/OA70z7jUdDOWeoUQEhsm61uHilEXmHkEMSpnkIJ3.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000F&option_name=06%20%ED%95%84%EB%A7%81%20%EC%95%B5%EB%91%90",
+    "hex": "#c2696e",
+    "lab_l": 54.96,
+    "lab_a": 36.01,
+    "lab_b": 13.06
+  },
+  {
+    "id": "26ba5c45-d1bc-4940-a83f-c9cbafc49161",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 24 베어 쥬시 오",
+    "color_name": "24 베어 쥬시 오",
+    "image": "https://romand.io/images/product/958/HVs9RVIp3xylieHLYevVIjGWwe6mlre889pPsnoQ.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000X&option_name=24%20%EB%B2%A0%EC%96%B4%20%EC%A5%AC%EC%8B%9C%20%EC%98%A4",
+    "hex": "#eca07f",
+    "lab_l": 72.77,
+    "lab_a": 24.45,
+    "lab_b": 28.74
+  },
+  {
+    "id": "da606bdd-2d83-4591-ae77-81873b53f797",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 23 피치 피치 미",
+    "color_name": "23 피치 피치 미",
+    "image": "https://romand.io/images/product/958/kOY2uHHIYeeicQZh8S162C63jtojxgS0EAq9ZR8H.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000W&option_name=23%20%ED%94%BC%EC%B9%98%20%ED%94%BC%EC%B9%98%20%EB%AF%B8",
+    "hex": "#eaa0aa",
+    "lab_l": 73.46,
+    "lab_a": 28.71,
+    "lab_b": 5.82
+  },
+  {
+    "id": "2467a4db-8a4b-48d7-ae4b-7187274dd184",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 22 도토리 밤",
+    "color_name": "22 도토리 밤",
+    "image": "https://romand.io/images/product/958/yMaewlQ2iW42hrhNZw2kLlG40dD9JY5ZRgWIqIdi.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000V&option_name=22%20%EB%8F%84%ED%86%A0%EB%A6%AC%20%EB%B0%A4",
+    "hex": "#a64e56",
+    "lab_l": 44.82,
+    "lab_a": 36.93,
+    "lab_b": 12.54
+  },
+  {
+    "id": "69880f1f-81ec-4e56-acfc-b1188bca8e56",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 21 그레이프 밤",
+    "color_name": "21 그레이프 밤",
+    "image": "https://romand.io/images/product/958/inczn5S3hX1dOAt7UCkPINdupgH6qbJZ1xVQpPET.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000U&option_name=21%20%EA%B7%B8%EB%A0%88%EC%9D%B4%ED%94%84%20%EB%B0%A4",
+    "hex": "#d6769e",
+    "lab_l": 61.66,
+    "lab_a": 42.08,
+    "lab_b": -4.94
+  },
+  {
+    "id": "142dfdac-0fed-4814-bc21-eff3ea2537d4",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 20 쥬쥬 피그",
+    "color_name": "20 쥬쥬 피그",
+    "image": "https://romand.io/images/product/958/1I9OyW4j0wijPOsEbaoljzreN4aGXUTRlcAK7L04.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000T&option_name=20%20%EC%A5%AC%EC%A5%AC%20%ED%94%BC%EA%B7%B8",
+    "hex": "#d78490",
+    "lab_l": 64.35,
+    "lab_a": 33.49,
+    "lab_b": 7.41
+  },
+  {
+    "id": "19ab1d34-10a6-4f71-b79c-b9776540076a",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 19 썸머 센트",
+    "color_name": "19 썸머 센트",
+    "image": "https://romand.io/images/product/958/2OBJbPaANmkScXjLtjRX48shuuCgsYE9p1j9Nbz1.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000S&option_name=19%20%EC%8D%B8%EB%A8%B8%20%EC%84%BC%ED%8A%B8",
+    "hex": "#e45b65",
+    "lab_l": 57.15,
+    "lab_a": 53.97,
+    "lab_b": 22.22
+  },
+  {
+    "id": "4b7fa6d4-d667-4773-a4fc-05e3c7dbabd4",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 17 다크 코코넛",
+    "color_name": "17 다크 코코넛",
+    "image": "https://romand.io/images/product/958/XP3eLtN4ZcjUmvyvmgyXiaeDZnwxYJ2HaDjeffdb.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000Q&option_name=17%20%EB%8B%A4%ED%81%AC%20%EC%BD%94%EC%BD%94%EB%84%9B",
+    "hex": "#8c544d",
+    "lab_l": 42.19,
+    "lab_a": 22.27,
+    "lab_b": 14.13
+  },
+  {
+    "id": "e430d1d6-3b9c-4c3b-85c6-4b265216ae29",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 16 플럼 콕",
+    "color_name": "16 플럼 콕",
+    "image": "https://romand.io/images/product/958/MeHqAPbIXbv1DYd4ttfVFpdODslPH4cKYzG8Amsb.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000P&option_name=16%20%ED%94%8C%EB%9F%BC%20%EC%BD%95",
+    "hex": "#8d4656",
+    "lab_l": 39.35,
+    "lab_a": 31.61,
+    "lab_b": 4.81
+  },
+  {
+    "id": "ae43a2fa-7ff9-4957-b1c3-200f5ec6c5c5",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 15 베어 피그",
+    "color_name": "15 베어 피그",
+    "image": "https://romand.io/images/product/958/EfEL2EDNWkUFzS741F9hN9M7fFYUvjTIQ4X9GX6Y.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000O&option_name=15%20%EB%B2%A0%EC%96%B4%20%ED%94%BC%EA%B7%B8",
+    "hex": "#b96e81",
+    "lab_l": 55.41,
+    "lab_a": 32.1,
+    "lab_b": 2.4
+  },
+  {
+    "id": "7b50314a-341a-4534-8cc1-45ff117669ea",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 14 아몬드 로즈",
+    "color_name": "14 아몬드 로즈",
+    "image": "https://romand.io/images/product/958/oxJxwHns1GrJk0WAn9QXxQiil0CalGNZceDsluQg.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000N&option_name=14%20%EC%95%84%EB%AA%AC%EB%93%9C%20%EB%A1%9C%EC%A6%88",
+    "hex": "#c17177",
+    "lab_l": 56.76,
+    "lab_a": 32.0,
+    "lab_b": 10.15
+  },
+  {
+    "id": "cb677659-d2d3-4005-bb92-ba6723f55b67",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 13 잇 도토리",
+    "color_name": "13 잇 도토리",
+    "image": "https://romand.io/images/product/958/QK4geWmsw4P0tJNFQEOeHgdrC8PD89ABuP6xCIBx.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000M&option_name=13%20%EC%9E%87%20%EB%8F%84%ED%86%A0%EB%A6%AC",
+    "hex": "#af6259",
+    "lab_l": 50.39,
+    "lab_a": 29.91,
+    "lab_b": 18.65
+  },
+  {
+    "id": "8a406109-28d3-48ae-bd47-5db532937106",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 12 애플 브라운",
+    "color_name": "12 애플 브라운",
+    "image": "https://romand.io/images/product/958/B06iurpARo7agGql1klQnt9XEO2blsvJFgd73Yf3.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000L&option_name=12%20%EC%95%A0%ED%94%8C%20%EB%B8%8C%EB%9D%BC%EC%9A%B4",
+    "hex": "#ba6c5c",
+    "lab_l": 54.14,
+    "lab_a": 29.18,
+    "lab_b": 22.24
+  },
+  {
+    "id": "8de62e86-7c24-4d60-b738-d80844b7e37c",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 11 파파야 잼",
+    "color_name": "11 파파야 잼",
+    "image": "https://romand.io/images/product/958/oJgHkcoeViDMvaiM7ZDEAGAOHG3BJ2L3F4rv9ZuD.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000K&option_name=11%20%ED%8C%8C%ED%8C%8C%EC%95%BC%20%EC%9E%BC",
+    "hex": "#e07e71",
+    "lab_l": 63.49,
+    "lab_a": 36.33,
+    "lab_b": 23.69
+  },
+  {
+    "id": "e572778a-bf40-4c4e-b6fb-ea667ac97800",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 10 베어 애프리콧",
+    "color_name": "10 베어 애프리콧",
+    "image": "https://romand.io/images/product/958/QD52KlGsKzWl5QtwmgroiiSn0y0abm7cotPUWU1v.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000J&option_name=10%20%EB%B2%A0%EC%96%B4%20%EC%95%A0%ED%94%84%EB%A6%AC%EC%BD%A7",
+    "hex": "#e98d88",
+    "lab_l": 68.25,
+    "lab_a": 34.44,
+    "lab_b": 17.27
+  },
+  {
+    "id": "6ac3276f-3745-4ffb-b830-53eb087547a7",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 09 멀드 피치",
+    "color_name": "09 멀드 피치",
+    "image": "https://romand.io/images/product/958/ACQYJFhs3MqIqGnIugCft1mZKSBLmVRVlFNkEOxP.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000I&option_name=09%20%EB%A9%80%EB%93%9C%20%ED%94%BC%EC%B9%98",
+    "hex": "#d88b89",
+    "lab_l": 65.73,
+    "lab_a": 29.1,
+    "lab_b": 13.26
+  },
+  {
+    "id": "1bad06a3-1a67-44d2-82a5-b2a10a7ab290",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 08 핑크 펌킨",
+    "color_name": "08 핑크 펌킨",
+    "image": "https://romand.io/images/product/958/JP0abekdVUyFdheuHWBOEEl1PBELsV6QoZkL2YPK.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000H&option_name=08%20%ED%95%91%ED%81%AC%20%ED%8E%8C%ED%82%A8",
+    "hex": "#d6746d",
+    "lab_l": 59.87,
+    "lab_a": 37.62,
+    "lab_b": 20.71
+  },
+  {
+    "id": "64fc166a-e44d-476f-a4be-8513eb34c11e",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 07 체리 밤",
+    "color_name": "07 체리 밤",
+    "image": "https://romand.io/images/product/958/iKTjBrzXDwqWW3QimfKxKU8vCSSjeICGlsmvTT3M.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000G&option_name=07%20%EC%B2%B4%EB%A6%AC%20%EB%B0%A4",
+    "hex": "#b34f5a",
+    "lab_l": 46.97,
+    "lab_a": 41.6,
+    "lab_b": 13.65
+  },
+  {
+    "id": "0c4daa58-b564-4ebe-9231-949d2448b0a2",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 더 쥬시 래스팅 틴트 / 05 쥬쥬브",
+    "color_name": "05 쥬쥬브",
+    "image": "https://romand.io/images/product/958/UQiAZpL8zY2zzpHxnCgDfRvLa6Yb38ymNoFFJx4M.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/958/?variant_code=P0000BKW000E&option_name=05%20%EC%A5%AC%EC%A5%AC%EB%B8%8C",
+    "hex": "#ce7373",
+    "lab_l": 58.67,
+    "lab_a": 35.71,
+    "lab_b": 15.85
+  },
+  {
+    "id": "71c10932-cb6d-4db1-b0b8-461403db6f46",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #뉴베어 / 09 피오니즈",
@@ -658,7 +616,7 @@
     "lab_b": 0.19
   },
   {
-    "id": "0360c61a-b1ba-449d-9fc5-bf473ea088ab",
+    "id": "75e91c80-ada7-44f1-860c-17591fec811b",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #뉴베어 / 08 코랄리아",
@@ -672,7 +630,7 @@
     "lab_b": 6.46
   },
   {
-    "id": "d913b2cb-3f1d-4865-99c9-104b681fa7a6",
+    "id": "6d9c6994-a026-40db-9ce0-d51ae481552f",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #단종귀환템 / 05 피치 미",
@@ -686,7 +644,7 @@
     "lab_b": 10.95
   },
   {
-    "id": "d51fdbaf-1cf3-4d69-b609-d2e82147da6c",
+    "id": "278e5ee0-6874-4a74-9fec-800df0568029",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #단종귀환템 / 04 드래곤 핑크",
@@ -700,7 +658,49 @@
     "lab_b": -5.11
   },
   {
-    "id": "58cfa7d4-9e93-4db2-849e-b640ca8385f6",
+    "id": "a5c019d6-0c38-4f75-92e7-7cc913eb60ee",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 17 베리 인 블랙",
+    "color_name": "17 베리 인 블랙",
+    "image": "https://romand.io/images/product/902/UZg74Q1zeFIsVQugzASd3XuZp9Qz0hrSfBTTv1Cb.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/902/?variant_code=P0000BIS000E&option_name=17%20%EB%B2%A0%EB%A6%AC%20%EC%9D%B8%20%EB%B8%94%EB%9E%99",
+    "hex": "#686064",
+    "lab_l": 41.84,
+    "lab_a": 3.68,
+    "lab_b": -1.15
+  },
+  {
+    "id": "04389ed6-cfe5-4843-9047-20f3c7e6c627",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 16 키튼 피치",
+    "color_name": "16 키튼 피치",
+    "image": "https://romand.io/images/product/902/EJ1VyyBRxhumy6rRRC3oNLbiy8qkqiB6KKPOWG5h.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/902/?variant_code=P0000BIS000D&option_name=16%20%ED%82%A4%ED%8A%BC%20%ED%94%BC%EC%B9%98",
+    "hex": "#936f70",
+    "lab_l": 50.72,
+    "lab_a": 14.39,
+    "lab_b": 5.15
+  },
+  {
+    "id": "083697b4-2f5a-4ae2-b82f-e88c5f7f6120",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 멜팅 밤 #블랙스펙트럼 / 06 카야 피그",
+    "color_name": "06 카야 피그",
+    "image": "https://romand.io/images/product/902/3hQ1EehF0vNo65GAUh92JlD4ofo9PxcpILWHhFqb.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/902/?variant_code=P0000BIS000C&option_name=06%20%EC%B9%B4%EC%95%BC%20%ED%94%BC%EA%B7%B8",
+    "hex": "#886f70",
+    "lab_l": 49.41,
+    "lab_a": 10.06,
+    "lab_b": 3.4
+  },
+  {
+    "id": "98dca307-9f09-43d9-9d2c-48f67db44dee",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #밀크그로서리 / 29 파파야 잼",
@@ -714,7 +714,7 @@
     "lab_b": 12.64
   },
   {
-    "id": "6b18d829-8fa5-482f-ac74-bf1032fc8c67",
+    "id": "b4d5ef03-754e-4946-a4b7-644ea7b8c21d",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #밀크그로서리 / 28 베어 피그",
@@ -728,7 +728,7 @@
     "lab_b": 5.47
   },
   {
-    "id": "f0af499d-b2a3-4201-b0a4-0cffb06f69d1",
+    "id": "ae8a4e12-4a2c-4a8e-9722-e69f5b47e4f9",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 06 카야 피그",
@@ -742,7 +742,7 @@
     "lab_b": 6.62
   },
   {
-    "id": "56cc8ba6-3059-46b7-9fd2-84bbf1b9ebcd",
+    "id": "e6924cc5-ef5e-462c-9692-209a7a057fd1",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 01 코코 누드",
@@ -756,7 +756,7 @@
     "lab_b": 10.4
   },
   {
-    "id": "79e08d1c-19a3-4377-a710-cba89b246709",
+    "id": "3900c241-6a2a-4afd-ac57-3bb167cc84d6",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 02 러비 핑크",
@@ -770,7 +770,7 @@
     "lab_b": 3.68
   },
   {
-    "id": "450cb4de-e40c-4301-bf15-d2cb87b58650",
+    "id": "5003a42f-9f49-4ddf-a899-ce17358696fa",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 03 소르베 밤",
@@ -784,7 +784,7 @@
     "lab_b": 9.63
   },
   {
-    "id": "587eecaa-6532-4644-9bd2-8c8bf1e8a195",
+    "id": "3737491d-1138-4075-918a-ffac868ba77c",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 04 히피 베리",
@@ -798,7 +798,7 @@
     "lab_b": 7.81
   },
   {
-    "id": "d4e40595-6024-4c1d-b159-b3213f56f61f",
+    "id": "7fed05ea-b1f8-4dec-9e3a-759797b1ec06",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 05 누가 샌드",
@@ -812,7 +812,7 @@
     "lab_b": 8.3
   },
   {
-    "id": "247f4663-5967-4872-88c6-577fabda407c",
+    "id": "b4a88e82-f6ef-435e-8401-d9503b900638",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 밤 #오리지널 / 07 모브 휩",
@@ -826,7 +826,7 @@
     "lab_b": 3.23
   },
   {
-    "id": "b97ba469-b7a2-4e62-95f3-2e8049600841",
+    "id": "d5f0059c-d64a-4b8b-af14-81b46a032483",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #스파클링 / 16 코니 소다",
@@ -840,7 +840,7 @@
     "lab_b": 15.58
   },
   {
-    "id": "1f4fd646-944b-47ab-9924-987e89ad8c93",
+    "id": "a9b8ed3b-168d-4770-b15f-f60d3fd429fe",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 MINI / 02 나이트 마린",
@@ -854,7 +854,7 @@
     "lab_b": -3.65
   },
   {
-    "id": "1f0de0fb-496b-49c0-926b-539c17e44758",
+    "id": "404c60b8-bab9-41b3-abee-79f58bcfed87",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 MINI / 03 페어리 샤베트",
@@ -868,7 +868,7 @@
     "lab_b": -8.02
   },
   {
-    "id": "58bb7b88-83ce-4eaf-8013-7ee165515384",
+    "id": "ca495e42-3ae4-44f4-ab74-c2adcac58fbf",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 MINI / 04 허니 샤베트",
@@ -882,7 +882,7 @@
     "lab_b": 22.48
   },
   {
-    "id": "c565f605-2955-43d5-91c8-3e060e7339d9",
+    "id": "08c4c9f9-6de7-4c14-9581-5d5b979b67c8",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 MINI / 05 피치 샤베트",
@@ -896,7 +896,7 @@
     "lab_b": 11.53
   },
   {
-    "id": "679e2b2b-4506-41f4-a318-bb4ecfefc1a3",
+    "id": "e714de6f-8651-474f-bed1-4a46436f9926",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 MINI / 06 클리어 젤리",
@@ -910,7 +910,7 @@
     "lab_b": -0.61
   },
   {
-    "id": "c232563b-a8c5-45c0-8549-bebe80e0a950",
+    "id": "bdaf40c6-a0d5-4cca-96d1-0db037c90bc1",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #가을열매 / 13 잇 도토리",
@@ -924,7 +924,7 @@
     "lab_b": 22.09
   },
   {
-    "id": "01842932-9555-4609-b422-c1201599afe0",
+    "id": "807cbb63-e06c-4e32-80de-89b95366c8a2",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #가을열매 / 11 핑크 펌킨",
@@ -938,7 +938,7 @@
     "lab_b": 12.4
   },
   {
-    "id": "5c2a9cf0-3ef3-4dab-8ce5-4e699b8fbe2b",
+    "id": "672bc8d6-b75b-4485-9c20-804e13b1d3c1",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 쥬시 래스팅 틴트 #가을열매 / 10 누디 피넛",
@@ -952,7 +952,7 @@
     "lab_b": 15.73
   },
   {
-    "id": "c621725c-51e5-4cef-b6ef-cf750847bb19",
+    "id": "18d350e1-0090-47f5-8fbf-0f4872b46e0c",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 틴트 #오리지널 / 02 레드 드롭",
@@ -966,7 +966,7 @@
     "lab_b": 14.94
   },
   {
-    "id": "5948abf0-990f-48f0-978d-cf4ed09cd219",
+    "id": "664aedcd-4f19-42df-8a28-d1d756f4cbaf",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 틴트 #오리지널 / 03 브릭 리버",
@@ -980,7 +980,7 @@
     "lab_b": 15.04
   },
   {
-    "id": "8580e08a-96ac-48fb-a1c7-e8a14f289a06",
+    "id": "4f82c58d-ac2e-473d-b3c3-bda52418d1e7",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 틴트 #오리지널 / 04 빈티지 오션",
@@ -994,7 +994,7 @@
     "lab_b": 11.5
   },
   {
-    "id": "ba467c69-d3ed-4c8b-8630-4d5773759841",
+    "id": "a5375e55-6078-40f3-8047-960b9bc95787",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 틴트 #오리지널 / 05 로즈 스플래쉬",
@@ -1008,7 +1008,7 @@
     "lab_b": 6.7
   },
   {
-    "id": "9ae57ab3-3bc8-47ae-a944-651bba48c6b9",
+    "id": "1bf38ad6-81fe-45c0-a1ec-e5f92d116d76",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 틴트 #오리지널 / 08 로제 스트림",
@@ -1022,7 +1022,7 @@
     "lab_b": 8.11
   },
   {
-    "id": "a19ebd66-a30b-47df-a88a-6155d782255b",
+    "id": "47fb83eb-86c2-46fb-8d65-77ec463c73ce",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 / 00 메테오 트랙",
@@ -1036,7 +1036,7 @@
     "lab_b": -0.76
   },
   {
-    "id": "679545da-ced9-4fbb-a2e8-5aae8e3704af",
+    "id": "35764400-d47d-4e5e-ad83-4f28a7a4d9e7",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 워터 글로스 / 01 산호 크러쉬",
@@ -1050,7 +1050,7 @@
     "lab_b": 17.11
   },
   {
-    "id": "9c791fc9-0c76-46aa-a0be-692de6718109",
+    "id": "7a668a31-e2e1-4f79-93c4-6e1336a00a43",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 듀이풀 워터 틴트 #오리지널 / 04 칠리 업",
@@ -1064,7 +1064,7 @@
     "lab_b": 17.78
   },
   {
-    "id": "a6a4f541-4e96-4d05-88da-a3a22cedf463",
+    "id": "ca4ba3ac-9db3-4ea2-bc5b-bcb3aac3c09a",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 듀이풀 워터 틴트 #오리지널 / 06 툴리안",
@@ -1078,7 +1078,7 @@
     "lab_b": 1.63
   },
   {
-    "id": "37c155d8-f204-4a50-96e9-0a8161b96c90",
+    "id": "6fe2b5ae-0fa2-4c1c-bdd1-2f999b9042a4",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 듀이풀 워터 틴트 #오리지널 / 07 체리 웨이",
@@ -1092,7 +1092,7 @@
     "lab_b": 17.17
   },
   {
-    "id": "550049c9-a8a7-4c9a-a45d-b0b5d7ff5d12",
+    "id": "a5e13466-454a-4657-b540-4131fbcc9eae",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 듀이풀 워터 틴트 #오리지널 / 03 이프 로즈",
@@ -1106,217 +1106,7 @@
     "lab_b": 12.94
   },
   {
-    "id": "ffe21a6a-3fe2-43fe-a017-c75de910d409",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 / 05 딤모브",
-    "color_name": "05 딤모브",
-    "image": "https://romand.io/images/product/847/Yvq1cQTmyhIhO1bi3jqhmdS7I7EboT3muVjsDvRt.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GX&option_name=05%20%EB%94%A4%EB%AA%A8%EB%B8%8C",
-    "hex": "#b58686",
-    "lab_l": 60.51,
-    "lab_a": 18.08,
-    "lab_b": 6.74
-  },
-  {
-    "id": "aaee454a-4385-4c6b-80d6-1aa588e76f4b",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 / 02 너티 베이그",
-    "color_name": "02 너티 베이그",
-    "image": "https://romand.io/images/product/847/Z9MqbuGFkXAo2eNeQBuxIsurVO4a7YiOSe3pRw3d.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GU&option_name=02%20%EB%84%88%ED%8B%B0%20%EB%B2%A0%EC%9D%B4%EA%B7%B8",
-    "hex": "#d29e8f",
-    "lab_l": 69.63,
-    "lab_a": 17.49,
-    "lab_b": 14.97
-  },
-  {
-    "id": "986543ac-819f-4a2c-9d9a-cd22db9da4a6",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 / 04 그레이피 웨이",
-    "color_name": "04 그레이피 웨이",
-    "image": "https://romand.io/images/product/847/nXD733s6NgeMuPj5hVLwORizy2MJ9r8JCdX8tYuY.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GW&option_name=04%20%EA%B7%B8%EB%A0%88%EC%9D%B4%ED%94%BC%20%EC%9B%A8%EC%9D%B4",
-    "hex": "#c88996",
-    "lab_l": 63.79,
-    "lab_a": 25.92,
-    "lab_b": 3.04
-  },
-  {
-    "id": "9359d1fa-71e7-45cb-b14f-a234204bfbb6",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 / 03 로즈 핀치",
-    "color_name": "03 로즈 핀치",
-    "image": "https://romand.io/images/product/847/6EADRhaRhU7YXAytPK2rRsvg0rdS8dRTxXqzmLZm.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GV&option_name=03%20%EB%A1%9C%EC%A6%88%20%ED%95%80%EC%B9%98",
-    "hex": "#c18a8d",
-    "lab_l": 62.96,
-    "lab_a": 21.66,
-    "lab_b": 6.63
-  },
-  {
-    "id": "68c057b9-bf64-43eb-bfc6-f68062fcc273",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 / 06 디픈 무어",
-    "color_name": "06 디픈 무어",
-    "image": "https://romand.io/images/product/847/bKeKU3LagDmkGbXXPXIDNbaeO5ePC7vbT6yMO8VT.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GY&option_name=06%20%EB%94%94%ED%94%88%20%EB%AC%B4%EC%96%B4",
-    "hex": "#b27f79",
-    "lab_l": 58.16,
-    "lab_a": 18.8,
-    "lab_b": 11.06
-  },
-  {
-    "id": "418d0db8-e6d3-42b8-b715-05f8bd67e56b",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 / 01 피오니 발레",
-    "color_name": "01 피오니 발레",
-    "image": "https://romand.io/images/product/847/dt3narGEEUTYpJG5Qbldcenng5Pgke18Z9cH61ZV.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GT&option_name=01%20%ED%94%BC%EC%98%A4%EB%8B%88%20%EB%B0%9C%EB%A0%88",
-    "hex": "#e5afb6",
-    "lab_l": 76.58,
-    "lab_a": 20.73,
-    "lab_b": 3.92
-  },
-  {
-    "id": "0df6f4f6-5cca-4991-9a74-75bc52020c24",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 워터 틴트 MINI / 09 소프트 풀",
-    "color_name": "09 소프트 풀",
-    "image": "https://romand.io/images/product/859/y5NwVVP7YTnU3l0HAlzWkwxoxw7OkNWnhfQAfNzE.png",
-    "price": "6,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/859/?variant_code=P0000BHB000A&option_name=09%20%EC%86%8C%ED%94%84%ED%8A%B8%20%ED%92%80",
-    "hex": "#cf889a",
-    "lab_l": 64.51,
-    "lab_a": 29.57,
-    "lab_b": 1.81
-  },
-  {
-    "id": "324d1e09-25af-4704-ab0c-9dd669a3f255",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 #스프링피버 / 07 스프링 피버",
-    "color_name": "07 스프링 피버",
-    "image": "https://romand.io/images/product/879/cN2rdPkqlSAO7AvjcDIsHqw06ETULOYDlRYLi5G6.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/879/?variant_code=P0000BHV000B&option_name=07%20%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%94%BC%EB%B2%84",
-    "hex": "#e9a09f",
-    "lab_l": 73.03,
-    "lab_a": 27.06,
-    "lab_b": 11.5
-  },
-  {
-    "id": "4000ca86-fa94-433a-8c28-437b8b2ec702",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 컬러 글로스 #스프링피버 / 08 체리 업",
-    "color_name": "08 체리 업",
-    "image": "https://romand.io/images/product/879/mSn9TLjjWdOIg0T8FG2xAvhGNa7rCJNeDpH7pZ6D.jpg",
-    "price": "10,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/879/?variant_code=P0000BHV000C&option_name=08%20%EC%B2%B4%EB%A6%AC%20%EC%97%85",
-    "hex": "#e199a4",
-    "lab_l": 70.71,
-    "lab_a": 28.05,
-    "lab_b": 5.54
-  },
-  {
-    "id": "7c57701a-2899-4e36-911d-c3de14fac2f8",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 14 모브 문",
-    "color_name": "14 모브 문",
-    "image": "https://romand.io/images/product/842/NGMs3C4Hltp7Yq33i92ICFxSLyWmWjhzyYGnpehd.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GR&option_name=14%20%EB%AA%A8%EB%B8%8C%20%EB%AC%B8",
-    "hex": "#d49ba6",
-    "lab_l": 69.84,
-    "lab_a": 22.65,
-    "lab_b": 2.75
-  },
-  {
-    "id": "67b2b414-9c12-4aa4-9666-4adf1ec73666",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 15 누디 선다운",
-    "color_name": "15 누디 선다운",
-    "image": "https://romand.io/images/product/842/Xk0oUdsoMRdjzooCx9MUn9AkGb7PnOOId5W6FxwQ.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GS&option_name=15%20%EB%88%84%EB%94%94%20%EC%84%A0%EB%8B%A4%EC%9A%B4",
-    "hex": "#d5a295",
-    "lab_l": 71.1,
-    "lab_a": 17.37,
-    "lab_b": 13.95
-  },
-  {
-    "id": "6bbd9c1b-5556-4745-b39f-91fe09d12dfd",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 16 피그 라이즈",
-    "color_name": "16 피그 라이즈",
-    "image": "https://romand.io/images/product/842/If8BzbBehLSDxFjRIMCUgnlGuFV3i03Frtmt69kj.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GT&option_name=16%20%ED%94%BC%EA%B7%B8%20%EB%9D%BC%EC%9D%B4%EC%A6%88",
-    "hex": "#c4898d",
-    "lab_l": 63.26,
-    "lab_a": 23.04,
-    "lab_b": 7.21
-  },
-  {
-    "id": "46816127-8b1a-48e7-be0f-2d079db2dc74",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 17 우디 선셋",
-    "color_name": "17 우디 선셋",
-    "image": "https://romand.io/images/product/842/nNzcFaxNFI1lLul5ycUFh0IKUYtqMWsivSb88SZe.jpg",
-    "price": "9,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GU&option_name=17%20%EC%9A%B0%EB%94%94%20%EC%84%A0%EC%85%8B",
-    "hex": "#ac7f7d",
-    "lab_l": 57.67,
-    "lab_a": 17.5,
-    "lab_b": 7.62
-  },
-  {
-    "id": "e543bef5-4ca0-44e9-bfca-ee08eced5aa2",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "[COHA] 쥬시 래스팅 틴트 MINI / 40 블랙 사파이어",
-    "color_name": "40 블랙 사파이어",
-    "image": "https://romand.io/images/product/900/20zNZqkRxaxi0TBA5Xi1rHFxVbf6PteRuSJthWTM.jpg",
-    "price": "6,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/900/?variant_code=P0000BIQ000G&option_name=40%20%EB%B8%94%EB%9E%99%20%EC%82%AC%ED%8C%8C%EC%9D%B4%EC%96%B4",
-    "hex": "#865460",
-    "lab_l": 41.73,
-    "lab_a": 22.43,
-    "lab_b": 1.78
-  },
-  {
-    "id": "22fc5c7d-c8ab-4ec9-825e-37da3eca9940",
-    "brand": "romand",
-    "category": "Lips",
-    "name": "[COHA] 쥬시 래스팅 틴트 MINI / 41 자두인냥",
-    "color_name": "41 자두인냥",
-    "image": "https://romand.io/images/product/900/XqcciN7iH3Hz7wU4LDTfsZE9t606KxLRpkubIfc7.jpg",
-    "price": "6,900원",
-    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/900/?variant_code=P0000BIQ000H&option_name=41%20%EC%9E%90%EB%91%90%EC%9D%B8%EB%83%A5",
-    "hex": "#bc497c",
-    "lab_l": 48.42,
-    "lab_a": 51.33,
-    "lab_b": -4.95
-  },
-  {
-    "id": "228f0017-e135-45e7-ab0b-f8bee33fd5a3",
+    "id": "bd4eba83-890d-4e4b-804e-08ea78b6bc50",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 듀이풀 워터 틴트 #뮤트럴 누드 / 12 캐니언",
@@ -1330,7 +1120,7 @@
     "lab_b": 16.11
   },
   {
-    "id": "c0d29700-600e-4376-8e9b-c73debfe6628",
+    "id": "be223aca-77d0-4029-bb9c-b74f33841212",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 듀이풀 워터 틴트 #뮤트럴 누드 / 13 커스터드 모브",
@@ -1344,7 +1134,217 @@
     "lab_b": 7.19
   },
   {
-    "id": "7c91fa1b-5347-447a-b752-629c915a4188",
+    "id": "b74d5584-523f-4406-9429-64fbaf157b8f",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 14 모브 문",
+    "color_name": "14 모브 문",
+    "image": "https://romand.io/images/product/842/NGMs3C4Hltp7Yq33i92ICFxSLyWmWjhzyYGnpehd.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GR&option_name=14%20%EB%AA%A8%EB%B8%8C%20%EB%AC%B8",
+    "hex": "#d49ba6",
+    "lab_l": 69.84,
+    "lab_a": 22.65,
+    "lab_b": 2.75
+  },
+  {
+    "id": "7619ab1f-7330-45c8-a2b0-e99bf94afdd3",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 15 누디 선다운",
+    "color_name": "15 누디 선다운",
+    "image": "https://romand.io/images/product/842/Xk0oUdsoMRdjzooCx9MUn9AkGb7PnOOId5W6FxwQ.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GS&option_name=15%20%EB%88%84%EB%94%94%20%EC%84%A0%EB%8B%A4%EC%9A%B4",
+    "hex": "#d5a295",
+    "lab_l": 71.1,
+    "lab_a": 17.37,
+    "lab_b": 13.95
+  },
+  {
+    "id": "95d605b8-f71c-49f6-a1ad-b09b92555d1f",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 16 피그 라이즈",
+    "color_name": "16 피그 라이즈",
+    "image": "https://romand.io/images/product/842/If8BzbBehLSDxFjRIMCUgnlGuFV3i03Frtmt69kj.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GT&option_name=16%20%ED%94%BC%EA%B7%B8%20%EB%9D%BC%EC%9D%B4%EC%A6%88",
+    "hex": "#c4898d",
+    "lab_l": 63.26,
+    "lab_a": 23.04,
+    "lab_b": 7.21
+  },
+  {
+    "id": "67b1b66c-71be-4754-8996-9b789f41b6c5",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 워터 틴트 #선셋 / 17 우디 선셋",
+    "color_name": "17 우디 선셋",
+    "image": "https://romand.io/images/product/842/nNzcFaxNFI1lLul5ycUFh0IKUYtqMWsivSb88SZe.jpg",
+    "price": "9,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/842/?variant_code=P0000BGK00GU&option_name=17%20%EC%9A%B0%EB%94%94%20%EC%84%A0%EC%85%8B",
+    "hex": "#ac7f7d",
+    "lab_l": 57.67,
+    "lab_a": 17.5,
+    "lab_b": 7.62
+  },
+  {
+    "id": "e28ca45d-1356-4e71-9466-9cf7349d909a",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 / 05 딤모브",
+    "color_name": "05 딤모브",
+    "image": "https://romand.io/images/product/847/Yvq1cQTmyhIhO1bi3jqhmdS7I7EboT3muVjsDvRt.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GX&option_name=05%20%EB%94%A4%EB%AA%A8%EB%B8%8C",
+    "hex": "#b58686",
+    "lab_l": 60.51,
+    "lab_a": 18.08,
+    "lab_b": 6.74
+  },
+  {
+    "id": "aadc9b2e-2556-4435-98c0-6d5378d69b38",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 / 02 너티베이그",
+    "color_name": "02 너티베이그",
+    "image": "https://romand.io/images/product/847/Z9MqbuGFkXAo2eNeQBuxIsurVO4a7YiOSe3pRw3d.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GU&option_name=02%20%EB%84%88%ED%8B%B0%EB%B2%A0%EC%9D%B4%EA%B7%B8",
+    "hex": "#d29e8f",
+    "lab_l": 69.63,
+    "lab_a": 17.49,
+    "lab_b": 14.97
+  },
+  {
+    "id": "ca7cc89d-8612-47ad-84fa-4a0029e5acf8",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 / 04 그레이피 웨이",
+    "color_name": "04 그레이피 웨이",
+    "image": "https://romand.io/images/product/847/nXD733s6NgeMuPj5hVLwORizy2MJ9r8JCdX8tYuY.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GW&option_name=04%20%EA%B7%B8%EB%A0%88%EC%9D%B4%ED%94%BC%20%EC%9B%A8%EC%9D%B4",
+    "hex": "#c88996",
+    "lab_l": 63.79,
+    "lab_a": 25.92,
+    "lab_b": 3.04
+  },
+  {
+    "id": "8a9a89c7-0dc7-4e09-af02-c6b532acf90e",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 / 03 로즈 핀치",
+    "color_name": "03 로즈 핀치",
+    "image": "https://romand.io/images/product/847/6EADRhaRhU7YXAytPK2rRsvg0rdS8dRTxXqzmLZm.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GV&option_name=03%20%EB%A1%9C%EC%A6%88%20%ED%95%80%EC%B9%98",
+    "hex": "#c18a8d",
+    "lab_l": 62.96,
+    "lab_a": 21.66,
+    "lab_b": 6.63
+  },
+  {
+    "id": "ac2d1341-7016-42b1-9e3e-fe5f4bc46476",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 / 06 디픈무어",
+    "color_name": "06 디픈무어",
+    "image": "https://romand.io/images/product/847/bKeKU3LagDmkGbXXPXIDNbaeO5ePC7vbT6yMO8VT.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GY&option_name=06%20%EB%94%94%ED%94%88%EB%AC%B4%EC%96%B4",
+    "hex": "#b27f79",
+    "lab_l": 58.16,
+    "lab_a": 18.8,
+    "lab_b": 11.06
+  },
+  {
+    "id": "842cb359-cb1e-49ec-8569-628675208a31",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 / 01 피오니 발레",
+    "color_name": "01 피오니 발레",
+    "image": "https://romand.io/images/product/847/dt3narGEEUTYpJG5Qbldcenng5Pgke18Z9cH61ZV.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/847/?variant_code=P0000BGP00GT&option_name=01%20%ED%94%BC%EC%98%A4%EB%8B%88%20%EB%B0%9C%EB%A0%88",
+    "hex": "#e5afb6",
+    "lab_l": 76.58,
+    "lab_a": 20.73,
+    "lab_b": 3.92
+  },
+  {
+    "id": "bf7772f5-4c82-4e97-a7a7-3ba93df5e11c",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 워터 틴트 MINI / 09 소프트 풀",
+    "color_name": "09 소프트 풀",
+    "image": "https://romand.io/images/product/859/y5NwVVP7YTnU3l0HAlzWkwxoxw7OkNWnhfQAfNzE.png",
+    "price": "6,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/859/?variant_code=P0000BHB000A&option_name=09%20%EC%86%8C%ED%94%84%ED%8A%B8%20%ED%92%80",
+    "hex": "#cf889a",
+    "lab_l": 64.51,
+    "lab_a": 29.57,
+    "lab_b": 1.81
+  },
+  {
+    "id": "881dddb2-0c6a-4d47-baa6-35b0e504ab30",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 #스프링피버 / 07 스프링피버",
+    "color_name": "07 스프링피버",
+    "image": "https://romand.io/images/product/879/cN2rdPkqlSAO7AvjcDIsHqw06ETULOYDlRYLi5G6.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/879/?variant_code=P0000BHV000B&option_name=07%20%EC%8A%A4%ED%94%84%EB%A7%81%ED%94%BC%EB%B2%84",
+    "hex": "#e9a09f",
+    "lab_l": 73.03,
+    "lab_a": 27.06,
+    "lab_b": 11.5
+  },
+  {
+    "id": "61730b9b-b8e6-483c-af6e-67c704157228",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "롬앤 글래스팅 컬러 글로스 #스프링피버 / 08 체리 업",
+    "color_name": "08 체리 업",
+    "image": "https://romand.io/images/product/879/mSn9TLjjWdOIg0T8FG2xAvhGNa7rCJNeDpH7pZ6D.jpg",
+    "price": "10,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/879/?variant_code=P0000BHV000C&option_name=08%20%EC%B2%B4%EB%A6%AC%20%EC%97%85",
+    "hex": "#e199a4",
+    "lab_l": 70.71,
+    "lab_a": 28.05,
+    "lab_b": 5.54
+  },
+  {
+    "id": "c4f07667-9a50-46a1-baea-461debee96c1",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "[COHA] 쥬시 래스팅 틴트 MINI / 40 블랙 사파이어",
+    "color_name": "40 블랙 사파이어",
+    "image": "https://romand.io/images/product/900/20zNZqkRxaxi0TBA5Xi1rHFxVbf6PteRuSJthWTM.jpg",
+    "price": "6,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/900/?variant_code=P0000BIQ000G&option_name=40%20%EB%B8%94%EB%9E%99%20%EC%82%AC%ED%8C%8C%EC%9D%B4%EC%96%B4",
+    "hex": "#865460",
+    "lab_l": 41.73,
+    "lab_a": 22.43,
+    "lab_b": 1.78
+  },
+  {
+    "id": "7e41363a-b02f-43f8-b26f-bf3b361cbd41",
+    "brand": "romand",
+    "category": "Lips",
+    "name": "[COHA] 쥬시 래스팅 틴트 MINI / 41 자두인냥",
+    "color_name": "41 자두인냥",
+    "image": "https://romand.io/images/product/900/XqcciN7iH3Hz7wU4LDTfsZE9t606KxLRpkubIfc7.jpg",
+    "price": "6,900원",
+    "url": "https://romand.co.kr/product/%EB%A1%AC%EC%95%A4/900/?variant_code=P0000BIQ000H&option_name=41%20%EC%9E%90%EB%91%90%EC%9D%B8%EB%83%A5",
+    "hex": "#bc497c",
+    "lab_l": 48.42,
+    "lab_a": 51.33,
+    "lab_b": -4.95
+  },
+  {
+    "id": "17c6c617-0786-49e2-a9fd-244147c9b4bb",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 팟 / 02 블랙 베리 팟",
@@ -1358,7 +1358,7 @@
     "lab_b": -25.5
   },
   {
-    "id": "0cee538b-beb7-49ed-91f8-78afa3f1298d",
+    "id": "6539ae47-e6b6-44c9-b3c6-2e5111e25487",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 팟 / 01 코튼 밀크 팟",
@@ -1372,7 +1372,7 @@
     "lab_b": 2.14
   },
   {
-    "id": "c132431a-8637-4691-a0c7-4aa3b31aa045",
+    "id": "71929b44-3e3a-40fb-b6b0-e24d33494a30",
     "brand": "romand",
     "category": "Lips",
     "name": "롬앤 글래스팅 멜팅 팟 / 03 피치 허니 팟",
@@ -1386,7 +1386,7 @@
     "lab_b": 10.41
   },
   {
-    "id": "5b7ad327-a914-4b87-92a4-bcd6efa1ab8b",
+    "id": "02771332-9d3b-45d5-9de8-4c72b28c7036",
     "brand": "3CE",
     "category": "Lips",
     "name": "[3CE X MUUT] BLUR WATER TINT",
@@ -1400,7 +1400,7 @@
     "lab_b": -1.58
   },
   {
-    "id": "cc78bd55-dce5-4b85-bf4f-fe6fe33f080d",
+    "id": "879f2aa1-6171-493c-bc4a-2cc9f1a23e7d",
     "brand": "3CE",
     "category": "Lips",
     "name": "[3CE X MUUT] VELVET LIP TINT",
@@ -1414,7 +1414,7 @@
     "lab_b": 3.13
   },
   {
-    "id": "481514ee-4c28-4708-ac49-e5f7f8837c96",
+    "id": "7d63a456-b37b-4808-8c96-fce7cec936ea",
     "brand": "3CE",
     "category": "Lips",
     "name": "[3CE X MUUT] CASHMERE HUG LIPSTICK",
@@ -1428,7 +1428,7 @@
     "lab_b": 2.02
   },
   {
-    "id": "5bf3fbe4-b850-43fb-9c85-5bd881d07dcc",
+    "id": "adc8b0bd-6880-4aa3-af69-88431f47d3e2",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE GLAZY LIP GLOW",
@@ -1442,7 +1442,7 @@
     "lab_b": 0.93
   },
   {
-    "id": "80c092b1-691a-4dc4-86dd-7c29ab3a6d66",
+    "id": "42bb9de0-fefa-41bf-a50f-8871f5c2812b",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE BLUR WATER TINT",
@@ -1456,7 +1456,7 @@
     "lab_b": 2.71
   },
   {
-    "id": "e1f21e7d-9f44-47fc-9ce4-42cc01aa19c9",
+    "id": "b1022180-edab-47ba-9dc9-380631e4dec6",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE VELVET LIP TINT",
@@ -1470,7 +1470,7 @@
     "lab_b": 5.38
   },
   {
-    "id": "f4c5e948-f91d-4f35-b8a5-ff2ef9e6ad58",
+    "id": "a99be2f8-5cdc-46c3-8513-c64514fccc23",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE CASHMERE HUG LIPSTICK",
@@ -1484,7 +1484,7 @@
     "lab_b": 2.97
   },
   {
-    "id": "0cffb8b2-7cbb-4f8a-8764-0619419ca36d",
+    "id": "2775698a-bb64-4c05-a3ad-e126cc9a635a",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE HAZY LIP CLAY",
@@ -1498,7 +1498,7 @@
     "lab_b": 0.0
   },
   {
-    "id": "ffb477ee-7eb4-44ea-9c48-8a0a78ddfd74",
+    "id": "28256242-f9bf-4184-8978-389538c69845",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE BLUR MATTE LIPSTICK",
@@ -1512,7 +1512,7 @@
     "lab_b": 0.29
   },
   {
-    "id": "fe0f55cd-80d0-4d28-8efe-5c6da1615fa5",
+    "id": "ad7ff592-6a21-44ce-b5a9-2dab80ab84e6",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE BLURRING LIQUID LIP",
@@ -1526,7 +1526,7 @@
     "lab_b": 5.92
   },
   {
-    "id": "b2cb0318-1669-4f87-84a9-8d6d2d407e2f",
+    "id": "1d80bc37-59f0-4136-b967-de5017916f26",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE CLOUD LIP TINT",
@@ -1540,7 +1540,7 @@
     "lab_b": 7.06
   },
   {
-    "id": "d873f0b7-b044-4fe3-8854-c7f23bfddf34",
+    "id": "0aa1c3cc-ee5e-416e-bd37-d45a964de98d",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE DROP GLOW GEL",
@@ -1554,7 +1554,7 @@
     "lab_b": 3.77
   },
   {
-    "id": "5c60e12a-2285-4e93-b55e-eea6a6db06f7",
+    "id": "5e2aba0c-13d7-4a9b-aff6-b49ac0b79f1d",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE GLAZE LIP TINT",
@@ -1568,7 +1568,7 @@
     "lab_b": 2.12
   },
   {
-    "id": "5652a687-3549-4cfd-9fef-40ab1fb15625",
+    "id": "db02f4b8-d7fd-4939-ae9e-45b9ab6f8570",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE LAZY POP LIP STAIN",
@@ -1582,7 +1582,7 @@
     "lab_b": 3.23
   },
   {
-    "id": "2ccb414b-dd3e-4dd0-b1d9-bffe85903b0d",
+    "id": "1040a232-6a85-4a37-a552-05969deca1f4",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE MOOD RECIPE MATTE LIP COLOR",
@@ -1596,7 +1596,7 @@
     "lab_b": 1.94
   },
   {
-    "id": "d7e80c03-3146-4921-8ab5-98b7626c1fe8",
+    "id": "a780d52f-05a3-4faa-b238-047f08a8144a",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE SHINE REFLECTOR",
@@ -1610,7 +1610,7 @@
     "lab_b": 3.68
   },
   {
-    "id": "e5ada97b-0c73-44c4-95a9-084925ef6ed6",
+    "id": "21fd2193-71ec-43fc-a190-c2f332ebf75e",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE SOFT MATTE LIPSTICK",
@@ -1624,7 +1624,7 @@
     "lab_b": 2.91
   },
   {
-    "id": "da7bef63-b905-42bf-974d-2a8401cf9b1d",
+    "id": "5ad69829-0a13-4904-b261-05b7aac4a4a9",
     "brand": "3CE",
     "category": "Lips",
     "name": "3CE SYRUP LAYERING TINT",
@@ -1638,7 +1638,7 @@
     "lab_b": 1.62
   },
   {
-    "id": "a7d87635-649c-4ca5-bc49-aa824cfc9675",
+    "id": "10fd5e34-7319-4bcb-87e1-b4d98358365e",
     "brand": "3CE",
     "category": "blush",
     "name": "[3CE X MUUT] BOUNCY BLUR BALM",
@@ -1652,7 +1652,7 @@
     "lab_b": 5.13
   },
   {
-    "id": "e13dc09e-9417-4682-a144-98113be0d2bf",
+    "id": "86b0145e-30d0-4be6-a865-e6bedac22eef",
     "brand": "3CE",
     "category": "blush",
     "name": "3CE LAYER-IT-ALL BLUSH PALETTE",
@@ -1666,7 +1666,7 @@
     "lab_b": 3.63
   },
   {
-    "id": "021a18ac-822c-41de-8f13-665ca4649ea6",
+    "id": "81c93ecd-91cc-434b-9956-814b94fd0104",
     "brand": "3CE",
     "category": "blush",
     "name": "3CE BLUSHLIGHTER",
@@ -1680,7 +1680,7 @@
     "lab_b": 0.71
   },
   {
-    "id": "ccffdf60-43c9-4cc0-acfd-56d6363f6e74",
+    "id": "715f6755-eb3d-44b3-bac8-8888a587a529",
     "brand": "3CE",
     "category": "blush",
     "name": "3CE FACE BLUSH",
@@ -1694,7 +1694,7 @@
     "lab_b": 2.52
   },
   {
-    "id": "d93d7a10-a055-4443-ab9b-046b590f245f",
+    "id": "99768c9e-087b-4614-b270-119fe54b523d",
     "brand": "3CE",
     "category": "blush",
     "name": "3CE NEW TAKE FACE BLUSHER",
@@ -1708,7 +1708,7 @@
     "lab_b": 5.7
   },
   {
-    "id": "59ba707d-7c08-4786-84d3-a8ddfe795c83",
+    "id": "114f25c6-4406-407c-88c8-5f414b3573ef",
     "brand": "3CE",
     "category": "blush",
     "name": "3CE SHEER LIQUID BLUSHER",
@@ -1722,7 +1722,7 @@
     "lab_b": 2.35
   },
   {
-    "id": "9c920444-47ea-48c6-9937-b8160cdb85f2",
+    "id": "b3870433-e09a-447b-bb93-30622bfb0ec5",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE COLOR GRID EYESHADOW",
@@ -1736,7 +1736,7 @@
     "lab_b": 0.11
   },
   {
-    "id": "4b5ec573-af0a-4295-a5b3-40006ca12882",
+    "id": "20346dac-c67c-461b-8c88-f63062904701",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "[3CE X MUUT] MULTI EYE COLOR PALETTE",
@@ -1750,7 +1750,7 @@
     "lab_b": -7.92
   },
   {
-    "id": "70430544-bd86-4d41-ac2e-49827a472aed",
+    "id": "6b78f3a4-4a40-44a0-856f-b4065b4c98fa",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE LAYER-IT-ALL EYESHADOW PALETTE",
@@ -1764,7 +1764,7 @@
     "lab_b": 2.22
   },
   {
-    "id": "6330673b-9616-40d3-9fec-bed08d75dcc1",
+    "id": "24887d17-8580-4809-aa90-ad903e400951",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE MULTI EYE COLOR PALETTE",
@@ -1778,7 +1778,7 @@
     "lab_b": 3.41
   },
   {
-    "id": "a8ed8f6d-a884-46fe-8ba7-a679bc57a72d",
+    "id": "eed1502b-07c7-472d-b7e4-9cd7de630766",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE MINI MULTI EYE COLOR PALETTE",
@@ -1792,7 +1792,7 @@
     "lab_b": 5.93
   },
   {
-    "id": "64105de9-e47f-4387-9ae8-c76493919a47",
+    "id": "a4c0a977-cced-4ce8-abea-f718dcff8325",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE ALL ROUNDER FACE PALETTE",
@@ -1806,7 +1806,7 @@
     "lab_b": -1.16
   },
   {
-    "id": "dead0110-27cb-4189-9e42-27dc0370563a",
+    "id": "aae2b01b-f84f-4bcf-9979-88ab9b4900cc",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE EYE SWITCH",
@@ -1820,7 +1820,7 @@
     "lab_b": -13.34
   },
   {
-    "id": "b6ff218b-0a66-4435-8304-57d44e4698c4",
+    "id": "428205ad-0aee-4888-ad22-5a3640c5afc3",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE LIQUID PRIMER EYE SHADOW",
@@ -1834,7 +1834,7 @@
     "lab_b": 5.0
   },
   {
-    "id": "e19d7eb9-bfab-40e4-839d-e7ff11df8c21",
+    "id": "22b7a16e-3bf7-4385-a03e-0655fa746839",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE NEW TAKE EYESHADOW PALETTE",
@@ -1848,7 +1848,7 @@
     "lab_b": 2.23
   },
   {
-    "id": "bc5856bb-7e4f-45b3-8be8-babc01c2acb7",
+    "id": "ff300de4-808b-40b8-a8c2-dd12aea92dad",
     "brand": "3CE",
     "category": "eyeshadow",
     "name": "3CE XL EYESHADOW PALETTE",

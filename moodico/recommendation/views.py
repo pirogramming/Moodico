@@ -6,15 +6,22 @@ from django.views.decorators.csrf import csrf_exempt
 import logging
 logger = logging.getLogger(__name__)
 from sklearn.metrics.pairwise import cosine_similarity
+from moodico.products.views import get_top_liked_products
 
 # Create your views here.
-
 def my_item_recommendation(request):
-    """내 아이템 기반 추천 페이지 뷰"""
-    # 백엔드 연동을 위해 임시로 빈 리스트 전달
-    recommended_items = []
-    search_results = []
-    return render(request, 'upload/upload.html', {'search_results': search_results, 'recommended_items': recommended_items})
+    # Get recommended or default products
+    search_results = get_top_liked_products(limit=10)
+    recommended_items = []  # Set this if you want a separate recommended section
+
+    return render(
+        request,
+        'upload/upload.html',
+        {
+            'search_results': search_results,
+            'recommended_items': recommended_items
+        }
+    )
 
 @csrf_exempt
 def recommend_by_color(request):
@@ -34,11 +41,18 @@ def recommend_by_color(request):
 
         coord = np.array([warm, deep, lab_l, lab_a, lab_b])
         logger.info(f"Received coordinates: warmCool={warm}, lightDeep={deep}, lab_l={lab_l}, lab_a={lab_a}, lab_b={lab_b}")
-
-        with open("static/data/cluster_centers_new.json", "r") as f:
+        import os
+        from django.conf import settings
+        with open("static/data/cluster_centers.json", "r") as f:
             centers = json.load(f)
-        with open("static/data/products_clustered_new.json", "r", encoding="utf-8") as f:
+        # path = os.path.join(settings.MEDIA_ROOT, 'data', 'cluster_centers.json')
+        # with open(path, "r", encoding="utf-8") as f:
+        #     centers = json.load(f)
+        with open("static/data/products_clustered.json", "r", encoding="utf-8") as f:
             products = json.load(f)
+        # path = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
+        # with open(path, "r", encoding="utf-8") as f:
+        #     products = json.load(f)
 
         # Step 1: Find closest cluster
         cluster_idx = np.argmin([np.linalg.norm(coord - np.array(c)) for c in centers])
