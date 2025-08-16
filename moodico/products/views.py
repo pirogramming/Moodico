@@ -17,6 +17,11 @@ from moodico.users.utils import login_or_kakao_required
 # Create your views here.
 def color_matrix_explore(request):
     """색상 매트릭스 페이지 뷰"""
+    # 로그인이 되어있다면, 찜한 제품 정보 불러오기
+    liked_product_ids = set()
+    if request.user.is_authenticated:
+        liked_product_ids = set(ProductLike.objects.filter(user=request.user).values_list('product_id', flat=True))
+
     static_cluster = os.path.join(settings.BASE_DIR, 'static','data', 'products_clustered.json')
     static_all = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
 
@@ -28,6 +33,10 @@ def color_matrix_explore(request):
 
     with open(product_path, 'r', encoding='utf-8') as f:
         products = json.load(f)
+
+    # 찜 여부 추가
+    for product in products:
+        product['is_liked'] = product.get('id') in liked_product_ids
 
     return render(request, 'recommendation/color_matrix.html', {'makeupProducts': products})
 from django.templatetags.static import static

@@ -1,8 +1,46 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/recommendation/color_matrix_style.css' %}" />
+<style>
+  .like-filter-toggle {
+    margin: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .toggle-checkbox {
+    display: none; /* 실제 체크박스는 숨김 */
+  }
+
+  .toggle-label {
+    cursor: pointer;
+    background-color: #ccc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    position: relative;
+    transition: background-color 0.3s;
+  }
+
+  .toggle-label .toggle-text {
+    font-size: 14px;
+    color: white;
+  }
+
+  /* 체크됐을 때 스타일 */
+  .toggle-checkbox:checked + .toggle-label {
+    background-color: #8A2BE2; /* 보라색 계열 */
+  }
+</style>
 {% endblock %} {% block content %}
 <div class="matrix-wrapper">
   <div class="matrix-selector">
+    {% if user.is_authenticated %}
+      <div class="like-filter-toggle">
+        <input type="checkbox" id="like-toggle-checkbox" class="toggle-checkbox">
+        <label for="like-toggle-checkbox" class="toggle-label">
+          <span class="toggle-text">내가 찜한 제품</span>
+        </label>
+      </div>
+    {% endif %}
     <div class="mood-selector">
       <select id="mood-dropdown" class="mood-dropdown">
         <option value="">무드를 선택하세요</option>
@@ -104,10 +142,7 @@
   </p>
 </div>
 {% endblock %} {% block extra_js %}
-<script>
-  const makeupProducts = {{ makeupProducts| safe }};
-  //console.log(makeupProducts);  // 확인용
-</script>
+{{ makeupProducts|json_script:"products-data" }}
 <script src="{% static 'js/recommendation/color_analyzer.js' %}"></script>
 <script src="{% static 'js/recommendation/color_matrix_script.js' %}"></script>
 {% endblock %}
