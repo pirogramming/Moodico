@@ -19,6 +19,7 @@
   </div>
   {% elif top_products %}
   <div class="ranking-grid">
+    {% comment %} [{'product_id': 'ec733645-2d66-4fb4-b207-d740680acd73', 'product_name': '04 빈티지 오션', 'product_brand': 'romand', 'product_price': '9,900원', 'product_image': 'https://romand.io/images/product/343/BZgkQP0CTQ1Wb8FTVcLlVBqfPwSBpyZ3BeEQVdCu.jpg', 'like_count': 1}, .. ] {% endcomment %}
     {% for product in top_products %}
     <div
       class="ranking-card {% if forloop.counter <= 3 %}top-3 rank-{{ forloop.counter }}{% endif %}"

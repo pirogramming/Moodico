@@ -126,13 +126,7 @@
     <h3>추천 제품</h3>
     <div class="product-list">
       {% for product in search_results %}
-        {% comment %} <div
-          class="product-card"
-          data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-search{{ forloop.counter }}"
-        >  {% endcomment %}
         <div class="product-card">
-          {% comment %} <button class="like-button" title="좋아요"></button>
-          <span class="like-count">0</span> {% endcomment %}
           <img src="{{ product.image }}" alt="{{ product.name }}" />
           <div class="product-info">
             <div class="brand">
