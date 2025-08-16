@@ -10,8 +10,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (productCard) {
                 // 제품 정보 가져오기
+                // const productInfo = {
+                //     product_id: productCard.dataset.productId || generateUniqueProductId(productCard),
+                //     product_name: getProductName(productCard),
+                //     product_brand: getProductBrand(productCard),
+                //     product_price: getProductPrice(productCard),
+                //     product_image: getProductImage(productCard)
+                // };
+                const productId = productCard.dataset.productId;
+
+                if (!productId) {
+                    console.error('Error: product-card missing data-product-id attribute.');
+                    return;  
+                }
+
                 const productInfo = {
-                    product_id: productCard.dataset.productId || generateUniqueProductId(productCard),
+                    product_id: productId,
                     product_name: getProductName(productCard),
                     product_brand: getProductBrand(productCard),
                     product_price: getProductPrice(productCard),
@@ -76,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     showLikeMessage('로그인이 필요합니다.');
                     // 로그인 페이지로 리다이렉트 옵션
                     setTimeout(() => {
-                        window.location.href = '/login/';
+                        window.location.href = '/';
                     }, 2000);
                 } else {
                     showLikeMessage(data.message || '오류가 발생했습니다.');
@@ -226,9 +240,17 @@ document.addEventListener('DOMContentLoaded', function () {
     async function loadMultipleProductsLikeInfo() {
         try {
             const productCards = document.querySelectorAll('.product-card, .recommended-product-card');
-            const productIds = Array.from(productCards).map(card =>
-                card.dataset.productId || generateUniqueProductId(card)
-            ).filter(Boolean);
+            // const productIds = Array.from(productCards).map(card =>
+            //     card.dataset.productId || generateUniqueProductId(card)
+            // ).filter(Boolean);
+            const productIds = Array.from(productCards).map(card => {
+                const id = card.dataset.productId;
+                if (!id) {
+                    console.warn('Product card without valid product ID found, skipping:', card);
+                    return null;
+                }
+                return id;
+            }).filter(Boolean);
 
             if (productIds.length === 0) return;
 
@@ -327,7 +349,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const productCards = document.querySelectorAll('.product-card, .recommended-product-card');
 
                 productCards.forEach(card => {
-                    const productId = card.dataset.productId || generateUniqueProductId(card);
+                    // const productId = card.dataset.productId || generateUniqueProductId(card);
+                    const productId = card.dataset.productId;
+                    if (!productId) {
+                        console.error('Missing product ID on card:', card);
+                        return; // skip this card
+                    }
                     const likeButton = card.querySelector('.like-button');
 
                     if (likeButton && likes.some(item => item.product_id === productId)) {
@@ -343,7 +370,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // 동적으로 추가되는 제품 카드들의 좋아요 상태 복원
     async function restoreLikeStateForCard(card) {
         try {
-            const productId = card.dataset.productId || generateUniqueProductId(card);
+            // const productId = card.dataset.productId || generateUniqueProductId(card);
+            const productId = card.dataset.productId;
             if (!productId) return;
 
             const response = await fetch(`/products/like_count/?product_id=${encodeURIComponent(productId)}`);
@@ -375,7 +403,12 @@ document.addEventListener('DOMContentLoaded', function () {
             // 실패 시 기존 방식으로 폴백
             try {
                 const likes = await loadUserLikes();
-                const productId = card.dataset.productId || generateUniqueProductId(card);
+                // const productId = card.dataset.productId || generateUniqueProductId(card);
+                const productId = card.dataset.productId;
+                if (!productId) {
+                    console.error('Missing product ID on card:', card);
+                    return; // skip this card
+                }
                 const likeButton = card.querySelector('.like-button');
 
                 if (likeButton && likes.some(item => item.product_id === productId)) {
@@ -502,7 +535,12 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log(`페이지에서 발견된 제품 카드 수: ${allCards.length}`);
 
     allCards.forEach((card, index) => {
-        const productId = card.dataset.productId || generateUniqueProductId(card);
+        // const productId = card.dataset.productId || generateUniqueProductId(card);
+        const productId = card.dataset.productId;
+        if (!productId) {
+            console.error('Missing product ID on card:', card);
+            return; // skip this card
+        }
         const productName = getProductName(card);
         console.log(`Card ${index + 1}: ID=${productId}, Name=${productName}`);
     });

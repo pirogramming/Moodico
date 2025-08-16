@@ -44,85 +44,76 @@ def product_detail(request, product_id):
     return render(request, 'products/detail.html', {'product': product})
 
 def crawled_product_detail(request, crawled_id):
+    # crawled_id -> a4c0a977-cced-4ce8-abea-f718dcff8325
     """크롤링된 제품 상세 페이지 뷰"""
     try:
         logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
         
         # products_clustered.json에서 제품 정보 찾기
-        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'products_clustered.json')
-        logger.info(f"제품 데이터 파일 경로: {product_path}")
+        product_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
         
         with open(product_path, 'r', encoding='utf-8') as f:
             products = json.load(f)
-        
-        logger.info(f"로드된 제품 수: {len(products)}")
-        
+                
         # crawled_id로 제품 찾기
         product = None
-        logger.info(f"찾고 있는 제품 ID: {crawled_id}")
-        logger.info(f"제품 ID 타입: {type(crawled_id)}")
-        
-        # 처음 몇 개 제품의 ID 출력 (디버깅용)
-        for i, p in enumerate(products[:5]):
-            logger.info(f"제품 {i}: ID={p.get('id')} (타입: {type(p.get('id'))}), 이름={p.get('name', 'Unknown')}")
         
         for p in products:
             if p.get('id') == crawled_id:
+                # p.get('id') -> a4c0a977-cced-4ce8-abea-f718dcff8325
                 product = p
-                logger.info(f"제품 찾음: {p.get('name', 'Unknown')}")
                 break
-        
-        if not product:
-            logger.warning(f"제품을 찾을 수 없음: crawled_id = {crawled_id}")
-            return render(request, 'products/detail.html', {
-                'error': '제품을 찾을 수 없습니다.',
-                'product': None
-            })
-        
-        logger.info(f"제품 정보: {product}")
-        
-        # 간단한 테스트를 위해 기본 HTML 응답도 시도
-        if request.GET.get('debug') == '1':
-            return HttpResponse(f"""
-            <html>
-            <body>
-                <h1>디버그 모드</h1>
-                <p>제품 ID: {crawled_id}</p>
-                <p>제품명: {product.get('name', 'N/A')}</p>
-                <p>브랜드: {product.get('brand', 'N/A')}</p>
-                <p>가격: {product.get('price', 'N/A')}</p>
-                <p>URL: {product.get('url', 'N/A')}</p>
-                <a href="/products/detail/{crawled_id}/">상세 페이지로</a>
-            </body>
-            </html>
-            """)
-        
-        # 해당 제품의 리뷰 정보 가져오기
+        print('...',crawled_id)
+        product_id = product['id']
+        # 모든 리뷰
+        all_reviews = ProductRating.objects.filter(product_id=crawled_id).order_by('-created_at')
+        # 유저 리뷰
         from moodico.users.utils import get_user_from_request
         user = get_user_from_request(request)
-        
-        # 제품 ID로 리뷰 찾기 (crawled_id 사용)
-        user_review = None
         if user:
-            try:
-                user_review = ProductRating.objects.get(
-                    user=user,
-                    product_id=crawled_id
-                )
-            except ProductRating.DoesNotExist:
-                pass
-        
-        # 제품의 모든 리뷰 가져오기
-        all_reviews = ProductRating.objects.filter(product_id=crawled_id).order_by('-created_at')
-        
-        # 평균 별점과 평가 개수 계산
-        total_ratings = all_reviews.count()
-        if total_ratings > 0:
-            total_score = sum(review.rating for review in all_reviews)
-            average_rating = round(total_score / total_ratings, 1)
+            user_review = all_reviews.filter(user=user).first()
         else:
-            average_rating = 0.0
+            user_review = None
+        # ratings 총수
+        total_ratings = all_reviews.count()
+        # average ratings 총수 
+        from django.db.models import Avg
+        average_rating = all_reviews.aggregate(avg=Avg('rating')).get('avg') or 0
+        average_rating = round(average_rating, 2)
+
+        # if not product:
+        #     return render(request, 'products/detail.html', {
+        #         'error': '제품을 찾을 수 없습니다.',
+        #         'product': None
+        #     })
         
+        # # 해당 제품의 리뷰 정보 가져오기
+        # from moodico.users.utils import get_user_from_request
+        # user = get_user_from_request(request)
+        
+        # # 제품 ID로 리뷰 찾기 (crawled_id 사용)
+        # user_review = None
+        # print('..',ProductRating.objects.all())
+        # if user:
+        #     try:
+        #         user_review = ProductRating.objects.get(
+        #             user=user,
+        #             product_id=crawled_id
+        #         )
+        #     except ProductRating.DoesNotExist:
+        #         pass
+        
+        # # 제품의 모든 리뷰 가져오기
+        # # [<ProductRating: zin - 롬앤 더 쥬시 래스팅 틴트 / 02 누카다미아 (4점)>]>
+        # all_reviews = ProductRating.objects.filter(product_id=crawled_id).order_by('-created_at')
+        
+        # # 평균 별점과 평가 개수 계산
+        # total_ratings = all_reviews.count()
+        # if total_ratings > 0:
+        #     total_score = sum(review.rating for review in all_reviews)
+        #     average_rating = round(total_score / total_ratings, 1)
+        # else:
+        #     average_rating = 0.0
         context = {
             'product': product,
             'user_review': user_review,
@@ -652,19 +643,14 @@ def get_multiple_products_like_info(request):
         }, status=500)
 
 
-def get_top_liked_products(limit=10, include_unliked=True, exclude_brands=None):
+def get_top_liked_products(limit=10, include_unliked=True):
     """
     상위 찜 제품 조회 함수
     - include_unliked: True면 좋아요 없는 제품도 포함
-    - exclude_brands: set/list로 제외할 브랜드명 지정
     """
     import json
     import os
     from django.conf import settings
-    from django.db.models import Count
-    from collections import defaultdict
-
-    exclude_brands = set(exclude_brands or [])
 
     # 전체 제품 데이터 로드
     json_path = os.path.join(settings.BASE_DIR, 'static', 'data', 'all_products.json')
@@ -672,54 +658,42 @@ def get_top_liked_products(limit=10, include_unliked=True, exclude_brands=None):
         with open(json_path, 'r', encoding='utf-8') as f:
             all_products = json.load(f)
     except FileNotFoundError:
-        logger.error("all_products.json 파일을 찾을 수 없습니다.")
+        print("all_products.json 파일을 찾을 수 없습니다.")
         return []
 
-    # 1) 찜 개수 집계
+    # id로 빠른 접근을 위해 dict로 변환
+    all_products_by_id = {str(p["id"]): p for p in all_products if "id" in p and p["id"]}
+
+    # 1) 찜 개수 집계 (id 기준)
     product_likes_summary = {}
     for item in ProductLike.objects.all():
-        key = f"{item.product_brand}_{item.product_name}"
-        if item.product_brand in exclude_brands:
-            continue  # 지정한 브랜드 제외
-
-        if key not in product_likes_summary:
-            product_likes_summary[key] = {
-                'product_id': str(item.product_id),  # 항상 문자열로
-                'product_name': item.product_name,
-                'product_brand': item.product_brand,
-                'product_price': item.product_price,
-                'product_image': item.product_image,
-                'like_count': 0
-            }
-        product_likes_summary[key]['like_count'] += 1
+        pid = str(item.product_id)
+        if pid in all_products_by_id:  # only include products with real id from all_products.json
+            if pid not in product_likes_summary:
+                product = all_products_by_id[pid]
+                product_likes_summary[pid] = {
+                    'product_id': pid,
+                    'product_name': product.get("name", ""),
+                    'product_brand': product.get("brand", ""),
+                    'product_price': product.get("price", ""),
+                    'product_image': product.get("image", ""),
+                    'like_count': 0
+                }
+            product_likes_summary[pid]['like_count'] += 1
 
     products_with_likes = list(product_likes_summary.values())
 
-    # 2) 좋아요 없는 제품 추가 (옵션)
+    # 2) 좋아요 없는 모든 제품 포함 (옵션)
     if include_unliked:
-        existing_product_keys = set(f"{p['product_brand']}_{p['product_name']}" 
-                                    for p in product_likes_summary.values())
-
-        for product in all_products:
-            product_brand = product.get('brand', '')
-            product_name = product.get('name', '')
-            if product_brand in exclude_brands or not product_name:
-                continue
-
-            product_key = f"{product_brand}_{product_name}"
-            if product_key not in existing_product_keys:
-                # id 필드 없으면 고유 UUID 생성 or 건너뛰기
-                pid = product.get('id')
-                if not pid:
-                    import uuid
-                    pid = str(uuid.uuid4())
-
+        liked_ids = set(product_likes_summary.keys())
+        for pid, product in all_products_by_id.items():
+            if pid not in liked_ids:
                 products_with_likes.append({
-                    'product_id': str(pid),
-                    'product_name': product_name,
-                    'product_brand': product_brand,
-                    'product_price': product.get('price', ''),
-                    'product_image': product.get('image', ''),
+                    'product_id': pid,
+                    'product_name': product.get("name", ""),
+                    'product_brand': product.get("brand", ""),
+                    'product_price': product.get("price", ""),
+                    'product_image': product.get("image", ""),
                     'like_count': 0
                 })
 
@@ -753,6 +727,7 @@ def product_ranking_page(request):
     """제품 랭킹 페이지 뷰"""
     try:
         top_products = get_top_liked_products(10)
+        print("....",top_products)
         
         return render(request, 'products/product_ranking.html', {
             'top_products': top_products
