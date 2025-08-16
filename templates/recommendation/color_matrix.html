@@ -1,35 +1,5 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/recommendation/color_matrix_style.css' %}" />
-<style>
-  .like-filter-toggle {
-    margin: 15px;
-    display: flex;
-    align-items: center;
-  }
-
-  .toggle-checkbox {
-    display: none; /* 실제 체크박스는 숨김 */
-  }
-
-  .toggle-label {
-    cursor: pointer;
-    background-color: #ccc;
-    padding: 8px 15px;
-    border-radius: 20px;
-    position: relative;
-    transition: background-color 0.3s;
-  }
-
-  .toggle-label .toggle-text {
-    font-size: 14px;
-    color: white;
-  }
-
-  /* 체크됐을 때 스타일 */
-  .toggle-checkbox:checked + .toggle-label {
-    background-color: #8A2BE2; /* 보라색 계열 */
-  }
-</style>
 {% endblock %} {% block content %}
 <div class="matrix-wrapper">
   <div class="matrix-selector">
