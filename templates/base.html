@@ -1,38 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moodico"</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block extra_head %}{% endblock %}
-  </head>
-  <body>
-    <header>
-      <nav>
-        <a href="{% url 'main' %}" class="logo" style="text-decoration: none"
-          >Moodico"</a
-        >
-        <div class="nav-links">
-          <a
-            href="{% url 'liked_products' %}"
-            class="nav-link liked-products-link"
-          >
-            💖 찜한 아이템
-          </a>
-          <a href="{% url 'login' %}" class="login-icon">👤 마이페이지 </a>
-        </div>
-      </nav>
-    </header>
 
-    <main>{% block content %} {% endblock %}</main>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moodico"</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <style>
+    body {
+      cursor: url("{% static 'images/purple_cursor.svg' %}"),
+      auto;
+    }
+  </style>
+  {% block extra_head %}{% endblock %}
+</head>
 
-    <footer>
-      <p>&copy; 2025 Moodico" All rights reserved.</p>
-    </footer>
-    <script src="{% static 'js/main/main.js' %}"></script>
-    <script src="{% static 'js/products/like_button.js' %}"></script>
-    {% block extra_js %}{% endblock %}
-  </body>
+<body>
+  <header>
+    <nav>
+      <a href="{% url 'main' %}" class="logo" style="text-decoration: none">Moodico"</a>
+      <div class="nav-links">
+        <a href="{% url 'liked_products' %}" class="nav-link liked-products-link">
+          💖 찜한 아이템
+        </a>
+        <a href="{% url 'login' %}" class="login-icon">👤 마이페이지 </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>{% block content %} {% endblock %}</main>
+
+  <footer>
+    <p>&copy; 2025 Moodico" All rights reserved.</p>
+  </footer>
+  <script src="{% static 'js/main/main.js' %}"></script>
+  <script src="{% static 'js/products/like_button.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+
 </html>

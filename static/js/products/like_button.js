@@ -457,20 +457,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         return observer;
     }
-    // 랭킹페이지에서 제품 디테일 페이지로 이동하는거
-    const rankingGrid = document.querySelector('.ranking-grid');
-    if (rankingGrid) {
-        rankingGrid.addEventListener('click', function (e) {
-            const rankingCard = e.target.closest('.ranking-card');
-
-            if (rankingCard) {
-                const productId = rankingCard.dataset.productId;
-                if (productId) {
-                    window.open(`/products/detail/${productId}/`, '_blank');
-                }
-            }
-        });
-    }
+    
 
     // CSS 애니메이션 추가
     const style = document.createElement('style');
