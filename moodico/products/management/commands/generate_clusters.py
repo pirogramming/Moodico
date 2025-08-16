@@ -10,8 +10,6 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
 
-
-# -------- helpers (kept as in your script) --------
 def hex_to_rgb(hex_code):
     h = hex_code.lstrip('#')
     if len(h) == 3:

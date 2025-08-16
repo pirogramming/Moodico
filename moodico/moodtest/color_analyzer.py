@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 def product_result_by_mood(mood):
     try:
         mood_zones_path = 'static/data/mood_zones.json'
-        products_path = 'static/data/all_products_hex_update_tempk=4_2_1_1.json'
+        products_path = 'static/data/all_products.json'
 
         with open(mood_zones_path, 'r', encoding='utf-8') as f:
             mood_zones = json.load(f)
