@@ -219,3 +219,8 @@
       font-size: 1.5em;
     }
   }
+
+.image-box.image-preview {
+  width: 22%;
+  height: 150px;
+}
