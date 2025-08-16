@@ -15,128 +15,538 @@
     margin-bottom: 50px;
 }
 
-.exploration-models {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    width: 70%;
-}
-
-.exploration-models .model-card {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.exploration-models.is-visible .model-card {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.exploration-models.is-visible .model-card:nth-child(1) {
-    transition-delay: 0.1s;
-}
-
-.exploration-models.is-visible .model-card:nth-child(2) {
-    transition-delay: 0.2s;
-}
-
-.exploration-models.is-visible .model-card:nth-child(3) {
-    transition-delay: 0.3s;
-}
-
-.model-card {
-    background-color: #fff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 30px;
+/* 퍼스널 컬러 배너 스타일 */
+.personal-color-banner {
+    background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #fff8e1 100%);
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 1050px;
     width: 90%;
-    max-width: 800px;
-    text-align: left;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.model-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+.banner-content h2 {
+    color: #e91e63;
+    font-size: 2.2em;
+    margin-bottom: 15px;
+    font-weight: 700;
 }
 
-.model-card .icon-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 30%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
+.banner-content p {
+    color: #9c27b0;
+    font-size: 1.1em;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #e91e63, #9c27b0);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+    text-decoration: none;
     color: white;
 }
 
-.model-card.item-based {
-    background-color: #fae6e6;
+/* 주요 기능 섹션 스타일 */
+.main-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 50px;
 }
 
-.model-card.mood-test {
-    background-color: #eadef8;
+.feature-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
 }
 
-.model-card.color-matrix {
-    background-color: #faf6d1;
-
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
 }
 
-.model-card.item-based .icon-circle {
-    background-color: #fdcad4;
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.model-card.mood-test .icon-circle {
-    background-color: #e0ceff;
-}
-
-.model-card.color-matrix .icon-circle {
-    background-color: #fdead2;
-}
-
-.model-card-content {
-    flex-grow: 1;
-}
-
-.model-card-content h3 {
-    font-size: 1.5em;
+.card-header h3 {
     color: #333;
-    margin-bottom: 10px;
+    font-size: 1.8em;
+    margin-bottom: 8px;
+    font-weight: 600;
+    margin-top: 5px;
 }
 
-.model-card-content p {
-    font-size: 1em;
-    color: #777;
-    margin-bottom: 0;
+.card-header p {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+/* 추천 상품 카드 */
+.recommendation-card {
+    background: linear-gradient(135deg, #fff5f7 0%, #fff 100%);
+}
+
+/* 내 아이템 기반 검색 카드 */
+.item-search-card {
+    background: linear-gradient(135deg, #f0f8ff 0%, #fff 100%);
+}
+
+.search-preview {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+}
+
+.search-image {
+    width: 50px;
+    height: 50px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.search-info h4 {
+    color: #1976d2;
+    font-size: 1.2em;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.search-info p {
+    color: #666;
+    font-size: 0.9em;
+    margin: 0;
     line-height: 1.4;
 }
 
-.model-card .arrow-icon {
-    font-size: 1.8em;
-    color: #ccc;
+.product-preview {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    margin-bottom: 20px;
+    padding-left: 30px;
 }
 
-a.model-card {
+.product-image {
+    width: 150px;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-info h4 {
+    color: #333;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.product-info p {
+    color: #666;
+    font-size: 0.85em;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 무드 테스트 카드 */
+.mood-test-card {
+    background: linear-gradient(135deg, #f8f4ff 0%, #fff 100%);
+}
+
+.mood-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mood-option {
+    background: #f3e5f5;
+    border: 2px solid #e1bee7;
+    border-radius: 20px;
+    padding: 8px 12px;
+    color: #7b1fa2;
+    font-size: 0.85em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mood-option:hover {
+    background: #e1bee7;
+    transform: scale(1.05);
+}
+
+/* 색상 매트릭스 카드 */
+.color-matrix-card {
+    background: linear-gradient(135deg, #fffbf0 0%, #fff 100%);
+}
+
+.matrix-preview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.mini-color-matrix {
+    position: relative;
+    width: 500px;
+    height: 350px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+}
+
+.quadrant-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+}
+
+.quadrant {
+    position: relative;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.quadrant.top-left {
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+}
+
+.quadrant.top-right {
+    background: linear-gradient(135deg, #fff8f0 0%, #fff0e6 100%);
+}
+
+.quadrant.bottom-left {
+    background: linear-gradient(135deg, #f0f0ff 0%, #e6e6ff 100%);
+}
+
+.quadrant.bottom-right {
+    background: linear-gradient(135deg, #fff0f0 0%, #ffe6e6 100%);
+}
+
+.quadrant-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.quadrant-label {
+    font-size: 0.7em;
+    color: #666;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.color-dots {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.axis-labels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.axis-label {
+    position: absolute;
+    font-size: 0.75em;
+    color: #888;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 2px 6px;
+    border-radius: 10px;
+    border: 1px solid #eee;
+}
+
+.axis-label.top {
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.axis-label.bottom {
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.axis-label.left {
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: center;
+}
+
+.axis-label.right {
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+}
+
+/* 컬러 투표 카드 */
+.voting-card {
+    background: linear-gradient(135deg, #f0f8ff 0%, #fff 100%);
+    position: relative;
+    grid-column: 1 / -1; /* 전체 너비 사용 */
+}
+
+.voting-products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.vote-product-card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.vote-product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: #2196f3;
+}
+
+.vote-product-card.selected {
+    border-color: #ff6b9d;
+    background: linear-gradient(135deg, #fff5f7 0%, #fff 100%);
+}
+
+.product-vote-image {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.product-vote-image img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.vote-overlay {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    color: #e91e63;
+    font-weight: 600;
+}
+
+.product-vote-info h4 {
+    color: #333;
+    font-size: 0.9em;
+    margin-bottom: 4px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.product-vote-info p {
+    color: #666;
+    font-size: 0.8em;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.vote-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff6b9d, #4ecdc4);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.vote-percentage {
+    color: #333;
+    font-size: 0.8em;
+    font-weight: 700;
+    min-width: 30px;
+    text-align: right;
+}
+
+.voting-stats {
+    text-align: center;
+    padding: 15px;
+    background: rgba(33, 150, 243, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(33, 150, 243, 0.1);
+}
+
+.voting-stats p {
+    color: #666;
+    font-size: 0.85em;
+    margin: 0;
+    font-weight: 500;
+}
+
+.voting-stats strong {
+    color: #2196f3;
+}
+
+/* 투표 메시지 스타일 */
+.vote-message {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-size: 0.9em;
+    font-weight: 600;
+    z-index: 10;
+    animation: slideDown 0.3s ease-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.vote-message-success {
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+}
+
+.vote-message-warning {
+    background: linear-gradient(135deg, #ff9800, #f57c00);
+    color: white;
+}
+
+.vote-message-info {
+    background: linear-gradient(135deg, #2196f3, #1976d2);
+    color: white;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.no-voting-products {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    border: 2px dashed #ddd;
+}
+
+.no-voting-products p {
+    font-size: 1em;
+    margin: 0;
+    font-weight: 500;
+}
+
+.card-action {
+    display: block;
+    text-align: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 20px;
     text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
 }
 
+.card-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    text-decoration: none;
+    color: white;
+}
 
 /* 메인페이지 랭킹 섹션 */
 .ranking-section {
-    margin-top: 60px;
+    margin-top: 10px;
     padding: 50px 0;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    width: 1200px;
 }
 
 .ranking-section .section-header {
@@ -327,7 +737,26 @@ a.model-card {
     margin: 0;
 }
 
+/* 반응형 디자인 */
 @media (max-width: 768px) {
+    .main-features {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .mood-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .color-grid {
+        width: 100px;
+    }
+    
+    .color-cell {
+        width: 30px;
+        height: 30px;
+    }
+
     .ranking-section {
         margin-top: 40px;
         padding: 30px 0;
