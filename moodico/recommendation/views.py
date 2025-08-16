@@ -8,13 +8,53 @@ logger = logging.getLogger(__name__)
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Create your views here.
+# def my_item_recommendation(request):
+#     # Get recommended or default products
+#     search_results = get_top_liked_products(limit=10)
+#     recommended_items = []  # Set this if you want a separate recommended section
+#     print("....",search_results)
+
+#     return render(
+#         request,
+#         'upload/upload.html',
+#         {
+#             'search_results': search_results,
+#             'recommended_items': recommended_items
+#         }
+#     )
+
+def get_recommendation_list():
+        # JSON 데이터를 파싱 (실제로는 DB나 API에서 받아올 수 있음)
+    products_path = 'static/data/advertise_products.json'
+    with open(products_path, 'r', encoding='utf-8') as f:
+        raw_data = json.load(f)
+
+    # 태그 추출 규칙 예시 (첫번째 flag 사용 or None)
+    def get_tag(flags):
+        for tag in ['글로시', 'matte', 'glossy', '증정', '세일', '쿠폰', '오늘드림']:
+            if tag in flags:
+                return tag
+        return flags[0] if flags else '-'
+
+    search_results = [
+        {
+            "brand": item["brand_name"],
+            "name": item["product_name"],
+            "image": item["image_src"],
+            "price": item["price_original"].replace("~", ""),
+            "tag": get_tag(item.get("flags", [])),
+            "url": item["product_url"],
+        }
+        for item in raw_data
+    ]
+    return search_results
 
 def my_item_recommendation(request):
-    """내 아이템 기반 추천 페이지 뷰"""
-    # 백엔드 연동을 위해 임시로 빈 리스트 전달
-    recommended_items = []
-    search_results = []
-    return render(request, 'upload/upload.html', {'search_results': search_results, 'recommended_items': recommended_items})
+    search_results = get_recommendation_list()
+    return render(request, 'upload/upload.html', {
+        "search_results": search_results
+    })
+
 
 @csrf_exempt
 def recommend_by_color(request):
@@ -34,11 +74,18 @@ def recommend_by_color(request):
 
         coord = np.array([warm, deep, lab_l, lab_a, lab_b])
         logger.info(f"Received coordinates: warmCool={warm}, lightDeep={deep}, lab_l={lab_l}, lab_a={lab_a}, lab_b={lab_b}")
-
-        with open("static/data/cluster_centers_new.json", "r") as f:
+        import os
+        from django.conf import settings
+        with open("static/data/cluster_centers.json", "r") as f:
             centers = json.load(f)
-        with open("static/data/products_clustered_new.json", "r", encoding="utf-8") as f:
+        # path = os.path.join(settings.MEDIA_ROOT, 'data', 'cluster_centers.json')
+        # with open(path, "r", encoding="utf-8") as f:
+        #     centers = json.load(f)
+        with open("static/data/products_clustered.json", "r", encoding="utf-8") as f:
             products = json.load(f)
+        # path = os.path.join(settings.MEDIA_ROOT, 'data', 'products_clustered.json')
+        # with open(path, "r", encoding="utf-8") as f:
+        #     products = json.load(f)
 
         # Step 1: Find closest cluster
         cluster_idx = np.argmin([np.linalg.norm(coord - np.array(c)) for c in centers])

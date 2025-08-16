@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config, Csv
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,13 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f+2cp%8dmctmuc-8#8@t)7zkd!=#smii5e+tv&eb-0g$970fkd'
+if os.getenv('GITHUB_ACTIONS') == 'true':  # running in GitHub Actions
+    SECRET_KEY = config('DJANGO_SECRET_KEY', default='insecure-ci-only-secret')
+else:  # production or local dev
+    SECRET_KEY = config('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+CSRF_TRUSTED_ORIGINS = config(
+    'DJANGO_CSRF_TRUSTED_ORIGINS',
+    default='http://localhost:8000,http://127.0.0.1:8000',
+    cast=Csv()
+)
 
 # Application definition
 
@@ -44,7 +53,6 @@ INSTALLED_APPS = [
     'moodico.products', # 제품 관련 앱
     'moodico.moodtest', # 무드 테스트 앱
     'moodico.users', # 유저 앱
-    'storages'
 ]
 
 MIDDLEWARE = [
@@ -141,31 +149,56 @@ MEDIA_URL = '/media/'  # NCP에 저장될 예정 -> 사용되지 않음
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') # NCP에 저장될 예정 -> 사용되지 않음
 
 
+# # NCP Object Storage setting(S3)
+# # dummy key is for github actions
+# # AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID", default="dummy-key")
+# # AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY", default="dummy-key")
+# # AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME",default="dummy-key")
+# AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
+# AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
+# AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 
-###############
-# NCP Object Storage setting(S3)
+# AWS_S3_REGION_NAME = "kr-standard"
+# AWS_S3_ENDPOINT_URL = "https://kr.object.ncloudstorage.com"
+# AWS_S3_SIGNATURE_VERSION = "s3v4"
+# AWS_S3_ADDRESSING_STYLE = "virtual"
+# AWS_DEFAULT_ACL = None
+# AWS_QUERYSTRING_AUTH = False
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# INSTALLED_APPS += ["storages"]
 
-
-AWS_STORAGE_BUCKET_NAME = ''# 추후 버킷 명 기입
-AWS_S3_ENDPOINT_URL = 'https://kr.object.ncloudstorage.com'
-AWS_S3_REGION_NAME = 'kr-standard' # 추후 정확한 region명 확인 후 기입 필요 
-
-AWS_ACCESS_KEY_ID = os.environ.get('NCP_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.environ.get('NCP_SECRET_ACCESS_KEY', '')
-
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-
+# STORAGES = {
+#     "default": {
+#         "BACKEND": "storages.backends.s3.S3Storage",
+#         "OPTIONS": {
+#             "bucket_name": AWS_STORAGE_BUCKET_NAME,
+#             "region_name": AWS_S3_REGION_NAME,
+#             "endpoint_url": AWS_S3_ENDPOINT_URL,
+#             "signature_version": AWS_S3_SIGNATURE_VERSION,
+#             "addressing_style": AWS_S3_ADDRESSING_STYLE,
+#         },
+#     },
+#     "staticfiles": {
+#         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+#     },
+# }
 
 # 카카오 로그인 설정
-KAKAO_REDIRECT_URI = "http://localhost:8000/users/kakao/callback/"
 KAKAO_AUTH_HOST = "https://kauth.kakao.com"
 KAKAO_API_HOST = "https://kapi.kakao.com"
-from decouple import config
-KAKAO_CLIENT_ID = config("KAKAO_CLIENT_ID")
-KAKAO_CLIENT_SECRET = config("KAKAO_CLIENT_SECRET")
+IS_TEST = 'test' in sys.argv
+KAKAO_REDIRECT_URI = config(
+    "KAKAO_REDIRECT_URI",
+    default="http://localhost:8000/users/kakao/callback/"
+)
+KAKAO_CLIENT_ID = config(
+    "KAKAO_CLIENT_ID",
+    default="dummy" if IS_TEST else None  # None => raise if missing
+)
+KAKAO_CLIENT_SECRET = config(
+    "KAKAO_CLIENT_SECRET",
+    default="dummy" if IS_TEST else None
+)
 
 # 로그인 로그아웃 후 리다이렉트 URL 설정
 LOGIN_REDIRECT_URL = "/"
