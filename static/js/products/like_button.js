@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     showLikeMessage('로그인이 필요합니다.');
                     // 로그인 페이지로 리다이렉트 옵션
                     setTimeout(() => {
-                        window.location.href = '/login/';
+                        window.location.href = '/';
                     }, 2000);
                 } else {
                     showLikeMessage(data.message || '오류가 발생했습니다.');
