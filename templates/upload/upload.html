@@ -125,8 +125,7 @@
   <div class="recommendations-section">
     <h3>추천 제품</h3>
     <div class="product-list">
-      {% if search_results %} 
-        {% for product in search_results %}
+      {% for product in search_results %}
         {% comment %} <div
           class="product-card"
           data-product-id="{{ product.brand|slugify }}-{{ product.name|slugify }}-{{ product.price|slugify }}-search{{ forloop.counter }}"
@@ -149,91 +148,7 @@
             ✨ 추천받기
           </button>
         </div>
-        {% endfor %} 
-      {% else %}
-      <div
-        class="product-card"
-        data-product-id="peripera-glow-check-blusher-18000"
-      >
-        <button class="like-button" title="좋아요"></button>
-        <span class="like-count">0</span>
-        <img
-          src="/static/images/test.jpg"
-          alt="페리페라 글로우 체크 블러셔"
-        />
-        <div class="product-info">
-          <div class="brand">PERIPERA <span class="tag">glossy</span></div>
-          <div class="name">글로우 체크 블러셔</div>
-          <div class="price">18,000원</div>
-        </div>
-        <button class="recommendation-button">✨ 추천받기</button>
-      </div>
-      <div
-        class="product-card"
-        data-product-id="etude-house-coating-tint-lip-12000"
-      >
-        <button class="like-button" title="좋아요"></button>
-        <span class="like-count">0</span>
-        <img
-          src="{% static 'images/test.jpg' %}"
-          alt="에뛰드하우스 코팅 틴트 립"
-        />
-        <div class="product-info">
-          <div class="brand">ETUDE HOUSE <span class="tag">glossy</span></div>
-          <div class="name">코팅 틴트 립</div>
-          <div class="price">12,000원</div>
-        </div>
-        <button class="recommendation-button">✨ 추천받기</button>
-      </div>
-      <div
-        class="product-card"
-        data-product-id="innisfree-natural-eyeshadow-22000"
-      >
-        <button class="like-button" title="좋아요"></button>
-        <span class="like-count">0</span>
-        <img
-          src="{% static 'images/test.jpg' %}"
-          alt="이니스프리 내추럴 아이쉐도우"
-        />
-        <div class="product-info">
-          <div class="brand">INNISFREE <span class="tag">matte</span></div>
-          <div class="name">내추럴 아이쉐도우</div>
-          <div class="price">22,000원</div>
-        </div>
-        <button class="recommendation-button">✨ 추천받기</button>
-      </div>
-      <div class="product-card" data-product-id="clio-earth-on-eyeshadow-32000">
-        <button class="like-button" title="좋아요"></button>
-        <span class="like-count">0</span>
-        <img
-          src="{% static 'images/test.jpg' %}"
-          alt="클리오 어스 온 아이쉐도우"
-        />
-        <div class="product-info">
-          <div class="brand">CLIO <span class="tag">matte</span></div>
-          <div class="name">어스 온 아이쉐도우</div>
-          <div class="price">32,000원</div>
-        </div>
-        <button class="recommendation-button">✨ 추천받기</button>
-      </div>
-      <div
-        class="product-card"
-        data-product-id="romand-beige-matte-lipstick-15000"
-      >
-        <button class="like-button" title="좋아요"></button>
-        <span class="like-count">0</span>
-        <img
-          src="{% static 'images/test.jpg' %}"
-          alt="롬앤 베이지 매트 립스틱"
-        />
-        <div class="product-info">
-          <div class="brand">ROMAND <span class="tag">matte</span></div>
-          <div class="name">베이지 매트 립스틱</div>
-          <div class="price">15,000원</div>
-        </div>
-        <button class="recommendation-button">✨ 추천받기</button>
-      </div>
-      {% endif %}
+      {% endfor %} 
     </div>
   </div> 
 </div>

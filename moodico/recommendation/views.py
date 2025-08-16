@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 import logging
 logger = logging.getLogger(__name__)
 from sklearn.metrics.pairwise import cosine_similarity
-from moodico.products.views import get_top_liked_products
 
 # Create your views here.
 # def my_item_recommendation(request):
@@ -24,9 +23,8 @@ from moodico.products.views import get_top_liked_products
 #         }
 #     )
 
-
-def my_item_recommendation(request):
-    # JSON 데이터를 파싱 (실제로는 DB나 API에서 받아올 수 있음)
+def get_recommendation_list():
+        # JSON 데이터를 파싱 (실제로는 DB나 API에서 받아올 수 있음)
     products_path = 'static/data/advertise_products.json'
     with open(products_path, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)
@@ -49,7 +47,10 @@ def my_item_recommendation(request):
         }
         for item in raw_data
     ]
+    return search_results
 
+def my_item_recommendation(request):
+    search_results = get_recommendation_list()
     return render(request, 'upload/upload.html', {
         "search_results": search_results
     })
