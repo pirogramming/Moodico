@@ -188,14 +188,16 @@
         <p>가장 인기있는 컬러는?</p>
       </div>
       <div class="voting-products">
-        {% for product in voting_data %}
+        {% for product in voting_data.values %}
         <div
           class="vote-product-card"
           data-product-id="{{ product.product_id }}"
+          data-votes="{{ product.votes }}"
+          data-like_count="{{ product.like_count }}"
         >
           <div class="product-vote-image">
             <img
-              src="{{ product.product_image|default:'/static/images/test.jpg' }}"
+              src="{{ product.image_url|default:'/static/images/test.jpg' }}"
               alt="{{ product.product_name }}"
               onerror="this.src='/static/images/test.jpg'"
             />
@@ -278,8 +280,8 @@
     </div>
   </div>
 </div>
-
+{% endblock %}
+{% block extra_js %}
 <!-- JavaScript 파일 로드 -->
 <script src="{% static 'js/main/main.js' %}"></script>
-
 {% endblock %}

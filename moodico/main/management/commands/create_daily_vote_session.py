@@ -1,14 +1,13 @@
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 from django.db import transaction
-
-from main.models import Product, VotingSession
-from moodico.products.views import get_top_liked_products
+from moodico.main.models import RankedProduct, VotingSession
+from moodico.products.utils import get_top_liked_products
 
 # 매일 자정, 현재의 랭킹 최상위 두 개 제품으로 투표 세션을 생성하는 함수
 class Command(BaseCommand):
 
-    def make_vote_session(self, *args, **options):
+    def handle(self, *args, **options):
         self.stdout.write(f"[{timezone.now()}] 투표 세션 생성 시작")
 
         active_sessions = VotingSession.objects.filter(is_active=True)
@@ -23,8 +22,8 @@ class Command(BaseCommand):
             return
 
         # 가져온 데이터로 Product 객체 생성 및 업데이트
-        product1, created1 = Product.objects.update_or_create(
-            source_id=ranked1_data["product_id"],
+        product1, created1 = RankedProduct.objects.update_or_create(
+            product_id=ranked1_data["product_id"],
             defaults={
                 'name': ranked1_data["product_name"],
                 'brand': ranked1_data["product_brand"],
@@ -36,8 +35,8 @@ class Command(BaseCommand):
         if created1:
             self.stdout.write(f"새로운 제품 '{product1.name}'이 랭킹 1위로 투표 대상 객체가 생성")
         
-        product2, created2 = Product.objects.update_or_create(
-            source_id=ranked2_data["product_id"],
+        product2, created2 = RankedProduct.objects.update_or_create(
+            product_id=ranked2_data["product_id"],
             defaults={
                 'name': ranked2_data["product_name"],
                 'brand': ranked2_data["product_brand"],

@@ -47,28 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // }
     
     // 투표 데이터 초기화
-    // let voteData = {};
-    // let totalVoteCount = voting_object.product1_votes + voting_object.product2_votes;
-    // let hasVoted = false;
-    // let currentSelectedId = null; // 현재 선택된 카드
-    
-    // voteCards.forEach((card) => {
-    //     const productId = card.dataset.productId;
-    //     const likeCount = parseInt(card.querySelector('.vote-count').textContent.match(/\d+/)[0]);
-        
-    //     console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
-        
-    //     voteData[productId] = { 
-    //         likes: likeCount,
-    //         votes: 0,
-    //         percentage: 0
-    //     };
-    // });
+    let voteData = {};
+    let totalVoteCount = 0;
+    let hasVoted = false;
+    let currentSelectedId = null; // 현재 선택된 카드
 
     voteCards.forEach((card) => {
         const productId = card.dataset.productId;
-        const likeCount = card.dataset.like_count;
-        const productVotes = card.dataset.votes;
+        const likeCount = parseInt(card.dataset.like_count, 10) || 0;
+        const productVotes = parseInt(card.dataset.votes, 10) || 0;
         
         console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
         
@@ -77,10 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
             votes: productVotes,
             percentage: 0
         };
+        totalVoteCount += productVotes;
     });
     
     // console.log('투표 시작 - 모든 제품 0표');
-    // updateVoteResults();
+    updateVoteResults();
     
     // 이벤트 리스너 (다시 누르면 취소 / 다른 카드 선택하면 이전 해제 후 이동)
     voteCards.forEach(card => {

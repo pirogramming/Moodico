@@ -6,7 +6,7 @@ class RankedProduct(models.Model):
     product_id = models.CharField(max_length=100, unique=True, db_index=True) # 제품 id
     name = models.CharField(max_length=200)
     brand = models.CharField(max_length=100)
-    price = models.PositiveIntegerField(default=0)
+    price = models.CharField(max_length=100, verbose_name="가격")
     image_url = models.CharField(max_length=500)
     like_count = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
