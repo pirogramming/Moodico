@@ -17,14 +17,6 @@
     margin-bottom: 50px;
 }
 
-.main-card-container {
-
-    gap: 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-    align-items: start;
-}
-
 /* 퍼스널 컬러 배너 스타일 */
 .personal-color-banner {
     background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #fff8e1 100%);
@@ -859,8 +851,8 @@
     --pc-radius: 16px;
     --pc-radius-lg: 22px;
   }
-  .pc-section { padding: 40px 0; }
-  .pc-container { max-width: 100%; margin: 0; padding: 0; }
+  .pc-section { padding: 64px 0; }
+  .pc-container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
   .pc-title-xl { font-size: clamp(28px,3.6vw,40px); line-height: 1.15; margin: 6px 0 12px; }
   .pc-subtitle { color: var(--pc-muted); font-size: clamp(15px,1.9vw,18px); }
   .pc-eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #472ec7; }
@@ -877,12 +869,9 @@
     border: 1px solid var(--pc-line);
     border-radius: var(--pc-radius-lg);
     box-shadow: var(--pc-shadow);
-    padding: clamp(20px,3vw,30px);
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: clamp(20px,3vw,30px);
+    padding: clamp(20px,4vw,42px);
+    display: grid; grid-template-columns: 1.25fr .9fr; gap: clamp(18px,4vw,36px);
     background: #fff;
-    height: fit-content;
   }
   @media (max-width: 900px) { .pc-hero{grid-template-columns:1fr;} }
 
@@ -930,34 +919,9 @@
   .pc-reveal.on { opacity:1; transform: translateY(0); }
 
 /* 반응형 디자인 */
-@media (max-width: 1200px) {
-    .main-card-container {
-        max-width: 100%;
-        gap: 30px;
-        padding: 0 20px;
-    }
-}
-
-@media (max-width: 900px) {
-    .main-card-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .pc-hero {
-        padding: 25px;
-        gap: 25px;
-    }
-}
-
 @media (max-width: 768px) {
     .main-container {
         padding: 20px 15px;
-    }
-    
-    .main-card-container {
-        gap: 25px;
-        padding: 0 15px;
     }
     
     .personal-color-banner {
@@ -979,11 +943,6 @@
 @media (max-width: 480px) {
     .main-container {
         padding: 15px 10px;
-    }
-    
-    .main-card-container {
-        gap: 20px;
-        padding: 0 10px;
     }
     
     .personal-color-banner {
