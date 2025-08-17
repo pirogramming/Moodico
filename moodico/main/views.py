@@ -2,6 +2,7 @@ from django.shortcuts import render
 from moodico.products.views import get_top_liked_products
 from moodico.products.models import ProductLike
 import random
+from .models import RankedProduct, VotingSession
 
 # Create your views here.
 
@@ -48,9 +49,11 @@ def main(request):
                 'is_user_liked': False
             }
     
+    # 오늘의 투표 데이터베이스 전달
+    voting_object = VotingSession.objects.get(user=request.user)
+    
     return render(request, 'main/main.html', {
         'top_liked_products': top_liked_products,
-        'recommended_product': recommended_product
+        'recommended_product': recommended_product,
+        'voting_object': voting_object,
     })
-
-

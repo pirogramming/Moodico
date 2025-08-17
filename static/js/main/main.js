@@ -30,23 +30,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // =============================
     // 컬러 투표 기능
     // =============================
-    console.log('투표 기능 초기화 시작');
     
-    const voteCards = document.querySelectorAll('.vote-product-card');
-    const progressBars = document.querySelectorAll('.progress-fill');
-    const votePercentages = document.querySelectorAll('.vote-percentage');
-    const totalVotes = document.querySelector('.voting-stats strong');
+    // 24시간마다 투표 세션 생성
+    //console.log('투표 기능 초기화 시작');
     
-    console.log('찾은 투표 카드 수:', voteCards.length);
+    // const voteCards = document.querySelectorAll('.vote-product-card');
+    // const progressBars = document.querySelectorAll('.progress-fill');
+    // const votePercentages = document.querySelectorAll('.vote-percentage');
+    // const totalVotes = document.querySelector('.voting-stats strong');
     
-    if (voteCards.length === 0) {
-        console.log('투표 카드가 없습니다.');
-        return;
-    }
+    // console.log('찾은 투표 카드 수:', voteCards.length);
+    
+    // if (voteCards.length === 0) {
+    //     console.log('투표 카드가 없습니다.');
+    //     return;
+    // }
     
     // 투표 데이터 초기화
     let voteData = {};
-    let totalVoteCount = 0;
+    let totalVoteCount = voting_object.product1_votes + voting_object.product2_votes;
     let hasVoted = false;
     let currentSelectedId = null; // 현재 선택된 카드
     

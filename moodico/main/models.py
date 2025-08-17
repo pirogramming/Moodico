@@ -8,7 +8,7 @@ class RankedProduct(models.Model):
     brand = models.CharField(max_length=100)
     price = models.PositiveIntegerField(default=0)
     image_url = models.CharField(max_length=500)
-    like_count = models.PositiveIntegerField(default=0)
+    like_count = models.PositiveIntegerField(default=0) # likecount를 둬야할까?
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
