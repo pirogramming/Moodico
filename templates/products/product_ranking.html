@@ -18,7 +18,7 @@
   <!-- 카테고리 선택 -->
   <div class="category-selector">
     <form method="get">
-      <select name="category" class="category-select" onchange="this.form.submit()">
+      <select name="category" class="category-dropdown" onchange="this.form.submit()">
         <option value="" {% if selected_category == '' %}selected{% endif %}>✨모두 보기</option>
         <option value="Lips" {% if selected_category|lower == 'lips' %}selected{% endif %}>💋 립</option>
         <option value="eyeshadow" {% if selected_category|lower == 'eyeshadow' %}selected{% endif %}>👀 아이섀도우</option>
