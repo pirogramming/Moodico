@@ -345,7 +345,8 @@
 .voting-card {
     background: linear-gradient(135deg, #f0f8ff 0%, #fff 100%);
     position: relative;
-    grid-column: 1 / -1; /* 전체 너비 사용 */
+    grid-column: 1 / -1;
+    /* 전체 너비 사용 */
 }
 
 .voting-products {
@@ -497,6 +498,7 @@
         opacity: 0;
         transform: translateX(-50%) translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
@@ -743,15 +745,15 @@
         grid-template-columns: 1fr;
         gap: 20px;
     }
-    
+
     .mood-options {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .color-grid {
         width: 100px;
     }
-    
+
     .color-cell {
         width: 30px;
         height: 30px;
@@ -780,5 +782,53 @@
     .ranking-item img {
         width: 100px;
         height: 100px;
+    }
+}
+
+.moodico-splash-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.moodico-splash-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.moodico-banner h3,
+.moodico-banner p {
+    color: mediumpurple;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+
+    background: linear-gradient(135deg, mediumpurple, #cf8bf3, #f6d2f3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.moodico-banner h3 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    animation-delay: 0.3s;
+}
+
+.moodico-banner p {
+    font-size: 1.5em;
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
     }
 }
