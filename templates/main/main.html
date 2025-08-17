@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
+<link rel="stylesheet" href="{% static 'css/upload/upload.css' %}" />
 {% endblock%} {% block content %}
 <div class="main-container">
   <div class="moodico-splash-container">
@@ -26,7 +27,34 @@
           </div>
         </div>
         <div>
-          <div class="pc-ring" aria-hidden="true"></div>
+          <div class="matrix-section">
+            <section class="color-matrix-container">
+              <div class="quadrant-grid">
+                <div class="quadrant top-left"></div>
+                <div class="quadrant top-right"></div>
+                <div class="quadrant bottom-left"></div>
+                <div class="quadrant bottom-right"></div>
+              </div>
+      
+              <div class="axis-label top-label">Light</div>
+              <div class="axis-label bottom-label">Deep</div>
+              <div class="axis-label left-label">Cool</div>
+              <div class="axis-label right-label">Warm</div>
+      
+              <div id="makeup-products-container" class="makeup-products-container"></div>
+      
+              <!--유사 무드 제품 추천 구간 표시-->
+              <!--
+              <div id="mood-selection-area" class="mood-selection-area">
+                <span class="mood-label">추천 구간</span>
+                <div class="resizer top-left-resizer"></div>
+                <div class="resizer top-right-resizer"></div>
+                <div class="resizer bottom-left-resizer"></div>
+                <div class="resizer bottom-right-resizer"></div>
+              </div>
+              -->
+            </section>
+          </div>
         </div>
       </div>
     </div>
