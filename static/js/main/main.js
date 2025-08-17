@@ -68,12 +68,13 @@ document.addEventListener('DOMContentLoaded', function() {
     voteCards.forEach((card) => {
         const productId = card.dataset.productId;
         const likeCount = card.dataset.like_count;
+        const productVotes = card.dataset.votes;
         
         console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
         
         voteData[productId] = { 
             likes: likeCount,
-            votes: 0,
+            votes: productVotes,
             percentage: 0
         };
     });
@@ -92,8 +93,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 this.style.transform = '';
                 this.style.boxShadow = '';
 
-                voteData[productId].votes = 0;
-                totalVoteCount = 0;
+                voteData[productId].votes -= 1;
+                totalVoteCount -= 1;
                 hasVoted = false;
                 currentSelectedId = null;
 
@@ -110,14 +111,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     prevCard.style.transform = '';
                     prevCard.style.boxShadow = '';
                 }
-                voteData[currentSelectedId].votes = 0;
+                voteData[currentSelectedId].votes += 1;
             }
 
             // 3) 신규 선택
             this.classList.add('selected');
             currentSelectedId = productId;
-            voteData[productId].votes = 1;
-            totalVoteCount = 1;
+            voteData[productId].votes += 1;
+            totalVoteCount += 1;
             hasVoted = true;
 
             updateVoteResults();
