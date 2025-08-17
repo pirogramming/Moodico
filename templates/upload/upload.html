@@ -109,14 +109,55 @@
   <!-- 동적 추천 제품 영역: 업로드/매트릭스 하단에 배치 -->
   <div class="recommendations-section">
     <h3>mood 기반 추천 제품</h3>
-    <div id="recommendation-box" class="recommendation-box">
-      <div class="wave-loader">
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
+
+    <!-- 카테고리별 추천 제품 슬롯 -->
+    <div class="recommendation-slots">
+      <!-- 립 제품 추천 슬롯 -->
+      <div class="recommendation-slot">
+        <div class="slot-header">
+          <h4>💋 립 제품</h4>
+          <span class="product-count">0개</span>
+        </div>
+        <div
+          id="lip-recommendation-box"
+          class="recommendation-box category-box"
+        >
+          <div class="empty-state">
+            <p>색상을 분석하면 립 제품을 추천해드려요</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 블러셔 제품 추천 슬롯 -->
+      <div class="recommendation-slot">
+        <div class="slot-header">
+          <h4>🌸 블러셔</h4>
+          <span class="product-count">0개</span>
+        </div>
+        <div
+          id="blush-recommendation-box"
+          class="recommendation-box category-box"
+        >
+          <div class="empty-state">
+            <p>색상을 분석하면 블러셔를 추천해드려요</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 아이섀도우 제품 추천 슬롯 -->
+      <div class="recommendation-slot">
+        <div class="slot-header">
+          <h4>👀 아이섀도우</h4>
+          <span class="product-count">0개</span>
+        </div>
+        <div
+          id="eyeshadow-recommendation-box"
+          class="recommendation-box category-box"
+        >
+          <div class="empty-state">
+            <p>색상을 분석하면 아이섀도우를 추천해드려요</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -126,25 +167,25 @@
     <h3>추천 제품</h3>
     <div class="product-list">
       {% for product in search_results %}
-        <div class="product-card">
-          <img src="{{ product.image }}" alt="{{ product.name }}" />
-          <div class="product-info">
-            <div class="brand">
-              {{ product.brand }} <span class="tag">{{ product.tag }}</span>
-            </div>
-            <div class="name">{{ product.name }}</div>
-            <div class="price">{{ product.price }}</div>
+      <div class="product-card">
+        <img src="{{ product.image }}" alt="{{ product.name }}" />
+        <div class="product-info">
+          <div class="brand">
+            {{ product.brand }} <span class="tag">{{ product.tag }}</span>
           </div>
-          <button 
-            class="recommendation-button" 
-            onclick="window.open('{{ product.url }}', '_blank')"
-          >
-            ✨ 추천받기
-          </button>
+          <div class="name">{{ product.name }}</div>
+          <div class="price">{{ product.price }}</div>
         </div>
-      {% endfor %} 
+        <button
+          class="recommendation-button"
+          onclick="window.open('{{ product.url }}', '_blank')"
+        >
+          ✨ 추천받기
+        </button>
+      </div>
+      {% endfor %}
     </div>
-  </div> 
+  </div>
 </div>
 {% endblock %} {% block extra_js %}
 <script src="{% static 'js/upload/upload.js' %}"></script>

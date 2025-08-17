@@ -216,8 +216,53 @@ function getCookie(name) {
 }
 
 function renderRecommendations(products) {
-    const box = document.getElementById("recommendation-box");
+    // 카테고리별로 제품 분류
+    const categorizedProducts = {
+        'Lips': [],
+        'blush': [],
+        'eyeshadow': []
+    };
+    
+    // 제품을 카테고리별로 분류
+    products.forEach(product => {
+        const category = product.category;
+        if (category && categorizedProducts.hasOwnProperty(category)) {
+            categorizedProducts[category].push(product);
+        } else {
+            // 카테고리가 없거나 매칭되지 않는 경우 기본값으로 처리
+            categorizedProducts['Lips'].push(product);
+        }
+    });
+    
+    // 각 카테고리별로 제품 렌더링
+    renderCategoryProducts('lip', categorizedProducts['Lips']);
+    renderCategoryProducts('blush', categorizedProducts['blush']);
+    renderCategoryProducts('eyeshadow', categorizedProducts['eyeshadow']);
+    
+    // 제품 개수 업데이트
+    updateProductCounts(categorizedProducts);
+}
+
+function renderCategoryProducts(categoryType, products) {
+    const boxId = `${categoryType}-recommendation-box`;
+    const box = document.getElementById(boxId);
+    
+    if (!box) return;
+    
+    // 기존 내용 제거
     box.innerHTML = "";
+    
+    if (products.length === 0) {
+        // 제품이 없는 경우 빈 상태 표시
+        box.innerHTML = `
+            <div class="empty-state">
+                <p>해당 카테고리의 추천 제품이 없어요</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // 제품 카드 생성
     products.forEach((p, index) => {
         const card = document.createElement("div");
         card.classList.add("product-card");
@@ -231,9 +276,7 @@ function renderRecommendations(products) {
         const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
         card.dataset.productId = p.id || uniqueId;
         
-        // 디버깅: 실제 제품 ID와 생성된 ID 출력
         console.log(`제품 ${index}: 원본 ID=${p.id}, 생성된 ID=${card.dataset.productId}`);
-        
         console.log(`Color analyzer card ${index}: ID=${card.dataset.productId}, Name=${p.color_name || p.name}`);
         
         card.innerHTML = `
@@ -242,7 +285,7 @@ function renderRecommendations(products) {
             <img src="${p.image}" alt="${p.name}" />
             <div class="product-info">
                 <div class="brand">${p.brand} <span class="tag">${p.category}</span></div>
-                <div class="name">${p.color_name}</div>
+                <div class="name">${p.color_name || p.name}</div>
                 <div class="price">${p.price}</div>
             </div>
             <div class="button-container">
@@ -250,6 +293,7 @@ function renderRecommendations(products) {
                 <a class="recommendation-button" href="${p.url}" target="_blank">구매하기</a>
             </div>
         `;
+        
         box.appendChild(card);
         
         // 새로 추가된 카드의 좋아요 상태 복원
@@ -265,9 +309,22 @@ function renderRecommendations(products) {
             });
         }
         
-        // 디버깅: 카드 정보 출력
         console.log(`추천 제품 카드 생성: ID=${p.id}, 이름=${p.name}, 브랜드=${p.brand}`);
     });
+}
+
+function updateProductCounts(categorizedProducts) {
+    // 립 제품 개수 업데이트
+    const lipCount = document.querySelector('#lip-recommendation-box').closest('.recommendation-slot').querySelector('.product-count');
+    if (lipCount) lipCount.textContent = `${categorizedProducts['Lips'].length}개`;
+    
+    // 블러셔 제품 개수 업데이트
+    const blushCount = document.querySelector('#blush-recommendation-box').closest('.recommendation-slot').querySelector('.product-count');
+    if (blushCount) blushCount.textContent = `${categorizedProducts['blush'].length}개`;
+    
+    // 아이섀도우 제품 개수 업데이트
+    const eyeshadowCount = document.querySelector('#eyeshadow-recommendation-box').closest('.recommendation-slot').querySelector('.product-count');
+    if (eyeshadowCount) eyeshadowCount.textContent = `${categorizedProducts['eyeshadow'].length}개`;
 }
 
 function displayRecommendationsOnMatrix(products) {
