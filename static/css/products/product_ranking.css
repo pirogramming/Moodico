@@ -43,9 +43,7 @@
     transition: all 0.2s ease;
 }
 
-.category-filter a:hover {
-    background-color: #ddd;
-}
+.category-filter a:hover { background-color: #ddd; }
 
 .category-filter a.active {
     background: linear-gradient(135deg, #667eea, #764ba2);
@@ -78,14 +76,14 @@
 .ranking-card {
     background: white;
     border-radius: 18px;
-    padding: 20px;
+    padding: 18px; /* 기존 20px → 18px */
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     border: 1px solid #eee;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px; /* 기존 15px → 12px */
 }
 
 .ranking-card:hover {
@@ -107,13 +105,13 @@
 
 /* ====== 랭킹 번호 ====== */
 .ranking-number {
-    width: 45px;
-    height: 45px;
+    width: 42px;  /* 기존 45px → 42px */
+    height: 42px; /* 기존 45px → 42px */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4em;
+    font-size: 1.35em;
     font-weight: bold;
     color: white;
     flex-shrink: 0;
@@ -126,19 +124,15 @@
 
 /* ====== 이미지 ====== */
 .product-image {
-    width: 70px;
-    height: 70px;
+    width: 60px;  /* 기존 70px → 60px */
+    height: 60px; /* 기존 70px → 60px */
     object-fit: cover;
     border-radius: 12px;
     flex-shrink: 0;
 }
 
 /* ====== 제품 정보 ====== */
-.product-details {
-    flex: 1;
-    min-width: 0;
-}
-
+.product-details { flex: 1; min-width: 0; }
 .product-brand { font-size: 0.9em; color: #888; margin-bottom: 5px; font-weight: 500; }
 .product-name {
     font-size: 1.1em;
@@ -160,21 +154,11 @@
 }
 
 /* ====== 왕관 ====== */
-.crown-icon {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 1.8em;
-    transform: rotate(25deg);
-}
+.crown-icon { position: absolute; top: -10px; right: -10px; font-size: 1.7em; transform: rotate(25deg); }
 .rank-1 .crown-icon { color: #ffd700; text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5); }
 
 /* ====== 빈 상태 ====== */
-.empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    color: #666;
-}
+.empty-state { text-align: center; padding: 80px 20px; color: #666; }
 .empty-state .icon { font-size: 4em; margin-bottom: 20px; opacity: 0.3; }
 .empty-state h2 { font-size: 1.8em; margin-bottom: 15px; color: #333; }
 .empty-state p { font-size: 1.1em; margin-bottom: 30px; }
@@ -194,6 +178,6 @@
     .ranking-container { padding: 20px 15px; }
     .ranking-header h1 { font-size: 2em; }
     .ranking-grid { grid-template-columns: 1fr; gap: 20px; }
-    .ranking-card { padding: 20px; flex-direction: column; text-align: center; }
-    .product-image { width: 100px; height: 100px; }
+    .ranking-card { padding: 18px; flex-direction: column; text-align: center; }
+    .product-image { width: 90px; height: 90px; }
 }

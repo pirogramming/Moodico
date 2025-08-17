@@ -2,14 +2,7 @@
 {% load static %}
 
 {% block extra_head %}
-{% extends 'base.html' %}
-{% load static %}
-
-{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/products/product_ranking.css' %}" />
-{% endblock %}
-
-{% block content %}
 {% endblock %}
 
 {% block content %}
@@ -25,11 +18,11 @@
   <!-- 카테고리 선택 -->
   <div class="category-selector">
     <form method="get">
-      <select name="category" onchange="this.form.submit()">
+      <select name="category" class="category-select" onchange="this.form.submit()">
         <option value="" {% if selected_category == '' %}selected{% endif %}>✨모두 보기</option>
-        <option value="Lips" {% if selected_category|lower == 'lips' %}selected{% endif %}>💋립</option>
-        <option value="eyeshadow" {% if selected_category|lower == 'eyeshadow' %}selected{% endif %}>👀아이섀도우</option>
-        <option value="blush" {% if selected_category|lower == 'blush' %}selected{% endif %}>🌸블러셔</option>
+        <option value="Lips" {% if selected_category|lower == 'lips' %}selected{% endif %}>💋 립</option>
+        <option value="eyeshadow" {% if selected_category|lower == 'eyeshadow' %}selected{% endif %}>👀 아이섀도우</option>
+        <option value="blush" {% if selected_category|lower == 'blush' %}selected{% endif %}>🌸 블러셔</option>
       </select>
     </form>
   </div>
@@ -37,12 +30,12 @@
   <div id="products-container" class="ranking-grid">
     {% if top_products %}
       {% for product in top_products %}
-        <div class="ranking-card {% if forloop.counter <= 3 %}top-3 rank-{{ forloop.counter }}{% endif %}">
-          {% if forloop.counter == 1 %}<div class="crown-icon">👑</div>{% endif %}
-          <img src="{{ product.product_image|default:'/static/images/test.jpg' }}" 
-               alt="{{ product.product_name }}" 
-               onerror="this.src='/static/images/test.jpg'" />
-          <div class="ranking-number {% if forloop.counter > 3 %}other{% endif %}">{{ forloop.counter }}</div>
+        {% with rank=forloop.counter %}
+        <div class="ranking-card {% if rank <= 3 %}top-3 rank-{{ rank }}{% endif %}">
+          {% if rank == 1 %}<div class="crown-icon">👑</div>{% endif %}
+          <img class="product-image" src="{{ product.product_image|default:'/static/images/test.jpg' }}" 
+               alt="{{ product.product_name }}" />
+          <div class="ranking-number {% if rank > 3 %}other{% endif %}">{{ rank }}</div>
           <div class="product-details">
             <div class="product-brand">{{ product.product_brand }}</div>
             <div class="product-name">{{ product.product_name }}</div>
@@ -50,6 +43,7 @@
             <div class="like-info">💜 {{ product.like_count }}명이 찜함</div>
           </div>
         </div>
+        {% endwith %}
       {% endfor %}
     {% else %}
       <div class="empty-state">
@@ -60,7 +54,7 @@
     {% endif %}
   </div>
 
-  <div style="text-align: center">
+  <div class="text-center">
     <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
   </div>
 </div>
