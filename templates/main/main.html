@@ -2,9 +2,12 @@
 <link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
 {% endblock%} {% block content %}
 <div class="main-container">
-  <h3>Moodico</h3>
-  <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
-
+  <div class="moodico-splash-container">
+    <div class="moodico-banner">
+      <h3>Moodico"</h3>
+      <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
+    </div>
+  </div>
   <!-- 퍼스널 컬러 배너 섹션 -->
   <div class="personal-color-banner">
     <div class="banner-content">
@@ -56,12 +59,13 @@
         <div class="product-info">
           <h4>{{ recommended_product.product_name }}</h4>
           <p>
-            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{ recommended_product.product_brand }} {% else %}
-             {{ recommended_product.product_brand }} | 💜 {{  recommended_product.like_count }}명이 찜함 {% endif %}
+            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | 
+            {{ recommended_product.product_brand }} {% else %} 
+            {{ recommended_product.product_brand }} | 💜 {{
+            recommended_product.like_count }}명이 찜함 {% endif %}
           </p>
         </div>
       </div>
-
     </div>
 
     <!-- 무드 테스트 미리보기 -->
