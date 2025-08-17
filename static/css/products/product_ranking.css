@@ -181,3 +181,19 @@
     .ranking-card { padding: 18px; flex-direction: column; text-align: center; }
     .product-image { width: 90px; height: 90px; }
 }
+
+.category-dropdown {
+    padding: 12px 20px;
+    border: 2px solid #667eea;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    background: white;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+    min-width: 150px;
+}
