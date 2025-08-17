@@ -52,34 +52,38 @@ def main(request):
     # 오늘의 투표 데이터베이스 전달
     session = VotingSession.objects.filter(is_active=True).first()
 
-    session_id = session.id
-    session_vote_count = session.product1_votes + session.product2_votes
-    voting_data = {
-        'product1': {
-            #'id': session.product1.id,
-            'product_id': session.product1.product_id,
-            'product_name': session.product1.name,
-            'product_brand': session.product1.brand,
-            'image_url': session.product1.image_url,
-            'like_count': session.product1.like_count,
-            'votes': session.product1_votes
-        },
-        'product2': {
-            #'id': session.product2.id,
-            'product_id': session.product2.product_id,
-            'product_name': session.product2.name,
-            'product_brand': session.product2.brand,
-            'image_url': session.product2.image_url,
-            'like_count': session.product2.like_count,
-            'votes': session.product2_votes
+    if session:
+        #session_id = session.id
+        session_vote_count = session.product1_votes + session.product2_votes
+        voting_data = {
+            'product1': {
+                #'id': session.product1.id,
+                'product_id': session.product1.product_id,
+                'product_name': session.product1.name,
+                'product_brand': session.product1.brand,
+                'image_url': session.product1.image_url,
+                'like_count': session.product1.like_count,
+                'votes': session.product1_votes
+            },
+            'product2': {
+                #'id': session.product2.id,
+                'product_id': session.product2.product_id,
+                'product_name': session.product2.name,
+                'product_brand': session.product2.brand,
+                'image_url': session.product2.image_url,
+                'like_count': session.product2.like_count,
+                'votes': session.product2_votes
+            }
         }
-    }
+    else:
+        session_vote_count = None
+        voting_data = None
 
     
     return render(request, 'main/main.html', {
         'top_liked_products': top_liked_products,
         'recommended_product': recommended_product,
-        'session_id': session_id,
+        #'session_id': session_id,
         'session_vote_count': session_vote_count,
         'voting_data': voting_data,
     })
