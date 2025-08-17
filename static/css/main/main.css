@@ -1148,3 +1148,71 @@
         padding: 20px;
     }
 }
+
+
+.matrix-section {
+    flex: 1;
+    min-width: 400px;
+}
+
+.color-matrix-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to bottom right,
+            #f8f0ff,
+            #e0efff,
+            #ffe0f0,
+            #fff8e0);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    overflow: visible;
+    border: 1px solid #ddd;
+    min-width: 400px;
+}
+
+
+
+
+.axis-label {
+    position: absolute;
+    font-weight: bold;
+    color: #777;
+    font-size: 0.9em;
+    z-index: 5;
+}
+
+.top-label {
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bottom-label {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.left-label {
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.right-label {
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+}
+
+.makeup-products-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    min-width: 400px;
+    border-radius: 15px;
+}
