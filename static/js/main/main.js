@@ -34,10 +34,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // 24시간마다 투표 세션 생성
     //console.log('투표 기능 초기화 시작');
     
-    // const voteCards = document.querySelectorAll('.vote-product-card');
-    // const progressBars = document.querySelectorAll('.progress-fill');
-    // const votePercentages = document.querySelectorAll('.vote-percentage');
-    // const totalVotes = document.querySelector('.voting-stats strong');
+    const voteCards = document.querySelectorAll('.vote-product-card');
+    const progressBars = document.querySelectorAll('.progress-fill');
+    const votePercentages = document.querySelectorAll('.vote-percentage');
+    const totalVotes = document.querySelector('.voting-stats strong');
     
     // console.log('찾은 투표 카드 수:', voteCards.length);
     
@@ -47,14 +47,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // }
     
     // 투표 데이터 초기화
-    let voteData = {};
-    let totalVoteCount = voting_object.product1_votes + voting_object.product2_votes;
-    let hasVoted = false;
-    let currentSelectedId = null; // 현재 선택된 카드
+    // let voteData = {};
+    // let totalVoteCount = voting_object.product1_votes + voting_object.product2_votes;
+    // let hasVoted = false;
+    // let currentSelectedId = null; // 현재 선택된 카드
     
+    // voteCards.forEach((card) => {
+    //     const productId = card.dataset.productId;
+    //     const likeCount = parseInt(card.querySelector('.vote-count').textContent.match(/\d+/)[0]);
+        
+    //     console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
+        
+    //     voteData[productId] = { 
+    //         likes: likeCount,
+    //         votes: 0,
+    //         percentage: 0
+    //     };
+    // });
+
     voteCards.forEach((card) => {
         const productId = card.dataset.productId;
-        const likeCount = parseInt(card.querySelector('.vote-count').textContent.match(/\d+/)[0]);
+        const likeCount = card.dataset.like_count;
         
         console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
         
@@ -65,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     });
     
-    console.log('투표 시작 - 모든 제품 0표');
-    updateVoteResults();
+    // console.log('투표 시작 - 모든 제품 0표');
+    // updateVoteResults();
     
     // 이벤트 리스너 (다시 누르면 취소 / 다른 카드 선택하면 이전 해제 후 이동)
     voteCards.forEach(card => {

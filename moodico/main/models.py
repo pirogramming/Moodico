@@ -18,6 +18,7 @@ class VotingSession(models.Model):
     """
     하나의 투표 세션 - 24시간 간격으로 생성
     """
+    #session_id = 
     product1 = models.ForeignKey(RankedProduct, on_delete=models.CASCADE, related_name='product1_sessions')
     product2 = models.ForeignKey(RankedProduct, on_delete=models.CASCADE, related_name='product2_sessions')
     product1_votes = models.PositiveIntegerField(default=0)

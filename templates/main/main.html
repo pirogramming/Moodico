@@ -188,7 +188,7 @@
         <p>가장 인기있는 컬러는?</p>
       </div>
       <div class="voting-products">
-        {% for product in top_liked_products|slice:":2" %}
+        {% for product in voting_data %}
         <div
           class="vote-product-card"
           data-product-id="{{ product.product_id }}"
@@ -225,10 +225,10 @@
         </div>
         {% endfor %}
       </div>
-      {% if top_liked_products %}
+      {% if session_vote_count %}
       <div class="voting-stats">
         <p>
-          총 투표수: <strong>{{ top_liked_products|length }}</strong> | 실시간
+          총 투표수: <strong>{{ session_vote_count }}</strong> | 실시간
           업데이트
         </p>
       </div>
