@@ -1,0 +1,344 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
+<style>
+  /* ===== Personal Color Onboarding (scoped with .pc-*) ===== */
+  :root {
+    --pc-brand: #6f4cff;
+    --pc-brand-600: #5b3ce6;
+    --pc-line: #ece8ff;
+    --pc-muted: #6b7280;
+    --pc-card: #fff;
+    --pc-shadow: 0 10px 30px rgba(24,19,56,.12);
+    --pc-radius: 16px;
+    --pc-radius-lg: 22px;
+  }
+  .pc-section { padding: 10px 0; }
+  .pc-container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .pc-title-xl { font-size: clamp(28px,3.6vw,40px); line-height: 1.15; margin: 6px 0 12px; }
+  .pc-subtitle { color: var(--pc-muted); font-size: clamp(15px,1.9vw,18px); }
+  .pc-eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #472ec7; }
+
+  .pc-card { background: var(--pc-card); border: 1px solid var(--pc-line); border-radius: var(--pc-radius); box-shadow: var(--pc-shadow); padding: 20px; }
+  .pc-grid { display: grid; gap: 18px; }
+  .pc-g2 { grid-template-columns: repeat(2,1fr); }
+  .pc-g3 { grid-template-columns: repeat(3,1fr); }
+  .pc-g4 { grid-template-columns: repeat(4,1fr); }
+  @media (max-width: 1000px) { .pc-g4{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width: 820px) { .pc-g2,.pc-g3,.pc-g4{grid-template-columns:1fr;} }
+
+  .pc-hero {
+    border: 1px solid var(--pc-line);
+    border-radius: var(--pc-radius-lg);
+    box-shadow: var(--pc-shadow);
+    padding: clamp(20px,4vw,42px);
+    display: grid; grid-template-columns: 1.25fr .9fr; gap: clamp(18px,4vw,36px);
+    background: #fff;
+  }
+  @media (max-width: 900px) { .pc-hero{grid-template-columns:1fr;} }
+
+  .pc-ring {
+    aspect-ratio: 1/1; border-radius: 24px; position: relative; overflow: hidden;
+    background: conic-gradient(
+      from 0deg,
+      #ffad92 0 25%, #cbb8ff 0 50%, #d9a46b 0 75%, #9bd3ff 0 100%
+    );
+    border: 1px solid var(--pc-line);
+  }
+  .pc-ring::after {
+    content: ""; position: absolute; inset: 14%; background: radial-gradient(circle at 50% 50%, #fff 0 60%, transparent 60%);
+    border-radius: 22px; box-shadow: inset 0 0 0 1px var(--pc-line);
+  }
+
+  .pc-badge { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:800; border:1px solid var(--pc-line); }
+  .pc-badge.warm { background:#fff7ed; color:#b45309; border-color:#fed7aa; }
+  .pc-badge.cool { background:#eef2ff; color:#3730a3; border-color:#c7d2fe; }
+
+  .pc-chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+  .pc-chip { --c:#ddd; --label:""; position:relative; width:42px; height:42px; border-radius:10px; background:var(--c);
+    border:1px solid rgba(0,0,0,.06); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 2px 8px rgba(16,16,24,.12);
+  }
+  .pc-chip::after { content:var(--label); position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:10px; color:var(--pc-muted); white-space:nowrap; }
+
+  .pc-list { margin:10px 0 0 0; padding:0 0 0 18px; color:var(--pc-muted); }
+  .pc-list li { margin:6px 0; }
+
+  .pc-cta { border: 1px dashed #dcd3ff; background: linear-gradient(180deg, #faf9ff 0%, #fff 100%); border-radius: var(--pc-radius);
+            padding: 24px; display: grid; grid-template-columns: 1.3fr .7fr; gap: 16px; align-items:center; }
+  @media (max-width: 900px) { .pc-cta{grid-template-columns:1fr;} }
+
+  .pc-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:800; font-size:14px; border:1px solid transparent; cursor:pointer; text-decoration:none; }
+  .pc-btn.primary { background: var(--pc-brand); color:#fff; box-shadow:0 8px 18px rgba(111,76,255,.28); }
+  .pc-btn.primary:hover { background: var(--pc-brand-600); }
+  .pc-btn.ghost { background:#fff; border-color:var(--pc-line); color:#111; }
+  .pc-btn.ghost:hover { background:#fbfaff; border-color:#d9d3ff; }
+
+  .pc-mood-tag { border: 1px solid var(--pc-line); border-radius: 999px; padding: 8px 12px; font-weight: 800; font-size: 13px; background:#fff; }
+  .pc-mood-dot { width:10px; height:10px; border-radius:999px; display:inline-block; border:1px solid rgba(0,0,0,.08); vertical-align:middle; margin-right:8px; }
+
+  /* simple reveal */
+  .pc-reveal { opacity:0; transform: translateY(10px); transition: opacity .5s ease, transform .6s ease; }
+  .pc-reveal.on { opacity:1; transform: translateY(0); }
+</style>
+{% endblock %}
+
+{% block content %}
+
+  <!-- ✅ 추가: 퍼스널 컬러 온보딩 (나의 시안 통합) -->
+  
+
+  <section class="pc-section">
+    <div class="pc-container">
+      <div class="pc-cta pc-reveal">
+        <div>
+          <ol class="pc-list">
+            <li><strong>무드 테스트</strong>로 오늘의 무드 파악</li>
+            <li><strong>내 아이템 업로드</strong>로 내 컬러 스펙트럼 분석</li>
+            <li><strong>컬러 매트릭스</strong>에서 팔레트 기반 제품 탐색</li>
+          </ol>
+          <p class="pc-subtitle" style="margin-top:6px">세 경로를 함께 쓰면 추천 정확도가 올라가요 ✨</p>
+          <div style="display:flex; gap:10px; flex-wrap: wrap; margin-top:12px;">
+            <a href="{% url 'mood_test' %}" class="pc-btn primary">무드 테스트</a>
+            <a href="{% url 'my_item_recommendation' %}" class="pc-btn ghost">아이템 업로드</a>
+            <a href="{% url 'color_matrix_explore' %}" class="pc-btn ghost">컬러 매트릭스</a>
+          </div>
+        </div>
+        <div class="matrix-preview">
+            <div class="mini-color-matrix">
+              <div class="quadrant-grid">
+                <div class="quadrant top-left">
+                  <div class="quadrant-content">
+                    <span class="quadrant-label">Light Cool</span>
+                    <div class="color-dots">
+                      <div
+                        class="color-dot"
+                        style="background-color: #87ceeb"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #98fb98"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #f0f8ff"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="quadrant top-right">
+                  <div class="quadrant-content">
+                    <span class="quadrant-label">Light Warm</span>
+                    <div class="color-dots">
+                      <div
+                        class="color-dot"
+                        style="background-color: #ffe4b5"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #f0e68c"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #ffb6c1"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="quadrant bottom-left">
+                  <div class="quadrant-content">
+                    <span class="quadrant-label">Deep Cool</span>
+                    <div class="color-dots">
+                      <div
+                        class="color-dot"
+                        style="background-color: #4169e1"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #008b8b"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #4b0082"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="quadrant bottom-right">
+                  <div class="quadrant-content">
+                    <span class="quadrant-label">Deep Warm</span>
+                    <div class="color-dots">
+                      <div
+                        class="color-dot"
+                        style="background-color: #8b4513"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #dc143c"
+                      ></div>
+                      <div
+                        class="color-dot"
+                        style="background-color: #ff4500"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="axis-labels">
+                <div class="axis-label top">Light</div>
+                <div class="axis-label bottom">Deep</div>
+                <div class="axis-label left">Cool</div>
+                <div class="axis-label right">Warm</div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pc-section">
+    <div class="pc-container pc-grid pc-g2">
+      <div class="pc-card pc-reveal">
+        <div class="pc-eyebrow">개념</div>
+        <h3 style="margin:6px 0 6px">퍼스널 컬러란?</h3>
+        <p class="pc-subtitle">개인의 고유 톤(피부·머리·눈동자)과 조화를 이루는 색의 집합. 보통 <strong>봄·여름·가을·겨울</strong> 4계절 분류를 사용해요.</p>
+        <ul class="pc-list">
+          <li><strong>목적</strong>: 생기·대비 밸런스, 첫인상 향상</li>
+          <li><strong>활용</strong>: 패션·헤어·메이크업·브랜딩 컬러</li>
+          <li><strong>오해</strong>: 한 계절로만 고정되는 건 아님(복합 가능)</li>
+        </ul>
+      </div>
+      <div class="pc-card pc-reveal">
+        <div class="pc-eyebrow">빠른 이해</div>
+        <h3 style="margin:6px 0 6px">4계절 한눈에 보기</h3>
+        <div class="pc-grid pc-g2">
+          <div>
+            <span class="pc-badge warm">봄 · Warm</span>
+            <div class="pc-chips">
+              <span class="pc-chip" style="--c:#ff8a65;--label:'코랄';"></span>
+              <span class="pc-chip" style="--c:#ffc1a6;--label:'피치';"></span>
+              <span class="pc-chip" style="--c:#fff4e6;--label:'아이보리';"></span>
+              <span class="pc-chip" style="--c:#b6e3a8;--label:'올리브';"></span>
+            </div>
+          </div>
+          <div>
+            <span class="pc-badge cool">여름 · Cool</span>
+            <div class="pc-chips">
+              <span class="pc-chip" style="--c:#f4a7b9;--label:'로즈';"></span>
+              <span class="pc-chip" style="--c:#c8b6ff;--label:'라일락';"></span>
+              <span class="pc-chip" style="--c:#a3c7ff;--label:'파스텔블루';"></span>
+              <span class="pc-chip" style="--c:#1f2a44;--label:'네이비';"></span>
+            </div>
+          </div>
+          <div>
+            <span class="pc-badge warm">가을 · Warm</span>
+            <div class="pc-chips">
+              <span class="pc-chip" style="--c:#a67c52;--label:'카멜';"></span>
+              <span class="pc-chip" style="--c:#c68a3e;--label:'머스타드';"></span>
+              <span class="pc-chip" style="--c:#6b8b66;--label:'카키';"></span>
+              <span class="pc-chip" style="--c:#9e3f3f;--label:'브릭';"></span>
+            </div>
+          </div>
+          <div>
+            <span class="pc-badge cool">겨울 · Cool</span>
+            <div class="pc-chips">
+              <span class="pc-chip" style="--c:#000;--label:'블랙';"></span>
+              <span class="pc-chip" style="--c:#fff;--label:'화이트'; border-color:#e5e7eb;"></span>
+              <span class="pc-chip" style="--c:#e53935;--label:'레드';"></span>
+              <span class="pc-chip" style="--c:#3d5afe;--label:'블루';"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pc-section">
+    <div class="pc-container">
+      <h3 class="pc-title-xl pc-reveal" style="font-size:clamp(22px,2.8vw,32px);">퍼스널 컬러 활용법</h3>
+      <div class="pc-grid pc-g3">
+        <div class="pc-card pc-reveal">
+          <h4>패션</h4>
+          <ul class="pc-list">
+            <li>얼굴에 가까운 상의부터 팔레트 적용</li>
+            <li>아우터/하의는 명도·채도만 맞춰도 OK</li>
+            <li>금속 톤: 골드(웜) / 실버(쿨)</li>
+          </ul>
+        </div>
+        <div class="pc-card pc-reveal">
+          <h4>메이크업</h4>
+          <ul class="pc-list">
+            <li>립·블러셔를 팔레트 톤으로 맞추기</li>
+            <li>아이섀도우는 과한 채도 대신 명도/온도</li>
+            <li>헤어는 피부 대비(명도)+온도(웜/쿨)</li>
+          </ul>
+        </div>
+        <div class="pc-card pc-reveal">
+          <h4>일상 & 브랜딩</h4>
+          <ul class="pc-list">
+            <li>프로필·발표·SNS 톤 일관성</li>
+            <li>중요 일정엔 대비 밸런스 조정</li>
+            <li>‘좋아하는 색’ vs ‘어울리는 색’ 분리</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="pc-section">
+    <div class="pc-container">
+      <h3 class="pc-title-xl pc-reveal" style="font-size:clamp(22px,2.8vw,32px);">무드 & 컬러 연결</h3>
+      <p class="pc-subtitle pc-reveal">무드를 누르면 오른쪽 예시 팔레트가 바뀝니다 💡</p>
+      <div class="pc-grid pc-g2" id="pcMoodBoard" style="margin-top:14px;">
+        <div class="pc-card pc-reveal">
+          <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <button class="pc-mood-tag" data-mood="excited"><span class="pc-mood-dot" style="background:#ff8a65"></span>설레는</button>
+            <button class="pc-mood-tag" data-mood="focus"><span class="pc-mood-dot" style="background:#1f2a44"></span>집중</button>
+            <button class="pc-mood-tag" data-mood="calm"><span class="pc-mood-dot" style="background:#6b8b66"></span>차분</button>
+            <button class="pc-mood-tag" data-mood="chic"><span class="pc-mood-dot" style="background:#000"></span>시크</button>
+            <button class="pc-mood-tag" data-mood="vivid"><span class="pc-mood-dot" style="background:#e53935"></span>활기찬</button>
+            <button class="pc-mood-tag" data-mood="romantic"><span class="pc-mood-dot" style="background:#f4a7b9"></span>로맨틱</button>
+          </div>
+          <p class="pc-subtitle" style="margin-top:10px">무디코는 퍼스널 컬러 + 오늘의 무드로 추천 정밀도를 높여요.</p>
+        </div>
+        <div class="pc-card pc-reveal" id="pcMoodPreview" aria-live="polite">
+          <h4 style="margin-top:0" id="pcMoodTitle">예시 팔레트</h4>
+          <div class="pc-chips" id="pcMoodChips" style="margin-top:12px"></div>
+          <ul class="pc-list" id="pcMoodTips" style="margin-top:10px"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+
+  
+
+  <section class="pc-section">
+    <div class="pc-container">
+      <h3 class="pc-title-xl pc-reveal" style="font-size:clamp(22px,2.8vw,32px);">자주 묻는 질문</h3>
+      <div class="pc-grid pc-g3">
+        <div class="pc-card pc-reveal">
+          <h4>좋아하는 색과 어울리는 색이 달라요.</h4>
+          <p class="pc-subtitle">정상이에요! 좋아하는 색은 취향, 어울리는 색은 조화의 문제예요. 좋아하는 색은 소품/하의 포인트로, 어울리는 색은 상의·립에 쓰면 균형이 좋아요.</p>
+        </div>
+        <div class="pc-card pc-reveal">
+          <h4>계절 타입은 한 가지로 고정인가요?</h4>
+          <p class="pc-subtitle">아니요. 중간대/복합형이 흔해요. 무디코는 타입에 <em>무드</em>를 더해 상황별로 유연하게 제안해요.</p>
+        </div>
+        <div class="pc-card pc-reveal">
+          <h4>사진/조명에 따라 색이 달라 보이면?</h4>
+          <p class="pc-subtitle">자연광 근처에서 촬영하고 과한 보정은 피해주세요. 무디코는 명도·채도·온도를 함께 고려해 안정적으로 분석하려고 설계돼 있어요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ✅ 퍼스널 컬러 온보딩 끝 -->
+  <script src="{% static 'js/main/main.js' %}"></script>
+
+
+{% endblock %}

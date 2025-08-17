@@ -28,8 +28,21 @@ header nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1020px;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+.logo {
+    color: mediumpurple;
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo:hover {
+    color: #8a2be2;
+    transform: scale(1.05);
 }
 
 .nav-links {
@@ -42,41 +55,55 @@ header nav {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 20px;
+    padding: 10px 18px;
+    border-radius: 25px;
     transition: all 0.3s ease;
     font-size: 0.9em;
+    background-color: transparent;
+    border: 2px solid transparent;
 }
 
 .nav-link:hover {
-    background: rgba(255, 107, 107, 0.1);
-    color: #ff6b6b;
-    transform: translateY(-1px);
+    background-color: rgba(147, 112, 219, 0.1);
+    color: mediumpurple;
+    border-color: rgba(147, 112, 219, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(147, 112, 219, 0.15);
 }
 
 .liked-products-link {
     background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
     color: white;
+    border-color: #ff6b6b;
     box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
-
 }
 
 .liked-products-link:hover {
     background: linear-gradient(135deg, #ff5252, #ff7676);
     color: white;
+    border-color: #ff5252;
     box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
-    text-decoration: none;
+    transform: translateY(-2px);
 }
 
-header .logo {
+.login-icon {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+
+.login-icon:hover {
+    background-color: rgba(147, 112, 219, 0.1);
     color: mediumpurple;
-    font-size: 1.8em;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-header .login-icon:hover {
-    text-decoration: none;
+    border-color: rgba(147, 112, 219, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(147, 112, 219, 0.15);
 }
 
 main {
@@ -304,16 +331,39 @@ input[type="email"] {
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    
+    .logo {
+        font-size: 1.6em;
+    }
+    
+    .nav-links {
+        gap: 15px;
+    }
+    
+    .nav-link, .login-icon {
+        padding: 8px 14px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        font-size: 1.4em;
+    }
+    
     .nav-links {
         gap: 10px;
     }
-
-    .nav-link {
-        padding: 6px 12px;
-        font-size: 0.8em;
-    }
-
-    .liked-products-link {
-        padding: 6px 12px;
+    
+    .nav-link, .login-icon {
+        padding: 6px 10px;
+        font-size: 0.75em;
     }
 }
