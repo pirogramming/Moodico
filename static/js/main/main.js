@@ -32,25 +32,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // =============================
     
     // 24시간마다 투표 세션 생성
-    //console.log('투표 기능 초기화 시작');
     
     const voteCards = document.querySelectorAll('.vote-product-card');
     const progressBars = document.querySelectorAll('.progress-fill');
     const votePercentages = document.querySelectorAll('.vote-percentage');
     const totalVotes = document.querySelector('.voting-stats strong');
     
-    // console.log('찾은 투표 카드 수:', voteCards.length);
-    
-    // if (voteCards.length === 0) {
-    //     console.log('투표 카드가 없습니다.');
-    //     return;
-    // }
-    
     // 투표 데이터 초기화
     let voteData = {};
     let totalVoteCount = 0;
-    let hasVoted = false;
-    let currentSelectedId = null; // 현재 선택된 카드
 
     voteCards.forEach((card) => {
         const productId = card.dataset.productId;
@@ -80,46 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const productId = this.dataset.productId;
             const sessionId = document.querySelector('.voting-card').dataset.sessionId;
             const voteUrl = document.querySelector('.voting-card').dataset.voteUrl;
-
-            // // 1) 같은 카드를 다시 클릭 → 취소
-            // if (currentSelectedId === productId) {
-            //     this.classList.remove('selected');
-            //     this.style.transform = '';
-            //     this.style.boxShadow = '';
-
-            //     voteData[productId].votes -= 1;
-            //     totalVoteCount -= 1;
-            //     hasVoted = false;
-            //     currentSelectedId = null;
-
-            //     updateVoteResults();
-            //     showVoteMessage('투표가 취소되었습니다.', 'info');
-            //     return;
-            // }
-
-            // // 2) 다른 카드 클릭 → 기존 해제 후 새 카드 선택
-            // if (hasVoted && currentSelectedId && currentSelectedId !== productId) {
-            //     const prevCard = document.querySelector(`.vote-product-card[data-product-id="${currentSelectedId}"]`);
-            //     if (prevCard) {
-            //         prevCard.classList.remove('selected');
-            //         prevCard.style.transform = '';
-            //         prevCard.style.boxShadow = '';
-            //     }
-            //     voteData[currentSelectedId].votes -= 1;
-            //     totalVoteCount -= 1; 
-            // }
-
-            // // 3) 신규 선택
-            // this.classList.add('selected');
-            // currentSelectedId = productId;
-            // voteData[productId].votes += 1;
-            // totalVoteCount += 1;
-            // hasVoted = true;
-
-            // updateVoteResults();
-            // showVoteStatus();
-            // showVoteMessage('투표가 완료되었습니다! 🎉', 'success');
-
 
             // fetch api를 통해 백엔드로 db 변경사항 업데이트
             const formData = new FormData();

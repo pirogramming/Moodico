@@ -88,26 +88,37 @@ def main(request):
     previous_session = VotingSession.objects.filter(is_active=False).order_by('-end_time').first()
     
     previous_session_data = None
-    if previous_session and previous_session.winner:
+    if previous_session:
         total_votes = previous_session.product1_votes + previous_session.product2_votes
         if total_votes > 0:
             p1_percentage = round((previous_session.product1_votes / total_votes) * 100)
             p2_percentage = round((previous_session.product2_votes / total_votes) * 100)
         else:
             p1_percentage = p2_percentage = 0
-            
-        previous_session_data = {
-            'winner_name': previous_session.winner.name,
-            'winner_brand': previous_session.winner.brand,
-            'winner_url': reverse('crawled_product_detail', kwargs={'crawled_id': previous_session.winner.product_id}),
-            'winner_image_url': previous_session.winner.image_url,
+        
+        if previous_session.winner:
+            previous_session_data = {
+                'winner_name': previous_session.winner.name,
+                'winner_brand': previous_session.winner.brand,
+                'winner_url': reverse('crawled_product_detail', kwargs={'crawled_id': previous_session.winner.product_id}),
+                'winner_image_url': previous_session.winner.image_url,
+                'is_draw': False,
+            }
+        else:
+            previous_session_data = {
+                'winner_name': '무승부',
+                'is_draw': True,
+            }
+        
+        # 공통데이터
+        previous_session_data.update({
             'product1_name': previous_session.product1.name,
             'product2_name': previous_session.product2.name,
             'product1_percentage': p1_percentage,
             'product2_percentage': p2_percentage,
             'product1_url': reverse('crawled_product_detail', kwargs={'crawled_id': previous_session.product1.product_id}),
             'product2_url': reverse('crawled_product_detail', kwargs={'crawled_id': previous_session.product2.product_id}),
-        }
+        })
 
     
     return render(request, 'main/main.html', {

@@ -208,4 +208,5 @@ LOGOUT_REDIRECT_URL = "/login/"
 # CRONJOBS 설정
 CRONJOBS = [
     ('0 0 * * *', 'main.cron.make_vote_session') # 매일 자정마다 실행
+    #('20 5 * * *', 'main.cron.make_vote_session') # 테스트용
 ]

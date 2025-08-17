@@ -1,3 +1,25 @@
+// CSRF 토큰 가져오기
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// 제품 정보 추출 함수들
+function getProductName(card) {
+    const nameElement = card.querySelector('.product-name, .name');
+    return nameElement ? nameElement.textContent.trim() : 'Unknown Product';
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     // 좋아요 버튼 이벤트 리스너 추가
     document.addEventListener('click', function (e) {
@@ -103,28 +125,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // 버튼 다시 활성화
             likeButton.disabled = false;
         }
-    }
-
-    // CSRF 토큰 가져오기
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-    // 제품 정보 추출 함수들
-    function getProductName(card) {
-        const nameElement = card.querySelector('.product-name, .name');
-        return nameElement ? nameElement.textContent.trim() : 'Unknown Product';
     }
 
     // 더 고유한 제품 ID 생성 함수
