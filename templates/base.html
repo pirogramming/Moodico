@@ -19,12 +19,18 @@
 <body>
   <header>
     <nav>
+      <div class="nav-links-left">
+        <a href="{% url 'my_item_recommendation'  %}" class="nav-search">Search</a>
+        <a href="{% url 'mood_test' %}" class="nav-test">Test</a>
+        <a href="{% url 'color_matrix_explore' %}" class="nav-matrix">Matrix</a>
+        <a href="{% url 'product_ranking' %}" class="nav-ranking">Ranking</a>
+      </div>
       <a href="{% url 'main' %}" class="logo" style="text-decoration: none">Moodico"</a>
       <div class="nav-links">
-        <a href="{% url 'liked_products' %}" class="nav-link liked-products-link">
-          💖 찜한 아이템
+        <a href="{% url 'liked_products' %}" class="liked-products-link">
+          찜한 아이템
         </a>
-        <a href="{% url 'login' %}" class="login-icon">👤 마이페이지 </a>
+        <a href="{% url 'login' %}" class="login-icon">마이페이지 </a>
       </div>
     </nav>
   </header>
