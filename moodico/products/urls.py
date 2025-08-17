@@ -1,6 +1,7 @@
 # moodico/products/urls.py
 from django.urls import path
 from . import views
+from .views import product_ranking_page
 
 urlpatterns = [
     path('color_matrix_explore/', views.color_matrix_explore, name='color_matrix_explore'), #색상 매트릭스
