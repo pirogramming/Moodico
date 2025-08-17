@@ -185,7 +185,7 @@
 <div class="ratings-list-section">
   <h3>사용자 리뷰</h3>
   {% if all_reviews %}
-  <div class="ratings-list">
+  <div id="ratings-list">
     {% for review in all_reviews %}
     <div class="rating-item">
       <div class="rating-header">
@@ -212,6 +212,13 @@
       {% if review.comment %}
       <div class="rating-comment">
         {{ review.comment }}
+      </div>
+      {% endif %}
+      {% if review.images.all %}
+      <div class="rating-item-images">
+        {% for image in review.images.all|slice:":4" %}
+          <img src="{{ image.image.url }}" alt="리뷰 이미지" class="rating-image">
+        {% endfor %}
       </div>
       {% endif %}
     </div>
@@ -312,7 +319,7 @@
     font-size: 1.3em;
   }
 
-  .ratings-list {
+  #ratings-list {
     display: flex;
     flex-direction: column;
     gap: 15px;

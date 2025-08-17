@@ -493,7 +493,7 @@ def submit_product_rating(request):
         if files:
             current_image_count = rating_product.images.count()
 
-            if current_image_count + len(files) >= 4:
+            if current_image_count + len(files) > 4:
                 return JsonResponse({'error': '이미지는 최대 4개까지 등록 가능합니다.'}, status=400)
             for file in files:
                 ProductRatingImage.objects.create(review=rating_product, image=file)
