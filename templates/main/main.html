@@ -111,9 +111,11 @@
           <h4>{{ recommended_product.product_name }}</h4>
           <p>
             {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{
-            recommended_product.product_brand }} {% else %} {{
-            recommended_product.product_brand }} 💜 | {{
-            recommended_product.like_count }}명이 찜함 {% endif %}
+            recommended_product.product_brand }} 
+            {% else %} 
+            {{recommended_product.product_brand }} 💜 | 
+              {{recommended_product.like_count }}명이 찜함 
+            {% endif %}
           </p>
         </div>
       </div>
