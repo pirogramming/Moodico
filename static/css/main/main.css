@@ -854,7 +854,7 @@
 }
 
 .pc-section {
-    padding: 64px 0;
+    padding-bottom: 25px;
 }
 
 .pc-container {
@@ -923,9 +923,9 @@
 }
 
 .pc-hero {
-    border: 1px solid var(--pc-line);
     border-radius: var(--pc-radius-lg);
-    box-shadow: var(--pc-shadow);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
     padding: clamp(20px, 4vw, 42px);
     display: grid;
     grid-template-columns: 1.25fr .9fr;
