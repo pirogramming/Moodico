@@ -1,38 +1,236 @@
-{% extends 'base.html' %} {% load static %} {% block extra_head %} 
+{% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
-{% endblock%}
-{% block content %}
+{% endblock%} {% block content %}
 <div class="main-container">
   <h3>Moodico</h3>
   <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
 
-  <div class="exploration-models">
-    <a href="{% url 'my_item_recommendation' %}" class="model-card item-based">
-      <div class="icon-circle">🔍</div>
-      <div class="model-card-content">
-        <h3>내 아이템 기반 추천</h3>
+  <!-- 퍼스널 컬러 배너 섹션 -->
+  <div class="personal-color-banner">
+    <div class="banner-content">
+      <h2>퍼스널 컬러? 그게 뭐야?</h2>
+      <p>나만의 컬러로 나만의 매력을 찾아보세요!</p>
+      <a href="#" class="cta-button">퍼스널 컬러 알아보러 가기</a>
+    </div>
+  </div>
+
+  <!-- 주요 기능 섹션 -->
+  <div class="main-features">
+    <!-- 내 아이템 기반 검색 카드 -->
+    <div class="feature-card item-search-card">
+      <div class="card-header">
+        <h3>🔍 내 아이템 기반 검색</h3>
         <p>가진 제품으로 완벽한 조합 찾기</p>
       </div>
-      <span class="arrow-icon">→</span>
-    </a>
-
-    <a href="{% url 'mood_test' %}" class="model-card mood-test">
-      <div class="icon-circle">✏️</div>
-      <div class="model-card-content">
-        <h3>무드 테스트</h3>
-        <p>10가지 추구미 중 나만의 스타일 발견</p>
+      <div class="search-preview">
+        <div class="search-icon">
+          <img
+            src="/static/images/eyedropper.svg"
+            alt="색상 추출"
+            class="search-image"
+          />
+        </div>
+        <div class="search-info">
+          <h4>색상 분석 기반 추천</h4>
+          <p>제품 사진을 업로드하면 색상과 어울리는 조합을 추천해드려요</p>
+        </div>
       </div>
-      <span class="arrow-icon">→</span>
-    </a>
+      <a href="{% url 'my_item_recommendation'  %}" class="card-action"
+        >사진 업로드하기 →</a
+      >
+    </div>
 
-    <a href="{% url 'color_matrix_explore' %}" class="model-card color-matrix">
-      <div class="icon-circle">📈</div>
-      <div class="model-card-content">
-        <h3>색상 매트릭스 탐색</h3>
-        <p>시각적 색상 맵에서 완벽한 조합 발견</p>
+    <!-- 오늘의 추천 카드 -->
+    <div class="feature-card recommendation-card">
+      <div class="card-header">
+        <h3>🎯 오늘의 추천</h3>
+        <p>당신을 위한 맞춤 제품</p>
       </div>
-      <span class="arrow-icon">→</span>
-    </a>
+      <div class="product-preview">
+        <img
+          src="{{ recommended_product.product_image|default:'/static/images/test.jpg' }}"
+          alt="{{ recommended_product.product_name }}"
+          onerror="this.src='/static/images/test.jpg'"
+          class="product-image"
+        />
+        <div class="product-info">
+          <h4>{{ recommended_product.product_name }}</h4>
+          <p>
+            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{ recommended_product.product_brand }} {% else %}
+             {{ recommended_product.product_brand }} | 💜 {{  recommended_product.like_count }}명이 찜함 {% endif %}
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 무드 테스트 미리보기 -->
+    <div class="feature-card mood-test-card">
+      <div class="card-header">
+        <h3>💫 무드 테스트</h3>
+        <p>나는 어떤 무드의 메이크업이 잘 어울릴까?</p>
+      </div>
+      <div class="mood-options">
+        <button class="mood-option">로맨틱</button>
+        <button class="mood-option">시크</button>
+        <button class="mood-option">내추럴</button>
+        <button class="mood-option">글램</button>
+      </div>
+      <a href="{% url 'mood_test' %}" class="card-action">테스트 시작하기 →</a>
+    </div>
+
+    <!-- 색상 매트릭스 미리보기 -->
+    <div class="feature-card color-matrix-card">
+      <div class="card-header">
+        <h3>🌈 색상 매트릭스 바로가기</h3>
+        <p>매트릭스에서 빠르게 원하는 무드의 제품을 찾아보세요!</p>
+      </div>
+      <div class="matrix-preview">
+        <div class="mini-color-matrix">
+          <div class="quadrant-grid">
+            <div class="quadrant top-left">
+              <div class="quadrant-content">
+                <span class="quadrant-label">Light Cool</span>
+                <div class="color-dots">
+                  <div
+                    class="color-dot"
+                    style="background-color: #87ceeb"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #98fb98"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #f0f8ff"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="quadrant top-right">
+              <div class="quadrant-content">
+                <span class="quadrant-label">Light Warm</span>
+                <div class="color-dots">
+                  <div
+                    class="color-dot"
+                    style="background-color: #ffe4b5"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #f0e68c"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #ffb6c1"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="quadrant bottom-left">
+              <div class="quadrant-content">
+                <span class="quadrant-label">Deep Cool</span>
+                <div class="color-dots">
+                  <div
+                    class="color-dot"
+                    style="background-color: #4169e1"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #008b8b"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #4b0082"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="quadrant bottom-right">
+              <div class="quadrant-content">
+                <span class="quadrant-label">Deep Warm</span>
+                <div class="color-dots">
+                  <div
+                    class="color-dot"
+                    style="background-color: #8b4513"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #dc143c"
+                  ></div>
+                  <div
+                    class="color-dot"
+                    style="background-color: #ff4500"
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="axis-labels">
+            <div class="axis-label top">Light</div>
+            <div class="axis-label bottom">Deep</div>
+            <div class="axis-label left">Cool</div>
+            <div class="axis-label right">Warm</div>
+          </div>
+        </div>
+      </div>
+      <a href="{% url 'color_matrix_explore' %}" class="card-action"
+        >매트릭스 보기 →</a
+      >
+    </div>
+
+    <!-- 컬러 투표 박스 -->
+    <div class="feature-card voting-card">
+      <div class="card-header">
+        <h3>🗳️ 컬러 투표</h3>
+        <p>가장 인기있는 컬러는?</p>
+      </div>
+      <div class="voting-products">
+        {% for product in top_liked_products|slice:":2" %}
+        <div
+          class="vote-product-card"
+          data-product-id="{{ product.product_id }}"
+        >
+          <div class="product-vote-image">
+            <img
+              src="{{ product.product_image|default:'/static/images/test.jpg' }}"
+              alt="{{ product.product_name }}"
+              onerror="this.src='/static/images/test.jpg'"
+            />
+            <div class="vote-overlay">
+              <span class="vote-count">❤️ {{ product.like_count }}</span>
+            </div>
+          </div>
+          <div class="product-vote-info">
+            <h4>{{ product.product_name }}</h4>
+            <p>{{ product.product_brand }}</p>
+            <div class="vote-progress">
+              <div class="progress-bar">
+                <div
+                  class="progress-fill"
+                  style="width: {% if forloop.first %}65{% else %}35{% endif %}%"
+                ></div>
+              </div>
+              <span class="vote-percentage"
+                >{% if forloop.first %}65{% else %}35{% endif %}%</span
+              >
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <div class="no-voting-products">
+          <p>아직 인기 제품이 없어요. 첫 번째로 찜해보세요! 💖</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% if top_liked_products %}
+      <div class="voting-stats">
+        <p>
+          총 투표수: <strong>{{ top_liked_products|length }}</strong> | 실시간
+          업데이트
+        </p>
+      </div>
+      {% endif %}
+    </div>
   </div>
 
   <!-- 현재 아이템 랭킹 섹션 -->
@@ -43,8 +241,11 @@
     </div>
 
     <div class="ranking-preview">
-      {% comment %} [{'product_id': 'ec733645-2d66-4fb4-b207-d740680acd73', 'product_name': '04 빈티지 오션', 'product_brand': 'romand', 'product_price': '9,900원', 'product_image': 'https://romand.io/images/product/343/BZgkQP0CTQ1Wb8FTVcLlVBqfPwSBpyZ3BeEQVdCu.jpg', 'like_count': 1}, .. ] {% endcomment %}
-      {% for product in top_liked_products %}
+      {% comment %} [{'product_id': 'ec733645-2d66-4fb4-b207-d740680acd73',
+      'product_name': '04 빈티지 오션', 'product_brand': 'romand',
+      'product_price': '9,900원', 'product_image':
+      'https://romand.io/images/product/343/BZgkQP0CTQ1Wb8FTVcLlVBqfPwSBpyZ3BeEQVdCu.jpg',
+      'like_count': 1}, .. ] {% endcomment %} {% for product in top_liked_products %}
       <div class="ranking-item">
         <div class="ranking-badge">{{ forloop.counter }}</div>
         <img
@@ -56,7 +257,7 @@
           <div class="product-brand">{{ product.product_brand }}</div>
           <div class="product-name">{{ product.product_name }}</div>
           <div class="like-count-display">
-            💜 {{ product.like_count }}명이 찜함
+            💜 {{ product.like_count }} 명이 찜함
           </div>
         </div>
       </div>
@@ -74,4 +275,8 @@
     </div>
   </div>
 </div>
+
+<!-- JavaScript 파일 로드 -->
+<script src="{% static 'js/main/main.js' %}"></script>
+
 {% endblock %}
