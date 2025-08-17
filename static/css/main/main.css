@@ -852,7 +852,7 @@
     --pc-radius-lg: 22px;
 
   }
-  .pc-section { padding: 64px 0; }
+  .pc-section { padding: 10px 0; }
   .pc-container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
   .pc-title-xl { font-size: clamp(28px,3.6vw,40px); line-height: 1.15; margin: 150px 0 70px; }
   .pc-subtitle { color: var(--pc-muted); font-size: clamp(15px,1.9vw,18px); }
@@ -888,7 +888,7 @@
 .pc-title-xl {
     font-size: clamp(28px, 3.6vw, 40px);
     line-height: 1.15;
-    margin: 6px 0 12px;
+    margin: 95px 0 12px;
 }
 
 .pc-subtitle {

@@ -23,7 +23,7 @@
     font-size: clamp(28px, 3.6vw, 40px);
     line-height: 1.15;
     margin: 6px 0 12px;
-    color: #664589
+    color: #664589;
 }
 
 .pc-subtitle {
