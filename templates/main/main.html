@@ -15,15 +15,18 @@
     <div class="pc-container">
       <div class="pc-hero pc-reveal">
         <div>
-          <div class="pc-eyebrow">Personal Color</div>
-          <h2 class="pc-title-xl">퍼스널 컬러, 나를 가장 빛나게 하는 색</h2>
+          <div class="pc-eyebrow">Tone-Match by Moodico</div>
+          <h2 class="pc-title-xl">톤 걱정 끝.<br> 무디코 매트릭스가 다 맞춰줘요</h2>
           <p class="pc-subtitle">
-            퍼스널 컬러는 피부·머리·눈동자와 조화를 이루는 <strong>나만의 팔레트</strong>예요.
-            좋아하는 색이 아니라, <em>나를 자연스럽고 매력적으로 보이게 하는 색</em>을 찾는 것이 핵심이죠.
-            Moodico"는 나만의 팔레트에 <strong>나만의 무드</strong>를 더해 상황별 추천을 도와줘요.
+
+            무디코는 <strong>톤 일치</strong>를 최우선으로, <strong>색상 매트릭스</strong>에서
+            <strong>동일 톤 제품</strong>을 추려 <strong>바로 쓸 수 있는 조합</strong>으로 추천합니다.
+            <strong>무드·보유템</strong>까지 반영해 실패를 줄여요.
           </p>
-          <div style="display:flex;gap:10px;margin-top:16px;">
-            <a class="pc-btn primary" href="{% url 'personalcolor' %}">더 알아보러가기</a>
+          <div style="display: flex; gap: 10px; margin-top: 16px">
+            <a class="pc-btn primary" href="{% url 'personalcolor' %}"
+              >더 알아보러가기</a
+            >
           </div>
         </div>
         <div>
@@ -35,13 +38,19 @@
                 <div class="quadrant bottom-left"></div>
                 <div class="quadrant bottom-right"></div>
               </div>
-      
+
               <div class="axis-label top-label">Light</div>
               <div class="axis-label bottom-label">Deep</div>
               <div class="axis-label left-label">Cool</div>
               <div class="axis-label right-label">Warm</div>
-      
-      
+
+            <div>
+
+              <div
+                id="makeup-products-container"
+                class="makeup-products-container"
+              ></div>
+
               <!--유사 무드 제품 추천 구간 표시-->
               <!--
               <div id="mood-selection-area" class="mood-selection-area">
@@ -58,7 +67,6 @@
       </div>
     </div>
   </section>
-  
 
   <!-- 주요 기능 섹션 -->
   <div class="main-features">
@@ -102,14 +110,10 @@
         <div class="product-info">
           <h4>{{ recommended_product.product_name }}</h4>
           <p>
-            
-            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | 
-              {{ recommended_product.product_brand }} 
-            {% else %} 
-              {{ recommended_product.product_brand }} 💜 |
-              {{ recommended_product.like_count }}명이 찜함 
-            {% endif %}
-
+            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{
+            recommended_product.product_brand }} {% else %} {{
+            recommended_product.product_brand }} 💜 | {{
+            recommended_product.like_count }}명이 찜함 {% endif %}
           </p>
         </div>
       </div>
@@ -326,8 +330,6 @@
     </div>
   </div>
 </div>
-
-
 
 <!-- JavaScript 파일 로드 -->
 <script src="{% static 'js/main/main.js' %}"></script>
