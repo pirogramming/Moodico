@@ -9,6 +9,8 @@ from moodico.products.models import ProductLike, ProductRating
 from .utils import login_or_kakao_required
 from moodico.users.models import UserProfile
 from moodico.products.views import get_liked_products_color_info
+from django.contrib.auth.models import User
+import secrets
 
 # Create your views here.
 def signup_view(request):
@@ -68,14 +70,34 @@ def kakao_callback(request: HttpRequest):
     nickname = profile_data.get("properties", {}).get("nickname")
     profile_image = profile_data.get("properties", {}).get("profile_image")
 
-    print("DEBUG nickname:", nickname)  # 확인용
+    kakao_id = profile_data.get("id")
+    email = profile_data.get("kakao_account", {}).get("email")  # optional email field
 
-    # 세션에 저장
+    # Django User username must be unique, so prepend something like 'kakao_'
+    username = f'kakao_{kakao_id}'
+
+    # Get or create Django User
+    user, created = User.objects.get_or_create(
+        username=username,
+        defaults={
+            'email': email or '',
+            'first_name': nickname or '',
+            'password': secrets.token_urlsafe(12)
+        }
+    )
+
+    # create or update UserProfile for kakao users
+    profile, _ = UserProfile.objects.get_or_create(user=user)
+
+    # Log the user in
+    login(request, user)
+
     request.session["access_token"] = access_token
     request.session["nickname"] = nickname
     request.session["profile_image"] = profile_image
 
-    return redirect("main")  # 로그인 페이지에서 프로필 보여주기
+    return redirect("main")
+
 
 
 def kakao_profile(request):

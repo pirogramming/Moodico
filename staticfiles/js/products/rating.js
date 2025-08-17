@@ -268,17 +268,17 @@ class ProductRating {
         }
     }
 
-    async loadRatingsList() {
-        try {
-            const response = await fetch(`/products/get_ratings_list/?product_id=${productId}`);
-            if (response.ok) {
-                const data = await response.json();
-                this.displayRatingsList(data.ratings);
-            }
-        } catch (error) {
-            console.error('별점 목록 로드 실패:', error);
-        }
-    }
+    // async loadRatingsList() {
+    //     try {
+    //         const response = await fetch(`/products/get_ratings_list/?product_id=${productId}`);
+    //         if (response.ok) {
+    //             const data = await response.json();
+    //             this.displayRatingsList(data.ratings);
+    //         }
+    //     } catch (error) {
+    //         console.error('별점 목록 로드 실패:', error);
+    //     }
+    // }
 
     async deleteRating(){
         if (!confirm('정말로 리뷰를 삭제하시겠습니까?\n삭제된 내용은 복구할 수 없습니다.')) {
@@ -309,46 +309,46 @@ class ProductRating {
         }
     }
 
-    displayRatingsList(ratings) {
-        const ratingsList = document.getElementById('ratings-list');
-        if (!ratingsList) return;
+    // displayRatingsList(ratings) {
+    //     const ratingsList = document.getElementById('ratings-list');
+    //     if (!ratingsList) return;
 
-        if (ratings.length === 0) {
-            ratingsList.innerHTML = '<div class="no-ratings">아직 리뷰가 없습니다.</div>';
-            return;
-        }
+    //     if (ratings.length === 0) {
+    //         ratingsList.innerHTML = '<div class="no-ratings">아직 리뷰가 없습니다.</div>';
+    //         return;
+    //     }
 
-        const ratingsHTML = ratings.map(rating => {
-            let imagesHTML = '';
-            if (rating.images && rating.images.length > 0){
-                const imagesToShow = rating.images.slice(0, 4);
-                imagesHTML=`
-                    <div class="rating-item-images">
-                        ${imagesToShow.map(imgUrl => `
-                            <img src="${imgUrl}" alt="리뷰 이미지" class="rating-image">
-                        `).join('')}
-                    </div>
-                `;
-            }
+    //     const ratingsHTML = ratings.map(rating => {
+    //         let imagesHTML = '';
+    //         if (rating.images && rating.images.length > 0){
+    //             const imagesToShow = rating.images.slice(0, 4);
+    //             imagesHTML=`
+    //                 <div class="rating-item-images">
+    //                     ${imagesToShow.map(imgUrl => `
+    //                         <img src="${imgUrl}" alt="리뷰 이미지" class="rating-image">
+    //                     `).join('')}
+    //                 </div>
+    //             `;
+    //         }
         
-            return `
-                <div class="rating-item">
-                    <div class="rating-item-header">
-                        <div class="rating-item-stars">
-                            ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
-                        </div>
-                        <span class="rating-item-date">${rating.created_at}</span>
-                    </div>
-                    <div class="rating-item-user">${rating.user_name}</div>
-                    <div class="rating-item-body">
-                        ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : '<div></div>' /* 댓글이 없을 때도 그리드 구조 유지를 위해 빈 div 추가 */}
-                        ${imagesHTML}
-                    </div>
-            </div>
-        `}).join('');
+    //         return `
+    //             <div class="rating-item">
+    //                 <div class="rating-item-header">
+    //                     <div class="rating-item-stars">
+    //                         ${'★'.repeat(rating.rating)}${'☆'.repeat(5 - rating.rating)}
+    //                     </div>
+    //                     <span class="rating-item-date">${rating.created_at}</span>
+    //                 </div>
+    //                 <div class="rating-item-user">${rating.user_name}</div>
+    //                 <div class="rating-item-body">
+    //                     ${rating.comment ? `<div class="rating-item-comment">${rating.comment}</div>` : '<div></div>' /* 댓글이 없을 때도 그리드 구조 유지를 위해 빈 div 추가 */}
+    //                     ${imagesHTML}
+    //                 </div>
+    //         </div>
+    //     `}).join('');
 
-        ratingsList.innerHTML = ratingsHTML;
-    }
+    //     ratingsList.innerHTML = ratingsHTML;
+    // }
 
     getCSRFToken() {
         const cookies = document.cookie.split(';');
