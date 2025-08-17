@@ -1,6 +1,109 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
+<style>
+  /* 폰트나 기본 스타일은 프로젝트에 맞게 조절하세요 */
+.prev-result {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    height: 100px;
+    padding: 15px;
+    background-color: #f7f9fc;
+    border: 1px solid #e9ecef;
+    border-radius: 16px;
+    box-sizing: border-box;
+    overflow: hidden;
+    margin: 20px 0 0 0;
+}
 
+/* 왼쪽: 우승자 정보 */
+.prev-result__winner {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+    color: inherit;
+}
+
+.winner__image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.winner__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.winner__label {
+    font-size: 12px;
+    color: #868e96;
+}
+
+.winner__name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #212529;
+}
+
+/* 오른쪽: 상세 득표율 */
+.prev-result__details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+a.details__bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    text-decoration: none;
+    color: inherit;
+}
+
+a.details__bar:hover {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+.bar__label {
+    width: 100px; /* 라벨 너비를 고정해 정렬 */
+    color: #495057;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bar__progress {
+    flex-grow: 1; /* 남은 공간을 모두 차지 */
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden; /* fill이 삐져나가지 않도록 */
+}
+
+.bar__fill {
+    height: 100%;
+    background-color: #4C6EF5; /* 포인트 컬러 */
+    border-radius: 5px;
+    transition: width 0.5s ease-in-out;
+}
+
+.bar__percentage {
+    width: 35px;
+    font-weight: bold;
+    color: #343a40;
+    text-align: right;
+    flex-shrink: 0;
+}
+</style>
 {% endblock%} {% block content %}
 <div class="main-container">
   <div class="moodico-splash-container">
@@ -50,17 +153,6 @@
                 id="makeup-products-container"
                 class="makeup-products-container"
               ></div>
-
-              <!--유사 무드 제품 추천 구간 표시-->
-              <!--
-              <div id="mood-selection-area" class="mood-selection-area">
-                <span class="mood-label">추천 구간</span>
-                <div class="resizer top-left-resizer"></div>
-                <div class="resizer top-right-resizer"></div>
-                <div class="resizer bottom-left-resizer"></div>
-                <div class="resizer bottom-right-resizer"></div>
-              </div>
-              -->
             </section>
           </div>
         </div>
@@ -234,10 +326,10 @@
     </div>
 
     <!-- 컬러 투표 박스 -->
-    <div class="feature-card voting-card">
+    <div class="feature-card voting-card" data-session-id="{{ session_id }}" data-vote-url="{% url 'voting_api' %}">
       <div class="card-header">
         <h3>🗳️ 컬러 투표</h3>
-        <p>가장 인기있는 컬러는?</p>
+        <p>오늘 가장 인기있는 컬러는?</p>
       </div>
       <div class="voting-products">
         {% for product in voting_data.values %}
@@ -287,6 +379,35 @@
         </p>
       </div>
       {% endif %}
+      <!-- 여기 밑에 어제(지난 세션)의 투표 결과 -->
+      {% if previous_session_data %}
+      <div class="prev-result">
+        <a href="{{ previous_session_data.winner_url }}" class="prev-result__winner">
+          <img src="{{ previous_session_data.winner_image_url }}" alt="{{ previous_session_data.winner_name }}" class="winner__image">
+          <div class="winner__info">
+            <span class="winner__label">🏆 직전 투표 우승</span>
+            <span class="winner__name">{{ previous_session_data.winner_name }}</span>
+          </div>
+        </a>
+
+        <div class="prev-result__details">
+          <a href="{{ previous_session_data.product1_url }}" class="details__bar">
+            <span class="bar__label" title="{{ previous_session_data.product1_name }}">{{ previous_session_data.product1_name }}</span>
+            <div class="bar__progress">
+              <div class="bar__fill" style="width: {{ previous_session_data.product1_percentage }}%;"></div>
+            </div>
+            <span class="bar__percentage">{{ previous_session_data.product1_percentage }}%</span>
+          </a>
+          <a href="{{ previous_session_data.product2_url }}" class="details__bar">
+            <span class="bar__label" title="{{ previous_session_data.product2_name }}">{{ previous_session_data.product2_name }}</span>
+            <div class="bar__progress">
+              <div class="bar__fill" style="width: {{ previous_session_data.product2_percentage }}%;"></div>
+            </div>
+            <span class="bar__percentage">{{ previous_session_data.product2_percentage }}%</span>
+          </a>
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 
@@ -332,8 +453,13 @@
     </div>
   </div>
 </div>
-{% endblock %}
-{% block extra_js %}
-<!-- JavaScript 파일 로드 -->
+
+<!-- JavaScript 파일 로드
+ ; base.html에 main.js가 로드되고 있으므로 중복 선언 방지를 위해 주석처리-->
+<!--
 <script src="{% static 'js/main/main.js' %}"></script>
+-->
+<script>
+  const isUserLoggedIn = {{ is_user_logged_in|yesno:"true,false" }};
+</script>
 {% endblock %}

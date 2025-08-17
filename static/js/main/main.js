@@ -69,49 +69,97 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // console.log('투표 시작 - 모든 제품 0표');
     updateVoteResults();
+
+    const csrftoken = getCookie('csrftoken');
     
     // 이벤트 리스너 (다시 누르면 취소 / 다른 카드 선택하면 이전 해제 후 이동)
     voteCards.forEach(card => {
         card.addEventListener('click', function() {
+            if (!isUserLoggedIn) { showVoteMessage("🔒 로그인이 필요한 서비스입니다. \n 로그인 후 더 다양한 무디코 서비스를 즐겨보세요.", 'info'); return;}
+
             const productId = this.dataset.productId;
+            const sessionId = document.querySelector('.voting-card').dataset.sessionId;
+            const voteUrl = document.querySelector('.voting-card').dataset.voteUrl;
 
-            // 1) 같은 카드를 다시 클릭 → 취소
-            if (currentSelectedId === productId) {
-                this.classList.remove('selected');
-                this.style.transform = '';
-                this.style.boxShadow = '';
+            // // 1) 같은 카드를 다시 클릭 → 취소
+            // if (currentSelectedId === productId) {
+            //     this.classList.remove('selected');
+            //     this.style.transform = '';
+            //     this.style.boxShadow = '';
 
-                voteData[productId].votes -= 1;
-                totalVoteCount -= 1;
-                hasVoted = false;
-                currentSelectedId = null;
+            //     voteData[productId].votes -= 1;
+            //     totalVoteCount -= 1;
+            //     hasVoted = false;
+            //     currentSelectedId = null;
 
-                updateVoteResults();
-                showVoteMessage('투표가 취소되었습니다.', 'info');
-                return;
-            }
+            //     updateVoteResults();
+            //     showVoteMessage('투표가 취소되었습니다.', 'info');
+            //     return;
+            // }
 
-            // 2) 다른 카드 클릭 → 기존 해제 후 새 카드 선택
-            if (hasVoted && currentSelectedId && currentSelectedId !== productId) {
-                const prevCard = document.querySelector(`.vote-product-card[data-product-id="${currentSelectedId}"]`);
-                if (prevCard) {
-                    prevCard.classList.remove('selected');
-                    prevCard.style.transform = '';
-                    prevCard.style.boxShadow = '';
+            // // 2) 다른 카드 클릭 → 기존 해제 후 새 카드 선택
+            // if (hasVoted && currentSelectedId && currentSelectedId !== productId) {
+            //     const prevCard = document.querySelector(`.vote-product-card[data-product-id="${currentSelectedId}"]`);
+            //     if (prevCard) {
+            //         prevCard.classList.remove('selected');
+            //         prevCard.style.transform = '';
+            //         prevCard.style.boxShadow = '';
+            //     }
+            //     voteData[currentSelectedId].votes -= 1;
+            //     totalVoteCount -= 1; 
+            // }
+
+            // // 3) 신규 선택
+            // this.classList.add('selected');
+            // currentSelectedId = productId;
+            // voteData[productId].votes += 1;
+            // totalVoteCount += 1;
+            // hasVoted = true;
+
+            // updateVoteResults();
+            // showVoteStatus();
+            // showVoteMessage('투표가 완료되었습니다! 🎉', 'success');
+
+
+            // fetch api를 통해 백엔드로 db 변경사항 업데이트
+            const formData = new FormData();
+            formData.append('session_id', sessionId);
+            formData.append('product_id', productId);
+
+            fetch(voteUrl, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken
+            },
+            body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // 서버가 보내준 데이터로 UI 업데이트
+                    voteData[Object.keys(voteData)[0]].votes = data.product1_votes;
+                    voteData[Object.keys(voteData)[1]].votes = data.product2_votes;
+                    totalVoteCount = data.product1_votes + data.product2_votes;
+
+                    updateVoteResults();
+                    showVoteMessage('투표가 반영되었습니다! 🎉', 'success');
+
+                    voteCards.forEach(c => {
+                    if (c.dataset.productId === data.user_voted_for) {
+                        c.classList.add('selected');
+                    } else {
+                        c.classList.remove('selected');
+                    }
+                });
+
+                } else {
+                    showVoteMessage(`오류: ${data.message}`, 'error');
                 }
-                voteData[currentSelectedId].votes += 1;
-            }
-
-            // 3) 신규 선택
-            this.classList.add('selected');
-            currentSelectedId = productId;
-            voteData[productId].votes += 1;
-            totalVoteCount += 1;
-            hasVoted = true;
-
-            updateVoteResults();
-            showVoteStatus();
-            showVoteMessage('투표가 완료되었습니다! 🎉', 'success');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showVoteMessage('네트워크 오류가 발생했습니다.', 'error');
+            });
         });
     });
     
@@ -210,12 +258,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-  // reveal
-  const _io = new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.15});
-  document.querySelectorAll('.pc-reveal').forEach(el=>_io.observe(el));
+// reveal
+const _io = new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.15});
+document.querySelectorAll('.pc-reveal').forEach(el=>_io.observe(el));
 
-  // mood palettes
-  const PC_MOOD = {
+// mood palettes
+const PC_MOOD = {
     lovely: {
       title:'러블리 무드 · 추천 팔레트',
       chips:[['#ff8a65','코랄'],['#f4a7b9','로즈핑크'],['#e1f5fe','베이비블루'],['#fff4e6','크림아이보리']],
@@ -258,8 +306,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 };
 
-  const moodBoard = document.getElementById('pcMoodBoard');
-  if (moodBoard){
+const moodBoard = document.getElementById('pcMoodBoard');
+if (moodBoard){
     const chipsBox = document.getElementById('pcMoodChips');
     const tipsBox = document.getElementById('pcMoodTips');
     const titleEl = document.getElementById('pcMoodTitle');
@@ -273,4 +321,19 @@ document.addEventListener('DOMContentLoaded', function() {
     moodBoard.querySelectorAll('[data-mood]').forEach(btn=>{
       btn.addEventListener('click', ()=> renderMood(btn.dataset.mood));
     });
-  }
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}

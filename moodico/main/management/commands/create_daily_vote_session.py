@@ -12,8 +12,9 @@ class Command(BaseCommand):
 
         active_sessions = VotingSession.objects.filter(is_active=True)
         if active_sessions.exists():
-            updated_count = active_sessions.update(is_active=False, end_time=timezone.now())
-            self.stdout.write(self.style.WARNING(f"{updated_count}개의 기존 활성 세션을 종료했습니다."))
+            for session in active_sessions:
+                session.close_session()
+            self.stdout.write(self.style.WARNING(f"{len(active_sessions)}개의 기존 활성 세션을 종료했습니다."))
         
         try:
             ranked1_data, ranked2_data = get_top_liked_products(2)

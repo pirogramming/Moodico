@@ -497,6 +497,7 @@
 .vote-message-info {
     background: linear-gradient(135deg, #2196f3, #1976d2);
     color: white;
+    white-space: pre-wrap;
 }
 
 @keyframes slideDown {

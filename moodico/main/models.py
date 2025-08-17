@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
 
 # Create your models here.
 class RankedProduct(models.Model):
@@ -45,3 +46,14 @@ class VotingSession(models.Model):
             self.winner = self.product2
         
         self.save()
+
+# 세션 - 투표 - 사용자를 잇는 투표 모델
+class Vote(models.Model):
+    session = models.ForeignKey(VotingSession, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    voted_product = models.ForeignKey(RankedProduct, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        # 한 사용자는 한 세션에 하나의 투표만 가능
+        unique_together = ('session', 'user')
