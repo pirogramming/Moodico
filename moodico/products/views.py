@@ -777,3 +777,33 @@ def delete_product_rating(request, product_id):
         return JsonResponse({'error': '삭제할 리뷰를 찾을 수 없습니다.'}, status=404)
     except Exception as e:
         return JsonResponse({'error': f'리뷰 삭제 중 오류가 발생했습니다: {e}'}, status=500)
+
+        # views.py
+
+
+def product_ranking(request):
+    """제품 랭킹 페이지 뷰 - 카테고리 필터링 가능"""
+    
+    try:
+        category = request.GET.get('category')  # URL에서 category 파라미터
+        top_products = get_top_liked_products(1000)  # 충분히 많은 제품을 가져옴
+        
+        # 카테고리 필터링
+        if category:
+            top_products = [p for p in top_products if p.get('product_category') == category]
+        
+        # 최대 10개만 표시
+        top_products = top_products[:10]
+        
+        return render(request, 'products/product_ranking.html', {
+            'top_products': top_products,
+            'selected_category': category,  # 선택된 카테고리 표시용
+        })
+    except Exception as e:
+        logger.error(f"제품 랭킹 페이지 오류: {str(e)}")
+        return render(request, 'products/product_ranking.html', {
+            'top_products': [],
+            'error_message': '랭킹 정보를 불러오는데 실패했습니다.'
+        })
+
+    

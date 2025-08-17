@@ -1,9 +1,11 @@
+/* ====== 랭킹 컨테이너 ====== */
 .ranking-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 40px 20px;
 }
 
+/* ====== 헤더 ====== */
 .ranking-header {
     text-align: center;
     margin-bottom: 50px;
@@ -24,36 +26,39 @@
     margin-bottom: 20px;
 }
 
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 14px;
-    margin-top: 16px;
+/* ====== 카테고리 필터 ====== */
+.category-filter {
+    margin-bottom: 20px;
 }
 
-.product-item {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 8px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
+.category-filter a {
+    display: inline-block;
+    margin: 0 8px 10px 0;
+    padding: 6px 16px;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
 }
 
-.product-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.category-filter a:hover {
+    background-color: #ddd;
 }
 
-.product-item img {
-    max-width: 100%;
-    border-radius: 4px;
+.category-filter a.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
+/* ====== 랭킹 통계 ====== */
 .ranking-stats {
     background: linear-gradient(135deg,
-            rgba(255, 107, 107, 0.1),
-            rgba(147, 112, 219, 0.1));
+        rgba(255, 107, 107, 0.1),
+        rgba(147, 112, 219, 0.1));
     padding: 15px 25px;
     border-radius: 25px;
     display: inline-block;
@@ -61,6 +66,7 @@
     color: #333;
 }
 
+/* ====== 그리드 ====== */
 .ranking-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -68,6 +74,7 @@
     margin-bottom: 40px;
 }
 
+/* ====== 카드 ====== */
 .ranking-card {
     background: white;
     border-radius: 18px;
@@ -90,14 +97,15 @@
 .ranking-card.top-3 {
     border: 2px solid;
     background: linear-gradient(135deg,
-            rgba(255, 215, 0, 0.05),
-            rgba(255, 255, 255, 1));
+        rgba(255, 215, 0, 0.05),
+        rgba(255, 255, 255, 1));
 }
 
-.ranking-card.rank-1 { border-color: #ffd700; }
-.ranking-card.rank-2 { border-color: #c0c0c0; }
-.ranking-card.rank-3 { border-color: #cd7f32; }
+.ranking-card.rank-1 { border-color: #ffd700; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3); }
+.ranking-card.rank-2 { border-color: #c0c0c0; box-shadow: 0 8px 25px rgba(192, 192, 192, 0.3); }
+.ranking-card.rank-3 { border-color: #cd7f32; box-shadow: 0 8px 25px rgba(205, 127, 50, 0.3); }
 
+/* ====== 랭킹 번호 ====== */
 .ranking-number {
     width: 45px;
     height: 45px;
@@ -111,11 +119,12 @@
     flex-shrink: 0;
 }
 
-.rank-1 .ranking-number { background: linear-gradient(135deg, #ffd700, #ffed4e); }
-.rank-2 .ranking-number { background: linear-gradient(135deg, #c0c0c0, #e8e8e8); }
-.rank-3 .ranking-number { background: linear-gradient(135deg, #cd7f32, #daa520); }
-.ranking-number.other { background: linear-gradient(135deg, #667eea, #764ba2); }
+.rank-1 .ranking-number { background: linear-gradient(135deg, #ffd700, #ffed4e); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); }
+.rank-2 .ranking-number { background: linear-gradient(135deg, #c0c0c0, #e8e8e8); box-shadow: 0 4px 15px rgba(192, 192, 192, 0.4); }
+.rank-3 .ranking-number { background: linear-gradient(135deg, #cd7f32, #daa520); box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4); }
+.ranking-number.other { background: linear-gradient(135deg, #667eea, #764ba2); box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
 
+/* ====== 이미지 ====== */
 .product-image {
     width: 70px;
     height: 70px;
@@ -124,15 +133,13 @@
     flex-shrink: 0;
 }
 
-.product-details { flex: 1; min-width: 0; }
-
-.product-brand {
-    font-size: 0.9em;
-    color: #888;
-    margin-bottom: 5px;
-    font-weight: 500;
+/* ====== 제품 정보 ====== */
+.product-details {
+    flex: 1;
+    min-width: 0;
 }
 
+.product-brand { font-size: 0.9em; color: #888; margin-bottom: 5px; font-weight: 500; }
 .product-name {
     font-size: 1.1em;
     font-weight: bold;
@@ -144,26 +151,15 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
-
-.product-price {
-    font-size: 1em;
-    color: #ff6699;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
+.product-price { font-size: 1em; color: #ff6699; font-weight: 600; margin-bottom: 10px; }
 .like-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex; align-items: center; gap: 8px;
     background: rgba(255, 107, 107, 0.1);
-    padding: 7px 10px;
-    border-radius: 18px;
-    font-size: 0.9em;
-    font-weight: 600;
-    color: #ff6b6b;
+    padding: 8px 12px; border-radius: 20px;
+    font-size: 0.9em; font-weight: 600; color: #ff6b6b;
 }
 
+/* ====== 왕관 ====== */
 .crown-icon {
     position: absolute;
     top: -10px;
@@ -171,47 +167,33 @@
     font-size: 1.8em;
     transform: rotate(25deg);
 }
+.rank-1 .crown-icon { color: #ffd700; text-shadow: 0 2px 8px rgba(255, 215, 0, 0.5); }
 
+/* ====== 빈 상태 ====== */
 .empty-state {
     text-align: center;
     padding: 80px 20px;
     color: #666;
 }
-
-.empty-state .icon {
-    font-size: 4em;
-    margin-bottom: 20px;
-    opacity: 0.3;
-}
-
+.empty-state .icon { font-size: 4em; margin-bottom: 20px; opacity: 0.3; }
 .empty-state h2 { font-size: 1.8em; margin-bottom: 15px; color: #333; }
 .empty-state p { font-size: 1.1em; margin-bottom: 30px; }
 
+/* ====== 뒤로가기 버튼 ====== */
 .back-btn {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
+    color: white; border: none;
+    padding: 12px 25px; border-radius: 25px;
+    cursor: pointer; font-size: 1em; font-weight: 600;
+    transition: all 0.3s ease; text-decoration: none; display: inline-block; margin-top: 20px;
 }
+.back-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3); text-decoration: none; }
 
-.back-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-    text-decoration: none;
-}
-
+/* ====== 반응형 ====== */
 @media (max-width: 768px) {
     .ranking-container { padding: 20px 15px; }
     .ranking-header h1 { font-size: 2em; }
-    .ranking-grid { grid-template-columns: 1fr; gap: 18px; }
-    .ranking-card { padding: 18px; flex-direction: column; text-align: center; gap: 12px; }
-    .product-image { width: 90px; height: 90px; }
+    .ranking-grid { grid-template-columns: 1fr; gap: 20px; }
+    .ranking-card { padding: 20px; flex-direction: column; text-align: center; }
+    .product-image { width: 100px; height: 100px; }
 }

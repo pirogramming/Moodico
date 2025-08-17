@@ -2,7 +2,14 @@
 {% load static %}
 
 {% block extra_head %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/products/product_ranking.css' %}" />
+{% endblock %}
+
+{% block content %}
 {% endblock %}
 
 {% block content %}
