@@ -54,3 +54,6 @@ def main(request):
     })
 
 
+def personalcolor(request):
+    """퍼스널 컬러 페이지 뷰"""
+    return render(request, 'personalcolor/personalcolor.html')
