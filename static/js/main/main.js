@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (splashContainer) {
             splashContainer.classList.add('hidden');
         }
-    }, 4000);
+    }, 2500);
 });
 
 
