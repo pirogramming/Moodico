@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const productsContainerLips = document.getElementById('makeup-products-container-lips');
     const productsContainerEyeshadow = document.getElementById('makeup-products-container-eyeshadow');
     const productsContainerBlush = document.getElementById('makeup-products-container-blush');
+    const productsDataElement = document.getElementById('products-data');
+    const makeupProducts = JSON.parse(productsDataElement.textContent);
     /*
     // 무드별 구역 정의 -> mood_zones.json로 이동
     const moodZones = {
@@ -189,9 +191,18 @@ document.addEventListener('DOMContentLoaded', async () => {
         productsContainerLips.innerHTML = '';
         productsContainerEyeshadow.innerHTML = '';
         productsContainerBlush.innerHTML = '';
+
+        let productsToRender = makeupProducts;
+
+        // 좋아요 필터링
+        if (isLikeFilterActive) {
+            productsToRender = productsToRender.filter(p => p.is_liked === true);
+        }
         
         // 필터링할 제품 목록
-        const productsToRender = category ? makeupProducts.filter(p => p.category === category) : makeupProducts;
+        if (category) {
+            productsToRender = productsToRender.filter(p => p.category === category);
+        }
         const targetContainer = category === 'Lips' ? productsContainerLips
                               : category === 'eyeshadow' ? productsContainerEyeshadow
                               : category === 'blush' ? productsContainerBlush
@@ -208,6 +219,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             productCircle.style.left = `${coords.warmCool}%`;
             productCircle.style.top = `${coords.lightDeep}%`;
             productCircle.dataset.productId = product.id;
+
+            productCircle.dataset.liked = product.is_liked ? 'true' : 'false';
             productCircle.title = `${product.name} (${product.mood})`;
 
             productCircle.href = product.url;
@@ -300,6 +313,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     };
+
+    // 좋아요 토글 필터링
+    function filterLikedProducts() {
+        const selectedCategory = categoryDropdown.value;
+
+        renderProducts(selectedCategory);
+        updateSelectedProducts(); // 오른쪽 선택 목록도 업데이트
+    }
+
+    const likeToggleCheckbox = document.getElementById('like-toggle-checkbox');
+    let isLikeFilterActive = false;
+    if (likeToggleCheckbox) {
+        likeToggleCheckbox.addEventListener('change', () => {
+            isLikeFilterActive = likeToggleCheckbox.checked;
+            filterLikedProducts();
+        });
+    }
 
     let isDragging = false;
     let isResizing = false;
