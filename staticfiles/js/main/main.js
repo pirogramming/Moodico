@@ -195,4 +195,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }, 3000);
     }
+    const splashContainer = document.querySelector('.moodico-splash-container');
+
+    //5초후에 무디코 소개멘트 숨기는거
+    setTimeout(() => {
+        if (splashContainer) {
+            splashContainer.classList.add('hidden');
+        }
+    }, 4000);
 });
