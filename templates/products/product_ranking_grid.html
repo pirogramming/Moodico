@@ -1,0 +1,28 @@
+{% for product in top_products %}
+<div
+  class="ranking-card {% if forloop.counter <= 3 %}top-3 rank-{{ forloop.counter }}{% endif %}"
+  data-product-id="{{ product.product_id }}"
+>
+  {% if forloop.counter == 1 %}
+  <div class="crown-icon">👑</div>
+  {% endif %}
+
+  <div class="ranking-number {% if forloop.counter > 3 %}other{% endif %}">
+    {{ forloop.counter }}
+  </div>
+
+  <img
+    src="{{ product.product_image|default:'/static/images/test.jpg' }}"
+    alt="{{ product.product_name }}"
+    class="product-image"
+    onerror="this.src='/static/images/test.jpg'"
+  />
+
+  <div class="product-details">
+    <div class="product-brand">{{ product.product_brand }}</div>
+    <div class="product-name">{{ product.product_name }}</div>
+    <div class="product-price">{{ product.product_price }}</div>
+    <div class="like-info">💜 {{ product.like_count }}명이 찜함</div>
+  </div>
+</div>
+{% endfor %}

@@ -132,7 +132,7 @@
   font-size: 1.2rem;
 }
 
-.ratings-list {
+#ratings-list {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -143,6 +143,15 @@
   border: 1px solid #e9ecef;
   border-radius: 6px;
   background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.rating-comment,
+.rating-item-images {
+    width: 100%;
+    box-sizing: border-box; 
 }
 
 .rating-item-header {
@@ -213,7 +222,7 @@
     gap: 8px;
     margin-top: 10px;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
   }
 
   .image-box {
@@ -227,7 +236,7 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .image-box img {
@@ -283,14 +292,6 @@
     background: rgba(0, 0, 0, 0.8);
   }
 
-  /*리뷰 이미지 부분*/
-  .rating-item-body {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    align-items: start;
-  }
-
   /* 리뷰 댓글 */
   .rating-item-comment {
     font-size: 0.95rem;
@@ -300,33 +301,18 @@
   }
 
   .rating-item-images {
-    display: grid;
-    gap: 5px;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
-
-  /* 이미지가 1개일 때 */
-  .rating-item-images:has(img:first-child:last-child) {
-    grid-template-columns: 1fr;
-  }
-
-  /* 이미지가 2개일 때 */
-  .rating-item-images:has(img:nth-child(2):last-child) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* 이미지가 3개일 때 */
-  .rating-item-images:has(img:nth-child(3):last-child) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .rating-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
+  .rating-item-images .rating-image {
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+    border: 1px solid #eee;
   }
 
   .image-modal {

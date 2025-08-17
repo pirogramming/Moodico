@@ -1,42 +1,54 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moodico"</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <style>
+      body {
+        cursor: url("{% static 'images/purple_cursor.svg' %}"), auto;
+      }
+    </style>
+    {% block extra_head %}{% endblock %}
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moodico"</title>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-  <style>
-    body {
-      cursor: url("{% static 'images/purple_cursor.svg' %}"),
-      auto;
-    }
-  </style>
-  {% block extra_head %}{% endblock %}
-</head>
+  <body>
+    <header>
+      <nav>
+        <div class="nav-links-left">
+          <a href="{% url 'personalcolor' %}" class="nav-personalcolor"
+            >About</a
+          >
+          <a href="{% url 'my_item_recommendation'  %}" class="nav-search"
+            >Search</a
+          >
+          <a href="{% url 'mood_test' %}" class="nav-test">Test</a>
+          <a href="{% url 'color_matrix_explore' %}" class="nav-matrix"
+            >Matrix</a
+          >
+          <a href="{% url 'product_ranking' %}" class="nav-ranking">Ranking</a>
+        </div>
+        <a href="{% url 'main' %}" class="logo" style="text-decoration: none"
+          >Moodico"</a
+        >
+        <div class="nav-links">
+          <a href="{% url 'liked_products' %}" class="liked-products-link">
+            My Item
+          </a>
+          <a href="{% url 'login' %}" class="login-icon">My Page</a>
+        </div>
+      </nav>
+    </header>
 
-<body>
-  <header>
-    <nav>
-      <a href="{% url 'main' %}" class="logo" style="text-decoration: none">Moodico"</a>
-      <div class="nav-links">
-        <a href="{% url 'liked_products' %}" class="nav-link liked-products-link">
-          💖 찜한 아이템
-        </a>
-        <a href="{% url 'login' %}" class="login-icon">👤 마이페이지 </a>
-      </div>
-    </nav>
-  </header>
+    <main>{% block content %} {% endblock %}</main>
 
-  <main>{% block content %} {% endblock %}</main>
-
-  <footer>
-    <p>&copy; 2025 Moodico" All rights reserved.</p>
-  </footer>
-  <script src="{% static 'js/main/main.js' %}"></script>
-  <script src="{% static 'js/products/like_button.js' %}"></script>
-  {% block extra_js %}{% endblock %}
-</body>
-
+    <footer>
+      <p>&copy; 2025 Moodico" All rights reserved.</p>
+    </footer>
+    <script src="{% static 'js/main/main.js' %}"></script>
+    <script src="{% static 'js/products/like_button.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+  </body>
 </html>

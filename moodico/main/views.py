@@ -87,3 +87,7 @@ def main(request):
         'session_vote_count': session_vote_count,
         'voting_data': voting_data,
     })
+
+def personalcolor(request):
+    """퍼스널 컬러 페이지 뷰"""
+    return render(request, 'personalcolor/personalcolor.html')

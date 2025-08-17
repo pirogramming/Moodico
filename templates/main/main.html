@@ -1,5 +1,6 @@
 {% extends 'base.html' %} {% load static %} {% block extra_head %}
 <link rel="stylesheet" href="{% static 'css/main/main.css' %}" />
+
 {% endblock%} {% block content %}
 <div class="main-container">
   <div class="moodico-splash-container">
@@ -8,14 +9,64 @@
       <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
     </div>
   </div>
-  <!-- 퍼스널 컬러 배너 섹션 -->
-  <div class="personal-color-banner">
-    <div class="banner-content">
-      <h2>퍼스널 컬러? 그게 뭐야?</h2>
-      <p>나만의 컬러로 나만의 매력을 찾아보세요!</p>
-      <a href="#" class="cta-button">퍼스널 컬러 알아보러 가기</a>
+
+  <!-- ✅ 추가: 퍼스널 컬러 온보딩 (나의 시안 통합) -->
+  <section class="pc-section">
+    <div class="pc-container">
+      <div class="pc-hero pc-reveal">
+        <div>
+          <div class="pc-eyebrow">Tone-Match by Moodico</div>
+          <h2 class="pc-title-xl">톤 걱정 끝.<br> 무디코 매트릭스가 다 맞춰줘요</h2>
+          <p class="pc-subtitle">
+
+            무디코는 <strong>톤 일치</strong>를 최우선으로, <strong>색상 매트릭스</strong>에서
+            <strong>동일 톤 제품</strong>을 추려 <strong>바로 쓸 수 있는 조합</strong>으로 추천합니다.
+            <strong>무드·보유템</strong>까지 반영해 실패를 줄여요.
+          </p>
+          <div style="display: flex; gap: 10px; margin-top: 16px">
+            <a class="pc-btn primary" href="{% url 'personalcolor' %}"
+              >더 알아보러가기</a
+            >
+          </div>
+        </div>
+        <div>
+          <div class="matrix-section">
+            <section class="color-matrix-container">
+              <div class="quadrant-grid">
+                <div class="quadrant top-left"></div>
+                <div class="quadrant top-right"></div>
+                <div class="quadrant bottom-left"></div>
+                <div class="quadrant bottom-right"></div>
+              </div>
+
+              <div class="axis-label top-label">Light</div>
+              <div class="axis-label bottom-label">Deep</div>
+              <div class="axis-label left-label">Cool</div>
+              <div class="axis-label right-label">Warm</div>
+
+            <div>
+
+              <div
+                id="makeup-products-container"
+                class="makeup-products-container"
+              ></div>
+
+              <!--유사 무드 제품 추천 구간 표시-->
+              <!--
+              <div id="mood-selection-area" class="mood-selection-area">
+                <span class="mood-label">추천 구간</span>
+                <div class="resizer top-left-resizer"></div>
+                <div class="resizer top-right-resizer"></div>
+                <div class="resizer bottom-left-resizer"></div>
+                <div class="resizer bottom-right-resizer"></div>
+              </div>
+              -->
+            </section>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- 주요 기능 섹션 -->
   <div class="main-features">
@@ -59,12 +110,13 @@
         <div class="product-info">
           <h4>{{ recommended_product.product_name }}</h4>
           <p>
-            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{ recommended_product.product_brand }} {% else %}
-             {{ recommended_product.product_brand }} | 💜 {{  recommended_product.like_count }}명이 찜함 {% endif %}
+            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{
+            recommended_product.product_brand }} {% else %} {{
+            recommended_product.product_brand }} 💜 | {{
+            recommended_product.like_count }}명이 찜함 {% endif %}
           </p>
         </div>
       </div>
-
     </div>
 
     <!-- 무드 테스트 미리보기 -->
@@ -74,10 +126,10 @@
         <p>나는 어떤 무드의 메이크업이 잘 어울릴까?</p>
       </div>
       <div class="mood-options">
-        <button class="mood-option">로맨틱</button>
+        <button class="mood-option">러블리</button>
         <button class="mood-option">시크</button>
-        <button class="mood-option">내추럴</button>
-        <button class="mood-option">글램</button>
+        <button class="mood-option">고급스러움</button>
+        <button class="mood-option">캐주얼</button>
       </div>
       <a href="{% url 'mood_test' %}" class="card-action">테스트 시작하기 →</a>
     </div>
