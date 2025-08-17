@@ -31,11 +31,17 @@
     {% if top_products %}
       {% for product in top_products %}
         {% with rank=forloop.counter %}
-        <div class="ranking-card {% if rank <= 3 %}top-3 rank-{{ rank }}{% endif %}">
-          {% if rank == 1 %}<div class="crown-icon">👑</div>{% endif %}
+        <div class="ranking-card {% if rank <= 3 %}top-3 rank-{{ rank }}{% endif %}"
+             data-product-id="{{ product.product_id }}">
+          {% if rank == 1 %}
+          <div class="crown-icon">👑</div>
+          {% endif %}
+
           <img class="product-image" src="{{ product.product_image|default:'/static/images/test.jpg' }}" 
                alt="{{ product.product_name }}" />
+
           <div class="ranking-number {% if rank > 3 %}other{% endif %}">{{ rank }}</div>
+
           <div class="product-details">
             <div class="product-brand">{{ product.product_brand }}</div>
             <div class="product-name">{{ product.product_name }}</div>
@@ -58,4 +64,22 @@
     <a href="{% url 'main' %}" class="back-btn">메인으로 돌아가기</a>
   </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // 랭킹 카드 클릭 시 제품 상세 페이지로 이동
+  const rankingGrid = document.querySelector('.ranking-grid');
+  if (rankingGrid) {
+      rankingGrid.addEventListener('click', function (e) {
+          const rankingCard = e.target.closest('.ranking-card');
+          if (rankingCard) {
+              const productId = rankingCard.dataset.productId;
+              if (productId) {
+                  window.open(`/products/detail/${productId}/`, '_blank');
+              }
+          }
+      });
+  }
+</script>
 {% endblock %}
