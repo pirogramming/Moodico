@@ -202,5 +202,71 @@ document.addEventListener('DOMContentLoaded', function() {
         if (splashContainer) {
             splashContainer.classList.add('hidden');
         }
-    }, 4000);
+    }, 2500);
 });
+
+
+  // reveal
+  const _io = new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.15});
+  document.querySelectorAll('.pc-reveal').forEach(el=>_io.observe(el));
+
+  // mood palettes
+  const PC_MOOD = {
+    lovely: {
+      title:'러블리 무드 · 추천 팔레트',
+      chips:[['#ff8a65','코랄'],['#f4a7b9','로즈핑크'],['#e1f5fe','베이비블루'],['#fff4e6','크림아이보리']],
+      tips:['피치/핑크톤 블러셔 넓게','글로시 립으로 생기있게','미니멀한 주얼리']
+    },
+    chic: {
+      title:'시크 무드 · 추천 팔레트',
+      chips:[['#000000','블랙'],['#4b4b5b','다크네이비'],['#a0a3a7','스톤그레이'],['#ffffff','화이트']],
+      tips:['모노톤 의상으로 톤온톤 스타일링','립은 딥한 버건디/레드','실버 또는 플래티넘 주얼리']
+    },
+    natural: {
+      title:'내추럴 무드 · 추천 팔레트',
+      chips:[['#c8e6c9','민트'],['#a67c52','카멜'],['#d2b48c','베이지'],['#c8d5b9','세이지그린']],
+      tips:['자연스러운 채도의 옷으로 톤 맞추기','누드/코랄 계열 립','골드 또는 원석 액세서리']
+    },
+    casual: {
+      title:'캐주얼 무드 · 추천 팔레트',
+      chips:[['#ffb300','머스타드옐로'],['#3d5afe','로얄블루'],['#e53935','레드'],['#fff4e6','아이보리']],
+      tips:['비비드 컬러로 한두 곳 포인트','스니커즈/캡모자로 활동성 강조','귀엽고 작은 액세서리']
+    },
+    elegant: {
+      title:'고급스러운 무드 · 추천 팔레트',
+      chips:[['#9e3c3e','와인'],['#3b3b3c','차콜'],['#bfa57f','브론즈'],['#d4c4b6','베이지']],
+      tips:['실크/새틴 등 고급 소재 활용','입술은 딥레드/말린장미','진주 또는 골드 주얼리']
+    },
+    modern: {
+      title:'모던 무드 · 추천 팔레트',
+      chips:[['#78909C','스모키블루'],['#4b4b5b','다크그레이'],['#9aa0a6','쿨그레이'],['#ffffff','화이트']],
+      tips:['절제된 실루엣의 의상','립은 로즈 또는 모브 MLBB','미니멀한 실버 주얼리']
+    },
+    purity: {
+      title:'청순 무드 · 추천 팔레트',
+      chips:[['#e1f5fe','스카이블루'],['#f8bbd0','라이트핑크'],['#b19cd9','라벤더'],['#fff8e1','아이보리']],
+      tips:['투명한 피부 표현에 집중','수채화처럼 연한 핑크 블러셔','글로시한 립 연출']
+    },
+    hip: {
+      title:'힙 무드 · 추천 팔레트',
+      chips:[['#b39ddb','바이올렛'],['#c0c0c0','실버'],['#6c757d','그레이'],['#f44336','강렬한레드']],
+      tips:['오버사이즈 핏 의상 활용','유니크한 패턴이나 프린팅','과감한 액세서리 매치']
+    }
+};
+
+  const moodBoard = document.getElementById('pcMoodBoard');
+  if (moodBoard){
+    const chipsBox = document.getElementById('pcMoodChips');
+    const tipsBox = document.getElementById('pcMoodTips');
+    const titleEl = document.getElementById('pcMoodTitle');
+    function renderMood(key){
+      const d = PC_MOOD[key]; if(!d) return;
+      titleEl.textContent = d.title;
+      chipsBox.innerHTML = d.chips.map(([c,l])=>`<span class="pc-chip" style="--c:${c};--label:'${l}';"></span>`).join('');
+      tipsBox.innerHTML = d.tips.map(t=>`<li>${t}</li>`).join('');
+    }
+    renderMood('excited');
+    moodBoard.querySelectorAll('[data-mood]').forEach(btn=>{
+      btn.addEventListener('click', ()=> renderMood(btn.dataset.mood));
+    });
+  }

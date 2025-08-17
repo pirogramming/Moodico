@@ -657,7 +657,8 @@ main {
 }
 
 .toggle-checkbox {
-    display: none; /* 실제 체크박스는 숨김 */
+    display: none;
+    /* 실제 체크박스는 숨김 */
 }
 
 .toggle-label {
@@ -675,8 +676,9 @@ main {
 }
 
 /* 체크됐을 때 스타일 */
-.toggle-checkbox:checked + .toggle-label {
-    background-color: #8A2BE2; /* 보라색 계열 */
+.toggle-checkbox:checked+.toggle-label {
+    background-color: #8A2BE2;
+    /* 보라색 계열 */
 }
 
 @media (max-width: 900px) {
