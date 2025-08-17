@@ -204,3 +204,46 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 4000);
 });
+
+
+  // reveal
+  const _io = new IntersectionObserver((entries)=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:.15});
+  document.querySelectorAll('.pc-reveal').forEach(el=>_io.observe(el));
+
+  // mood palettes
+  const PC_MOOD = {
+    excited: { title:'설레는 무드 · 추천 팔레트',
+      chips:[['#ff8a65','코랄'],['#ffc1a6','피치'],['#ff7eb6','핑크'],['#fff4e6','아이보리']],
+      tips:['볼에 코랄-피치','립은 글로시','악세서리는 골드'] },
+    focus: { title:'집중 무드 · 추천 팔레트',
+      chips:[['#1f2a44','네이비'],['#3d5afe','블루'],['#c8b6ff','라일락'],['#e5e7eb','쿨그레이']],
+      tips:['상하의 톤 맞추기','립 로즈/모브 MLBB','실버 주얼리'] },
+    calm: { title:'차분 무드 · 추천 팔레트',
+      chips:[['#6b8b66','카키'],['#a67c52','카멜'],['#d2b48c','탠'],['#c8d5b9','세이지']],
+      tips:['채도 낮춘 웜 뉴트럴','브릭/테라코타 소프트','브론즈 포인트'] },
+    chic: { title:'시크 무드 · 추천 팔레트',
+      chips:[['#000','블랙'],['#fff','화이트'],['#9aa0a6','쿨그레이'],['#3d5afe','블루']],
+      tips:['하이컨트라스트','립 체리/버건디','실버/플래티넘'] },
+    vivid: { title:'활기찬 무드 · 추천 팔레트',
+      chips:[['#e53935','레드'],['#ffb300','옐로'],['#00a896','에메랄드'],['#3d5afe','블루']],
+      tips:['포인트 한 곳만 비비드','나머지는 뉴트럴','액세서리는 미니멀'] },
+    romantic: { title:'로맨틱 무드 · 추천 팔레트',
+      chips:[['#f4a7b9','로즈'],['#f6c1d8','핑크베일'],['#c8b6ff','라일락'],['#fff4e6','아이보리']],
+      tips:['블러셔 넓게','립 글로시/틴트','펄은 미세입자'] },
+  };
+  const moodBoard = document.getElementById('pcMoodBoard');
+  if (moodBoard){
+    const chipsBox = document.getElementById('pcMoodChips');
+    const tipsBox = document.getElementById('pcMoodTips');
+    const titleEl = document.getElementById('pcMoodTitle');
+    function renderMood(key){
+      const d = PC_MOOD[key]; if(!d) return;
+      titleEl.textContent = d.title;
+      chipsBox.innerHTML = d.chips.map(([c,l])=>`<span class="pc-chip" style="--c:${c};--label:'${l}';"></span>`).join('');
+      tipsBox.innerHTML = d.tips.map(t=>`<li>${t}</li>`).join('');
+    }
+    renderMood('excited');
+    moodBoard.querySelectorAll('[data-mood]').forEach(btn=>{
+      btn.addEventListener('click', ()=> renderMood(btn.dataset.mood));
+    });
+  }

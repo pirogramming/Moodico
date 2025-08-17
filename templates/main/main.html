@@ -8,14 +8,30 @@
       <p>당신의 무드에 완벽하게 어울리는 메이크업 조합을 찾아보세요</p>
     </div>
   </div>
-  <!-- 퍼스널 컬러 배너 섹션 -->
-  <div class="personal-color-banner">
-    <div class="banner-content">
-      <h2>퍼스널 컬러? 그게 뭐야?</h2>
-      <p>나만의 컬러로 나만의 매력을 찾아보세요!</p>
-      <a href="#" class="cta-button">퍼스널 컬러 알아보러 가기</a>
+
+  <!-- ✅ 추가: 퍼스널 컬러 온보딩 (나의 시안 통합) -->
+  <section class="pc-section">
+    <div class="pc-container">
+      <div class="pc-hero pc-reveal">
+        <div>
+          <div class="pc-eyebrow">Personal Color</div>
+          <h2 class="pc-title-xl">퍼스널 컬러, 나를 가장 빛나게 하는 색</h2>
+          <p class="pc-subtitle">
+            퍼스널 컬러는 피부·머리·눈동자와 조화를 이루는 <strong>나만의 팔레트</strong>예요.
+            좋아하는 색이 아니라, <em>나를 자연스럽고 매력적으로 보이게 하는 색</em>을 찾는 것이 핵심이죠.
+            무디코는 여기에 <strong>오늘의 무드</strong>를 더해 상황별 추천을 도와줘요.
+          </p>
+          <div style="display:flex;gap:10px;margin-top:16px;">
+            <a class="pc-btn primary" href="{% url 'personalcolor' %}">더 알아보러가기</a>
+          </div>
+        </div>
+        <div>
+          <div class="pc-ring" aria-hidden="true"></div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
+  
 
   <!-- 주요 기능 섹션 -->
   <div class="main-features">
@@ -59,12 +75,17 @@
         <div class="product-info">
           <h4>{{ recommended_product.product_name }}</h4>
           <p>
-            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{ recommended_product.product_brand }} {% else %}
-             {{ recommended_product.product_brand }} | 💜 {{  recommended_product.like_count }}명이 찜함 {% endif %}
+            
+            {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | 
+              {{ recommended_product.product_brand }} 
+            {% else %} 
+              {{ recommended_product.product_brand }} 💜 |
+              {{ recommended_product.like_count }}명이 찜함 
+            {% endif %}
+
           </p>
         </div>
       </div>
-
     </div>
 
     <!-- 무드 테스트 미리보기 -->
@@ -278,6 +299,8 @@
     </div>
   </div>
 </div>
+
+
 
 <!-- JavaScript 파일 로드 -->
 <script src="{% static 'js/main/main.js' %}"></script>
