@@ -554,7 +554,8 @@
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9));
     border-radius: 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    width: 1020px;
+    width: 90%;
+    max-width: 900px;
 }
 
 .ranking-section .section-header {
@@ -930,7 +931,8 @@
     grid-template-columns: 1.25fr .9fr;
     gap: clamp(18px, 4vw, 36px);
     background: #fff;
-    max-width: 816px;
+    width: 90%;
+    max-width: 816px
 }
 
 @media (max-width: 900px) {

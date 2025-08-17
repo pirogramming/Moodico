@@ -41,13 +41,12 @@ header nav {
 
 .nav-links,
 .nav-links-left {
-    opacity: 0;
-    pointer-events: none;
     transition: opacity 0.5s ease-in-out;
     display: flex;
     align-items: center;
     gap: 20px;
     position: absolute;
+    align-self: flex-end;
 }
 
 .nav-links {
@@ -58,12 +57,10 @@ header nav {
     left: 30px;
 }
 
-header:hover .nav-links,
-header:hover .nav-links-left {
-    opacity: 1;
-    pointer-events: auto;
+.nav-links a,
+.nav-links-left a {
+    color: mediumpurple;
 }
-
 
 
 .nav-links-left a:after,
