@@ -1,16 +1,3 @@
-// hsl로부터 warmCool, lightDeep 값을 얻기 위한 함수
-/*
-const getCoords = (hex) => {
-  const rgb = hexToRgb(hex);
-  if (!rgb) return null;
-
-  const hsl = rgbToHsl(rgb[0], rgb[1], rgb[2]);
-  if (!hsl) return null;
-
-  return calculateCoordinatesFromHsl(hsl[0], hsl[1], hsl[2]);
-};
-*/
-
 document.addEventListener('DOMContentLoaded', async () => {
     const matrixContainer = document.querySelector('.color-matrix-container');
     const productsContainer = document.getElementById('makeup-products-container');
