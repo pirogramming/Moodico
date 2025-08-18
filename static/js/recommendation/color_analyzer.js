@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 renderRecommendations(data.recommended);
                                 displayRecommendationsOnMatrix(data.recommended);
                             } else {
-                                console.warn("No recommended field in response", data);
+                                // console.warn("No recommended field in response", data);
                             }
                             // console.log(data.recommended);
                         })

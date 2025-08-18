@@ -2,7 +2,7 @@
 {
     function setTheme(mode) {
         if (mode !== "light" && mode !== "dark" && mode !== "auto") {
-            console.error(`Got invalid theme mode: ${mode}. Resetting to auto.`);
+            // console.error(`Got invalid theme mode: ${mode}. Resetting to auto.`);
             mode = "auto";
         }
         document.documentElement.dataset.theme = mode;

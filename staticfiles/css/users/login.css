@@ -113,3 +113,159 @@
 .signup-link a:hover {
     text-decoration: underline;
 }
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .login-container {
+        height: 70vh;
+        padding: 15px;
+    }
+    
+    .login-box {
+        padding: 30px 25px;
+        max-width: 350px;
+    }
+    
+    .login-box h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+    
+    .login-input-group {
+        margin-bottom: 18px;
+    }
+    
+    .login-input-group input {
+        padding: 10px 8px;
+        font-size: 15px;
+    }
+    
+    .login-button {
+        padding: 13px;
+        font-size: 16px;
+    }
+    
+    .kakao-login-button {
+        padding: 13px;
+        font-size: 15px;
+    }
+    
+    .kakao-login-button img {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        height: 65vh;
+        padding: 10px;
+    }
+    
+    .login-box {
+        padding: 25px 20px;
+        max-width: 320px;
+    }
+    
+    .login-box h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    
+    .login-input-group {
+        margin-bottom: 15px;
+    }
+    
+    .login-input-group label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    .login-input-group input {
+        padding: 8px 6px;
+        font-size: 14px;
+    }
+    
+    .login-button {
+        padding: 12px;
+        font-size: 15px;
+    }
+    
+    .social-login {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+    
+    .social-login p {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .kakao-login-button {
+        padding: 12px;
+        font-size: 14px;
+    }
+    
+    .kakao-login-button img {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+    }
+    
+    .signup-link {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .login-container {
+        height: 60vh;
+        padding: 8px;
+    }
+    
+    .login-box {
+        padding: 20px 15px;
+        max-width: 300px;
+    }
+    
+    .login-box h2 {
+        font-size: 20px;
+        margin-bottom: 18px;
+    }
+    
+    .login-input-group {
+        margin-bottom: 12px;
+    }
+    
+    .login-input-group label {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+    
+    .login-input-group input {
+        padding: 7px 5px;
+        font-size: 13px;
+    }
+    
+    .login-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+    
+    .kakao-login-button {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .kakao-login-button img {
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+    }
+    
+    .signup-link {
+        margin-top: 12px;
+        font-size: 13px;
+    }
+}

@@ -33,7 +33,7 @@ def product_result_by_mood(mood):
         return filtered_results
     
     except Exception as e:
-        logger.error(f"제품 필터링 중 에러 발생: {e}")
+        # logger.error(f"제품 필터링 중 에러 발생: {e}")
         return []
 
 # 무드필터링 된 제품을 받아서 랜덤으로 최대 3개 반환하는 함수

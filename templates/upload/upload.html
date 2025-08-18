@@ -222,7 +222,7 @@
             renderRecommendations(data.recommended);
             displayRecommendationsOnMatrix(data.recommended);
           } else {
-            console.warn("No recommended field in response", data);
+            {% comment %} console.warn("No recommended field in response", data); {% endcomment %}
           }
           // console.log(data.recommended);
         })
@@ -290,7 +290,7 @@
         }
       })
       .catch((error) => {
-        console.error("검색 오류:", error);
+        {% comment %} console.error("검색 오류:", error); {% endcomment %}
         resultsBox.style.display = "none";
       });
   }

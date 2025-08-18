@@ -38,14 +38,19 @@ def get_recommendation_list(force_refresh=False):
     cached = cache.get(CACHE_KEY)
     # 캐시가 없거나 force_refresh(자발적인 refresh)이면
     if (not cached) or force_refresh:
-        raw_data = scrape_oliveyoung_products()
-        search_results = make_search_results(raw_data)
-        payload = {
-            "results": search_results,
-            "fetched_at": int(time.time()),  # 언제 refresh 됐는지 알 수 있게
-        }
-        cache.set(CACHE_KEY, payload, CACHE_TTL)
-        return payload
+        try: 
+            raw_data = scrape_oliveyoung_products()
+            search_results = make_search_results(raw_data)
+            payload = {
+                "results": search_results,
+                "fetched_at": int(time.time()),  # 언제 refresh 됐는지 알 수 있게
+            }
+            cache.set(CACHE_KEY, payload, CACHE_TTL)
+            return payload
+        except Exception as e:
+            if cached:
+                return cached
+            return {"results": [], "fetched_at": None}   # prevent 500
 
     return cached
 
@@ -80,7 +85,7 @@ def recommend_by_color(request):
             return JsonResponse({"error": "Missing coordinates"}, status=400)
 
         coord = np.array([warm, deep, lab_l, lab_a, lab_b])
-        logger.info(f"Received coordinates: warmCool={warm}, lightDeep={deep}, lab_l={lab_l}, lab_a={lab_a}, lab_b={lab_b}")
+        # logger.info(f"Received coordinates: warmCool={warm}, lightDeep={deep}, lab_l={lab_l}, lab_a={lab_a}, lab_b={lab_b}")
         import os
         from django.conf import settings
         with open("static/data/cluster_centers.json", "r") as f:
@@ -96,7 +101,7 @@ def recommend_by_color(request):
 
         # Step 1: Find closest cluster
         cluster_idx = np.argmin([np.linalg.norm(coord - np.array(c)) for c in centers])
-        logger.info(f"Closest cluster index: {cluster_idx}")
+        # logger.info(f"Closest cluster index: {cluster_idx}")
 
         # Step 2: Gather products from the cluster
         cluster_products = [p for p in products if p.get("cluster") == cluster_idx]
@@ -113,10 +118,10 @@ def recommend_by_color(request):
 
         if len(cluster_products) >= 5:
             candidates = cluster_products
-            logger.info(f"Cluster size sufficient: {len(candidates)} candidates")
+            # logger.info(f"Cluster size sufficient: {len(candidates)} candidates")
         else:
             candidates = products
-            logger.warning(f"Cluster {cluster_idx} has only {len(cluster_products)} products — using full dataset")
+            # logger.warning(f"Cluster {cluster_idx} has only {len(cluster_products)} products — using full dataset")
 
         similarities = []
         for p in candidates:
@@ -156,5 +161,5 @@ def recommend_by_color(request):
         return JsonResponse({"recommended": response}, json_dumps_params={"ensure_ascii": False})
 
     except Exception as e:
-        logger.exception("Recommendation error")
+        # logger.exception("Recommendation error")
         return JsonResponse({"error": str(e)}, status=500)

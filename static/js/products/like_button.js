@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const productId = productCard.dataset.productId;
 
                 if (!productId) {
-                    console.error('Error: product-card missing data-product-id attribute.');
+                    // console.error('Error: product-card missing data-product-id attribute.');
                     return;  
                 }
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         } catch (error) {
-            console.error('좋아요 토글 오류:', error);
+            // console.error('좋아요 토글 오류:', error);
             showLikeMessage('네트워크 오류가 발생했습니다.');
         } finally {
             // 버튼 다시 활성화
@@ -196,11 +196,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 cacheTimestamp = now;
                 return data.likes;
             } else {
-                console.error('좋아요 목록 로드 실패:', data.message);
+                // console.error('좋아요 목록 로드 실패:', data.message);
                 return [];
             }
         } catch (error) {
-            console.error('좋아요 목록 로드 오류:', error);
+            // console.error('좋아요 목록 로드 오류:', error);
             return [];
         }
     }
@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         } catch (error) {
-            console.error('찜 개수 업데이트 오류:', error);
+            // console.error('찜 개수 업데이트 오류:', error);
         }
     }
 
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const productIds = Array.from(productCards).map(card => {
                 const id = card.dataset.productId;
                 if (!id) {
-                    console.warn('Product card without valid product ID found, skipping:', card);
+                    // console.warn('Product card without valid product ID found, skipping:', card);
                     return null;
                 }
                 return id;
@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         } catch (error) {
-            console.error('여러 제품 찜 정보 로드 오류:', error);
+            // console.error('여러 제품 찜 정보 로드 오류:', error);
         }
     }
 
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // 여러 제품의 찜 정보를 한 번에 로드 (성능 개선)
             await loadMultipleProductsLikeInfo();
         } catch (error) {
-            console.error('좋아요 상태 복원 오류:', error);
+            // console.error('좋아요 상태 복원 오류:', error);
             // 실패 시 기존 방식으로 폴백
             try {
                 const likes = await loadUserLikes();
@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // const productId = card.dataset.productId || generateUniqueProductId(card);
                     const productId = card.dataset.productId;
                     if (!productId) {
-                        console.error('Missing product ID on card:', card);
+                        // console.error('Missing product ID on card:', card);
                         return; // skip this card
                     }
                     const likeButton = card.querySelector('.like-button');
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 });
             } catch (fallbackError) {
-                console.error('폴백 좋아요 상태 복원도 실패:', fallbackError);
+                // console.error('폴백 좋아요 상태 복원도 실패:', fallbackError);
             }
         }
     }
@@ -399,14 +399,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         } catch (error) {
-            console.error('개별 카드 좋아요 상태 복원 오류:', error);
+            // console.error('개별 카드 좋아요 상태 복원 오류:', error);
             // 실패 시 기존 방식으로 폴백
             try {
                 const likes = await loadUserLikes();
                 // const productId = card.dataset.productId || generateUniqueProductId(card);
                 const productId = card.dataset.productId;
                 if (!productId) {
-                    console.error('Missing product ID on card:', card);
+                    // console.error('Missing product ID on card:', card);
                     return; // skip this card
                 }
                 const likeButton = card.querySelector('.like-button');
@@ -415,7 +415,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     likeButton.classList.add('liked');
                 }
             } catch (fallbackError) {
-                console.error('폴백 개별 카드 복원도 실패:', fallbackError);
+                // console.error('폴백 개별 카드 복원도 실패:', fallbackError);
             }
         }
     }
@@ -503,7 +503,7 @@ async function getLikedProducts() {
         const data = await response.json();
         return data.success ? data.likes : [];
     } catch (error) {
-        console.error('좋아요 목록 조회 오류:', error);
+        // console.error('좋아요 목록 조회 오류:', error);
         return [];
     }
 }
@@ -521,7 +521,7 @@ async function clearLikedProducts() {
         const data = await response.json();
         return data.success;
     } catch (error) {
-        console.error('좋아요 목록 초기화 오류:', error);
+        // console.error('좋아요 목록 초기화 오류:', error);
         return false;
     }
 }
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // const productId = card.dataset.productId || generateUniqueProductId(card);
         const productId = card.dataset.productId;
         if (!productId) {
-            console.error('Missing product ID on card:', card);
+            // console.error('Missing product ID on card:', card);
             return; // skip this card
         }
         const productName = getProductName(card);

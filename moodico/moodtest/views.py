@@ -16,13 +16,13 @@ def mood_result(request):
     if request.method == 'POST':
         mood = request.POST.get('mood', '캐주얼')
         if request.user.is_authenticated:
-            try:
-                user_profile, created = UserProfile.objects.get_or_create(user=request.user)
-                user_profile.mood_result = mood
-                user_profile.save()
-                logger.info(f"사용자 {request.user.username}의 무드 테스트 결과 '{mood}'가 저장되었습니다.")
-            except Exception as e:
-                logger.error(f"무드 테스트 결과 저장 실패: {e}")
+            # try:
+            user_profile, created = UserProfile.objects.get_or_create(user=request.user)
+            user_profile.mood_result = mood
+            user_profile.save()
+                # logger.info(f"사용자 {request.user.username}의 무드 테스트 결과 '{mood}'가 저장되었습니다.")
+            # except Exception as e:
+                # logger.error(f"무드 테스트 결과 저장 실패: {e}")
     else:
         mood = '캐주얼'  # 기본값
     

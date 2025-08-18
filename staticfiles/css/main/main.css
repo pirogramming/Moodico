@@ -497,6 +497,7 @@
 .vote-message-info {
     background: linear-gradient(135deg, #2196f3, #1976d2);
     color: white;
+    white-space: pre-wrap;
 }
 
 @keyframes slideDown {
@@ -745,6 +746,108 @@
     margin: 0;
 }
 
+/* 투표 결과 부분 css */
+.prev-result {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100px;
+  padding: 15px;
+  background-color: #f7f9fc;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 20px 0 0 0;
+}
+
+/* 왼쪽: 우승자 정보 */
+.prev-result__winner {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.winner__image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.winner__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.winner__label {
+  font-size: 12px;
+  color: #868e96;
+}
+
+.winner__name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #212529;
+}
+
+/* 오른쪽: 상세 득표율 */
+.prev-result__details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+a.details__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.details__bar:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.bar__label {
+  width: 100px; /* 라벨 너비를 고정해 정렬 */
+  color: #495057;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar__progress {
+  flex-grow: 1; /* 남은 공간을 모두 차지 */
+  height: 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden; /* fill이 삐져나가지 않도록 */
+}
+
+.bar__fill {
+  height: 100%;
+  background-color: #4C6EF5;
+  border-radius: 5px;
+  transition: width 0.5s ease-in-out;
+}
+
+.bar__percentage {
+  width: 35px;
+  font-weight: bold;
+  color: #343a40;
+  text-align: right;
+  flex-shrink: 0;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .main-features {
@@ -989,7 +1092,7 @@
 
   .pc-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:800; font-size:14px; border:1px solid transparent; cursor:pointer; text-decoration:none; }
   .pc-btn.primary { background: var(--pc-brand); color:#fff; box-shadow:0 8px 18px rgba(111,76,255,.28); }
-  .pc-btn.primary:hover { background: var(--pc-brand-600); }
+  .pc-btn.primary:hover { background: var(--pc-brand-600); text-decoration: none;}
   .pc-btn.ghost { background:#fff; border-color:var(--pc-line); color:#111; }
   .pc-btn.ghost:hover { background:#fbfaff; border-color:#d9d3ff; }
 
@@ -1001,27 +1104,6 @@
   .pc-reveal.on { opacity:1; transform: translateY(0); }
 
 /* 반응형 디자인 */
-@media (max-width: 768px) {
-    .main-container {
-        padding: 20px 15px;
-    }
-    
-    .personal-color-banner {
-        padding: 25px;
-        margin-bottom: 30px;
-    }
-    
-    .main-features {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        width: 95%;
-    }
-    
-    .feature-card {
-        padding: 25px;
-    }
-}
-
 @media (max-width: 480px) {
     .main-container {
         padding: 15px 10px;
@@ -1039,6 +1121,94 @@
     
     .feature-card {
         padding: 20px;
+    }
+    
+    .banner-content h2 {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+    }
+    
+    .banner-content p {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+    
+    .card-header h3 {
+        font-size: 1.5em;
+    }
+    
+    .ranking-section .section-header h2 {
+        font-size: 1.6em;
+    }
+    
+    .ranking-item {
+        width: 260px;
+        padding: 15px;
+    }
+    
+    .ranking-item img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-container {
+        padding: 12px 8px;
+    }
+    
+    .personal-color-banner {
+        padding: 18px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+    }
+    
+    .main-features {
+        width: 100%;
+        gap: 12px;
+    }
+    
+    .feature-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+    
+    .banner-content h2 {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+    
+    .banner-content p {
+        font-size: 0.95em;
+        margin-bottom: 18px;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    
+    .card-header h3 {
+        font-size: 1.4em;
+    }
+    
+    .ranking-section .section-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .ranking-item {
+        width: 240px;
+        padding: 12px;
+    }
+    
+    .ranking-item img {
+        width: 80px;
+        height: 80px;
     }
 }
 

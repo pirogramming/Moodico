@@ -241,6 +241,10 @@ function renderRecommendations(products) {
     
     // 제품 개수 업데이트
     updateProductCounts(categorizedProducts);
+
+    if (window.restoreLikeStates) {
+        window.restoreLikeStates();
+    }
 }
 
 function renderCategoryProducts(categoryType, products) {
@@ -418,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 renderRecommendations(data.recommended);
                                 displayRecommendationsOnMatrix(data.recommended);
                             } else {
-                                console.warn("No recommended field in response", data);
+                                // console.warn("No recommended field in response", data);
                             }
                             // console.log(data.recommended);
                         })

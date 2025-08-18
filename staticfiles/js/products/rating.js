@@ -127,7 +127,7 @@ class ProductRating {
                 // this.loadRatingsList();
             }
         } catch (error) {
-            console.error('별점 데이터 로드 실패:', error);
+            // console.error('별점 데이터 로드 실패:', error);
         }
     }
 
@@ -260,7 +260,7 @@ class ProductRating {
                 alert(errorData.error || '별점 저장에 실패했습니다.');
             }
         } catch (error) {
-            console.error('별점 제출 실패:', error);
+            // console.error('별점 제출 실패:', error);
             alert('별점 저장 중 오류가 발생했습니다.');
         } finally {
             submitBtn.disabled = false;
@@ -304,7 +304,7 @@ class ProductRating {
                 alert(errorData.error || '리뷰 삭제에 실패했습니다.');
             }
         } catch (error) {
-            console.error('리뷰 삭제 실패:', error);
+            // console.error('리뷰 삭제 실패:', error);
             alert('리뷰 삭제 중 오류가 발생했습니다.');
         }
     }

@@ -174,12 +174,200 @@
 .back-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3); text-decoration: none; }
 
 /* ====== 반응형 ====== */
+@media (max-width: 1024px) {
+    .ranking-container {
+        padding: 30px 25px;
+    }
+    
+    .ranking-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 18px;
+    }
+    
+    .ranking-card {
+        padding: 16px;
+    }
+}
+
 @media (max-width: 768px) {
-    .ranking-container { padding: 20px 15px; }
-    .ranking-header h1 { font-size: 2em; }
-    .ranking-grid { grid-template-columns: 1fr; gap: 20px; }
-    .ranking-card { padding: 18px; flex-direction: column; text-align: center; }
-    .product-image { width: 90px; height: 90px; }
+    .ranking-container { 
+        padding: 20px 15px; 
+    }
+    
+    .ranking-header h1 { 
+        font-size: 2em; 
+    }
+    
+    .ranking-header p {
+        font-size: 1em;
+    }
+    
+    .ranking-grid { 
+        grid-template-columns: 1fr; 
+        gap: 18px; 
+    }
+    
+    .ranking-card { 
+        padding: 16px; 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 15px;
+    }
+    
+    .product-image { 
+        width: 90px; 
+        height: 90px; 
+    }
+    
+    .ranking-number {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2em;
+    }
+    
+    .product-name {
+        font-size: 1em;
+        margin-bottom: 6px;
+    }
+    
+    .product-price {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+    
+    .like-info {
+        padding: 6px 10px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .ranking-container {
+        padding: 15px 10px;
+    }
+    
+    .ranking-header {
+        margin-bottom: 30px;
+    }
+    
+    .ranking-header h1 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+    }
+    
+    .ranking-header p {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+    }
+    
+    .category-filter {
+        margin-bottom: 15px;
+    }
+    
+    .category-filter a {
+        margin: 0 5px 8px 0;
+        padding: 5px 12px;
+        font-size: 0.85em;
+    }
+    
+    .ranking-grid {
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .ranking-card {
+        padding: 14px;
+        gap: 12px;
+    }
+    
+    .product-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .ranking-number {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1em;
+    }
+    
+    .product-details {
+        text-align: center;
+    }
+    
+    .product-brand {
+        font-size: 0.85em;
+        margin-bottom: 4px;
+    }
+    
+    .product-name {
+        font-size: 0.95em;
+        margin-bottom: 5px;
+    }
+    
+    .product-price {
+        font-size: 0.9em;
+        margin-bottom: 6px;
+    }
+    
+    .like-info {
+        padding: 5px 8px;
+        font-size: 0.8em;
+        justify-content: center;
+    }
+    
+    .crown-icon {
+        font-size: 1.5em;
+        top: -8px;
+        right: -8px;
+    }
+}
+
+@media (max-width: 360px) {
+    .ranking-container {
+        padding: 10px 8px;
+    }
+    
+    .ranking-header h1 {
+        font-size: 1.6em;
+    }
+    
+    .ranking-header p {
+        font-size: 0.85em;
+    }
+    
+    .ranking-grid {
+        gap: 12px;
+    }
+    
+    .ranking-card {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .product-image {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .ranking-number {
+        width: 32px;
+        height: 32px;
+        font-size: 1em;
+    }
+    
+    .product-name {
+        font-size: 0.9em;
+    }
+    
+    .product-price {
+        font-size: 0.85em;
+    }
+    
+    .like-info {
+        padding: 4px 6px;
+        font-size: 0.75em;
+    }
 }
 
 .category-dropdown {
