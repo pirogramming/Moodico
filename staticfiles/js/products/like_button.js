@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const data = await response.json();
 
             if (data.success) {
-                console.log(`❤️ Like toggled for ${productInfo.product_id}: ${data.is_liked ? 'LIKED' : 'UNLIKED'}`); // 디버깅용
+                // console.log(`❤️ Like toggled for ${productInfo.product_id}: ${data.is_liked ? 'LIKED' : 'UNLIKED'}`); // 디버깅용
 
                 // 캐시 무효화
                 invalidateLikesCache();
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 브랜드 + 제품명 + 가격 + 이미지해시로 고유 ID 생성
         const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
 
-        console.log(`🔧 Generated unique ID: ${uniqueId} (for: ${name})`); // 디버깅용
+        // console.log(`🔧 Generated unique ID: ${uniqueId} (for: ${name})`); // 디버깅용
         return uniqueId;
     }
 
@@ -263,10 +263,10 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 // 각 제품 카드에 찜 정보 적용
                 Object.entries(data.products).forEach(([productId, info]) => {
-                    console.log(`Restoring like state for ${productId}: liked=${info.is_liked}, count=${info.like_count}`); // 디버깅용
+                    // console.log(`Restoring like state for ${productId}: liked=${info.is_liked}, count=${info.like_count}`); // 디버깅용
 
                     const cards = document.querySelectorAll(`[data-product-id="${productId}"]`);
-                    console.log(`Found ${cards.length} cards with ID ${productId}`); // 디버깅용
+                    // console.log(`Found ${cards.length} cards with ID ${productId}`); // 디버깅용
 
                     cards.forEach(card => {
                         const likeButton = card.querySelector('.like-button');
@@ -528,11 +528,11 @@ async function clearLikedProducts() {
 
 // 페이지 로드 시 초기화
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('좋아요 시스템 초기화 중...');
+    // console.log('좋아요 시스템 초기화 중...');
 
     // 현재 페이지의 모든 제품 카드 정보 출력 (디버깅용)
     const allCards = document.querySelectorAll('.product-card, .recommended-product-card');
-    console.log(`페이지에서 발견된 제품 카드 수: ${allCards.length}`);
+    // console.log(`페이지에서 발견된 제품 카드 수: ${allCards.length}`);
 
     allCards.forEach((card, index) => {
         // const productId = card.dataset.productId || generateUniqueProductId(card);
@@ -542,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return; // skip this card
         }
         const productName = getProductName(card);
-        console.log(`Card ${index + 1}: ID=${productId}, Name=${productName}`);
+        // console.log(`Card ${index + 1}: ID=${productId}, Name=${productName}`);
     });
 
     restoreLikeStates();
