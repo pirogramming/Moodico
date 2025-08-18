@@ -1104,27 +1104,6 @@ a.details__bar:hover {
   .pc-reveal.on { opacity:1; transform: translateY(0); }
 
 /* 반응형 디자인 */
-@media (max-width: 768px) {
-    .main-container {
-        padding: 20px 15px;
-    }
-    
-    .personal-color-banner {
-        padding: 25px;
-        margin-bottom: 30px;
-    }
-    
-    .main-features {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        width: 95%;
-    }
-    
-    .feature-card {
-        padding: 25px;
-    }
-}
-
 @media (max-width: 480px) {
     .main-container {
         padding: 15px 10px;
@@ -1142,6 +1121,94 @@ a.details__bar:hover {
     
     .feature-card {
         padding: 20px;
+    }
+    
+    .banner-content h2 {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+    }
+    
+    .banner-content p {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+    
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+    
+    .card-header h3 {
+        font-size: 1.5em;
+    }
+    
+    .ranking-section .section-header h2 {
+        font-size: 1.6em;
+    }
+    
+    .ranking-item {
+        width: 260px;
+        padding: 15px;
+    }
+    
+    .ranking-item img {
+        width: 90px;
+        height: 90px;
+    }
+}
+
+@media (max-width: 360px) {
+    .main-container {
+        padding: 12px 8px;
+    }
+    
+    .personal-color-banner {
+        padding: 18px;
+        margin-bottom: 20px;
+        border-radius: 20px;
+    }
+    
+    .main-features {
+        width: 100%;
+        gap: 12px;
+    }
+    
+    .feature-card {
+        padding: 18px;
+        border-radius: 18px;
+    }
+    
+    .banner-content h2 {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+    
+    .banner-content p {
+        font-size: 0.95em;
+        margin-bottom: 18px;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    
+    .card-header h3 {
+        font-size: 1.4em;
+    }
+    
+    .ranking-section .section-header h2 {
+        font-size: 1.5em;
+    }
+    
+    .ranking-item {
+        width: 240px;
+        padding: 12px;
+    }
+    
+    .ranking-item img {
+        width: 80px;
+        height: 80px;
     }
 }
 

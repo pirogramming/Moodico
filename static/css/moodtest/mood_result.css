@@ -256,4 +256,171 @@
         width: 100%;
         max-width: 300px;
     }
+    
+    .result-header {
+        margin-bottom: 40px;
+    }
+    
+    .result-header p {
+        font-size: 1.2em;
+    }
+    
+    .mood-card {
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+    
+    .mood-description {
+        font-size: 1.1em;
+        margin-bottom: 25px;
+    }
+    
+    .detail-section {
+        padding: 18px;
+    }
+    
+    .action-buttons {
+        margin-top: 50px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mood-result-container {
+        padding: 15px 10px;
+    }
+    
+    .result-header {
+        margin-bottom: 30px;
+    }
+    
+    .result-header h1 {
+        font-size: 2.2em;
+        margin-bottom: 8px;
+    }
+    
+    .result-header p {
+        font-size: 1.1em;
+    }
+    
+    .mood-card {
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+    }
+    
+    .mood-title {
+        font-size: 1.8em;
+        margin-bottom: 12px;
+    }
+    
+    .mood-description {
+        font-size: 1em;
+        margin-bottom: 20px;
+    }
+    
+    .mood-details {
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .detail-section {
+        padding: 15px;
+        border-radius: 10px;
+    }
+    
+    .detail-section h3 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+    
+    .detail-section p {
+        font-size: 1em;
+    }
+    
+    .keyword-tags {
+        gap: 8px;
+        margin-top: 12px;
+    }
+    
+    .keyword-tag {
+        padding: 3px 6px;
+        font-size: 11px;
+    }
+    
+    .action-buttons {
+        margin-top: 40px;
+        gap: 12px;
+    }
+    
+    .action-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 360px) {
+    .mood-result-container {
+        padding: 12px 8px;
+    }
+    
+    .result-header h1 {
+        font-size: 2em;
+    }
+    
+    .result-header p {
+        font-size: 1em;
+    }
+    
+    .mood-card {
+        padding: 18px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+    .mood-title {
+        font-size: 1.6em;
+        margin-bottom: 10px;
+    }
+    
+    .mood-description {
+        font-size: 0.95em;
+        margin-bottom: 18px;
+    }
+    
+    .mood-details {
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+    
+    .detail-section {
+        padding: 12px;
+        border-radius: 8px;
+    }
+    
+    .detail-section h3 {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    
+    .detail-section p {
+        font-size: 0.95em;
+    }
+    
+    .keyword-tag {
+        padding: 2px 5px;
+        font-size: 10px;
+    }
+    
+    .action-buttons {
+        margin-top: 35px;
+        gap: 10px;
+    }
+    
+    .action-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        max-width: 220px;
+    }
 }
