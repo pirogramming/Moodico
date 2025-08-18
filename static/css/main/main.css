@@ -989,7 +989,7 @@
 
   .pc-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:800; font-size:14px; border:1px solid transparent; cursor:pointer; text-decoration:none; }
   .pc-btn.primary { background: var(--pc-brand); color:#fff; box-shadow:0 8px 18px rgba(111,76,255,.28); }
-  .pc-btn.primary:hover { background: var(--pc-brand-600); }
+  .pc-btn.primary:hover { background: var(--pc-brand-600); text-decoration: none;}
   .pc-btn.ghost { background:#fff; border-color:var(--pc-line); color:#111; }
   .pc-btn.ghost:hover { background:#fbfaff; border-color:#d9d3ff; }
 
