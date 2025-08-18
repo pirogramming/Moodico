@@ -161,7 +161,10 @@ def kakao_logout(request):
 
 @login_or_kakao_required
 def profile(request):
-    user_name = request.user.username if request.user.is_authenticated else request.session.get("nickname", "게스트")
+    if request.user.is_authenticated:
+        display_name = request.user.first_name or request.user.username
+    else:
+        display_name = request.session.get("nickname", "게스트")
     try:
         user_profile = UserProfile.objects.get(user=request.user)
         user_mood = user_profile.mood_result if user_profile.mood_result else "정보 없음"
@@ -177,7 +180,7 @@ def profile(request):
     liked_products_colors = get_liked_products_color_info(liked_products)
 
     context = {
-        'user_name': user_name,
+        'user_name': display_name,
         'user_mood': user_mood,
         'liked_products': liked_products,
         'liked_products_colors': liked_products_colors,
