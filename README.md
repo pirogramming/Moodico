@@ -12,13 +12,13 @@
 [1.🔮 서비스 소개](#-서비스-소개)
 
 
-[2.💻 Developers](#Developers)
+[2.💻 Developers](#-developers)
 
 
-[3.🔩 System architecture](#System-architecture)
+[3.🔩 System architecture](#-system-architecture)
 
 
-[4.🔮 Moodico 사용 설명서](#Moodico-사용-설명서)
+[4.🔮 Moodico 사용 설명서](#-moodico-사용-설명서)
 
 
 
