@@ -71,7 +71,7 @@ window.createImagePreviewBox = (id, url, isExisting = false) => {
                     alert('이미지 삭제에 실패했습니다.');
                 }
             } catch (error) {
-                console.error('이미지 삭제 오류:', error);
+                // console.error('이미지 삭제 오류:', error);
                 alert('이미지 삭제 중 오류가 발생했습니다.');
             }
         } else {

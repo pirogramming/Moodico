@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                // console.error('Error:', error);
                 showVoteMessage('네트워크 오류가 발생했습니다.', 'error');
             });
         });

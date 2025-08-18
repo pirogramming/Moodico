@@ -343,7 +343,75 @@ input[type="email"] {
     display: block;
 }
 
+/* 모바일 터치 최적화 */
+@media (max-width: 768px) {
+    /* 터치 영역 최소화 */
+    .nav-link,
+    .login-icon,
+    .nav-links a,
+    .nav-links-left a {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* 터치 스크롤 최적화 */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    /* 터치 하이라이트 제거 */
+    * {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    /* 텍스트 선택 허용 */
+    p, h1, h2, h3, h4, h5, h6, span, div {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+    
+    /* 입력 필드 터치 최적화 */
+    input, textarea, select {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+        font-size: 16px; /* iOS 줌 방지 */
+    }
+}
+
 /* 반응형 디자인 */
+@media (max-width: 1024px) {
+    header {
+        padding: 18px 30px;
+    }
+    
+    .nav-links,
+    .nav-links-left {
+        gap: 15px;
+    }
+    
+    .nav-links {
+        right: 20px;
+    }
+    
+    .nav-links-left {
+        left: 20px;
+    }
+}
+
 @media (max-width: 768px) {
     header {
         padding: 15px 20px;
@@ -353,14 +421,31 @@ input[type="email"] {
         font-size: 1.6em;
     }
 
+    .nav-links,
+    .nav-links-left {
+        gap: 12px;
+        position: relative;
+        position: static;
+        margin-top: 10px;
+    }
+    
     .nav-links {
-        gap: 15px;
+        right: auto;
+    }
+    
+    .nav-links-left {
+        left: auto;
     }
 
     .nav-link,
     .login-icon {
         padding: 8px 14px;
-        font-size: 0.8em;
+        font-size: 0.85em;
+    }
+    
+    header nav {
+        flex-direction: column;
+        gap: 10px;
     }
 }
 
@@ -373,13 +458,42 @@ input[type="email"] {
         font-size: 1.4em;
     }
 
-    .nav-links {
-        gap: 10px;
+    .nav-links,
+    .nav-links-left {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .nav-link,
     .login-icon {
         padding: 6px 10px;
         font-size: 0.75em;
+    }
+    
+    .nav-link:after,
+    .nav-links-left a:after {
+        display: none;
+    }
+}
+
+@media (max-width: 360px) {
+    header {
+        padding: 8px 10px;
+    }
+    
+    .logo {
+        font-size: 1.2em;
+    }
+    
+    .nav-links,
+    .nav-links-left {
+        gap: 5px;
+    }
+    
+    .nav-link,
+    .login-icon {
+        padding: 5px 8px;
+        font-size: 0.7em;
     }
 }

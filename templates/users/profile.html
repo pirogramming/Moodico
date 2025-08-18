@@ -183,7 +183,7 @@
         throw new Error('리뷰 삭제에 실패했습니다.');
       }
     } catch (error) {
-      console.error('리뷰 삭제 오류:', error);
+      {% comment %} console.error('리뷰 삭제 오류:', error); {% endcomment %}
       showMessage('리뷰 삭제 중 오류가 발생했습니다.');
     }
   }
@@ -285,7 +285,7 @@
         showLikeMessage("찜이 해제되었습니다.");
       }
     } catch (error) {
-      console.error("찜 해제 오류:", error);
+      {% comment %} console.error("찜 해제 오류:", error); {% endcomment %}
       showLikeMessage("오류가 발생했습니다.");
     }
   }

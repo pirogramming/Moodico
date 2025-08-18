@@ -467,6 +467,34 @@ main {
     /* 보라색 계열 */
 }
 
+/* 모바일 터치 최적화 */
+@media (max-width: 768px) {
+    /* 터치 영역 최적화 */
+    .mood-dropdown,
+    .category-dropdown {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    .recommendation-button {
+        min-height: 44px;
+        touch-action: manipulation;
+    }
+    
+    /* 터치 스크롤 최적화 */
+    .selected-products-display {
+        -webkit-overflow-scrolling: touch;
+        overflow-scrolling: touch;
+    }
+    
+    /* 터치 하이라이트 제거 */
+    .product-card,
+    .recommendation-button {
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+    }
+}
+
 @media (max-width: 900px) {
     main {
         flex-direction: column;
@@ -488,5 +516,198 @@ main {
     .selected-products-display {
         width: 90vw;
         max-width: 600px;
+    }
+    
+    .matrix-selector {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .mood-selector,
+    .category-selector {
+        padding: 12px 16px;
+    }
+    
+    .mood-dropdown,
+    .category-dropdown {
+        min-width: 200px;
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        padding: 20px 15px;
+    }
+    
+    .matrix-wrapper {
+        margin-bottom: 20px;
+        gap: 15px;
+    }
+    
+    .color-matrix-container {
+        width: 95vw;
+        height: 95vw;
+        max-width: 450px;
+        max-height: 450px;
+    }
+    
+    .selected-products-display {
+        width: 95vw;
+        max-width: 500px;
+        padding: 15px;
+    }
+    
+    .mood-dropdown,
+    .category-dropdown {
+        min-width: 180px;
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+    
+    .recommendation-slot {
+        margin-bottom: 20px;
+    }
+    
+    .recommendation-slot h3 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    
+    .product-card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .product-card img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .product-info .brand {
+        font-size: 0.9em;
+    }
+    
+    .product-info .name {
+        font-size: 0.85em;
+    }
+    
+    .product-info .price {
+        font-size: 0.8em;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .recommendation-button {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    main {
+        padding: 15px 10px;
+    }
+    
+    .matrix-wrapper {
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .color-matrix-container {
+        width: 98vw;
+        height: 98vw;
+        max-width: 400px;
+        max-height: 400px;
+    }
+    
+    .selected-products-display {
+        width: 98vw;
+        max-width: 450px;
+        padding: 12px;
+    }
+    
+    .mood-dropdown,
+    .category-dropdown {
+        min-width: 160px;
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .recommendation-slot {
+        margin-bottom: 15px;
+    }
+    
+    .recommendation-slot h3 {
+        font-size: 1em;
+        margin-bottom: 8px;
+    }
+    
+    .product-card {
+        padding: 10px;
+        margin-bottom: 10px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .product-card img {
+        width: 70px;
+        height: 70px;
+        margin-bottom: 8px;
+    }
+    
+    .product-info {
+        margin-bottom: 8px;
+    }
+    
+    .button-container {
+        gap: 6px;
+    }
+    
+    .recommendation-button {
+        padding: 6px 10px;
+        font-size: 0.75em;
+    }
+}
+
+@media (max-width: 360px) {
+    .color-matrix-container {
+        width: 100vw;
+        height: 100vw;
+        max-width: 350px;
+        max-height: 350px;
+    }
+    
+    .selected-products-display {
+        width: 100vw;
+        max-width: 400px;
+        padding: 10px;
+    }
+    
+    .mood-dropdown,
+    .category-dropdown {
+        min-width: 140px;
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    
+    .product-card {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+    
+    .product-card img {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .recommendation-button {
+        padding: 5px 8px;
+        font-size: 0.7em;
     }
 }

@@ -139,7 +139,7 @@
         showLikeMessage("찜이 해제되었습니다.");
       }
     } catch (error) {
-      console.error("찜 해제 오류:", error);
+      {% comment %} console.error("찜 해제 오류:", error); {% endcomment %}
       showLikeMessage("오류가 발생했습니다.");
     }
   }
@@ -248,12 +248,12 @@
         // console.log('데이터 길이:', likedProductsColors ? likedProductsColors.length : 'undefined');
 
         if (!container) {
-            console.error('liked-products-container 요소를 찾을 수 없습니다');
+            {% comment %} console.error('liked-products-container 요소를 찾을 수 없습니다'); {% endcomment %}
             return;
         }
 
         if (!likedProductsColors || likedProductsColors.length === 0) {
-            console.warn('찜한 제품 색상 데이터가 없습니다');
+            {% comment %} console.warn('찜한 제품 색상 데이터가 없습니다'); {% endcomment %}
             return;
         }
 

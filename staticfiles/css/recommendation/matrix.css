@@ -123,3 +123,100 @@
 .products-color-container {
     animation: pulseHeart 2s infinite;
 }
+
+/* 반응형 디자인 */
+@media (max-width: 1024px) {
+    .color-matrix-container {
+        width: 90%;
+        max-width: 600px;
+    }
+    
+    .product-circle {
+        width: 22px;
+        height: 22px;
+        font-size: 0.65em;
+    }
+}
+
+@media (max-width: 768px) {
+    .color-matrix-container {
+        width: 95%;
+        max-width: 500px;
+        border-radius: 12px;
+    }
+    
+    .product-circle {
+        width: 20px;
+        height: 20px;
+        font-size: 0.6em;
+        border-width: 1.5px;
+    }
+    
+    .axis-label {
+        font-size: 12px;
+    }
+    
+    .top-label {
+        top: 8px;
+    }
+    
+    .bottom-label {
+        bottom: 8px;
+    }
+    
+    .left-label {
+        left: 8px;
+    }
+    
+    .right-label {
+        right: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .color-matrix-container {
+        width: 98%;
+        max-width: 400px;
+        border-radius: 10px;
+    }
+    
+    .product-circle {
+        width: 18px;
+        height: 18px;
+        font-size: 0.55em;
+        border-width: 1px;
+    }
+    
+    .axis-label {
+        font-size: 11px;
+    }
+    
+    .top-label {
+        top: 5px;
+    }
+    
+    .bottom-label {
+        bottom: 5px;
+    }
+    
+    .left-label {
+        left: 5px;
+    }
+    
+    .right-label {
+        right: 5px;
+    }
+}
+
+@media (max-width: 360px) {
+    .color-matrix-container {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    .product-circle {
+        width: 16px;
+        height: 16px;
+        font-size: 0.5em;
+    }
+}
