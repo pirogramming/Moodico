@@ -56,6 +56,9 @@ def main(request):
     
     # 오늘의 투표 데이터베이스 전달
     session = VotingSession.objects.filter(is_active=True).first()
+    session_id = None
+    session_vote_count = None
+    voting_data = None
 
     if session:
         session_id = session.id
@@ -80,9 +83,6 @@ def main(request):
                 'votes': session.product2_votes
             }
         }
-    else:
-        session_vote_count = None
-        voting_data = None
     
     # 지난 세션 투표 결과 정보 받아오기
     previous_session = VotingSession.objects.filter(is_active=False).order_by('-end_time').first()
