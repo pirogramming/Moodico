@@ -55,13 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     }
 
-    //헤더 위에서 아래로 내려오는 애니메이션
-    const header = document.querySelector('header');
-    if (header) {
-        setTimeout(() => {
-            header.classList.add('is-visible');
-        }, 100);
-    }
 
     // =============================
     // 컬러 투표 기능

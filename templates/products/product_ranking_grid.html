@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% load static %}
 {% for product in top_products %}
 <div
   class="ranking-card {% if forloop.counter <= 3 %}top-3 rank-{{ forloop.counter }}{% endif %}"
