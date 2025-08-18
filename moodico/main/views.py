@@ -60,6 +60,14 @@ def main(request):
     session_vote_count = None
     voting_data = None
 
+    # 로그인 사용자라면 투표 기록 정보 받아오기
+    user_voted_product_id = None
+
+    if session and request.user.is_authenticated:
+        user_vote = Vote.objects.filter(session=session, user=request.user).first()
+        if user_vote:
+            user_voted_product_id = user_vote.voted_product.product_id
+
     if session:
         session_id = session.id
         session_vote_count = session.product1_votes + session.product2_votes
@@ -129,6 +137,7 @@ def main(request):
         'voting_data': voting_data,
         'previous_session_data': previous_session_data,
         'is_user_logged_in': request.user.is_authenticated,
+        'user_voted_product_id': user_voted_product_id,
     })
 
 def personalcolor(request):

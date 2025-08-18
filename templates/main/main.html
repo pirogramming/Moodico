@@ -222,7 +222,7 @@
     </div>
 
     <!-- 컬러 투표 박스 -->
-    <div class="feature-card voting-card" data-session-id="{{ session_id }}" data-vote-url="{% url 'voting_api' %}">
+    <div class="feature-card voting-card" data-session-id="{{ session_id }}" data-vote-url="{% url 'voting_api' %}" data-user-vote="{{ user_voted_product_id }}">
       <div class="card-header">
         <h3>🗳️ 컬러 투표</h3>
         <p>오늘 가장 인기있는 컬러는?</p>

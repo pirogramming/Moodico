@@ -2,6 +2,42 @@ console.log("Moodico 프로젝트 JavaScript 로드됨.");
 
 document.addEventListener('DOMContentLoaded', function() {
     //여기에 전역적으로 필요한 이벤트 리스너나 초기화 코드 추가  ex) 네비게이션 메뉴 토글, 스크롤 이벤트 등
+    const currentVotingSection = document.querySelector('.voting-card');
+
+    // 페이지 처음 로드 시 투표정보가 있다면 복원
+    const voteCards = currentVotingSection.querySelectorAll('.vote-product-card');
+    const progressBars = currentVotingSection.querySelectorAll('.progress-fill');
+    const votePercentages = currentVotingSection.querySelectorAll('.vote-percentage');
+    const totalVotes = currentVotingSection.querySelector('.voting-stats strong');
+    const votingCardContainer = document.querySelector('.voting-card');
+    const userVoteId = votingCardContainer.dataset.userVote;
+    console.log("사용자의 기존 투표 ID:", userVoteId);
+
+    let voteData = {};
+    let totalVoteCount = 0;
+
+    voteCards.forEach((card) => {
+        const productId = card.dataset.productId;
+        const likeCount = parseInt(card.dataset.like_count, 10) || 0;
+        const productVotes = parseInt(card.dataset.votes, 10) || 0;
+        
+        console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
+        
+        voteData[productId] = { 
+            likes: likeCount,
+            votes: productVotes,
+            percentage: 0
+        };
+        totalVoteCount += productVotes;
+    });
+
+    if (userVoteId) {
+        voteCards.forEach(card => {
+            if (card.dataset.productId === userVoteId) {
+                card.classList.add('selected');
+            }
+        });
+    }
 
     //Moodico 클릭 시 메인 페이지로 이동
     const logo = document.querySelector('header .logo');
@@ -31,33 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 컬러 투표 기능
     // =============================
     
-    // 24시간마다 투표 세션 생성
-    
-    const voteCards = document.querySelectorAll('.vote-product-card');
-    const progressBars = document.querySelectorAll('.progress-fill');
-    const votePercentages = document.querySelectorAll('.vote-percentage');
-    const totalVotes = document.querySelector('.voting-stats strong');
-    
-    // 투표 데이터 초기화
-    let voteData = {};
-    let totalVoteCount = 0;
-
-    voteCards.forEach((card) => {
-        const productId = card.dataset.productId;
-        const likeCount = parseInt(card.dataset.like_count, 10) || 0;
-        const productVotes = parseInt(card.dataset.votes, 10) || 0;
-        
-        console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
-        
-        voteData[productId] = { 
-            likes: likeCount,
-            votes: productVotes,
-            percentage: 0
-        };
-        totalVoteCount += productVotes;
-    });
-    
-    // console.log('투표 시작 - 모든 제품 0표');
+    // 24시간마다 투표 세션 생성    
     updateVoteResults();
 
     const csrftoken = getCookie('csrftoken');
