@@ -7,7 +7,8 @@ from moodico.recommendation.views import get_recommendation_list
 # Create your views here.
 # 이미지 업로드
 def upload_color_image(request):
-    search_results = get_recommendation_list()
+    force = request.GET.get("refresh") == "1"
+    data = get_recommendation_list(force_refresh=force)
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -22,11 +23,11 @@ def upload_color_image(request):
             return render(request, 'upload/upload.html', {
                 'form': UploadForm(),
                 'uploaded_image_url': upload.image_path.url,
-                'search_results':search_results,
+                'search_results':data["results"],
             })
     else:
         form = UploadForm()
-    return render(request, 'upload/upload.html', {'form': form, 'search_results': search_results})
+    return render(request, 'upload/upload.html', {'form': form, 'search_results': data["results"]})
 
 # upload.html에서 검색한 제품의 이미지를 가져옴
 def proxy_image(request):
