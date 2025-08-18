@@ -280,8 +280,8 @@ function renderCategoryProducts(categoryType, products) {
         const uniqueId = `${brand}-${name}-${price}-${imgHash}`.substring(0, 60);
         card.dataset.productId = p.id || uniqueId;
         
-        console.log(`제품 ${index}: 원본 ID=${p.id}, 생성된 ID=${card.dataset.productId}`);
-        console.log(`Color analyzer card ${index}: ID=${card.dataset.productId}, Name=${p.color_name || p.name}`);
+        // console.log(`제품 ${index}: 원본 ID=${p.id}, 생성된 ID=${card.dataset.productId}`);
+        // console.log(`Color analyzer card ${index}: ID=${card.dataset.productId}, Name=${p.color_name || p.name}`);
         
         card.innerHTML = `
             <button class="like-button" title="좋아요"></button>
@@ -309,11 +309,11 @@ function renderCategoryProducts(categoryType, products) {
         const viewDetailBtn = card.querySelector('.view-detail-btn');
         if (viewDetailBtn) {
             viewDetailBtn.addEventListener('click', function(e) {
-                console.log('보러가기 클릭:', p.id, p.name);
+                // console.log('보러가기 클릭:', p.id, p.name);
             });
         }
         
-        console.log(`추천 제품 카드 생성: ID=${p.id}, 이름=${p.name}, 브랜드=${p.brand}`);
+        // console.log(`추천 제품 카드 생성: ID=${p.id}, 이름=${p.name}, 브랜드=${p.brand}`);
     });
 }
 
@@ -393,9 +393,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (lab) {
                     const coords = calculateCoordinatesFromLAB(lab[0], lab[1], lab[2]);
                     if (coords) {
-                        console.log(`Analyzed Color: ${hex}`);
-                        console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
-                        console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
+                        // console.log(`Analyzed Color: ${hex}`);
+                        // console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
+                        // console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
                     
                         // 색상을 매트릭스에 표시
                         displayColorOnMatrix(hex, coords.warmCool, coords.lightDeep);
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             } else {
                                 console.warn("No recommended field in response", data);
                             }
-                            console.log(data.recommended);
+                            // console.log(data.recommended);
                         })
                       .catch(err => console.error("추천 실패:", err));
                     }

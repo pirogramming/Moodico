@@ -91,17 +91,6 @@
           id="makeup-products-container"
           class="makeup-products-container"
         ></div>
-
-        <!--유사 무드 제품 추천 구간 표시-->
-        <!--
-        <div id="mood-selection-area" class="mood-selection-area">
-          <span class="mood-label">추천 구간</span>
-          <div class="resizer top-left-resizer"></div>
-          <div class="resizer top-right-resizer"></div>
-          <div class="resizer bottom-left-resizer"></div>
-          <div class="resizer bottom-right-resizer"></div>
-        </div>
-        -->
       </section>
     </div>
   </div>
@@ -205,9 +194,9 @@
       product.lab_b
     );
     if (coords) {
-      console.log(`Analyzed Color: ${product.hex}`);
-      console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
-      console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
+      // console.log(`Analyzed Color: ${product.hex}`);
+      // console.log(`Warm-Cool: ${coords.warmCool.toFixed(2)}`);
+      // console.log(`Light-Deep: ${coords.lightDeep.toFixed(2)}`);
 
       // 색상을 매트릭스에 표시
       displayColorOnMatrix(product.hex, coords.warmCool, coords.lightDeep);
@@ -235,7 +224,7 @@
           } else {
             console.warn("No recommended field in response", data);
           }
-          console.log(data.recommended);
+          // console.log(data.recommended);
         })
         .catch((err) => console.error("추천 실패:", err));
     }

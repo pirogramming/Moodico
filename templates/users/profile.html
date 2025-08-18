@@ -129,11 +129,11 @@
 <script>
   // 찜한 제품들의 색상 매트릭스 표시
   const likedProductsColors = {{ liked_products_colors|safe }};
-  console.log('프로필 페이지에서 받은 likedProductsColors:', likedProductsColors);
+  // console.log('프로필 페이지에서 받은 likedProductsColors:', likedProductsColors);
 
   // 제품 상세페이지로 이동하는 함수
   function goToProductDetail(productId) {
-    console.log('제품 상세페이지로 이동:', productId);
+    // console.log('제품 상세페이지로 이동:', productId);
 
     // 제품 ID가 숫자인지 문자열인지 확인하여 적절한 URL 생성
     if (!isNaN(productId)) {
@@ -147,7 +147,7 @@
 
   // 리뷰 수정 함수
   function editReview(productId) {
-    console.log('리뷰 수정:', productId);
+    // console.log('리뷰 수정:', productId);
     // 제품 상세페이지로 이동하여 리뷰 수정 모달 열기
     goToProductDetail(productId);
   }
@@ -230,21 +230,21 @@
 
   // 구매하기 함수 - 찜 페이지와 동일한 방식
   function purchaseProduct(productId) {
-      console.log('구매하기 버튼 클릭됨, 제품 ID:', productId);
-      console.log('likedProductsColors 데이터:', likedProductsColors);
+      // console.log('구매하기 버튼 클릭됨, 제품 ID:', productId);
+      // console.log('likedProductsColors 데이터:', likedProductsColors);
 
       // likedProductsColors에서 해당 제품의 URL 찾기
       const product = likedProductsColors.find(p => p.id === productId);
-      console.log('찾은 제품:', product);
+      // console.log('찾은 제품:', product);
 
       if (product && product.url && product.url !== '#') {
-          console.log('URL 열기:', product.url);
+          // console.log('URL 열기:', product.url);
           // 새 탭에서 제품 URL 열기
           window.open(product.url, '_blank');
           return false; // 기본 링크 동작 방지
       } else {
-          console.log('URL을 찾을 수 없음. 제품 ID:', productId);
-          console.log('제품 데이터:', product);
+          // console.log('URL을 찾을 수 없음. 제품 ID:', productId);
+          // console.log('제품 데이터:', product);
           // URL이 없는 경우 메시지 표시
           alert('해당 제품의 구매 링크를 찾을 수 없습니다.');
           return false; // 기본 링크 동작 방지

@@ -215,25 +215,25 @@
 
     // 찜한 제품들의 색상 매트릭스 표시
     const likedProductsColors = {{ liked_products_colors|safe }};
-    console.log('템플릿에서 받은 likedProductsColors:', likedProductsColors);
+    // console.log('템플릿에서 받은 likedProductsColors:', likedProductsColors);
 
     // 구매하기 함수 - 매트릭스 검색 페이지와 동일한 방식
     function purchaseProduct(productId) {
-        console.log('구매하기 버튼 클릭됨, 제품 ID:', productId);
-        console.log('likedProductsColors 데이터:', likedProductsColors);
+        // console.log('구매하기 버튼 클릭됨, 제품 ID:', productId);
+        // console.log('likedProductsColors 데이터:', likedProductsColors);
 
         // likedProductsColors에서 해당 제품의 URL 찾기
         const product = likedProductsColors.find(p => p.id === productId);
-        console.log('찾은 제품:', product);
+        // console.log('찾은 제품:', product);
 
         if (product && product.url && product.url !== '#') {
-            console.log('URL 열기:', product.url);
+            // console.log('URL 열기:', product.url);
             // 새 탭에서 제품 URL 열기
             window.open(product.url, '_blank');
             return false; // 기본 링크 동작 방지
         } else {
-            console.log('URL을 찾을 수 없음. 제품 ID:', productId);
-            console.log('제품 데이터:', product);
+            // console.log('URL을 찾을 수 없음. 제품 ID:', productId);
+            // console.log('제품 데이터:', product);
             // URL이 없는 경우 메시지 표시
             showLikeMessage('해당 제품의 구매 링크를 찾을 수 없습니다.');
             return false; // 기본 링크 동작 방지
@@ -242,10 +242,10 @@
 
     function renderLikedProductsMatrix() {
         const container = document.getElementById('liked-products-container');
-        console.log('매트릭스 렌더링 시작');
-        console.log('컨테이너 요소:', container);
-        console.log('찜한 제품 색상 데이터:', likedProductsColors);
-        console.log('데이터 길이:', likedProductsColors ? likedProductsColors.length : 'undefined');
+        // console.log('매트릭스 렌더링 시작');
+        // console.log('컨테이너 요소:', container);
+        // console.log('찜한 제품 색상 데이터:', likedProductsColors);
+        // console.log('데이터 길이:', likedProductsColors ? likedProductsColors.length : 'undefined');
 
         if (!container) {
             console.error('liked-products-container 요소를 찾을 수 없습니다');
@@ -306,7 +306,7 @@
 
     // 페이지 로드 시 매트릭스 렌더링
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM 로드 완료, 매트릭스 렌더링 시작');
+        // console.log('DOM 로드 완료, 매트릭스 렌더링 시작');
         setTimeout(renderLikedProductsMatrix, 500); // DOM 로드 후 렌더링
     });
 </script>

@@ -1,4 +1,4 @@
-console.log("Moodico 프로젝트 JavaScript 로드됨.");
+// console.log("Moodico 프로젝트 JavaScript 로드됨.");
 
 document.addEventListener('DOMContentLoaded', function() {
     //여기에 전역적으로 필요한 이벤트 리스너나 초기화 코드 추가  ex) 네비게이션 메뉴 토글, 스크롤 이벤트 등
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalVotes = currentVotingSection.querySelector('.voting-stats strong');
     const votingCardContainer = document.querySelector('.voting-card');
     const userVoteId = votingCardContainer.dataset.userVote;
-    console.log("사용자의 기존 투표 ID:", userVoteId);
+    // console.log("사용자의 기존 투표 ID:", userVoteId);
 
     let voteData = {};
     let totalVoteCount = 0;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const likeCount = parseInt(card.dataset.like_count, 10) || 0;
         const productVotes = parseInt(card.dataset.votes, 10) || 0;
         
-        console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
+        // console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
         
         voteData[productId] = { 
             likes: likeCount,
@@ -120,12 +120,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // 결과 업데이트 함수
     // =============================
     function updateVoteResults() {
-        console.log('투표 결과 업데이트 중...');
+        // console.log('투표 결과 업데이트 중...');
         
         Object.keys(voteData).forEach(productId => {
             const percentage = totalVoteCount > 0 ? Math.round((voteData[productId].votes / totalVoteCount) * 100) : 0;
             voteData[productId].percentage = percentage;
-            console.log(`제품 ${productId}: 좋아요 ${voteData[productId].likes}개, 투표 ${voteData[productId].votes}표 (${percentage}%)`);
+            // console.log(`제품 ${productId}: 좋아요 ${voteData[productId].likes}개, 투표 ${voteData[productId].votes}표 (${percentage}%)`);
         });
         
         progressBars.forEach((bar, index) => {
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        console.log('투표 결과 업데이트 완료');
+        // console.log('투표 결과 업데이트 완료');
     }
     
     function showVoteStatus() {
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const productId = selectedCard.dataset.productId;
             const productName = selectedCard.querySelector('h4').textContent;
             const data = voteData[productId];
-            console.log(`🎉 현재 투표된 제품: ${productName} (${productId}) - 좋아요 ${data.likes}개, 투표 ${data.votes}표`);
+            // console.log(`🎉 현재 투표된 제품: ${productName} (${productId}) - 좋아요 ${data.likes}개, 투표 ${data.votes}표`);
             
             selectedCard.style.transform = 'scale(1.02)';
             selectedCard.style.boxShadow = '0 8px 25px rgba(255, 107, 155, 0.3)';

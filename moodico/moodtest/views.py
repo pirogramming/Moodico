@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from moodico.users.models import UserProfile
+from moodico.products.models import ProductLike
 from .color_analyzer import product_result_by_mood, get_random_products
 import logging
 logger = logging.getLogger(__name__)
@@ -242,5 +243,10 @@ def mood_result(request):
     # 선택된 무드의 결과 데이터 가져오기
     result_data = mood_definition.get(mood, mood_definition['캐주얼'])
     result_data['recommended_products'] = get_random_products(mood_filtered_products)
+    
+    # if request.user.is_authenticated:
+    #     liked_product_ids = ProductLike.objects.filter(user=request.user).values_list('product_id', flat=True)
+    #     for product in result_data['recommended_products']:
+    #         product['is_liked'] = product['id'] in liked_product_ids
     
     return render(request, 'moodtest/mood_result.html', result_data)
