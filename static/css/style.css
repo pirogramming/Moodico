@@ -14,9 +14,8 @@ header {
     background-color: transparent;
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
     padding: 20px 40px;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out, background 0.5s ease;
+    opacity: 1;
+    transition: background 0.5s ease;
     position: sticky;
     top: 0;
     z-index: 999;
@@ -26,10 +25,6 @@ header:hover {
     background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #fff8e1 100%);
 }
 
-header.is-visible {
-    transform: translateY(0);
-    opacity: 1;
-}
 
 header nav {
     display: flex;
