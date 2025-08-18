@@ -55,7 +55,6 @@ def product_detail(request, product_id):
     return render(request, 'products/detail.html', {'product': product})
 
 def crawled_product_detail(request, crawled_id):
-    # crawled_id -> a4c0a977-cced-4ce8-abea-f718dcff8325
     """크롤링된 제품 상세 페이지 뷰"""
     try:
         logger.info(f"크롤링된 제품 상세 페이지 요청: crawled_id = {crawled_id}")
@@ -71,7 +70,6 @@ def crawled_product_detail(request, crawled_id):
         
         for p in products:
             if p.get('id') == crawled_id:
-                # p.get('id') -> a4c0a977-cced-4ce8-abea-f718dcff8325
                 product = p
                 break
         print('...',crawled_id)
@@ -92,39 +90,6 @@ def crawled_product_detail(request, crawled_id):
         average_rating = all_reviews.aggregate(avg=Avg('rating')).get('avg') or 0
         average_rating = round(average_rating, 2)
 
-        # if not product:
-        #     return render(request, 'products/detail.html', {
-        #         'error': '제품을 찾을 수 없습니다.',
-        #         'product': None
-        #     })
-        
-        # # 해당 제품의 리뷰 정보 가져오기
-        # from moodico.users.utils import get_user_from_request
-        # user = get_user_from_request(request)
-        
-        # # 제품 ID로 리뷰 찾기 (crawled_id 사용)
-        # user_review = None
-        # print('..',ProductRating.objects.all())
-        # if user:
-        #     try:
-        #         user_review = ProductRating.objects.get(
-        #             user=user,
-        #             product_id=crawled_id
-        #         )
-        #     except ProductRating.DoesNotExist:
-        #         pass
-        
-        # # 제품의 모든 리뷰 가져오기
-        # # [<ProductRating: zin - 롬앤 더 쥬시 래스팅 틴트 / 02 누카다미아 (4점)>]>
-        # all_reviews = ProductRating.objects.filter(product_id=crawled_id).order_by('-created_at')
-        
-        # # 평균 별점과 평가 개수 계산
-        # total_ratings = all_reviews.count()
-        # if total_ratings > 0:
-        #     total_score = sum(review.rating for review in all_reviews)
-        #     average_rating = round(total_score / total_ratings, 1)
-        # else:
-        #     average_rating = 0.0
         context = {
             'product': product,
             'user_review': user_review,
