@@ -9,16 +9,16 @@
 > URL : https://moodico.xyz/
 ---
 ## ✅ 목차
-[1.🔮 서비스 소개](#-🔮-서비스-소개)
+[1.🔮 서비스 소개](#-서비스-소개)
 
 
-[2.💻 Developers](#💻-Developers)
+[2.💻 Developers](#Developers)
 
 
-[3.🔩 System architecture](#🔩-System-architecture)
+[3.🔩 System architecture](#System-architecture)
 
 
-[4.🔮 Moodico 사용 설명서](#🔮-Moodico-사용-설명서)
+[4.🔮 Moodico 사용 설명서](#Moodico-사용-설명서)
 
 
 
