@@ -497,6 +497,7 @@
 .vote-message-info {
     background: linear-gradient(135deg, #2196f3, #1976d2);
     color: white;
+    white-space: pre-wrap;
 }
 
 @keyframes slideDown {
@@ -745,6 +746,108 @@
     margin: 0;
 }
 
+/* 투표 결과 부분 css */
+.prev-result {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: 100px;
+  padding: 15px;
+  background-color: #f7f9fc;
+  border: 1px solid #e9ecef;
+  border-radius: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 20px 0 0 0;
+}
+
+/* 왼쪽: 우승자 정보 */
+.prev-result__winner {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.winner__image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.winner__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.winner__label {
+  font-size: 12px;
+  color: #868e96;
+}
+
+.winner__name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #212529;
+}
+
+/* 오른쪽: 상세 득표율 */
+.prev-result__details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+a.details__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  text-decoration: none;
+  color: inherit;
+}
+
+a.details__bar:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.bar__label {
+  width: 100px; /* 라벨 너비를 고정해 정렬 */
+  color: #495057;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bar__progress {
+  flex-grow: 1; /* 남은 공간을 모두 차지 */
+  height: 10px;
+  background-color: #e9ecef;
+  border-radius: 5px;
+  overflow: hidden; /* fill이 삐져나가지 않도록 */
+}
+
+.bar__fill {
+  height: 100%;
+  background-color: #4C6EF5;
+  border-radius: 5px;
+  transition: width 0.5s ease-in-out;
+}
+
+.bar__percentage {
+  width: 35px;
+  font-weight: bold;
+  color: #343a40;
+  text-align: right;
+  flex-shrink: 0;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .main-features {
@@ -989,7 +1092,7 @@
 
   .pc-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; font-weight:800; font-size:14px; border:1px solid transparent; cursor:pointer; text-decoration:none; }
   .pc-btn.primary { background: var(--pc-brand); color:#fff; box-shadow:0 8px 18px rgba(111,76,255,.28); }
-  .pc-btn.primary:hover { background: var(--pc-brand-600); }
+  .pc-btn.primary:hover { background: var(--pc-brand-600); text-decoration: none;}
   .pc-btn.ghost { background:#fff; border-color:var(--pc-line); color:#111; }
   .pc-btn.ghost:hover { background:#fbfaff; border-color:#d9d3ff; }
 
