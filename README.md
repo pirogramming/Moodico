@@ -73,3 +73,79 @@
 
 ![image12.png](staticfiles/images/image12.png)
 
+- 립/블러셔/아이섀도우 세 종류로 분류하여 제품 추천 제공
+
+![image13.png](staticfiles/images/image13.png)
+
+- 올리브영 제품 추천 정보 모아보기
+
+### 3. 오늘의 추천
+
+- 내가 찜한 제품 중 랜덤 추천 기능 → 사용자 리마인드 기능
+
+![image14.png](staticfiles/images/image14.png)
+
+### 4. 무드 테스트
+
+- 10개의 간단한 설문
+- 러블리/시크/내추럴/캐주얼/고급스러운/모던/청순/힙에 맞는 추천 결과 제공
+
+![image15.png](staticfiles/images/image15.png)
+
+![image16.png](staticfiles/images/image16.png)
+
+![image17.png](staticfiles/images/image17.png)
+### 5. 색상 매트릭스 바로가기
+
+![image18.png](staticfiles/images/image18.png)
+
+![image19.png](staticfiles/images/image19.png)
+
+- 찜/무드별/제품기능별 필터링 기능 제공
+
+![image20.png](staticfiles/images/image20.png)
+
+- 무드 박스를 조정해 원하는 구역의 제품 모아보기 기능
+
+### 6. 컬러 투표
+
+- 해당 일자 자정 기준 상위 1위, 2위 제품 인기투표 경선 기능
+
+![image21.png](staticfiles/images/image21.png)
+
+### 7. 현재 인기 아이템 순위 제공
+
+- 찜 수를 기준으로 상위 아이템 표시
+- 상위 10 제품에 대한 정보 제공
+- 립/블러셔/섀도우 기능 필터링
+![image22.png](staticfiles/images/image22.png)
+![image23.png](staticfiles/images/image23.png)
+
+### 8. 찜한 아이템 모아보기 기능
+
+- 찜한 아이템 모아보기 제공
+- 찜한 아이템기반 개인 매트릭스 제공 → 사용자의 선호 무드 확인가능
+
+![image24.png](staticfiles/images/image24.png)
+
+![image25.png](staticfiles/images/image25.png)
+### 9. 로그인
+
+- 기본 로그인/카카오 로그인 제공
+- 마이페이지에서 나의 무드/내가 작성한 리뷰/찜한 제품 확인 가능
+
+![image26.png](staticfiles/images/image26.png)
+
+![image27.png](staticfiles/images/image27.png)
+
+![image28.png](staticfiles/images/image28.png)
+
+### 10. 제품 상세페이지 /  리뷰
+
+- 제품 매트릭스 위치/가격 제공
+- 구매하기 버튼 → 해당 브랜드 구매 페이지로 연결
+- 제품별 별점/리뷰 기능
+
+![image29.png](staticfiles/images/image29.png)
+
+![image30.png](staticfiles/images/image30.png)
