@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from moodico.products.views import get_top_liked_products
+from moodico.products.utils.common_utils import get_top_liked_products
 from moodico.products.models import ProductLike
 import random
 from django.http import JsonResponse
