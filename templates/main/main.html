@@ -99,9 +99,11 @@
           <h4>{{ recommended_product.product_name }}</h4>
           <p>
             {% if recommended_product.is_user_liked %} 💖 내가 찜한 제품 | {{
-            recommended_product.product_brand }} {% else %} {{
-            recommended_product.product_brand }} 💜 | {{
-            recommended_product.like_count }}명이 찜함 {% endif %}
+            recommended_product.product_brand }} 
+            {% else %} 
+            {{recommended_product.product_brand }} 💜 | 
+              {{recommended_product.like_count }}명이 찜함 
+            {% endif %}
           </p>
         </div>
       </div>
@@ -324,11 +326,7 @@
     </div>
 
     <div class="ranking-preview">
-      {% comment %} [{'product_id': 'ec733645-2d66-4fb4-b207-d740680acd73',
-      'product_name': '04 빈티지 오션', 'product_brand': 'romand',
-      'product_price': '9,900원', 'product_image':
-      'https://romand.io/images/product/343/BZgkQP0CTQ1Wb8FTVcLlVBqfPwSBpyZ3BeEQVdCu.jpg',
-      'like_count': 1}, .. ] {% endcomment %} {% for product in top_liked_products %}
+      {% for product in top_liked_products %}
       <div class="ranking-item">
         <div class="ranking-badge">{{ forloop.counter }}</div>
         <img
@@ -368,3 +366,4 @@
   const isUserLoggedIn = {{ is_user_logged_in|yesno:"true,false" }};
 </script>
 {% endblock %}
+

@@ -8,53 +8,60 @@ logger = logging.getLogger(__name__)
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Create your views here.
-# def my_item_recommendation(request):
-#     # Get recommended or default products
-#     search_results = get_top_liked_products(limit=10)
-#     recommended_items = []  # Set this if you want a separate recommended section
-#     print("....",search_results)
+from moodico.products.utils.scraper import scrape_oliveyoung_products
+import time
+from django.core.cache import cache
 
-#     return render(
-#         request,
-#         'upload/upload.html',
-#         {
-#             'search_results': search_results,
-#             'recommended_items': recommended_items
-#         }
-#     )
+CACHE_KEY = "oliveyoung_bestlist_v1"
+CACHE_TTL = 60 * 60 * 24  # 24 hours
 
-def get_recommendation_list():
-        # JSON 데이터를 파싱 (실제로는 DB나 API에서 받아올 수 있음)
-    products_path = 'static/data/advertise_products.json'
-    with open(products_path, 'r', encoding='utf-8') as f:
-        raw_data = json.load(f)
-
-    # 태그 추출 규칙 예시 (첫번째 flag 사용 or None)
+def make_search_results(raw_data):
     def get_tag(flags):
         for tag in ['글로시', 'matte', 'glossy', '증정', '세일', '쿠폰', '오늘드림']:
             if tag in flags:
                 return tag
         return flags[0] if flags else '-'
 
-    search_results = [
+    return [
         {
-            "brand": item["brand_name"],
-            "name": item["product_name"],
-            "image": item["image_src"],
-            "price": item["price_original"].replace("~", ""),
+            "brand": item.get("brand_name", ""),
+            "name": item.get("product_name", ""),
+            "image": item.get("image_src", ""),
+            "price": (item.get("price_original", "") or "").replace("~", ""),
             "tag": get_tag(item.get("flags", [])),
-            "url": item["product_url"],
+            "url": item.get("product_url", ""),
         }
         for item in raw_data
     ]
-    return search_results
+
+def get_recommendation_list(force_refresh=False):
+    cached = cache.get(CACHE_KEY)
+    # 캐시가 없거나 force_refresh(자발적인 refresh)이면
+    if (not cached) or force_refresh:
+        raw_data = scrape_oliveyoung_products()
+        search_results = make_search_results(raw_data)
+        payload = {
+            "results": search_results,
+            "fetched_at": int(time.time()),  # 언제 refresh 됐는지 알 수 있게
+        }
+        cache.set(CACHE_KEY, payload, CACHE_TTL)
+        return payload
+
+    return cached
 
 def my_item_recommendation(request):
-    search_results = get_recommendation_list()
-    return render(request, 'upload/upload.html', {
-        "search_results": search_results
-    })
+    # 자발적으로 확인 하고 싶을때: /?refresh=1
+    force = request.GET.get("refresh") == "1"
+    data = get_recommendation_list(force_refresh=force)
 
+    return render(
+        request,
+        "upload/upload.html",
+        {
+            "search_results": data["results"],
+            "fetched_at": data["fetched_at"],
+        },
+    )
 
 @csrf_exempt
 def recommend_by_color(request):
