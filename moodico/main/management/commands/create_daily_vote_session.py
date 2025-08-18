@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from django.utils import timezone
 from django.db import transaction
 from moodico.main.models import RankedProduct, VotingSession
-from moodico.products.utils import get_top_liked_products
+from moodico.products.utils.common_utils import get_top_liked_products
 
 # 매일 자정, 현재의 랭킹 최상위 두 개 제품으로 투표 세션을 생성하는 함수
 class Command(BaseCommand):

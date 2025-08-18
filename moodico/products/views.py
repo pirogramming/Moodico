@@ -15,7 +15,7 @@ from django.db import models
 import logging
 logger = logging.getLogger(__name__)
 from moodico.users.utils import login_or_kakao_required
-from .utils import get_top_liked_products
+from moodico.products.utils.common_utils import get_top_liked_products
 
 # Create your views here.
 def color_matrix_explore(request):

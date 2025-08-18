@@ -1,7 +1,7 @@
 import json, os
 from django.shortcuts import render
 from django.conf import settings
-from .models import ProductLike
+from ..models import ProductLike
 
 def get_top_liked_products(limit=10, include_unliked=True, category=None):
     """
