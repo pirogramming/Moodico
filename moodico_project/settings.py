@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab', # 투표 세션 생성의 주기적 실행을 위한 crontab
     'moodico.main', # 메인 앱
     'moodico.upload', # 이미지 업로드 앱
     'moodico.recommendation', # 추천 시스템 앱
@@ -203,3 +204,11 @@ KAKAO_CLIENT_SECRET = config(
 # 로그인 로그아웃 후 리다이렉트 URL 설정
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+# CRONJOBS 설정
+CRONJOBS = [
+    ('0 0 * * *', 'main.cron.make_vote_session') # 매일 자정마다 실행
+    #('20 5 * * *', 'main.cron.make_vote_session') # 테스트용 : 20분 05시에 실행한다는 뜻 - 만약 10시 3분에 실행하고 싶다면 '3 10 * * *'로 설정
+    # 설정 변경 후 크론 잡 목록을 등록하는 명령어 실행: python manage.py crontab add(리눅스 환경의 배포 서버에서도 동일함)
+    # .. 설정한 시간이 될 때까지 기다림
+]
