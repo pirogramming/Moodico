@@ -5,20 +5,32 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
+import sys
 
-def scrape_oliveyoung_products(max_items=10):
+def _build_chrome_driver():
     # Chrome config
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36"
     )
 
-    # Browser 시작
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+    # Linux (Ubuntu) 배포 서버
+    if sys.platform.startswith("linux"):
+        options.binary_location = "/usr/bin/chromium-browser"
+        service = Service("/usr/bin/chromedriver")
+
+        return webdriver.Chrome(service=service, options=options)
+
+    # macOS/Windows or fallback -> use webdriver_manager
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+def scrape_oliveyoung_products(max_items=10):
+    driver = _build_chrome_driver()
     products = []
 
     try:
@@ -33,7 +45,6 @@ def scrape_oliveyoung_products(max_items=10):
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "ul.cate_prd_list")))
         items = driver.find_elements(By.CSS_SELECTOR, "ul.cate_prd_list li") #all <li>
 
-        # Hard cap at max_items
         for item in items[:max_items]:
             try:
                 # 제품 정보

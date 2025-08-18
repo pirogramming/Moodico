@@ -50,7 +50,7 @@ def get_recommendation_list(force_refresh=False):
     return cached
 
 def my_item_recommendation(request):
-    # 자발적으로 확인 하고 싶을때: /upload/?refresh=1
+    # 자발적으로 확인 하고 싶을때: /?refresh=1
     force = request.GET.get("refresh") == "1"
     data = get_recommendation_list(force_refresh=force)
 
