@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const totalVotes = currentVotingSection.querySelector('.voting-stats strong');
     const votingCardContainer = document.querySelector('.voting-card');
     const userVoteId = votingCardContainer.dataset.userVote;
-    console.log("사용자의 기존 투표 ID:", userVoteId);
+    // console.log("사용자의 기존 투표 ID:", userVoteId);
 
     let voteData = {};
     let totalVoteCount = 0;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const likeCount = parseInt(card.dataset.like_count, 10) || 0;
         const productVotes = parseInt(card.dataset.votes, 10) || 0;
         
-        console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
+        // console.log(`제품 ${productId}: 좋아요 ${likeCount}개 (순위 결정용)`);
         
         voteData[productId] = { 
             likes: likeCount,
