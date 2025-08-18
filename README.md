@@ -5,6 +5,8 @@
 <img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/434db6c4-0189-4b32-84d0-47cba4f135d3" /> 
 
 > 나만의 컬러와 무드에 맞춘 메이크업 제품을 한눈에 추천해주는 웹 서비스
+> 
+> URL : https://moodico.xyz/
 
 
 ## 💻 Developers
@@ -20,6 +22,11 @@
 |응애 나 팀장|moodico팀과 함께해서 행복했습니다~ 화이팅|추구미=안정형 만능 성장캐|개발의 신을 꿈꾸지만 아직은 버그의 제자|막내 백|
 
 - **집돌이 집순이들의 모임**
+
+---
+## 🔩 System architecture
+<img width="881" height="405" alt="image" src="https://github.com/user-attachments/assets/b47d0b25-c98f-466e-bb3e-040b21aa3214" />
+
 
 ---
 
@@ -42,10 +49,10 @@
 <img width="1181" height="280" alt="image" src="https://github.com/user-attachments/assets/09eca7f0-f3a9-46e3-8f1d-3e2331b6d4ec" />
 - DB에 업로드 된 제품 내 추천
 - 업로드한 사진 색상 추출 기반 추천
-<img width="1180" height="296" alt="image" src="https://github.com/user-attachments/assets/1c81838f-70ac-4a30-a36f-bfb3995243a3" />
--립/블러셔/아이섀도우 세 종류로 분류하여 제품 추천 제공
-
-<img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/77adcc23-686c-4237-8c13-bd7a1d2e0eef" />
+- <img width="1180" height="296" alt="image" src="https://github.com/user-attachments/assets/1c81838f-70ac-4a30-a36f-bfb3995243a3" />
+- 립/블러셔/아이섀도우 세 종류로 분류하여 제품 추천 제공
+  
+- <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/77adcc23-686c-4237-8c13-bd7a1d2e0eef" />
 - 올리브영 제품 추천 정보 모아보기
  
 ---
